@@ -1,0 +1,201 @@
+KOTH_PresenceTriggerEntity {
+ coords 2501.933 147.722 2263.429
+ TriggerShapeType Sphere
+ SphereRadius 50
+ DrawShape 1
+ TriggerActivationType "Every query"
+ PeriodicQueries 1
+ NamesFilter {
+  ""
+ }
+}
+$grp KOTH_SpawnPoint {
+ KOTH_FirstSpawn {
+  coords 2439.257 132.609 2139.025
+  m_fSpawnRadius 1
+ }
+ KOTH_SecondSpawn {
+  coords 2549.373 136.54 2228.929
+  m_fSpawnRadius 1
+ }
+ KOTH_ThirdSpawn {
+  coords 2515.011 147.13 2323.113
+  m_fSpawnRadius 1
+ }
+}
+SCR_SpawnPoint : "{2B1758F237E4820E}Prefabs/MP/Spawning/SpawnPoint_FIA.et" {
+ coords 2899.428 69.86 1717.252
+}
+GenericEntity : "{39568880CC1F9CED}Prefabs/Systems/Arsenal/ArsenalBoxes/FIA/ArsenalBox_FIA.et" {
+ coords 2903.545 69.639 1714.684
+}
+$grp SCR_SpawnPoint : "{4FEA25583D0975F7}Prefabs/MP/Spawning/SpawnPoint_USSR.et" {
+ {
+  coords 2422.927 99.604 2087.007
+ }
+ {
+  coords 1861.34 40.354 2681.319
+ }
+}
+SCR_SpawnPoint : "{5A2220DD0C16958B}Prefabs/MP/Spawning/SpawnPoint_US.et" {
+ coords 3116.568 21.579 2615.852
+}
+$grp Vehicle : "{81FDAD5EB644CC3D}Prefabs/Vehicles/Wheeled/M923A1/M923A1_transport_covered.et" {
+ M923A1_transport_covered1 {
+  components {
+   SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
+    m_fVehicleDestroyDamage 11360.7
+   }
+  }
+  coords 3119.294 20.216 2624.7
+  angleY -139.564
+ }
+ M923A1_transport_covered2 {
+  components {
+   SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
+    m_fVehicleDestroyDamage 11360.7
+   }
+  }
+  coords 3115.327 19.81 2629.134
+  angleY -139.564
+ }
+ M923A1_transport_covered3 {
+  components {
+   SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
+    m_fVehicleDestroyDamage 11360.7
+   }
+  }
+  coords 3111.231 19.423 2633.456
+  angleY -139.564
+ }
+ M923A1_transport_covered4 {
+  components {
+   SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
+    m_fVehicleDestroyDamage 11360.7
+   }
+  }
+  coords 3106.793 19.441 2637.756
+  angleY -139.564
+ }
+ M923A1_transport_covered5 {
+  components {
+   SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
+    m_fVehicleDestroyDamage 11360.7
+   }
+  }
+  coords 3102.729 18.415 2641.557
+  angleY -139.564
+ }
+}
+SCR_DestructibleBuildingEntity : "{9CEC8BB63429FF28}Prefabs/Structures/Airport/ControlTower_01.et" {
+ coords 2507.183 -0.145 2276.654
+ {
+  Building {
+   ID "5A3104050AF53197"
+   {
+    GenericEntity {
+     ID "5A328682723799A1"
+     coords 0 0 0
+    }
+   }
+  }
+ }
+}
+GenericEntity : "{BE99D77D1155B127}Prefabs/Systems/Arsenal/ArsenalBoxes/US/ArsenalBox_US.et" {
+ coords 3120.317 21.456 2615.062
+}
+$grp Vehicle : "{D9B91FAB817A6033}Prefabs/Vehicles/Wheeled/Ural4320/Ural4320_transport_covered.et" {
+ Ural4320_transport_covered1 {
+  components {
+   SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
+    m_fVehicleDestroyDamage 11360.7
+   }
+  }
+  coords 1881.263 40.958 2680.932
+  angleY -60
+ }
+ Ural4320_transport_covered2 {
+  components {
+   SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
+    m_fVehicleDestroyDamage 11360.7
+   }
+  }
+  coords 1878.117 40.908 2676.123
+  angleY -60
+ }
+ Ural4320_transport_covered3 {
+  components {
+   SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
+    m_fVehicleDestroyDamage 11360.7
+   }
+  }
+  coords 1875.324 40.885 2671.467
+  angleY -60
+ }
+ Ural4320_transport_covered4 {
+  components {
+   SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
+    m_fVehicleDestroyDamage 11360.7
+   }
+  }
+  coords 1873.036 40.822 2667.512
+  angleY -60
+ }
+ Ural4320_transport_covered5 {
+  components {
+   SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
+    m_fVehicleDestroyDamage 11360.7
+   }
+  }
+  coords 1870.561 40.667 2662.943
+  angleY -60
+ }
+ Ural4320_transport_covered6 {
+  components {
+   SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
+    m_fVehicleDestroyDamage 11360.7
+   }
+  }
+  coords 2914.996 67.984 1730.032
+  angleY -60
+ }
+ Ural4320_transport_covered7 {
+  components {
+   SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
+    m_fVehicleDestroyDamage 11360.7
+   }
+  }
+  coords 2917.548 67.607 1733.925
+  angleY -60
+ }
+ Ural4320_transport_covered8 {
+  components {
+   SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
+    m_fVehicleDestroyDamage 11360.7
+   }
+  }
+  coords 2919.86 67.254 1738.293
+  angleY -60
+ }
+ Ural4320_transport_covered9 {
+  components {
+   SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
+    m_fVehicleDestroyDamage 11360.7
+   }
+  }
+  coords 2922.444 66.812 1743.468
+  angleY -60
+ }
+ Ural4320_transport_covered10 {
+  components {
+   SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
+    m_fVehicleDestroyDamage 11360.7
+   }
+  }
+  coords 2925.079 66.381 1749.087
+  angleY -60
+ }
+}
+GenericEntity : "{EDE6EC8B05227E3E}Prefabs/Systems/Arsenal/ArsenalBoxes/USSR/ArsenalBox_USSR.et" {
+ coords 1860.496 40.304 2674.787
+}

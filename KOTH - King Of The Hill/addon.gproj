@@ -1,0 +1,8 @@
+GameProject {
+ ID "KOTHKingOfTheHill"
+ GUID "5E055A77849516EF"
+ TITLE "KOTH - King Of The Hill"
+ Dependencies {
+  "58D0FB3206B6F859"
+ }
+}

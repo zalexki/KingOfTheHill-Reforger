@@ -1,0 +1,162 @@
+FrameWidgetClass {
+ Name "rootFrame"
+ {
+  FrameWidgetClass "{5E0ABE9AB3FB6F17}" {
+   Name "KOTH_HUB"
+   Slot FrameWidgetSlot "{5E0ABE9AB3FB6F2F}" {
+    PositionX 1800
+    OffsetLeft 1800
+    PositionY 700
+    OffsetTop 700
+    SizeX 120
+    OffsetRight -1920
+    SizeY 100
+    OffsetBottom -800
+   }
+   {
+    ImageWidgetClass "{5E0ABE96E3928B0B}" {
+     Name "Image0"
+     Slot FrameWidgetSlot "{5E0ABE9608A47FD0}" {
+      PositionX 70.056
+      OffsetLeft 70.056
+      PositionY 1.712
+      OffsetTop 1.712
+      SizeX 99.999
+      OffsetRight -170.056
+      SizeY 30
+      OffsetBottom -31.712
+     }
+     Opacity 0.471
+    }
+    HorizontalLayoutWidgetClass "{5E0ABE9D22E9476F}" {
+     Name "HorizontalLayout0"
+     Slot FrameWidgetSlot "{5E0ABE9D22E9477C}" {
+      PositionX 62.49
+      OffsetLeft 62.49
+      PositionY 1.994
+      OffsetTop 1.994
+      SizeX 100
+      OffsetRight -162.49
+      SizeY 30
+      OffsetBottom -31.994
+     }
+     Color 0.638 0.003 0.003 1
+     {
+      WrapLayoutWidgetClass "{5E0ABE9690B6D6E0}" {
+       Name "WrapLayout0"
+       Slot LayoutSlot "{5E0ABE9690B6D68B}" {
+       }
+       Color 1 0.084 0.084 1
+      }
+      TextWidgetClass "{5E0ABE88C3705669}" {
+       Name "RedforPoints"
+       Slot LayoutSlot "{5E0ABE9BC84C062F}" {
+        HorizontalAlign 3
+        SizeMode Fill
+       }
+       Color 0.502 0 0 1
+       Text "0"
+       "Horizontal Alignment" Right
+      }
+      TextWidgetClass "{5E0ABE88C5AEA00C}" {
+       Name "GreenforPoints"
+       Slot LayoutSlot "{5E0ABE9BC84C79CF}" {
+        HorizontalAlign 3
+        SizeMode Fill
+       }
+       Color 0 0.502 0.125 1
+       Text "0"
+       "Horizontal Alignment" Right
+      }
+      TextWidgetClass "{5E0ABE88D8B0F2E4}" {
+       Name "BlueforPoints"
+       Slot LayoutSlot "{5E0ABE9BC84C79DD}" {
+        HorizontalAlign 3
+        VerticalAlign 3
+        SizeMode Fill
+       }
+       Color 0 0.125 0.502 1
+       Text "0"
+       "Horizontal Alignment" Right
+      }
+     }
+    }
+    HorizontalLayoutWidgetClass "{5E0ABE9A0D6DF2A2}" {
+     Name "HorizontalLayout1"
+     Slot FrameWidgetSlot "{5E0ABE9D22E9477C}" {
+      PositionX 15.401
+      OffsetLeft 15.401
+      PositionY 69.6
+      OffsetTop 69.6
+      SizeX 99.999
+      OffsetRight -115.4
+      SizeY 24
+      OffsetBottom -93.6
+      SizeToContent 1
+     }
+     "Is Visible" 0
+     {
+      ImageWidgetClass "{5E0ABE9A4DA78415}" {
+       Name "Image0"
+       Slot LayoutSlot "{5E0ABE9A4DA78437}" {
+        VerticalAlign 2
+       }
+       Texture "{70417B54F33ED6E5}UI/Textures/PlayableSlots/DefaultPlayableSlot.edds"
+       Size 18 18
+      }
+      TextWidgetClass "{5E0ABE9A0D6DECA9}" {
+       Name "RedforPlayers"
+       Slot LayoutSlot "{5E0ABE9A0D6DF2D2}" {
+        HorizontalAlign 3
+        SizeMode Fill
+       }
+       Text "0"
+       "Font Size" 20
+       "Min Font Size" 20
+       "Horizontal Alignment" Right
+      }
+      ImageWidgetClass "{5E0ABE9891CFFBF5}" {
+       Name "Image1"
+       Slot LayoutSlot "{5E0ABE9A4DA78437}" {
+        VerticalAlign 2
+       }
+       Texture "{70417B54F33ED6E5}UI/Textures/PlayableSlots/DefaultPlayableSlot.edds"
+       Size 18 18
+      }
+      TextWidgetClass "{5E0ABE9A0D6DECAB}" {
+       Name "GreenforPlayers"
+       Slot LayoutSlot "{5E0ABE9A0D6DF282}" {
+        HorizontalAlign 3
+        SizeMode Fill
+       }
+       Text "99"
+       "Font Size" 20
+       "Min Font Size" 20
+       "Horizontal Alignment" Right
+      }
+      ImageWidgetClass "{5E0ABE9893588DBA}" {
+       Name "Image2"
+       Slot LayoutSlot "{5E0ABE9A4DA78437}" {
+        VerticalAlign 2
+       }
+       Texture "{70417B54F33ED6E5}UI/Textures/PlayableSlots/DefaultPlayableSlot.edds"
+       Size 18 18
+      }
+      TextWidgetClass "{5E0ABE9A0D6DECA4}" {
+       Name "BlueforPlayers"
+       Slot LayoutSlot "{5E0ABE9A0D6DF290}" {
+        HorizontalAlign 3
+        VerticalAlign 3
+        SizeMode Fill
+       }
+       Text "99"
+       "Font Size" 20
+       "Min Font Size" 20
+       "Horizontal Alignment" Right
+      }
+     }
+    }
+   }
+  }
+ }
+}
