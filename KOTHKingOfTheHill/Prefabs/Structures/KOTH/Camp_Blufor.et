@@ -1,0 +1,442 @@
+GenericEntity : "{FA9066DE33E8E67D}Prefabs/Structures/Military/Camps/Canvas_Covers/US/CanvasCover_Large_US.et" {
+ ID "52F0B4ADDCC2C24E"
+ coords 133.109 1.484 129.246
+ {
+  CommentEntity {
+   ID "5E1F523C656107A8"
+   coords 0 5.597 0
+   m_Comment "BLUFOR - SPAWN"
+   m_Color 0 0.25 1
+   m_ScaleByDistance 1
+   m_FaceCamera 1
+  }
+  GameEntity : "{06BC3F18B47799AE}Prefabs/Characters/Uniforms/Pants_M70.et" {
+   ID "5E1EFBF8517CA3C2"
+   components {
+    SCR_UniversalInventoryStorageComponent "{5222CB01D5B9A306}" {
+     Enabled 0
+    }
+    ActionsManagerComponent "{5104869D194C6245}" {
+     Enabled 0
+    }
+   }
+   coords -2.716 0.269 2.386
+   angleY 90
+  }
+  GenericEntity : "{09321D1470C3625E}Prefabs/Props/Military/AmmoBoxes/EquipmentBoxStack/US/EquipmentBoxStack_US_01_V4_covered.et" {
+   ID "5E1EFBF8517CA3CC"
+   coords 1.454 -0.051 -3.661
+  }
+  $grp StaticModelEntity : "{172DD50ACF177B9E}Prefabs/Props/Military/Furniture/ChairMilitary_USSR_01.et" {
+   {
+    ID "5E1EFBF8517CA3F3"
+    coords 0.108 -0.052 0.594
+    angleY 15
+   }
+   {
+    ID "5E1EFBF8517CA3F5"
+    coords -0.703 -0.053 1.219
+    angleY 75
+   }
+  }
+  GenericEntity : "{208468B520CCF515}Prefabs/Structures/Military/Flags/FlagPole_02/FlagPole_02_Opfor.et" {
+   ID "5E1EFBF8517CA3F1"
+   components {
+    SlotManagerComponent "{55DAE04E55ECE7FA}" {
+     Slots {
+      EntitySlotInfo Flag {
+       Enabled 0
+      }
+     }
+    }
+   }
+   coords 3.279 2.54 4.383
+   angleY 90
+   Flags 1026
+  }
+  SCR_SpawnPoint : "{269CABAD2E71A94D}Prefabs/MP/Spawning/BLUFOR_Spawnpoint_KOTH.et" {
+   ID "5E1F523DAA68A671"
+   coords 0.104 0.254 -0.01
+   angleY 90
+  }
+  GenericEntity : "{354B8737C5C45FA7}Prefabs/Structures/Military/Flags/FlagPole_02/FlagPole_02_Indfor.et" {
+   ID "5E1EFBF8517CA3FF"
+   components {
+    SlotManagerComponent "{55DAE04E55ECE7FA}" {
+     Slots {
+      EntitySlotInfo Flag {
+       Enabled 0
+      }
+     }
+    }
+   }
+   coords 3.279 2.54 4.383
+   angleY 90
+   Flags 1026
+  }
+  GenericEntity : "{377EB906F591E4BA}Prefabs/Systems/Arsenal/AmmoBoxes/US/AmmoBoxArsenal_Weapons_US.et" {
+   ID "5E1EFBF8517CA3FB"
+   coords -0.344 -0.075 -3.285
+   angleY -90
+  }
+  GameEntity : "{3CCA7A9BB4FD3197}Prefabs/Characters/Uniforms/Jacket_US_BDU_rolledup.et" {
+   ID "5E1EFBF8517CA3F9"
+   components {
+    SCR_UniversalInventoryStorageComponent "{5222CB01D5B9A306}" {
+     Enabled 0
+    }
+    ActionsManagerComponent "{5104869D194C6245}" {
+     Enabled 0
+    }
+   }
+   coords -3.166 0.765 3.847
+   angleY 90
+  }
+  GenericEntity : "{4805E67E2AE30F8D}Prefabs/Items/Equipment/Backpacks/Backpack_Medical_M5.et" {
+   ID "5E1EFBF8517CA3E5"
+   components {
+    SCR_UniversalInventoryStorageComponent "{5222CB03A40528FA}" {
+     Enabled 0
+    }
+    ActionsManagerComponent "{511E9C6ADE70F786}" {
+     Enabled 0
+    }
+   }
+   coords -3.323 0.753 1.999
+   angleY 30
+  }
+  $grp GenericEntity : "{4BE795374BE3D67E}Prefabs/Props/Industrial/BarrelFuel_01_closed.et" {
+   {
+    ID "5E1EFBF8517CA3E2"
+    coords 3.562 -0.081 1.195
+    angleY 76.263
+   }
+   {
+    ID "5E1EFBF8517CA3E3"
+    coords 2.85 -0.081 0.828
+    angleY 31.263
+   }
+  }
+  GameEntity : "{4EF74D1922997E84}Prefabs/Characters/Uniforms/Pants_M88_base.et" {
+   ID "5E1EFBF8517CA3EF"
+   components {
+    SCR_UniversalInventoryStorageComponent "{5222CB01D5B9A306}" {
+     Enabled 0
+    }
+    ActionsManagerComponent "{5104869D194C6245}" {
+     Enabled 0
+    }
+   }
+   coords -3.187 0.768 3.249
+   angleY 150
+  }
+  StaticModelEntity : "{5019513019F0885A}Prefabs/Props/Military/Furniture/TableMilitary_US_02.et" {
+   ID "5E1EFBF8517CA3ED"
+   coords 2.92 -0.066 3.181
+   angleY -90
+  }
+  GenericEntity : "{5C5C6EE05EE2FF1A}Prefabs/Items/Equipment/Backpacks/Backpack_ALICE_Medium_assembled.et" {
+   ID "5E1EFBF8517CA3EA"
+   components {
+    SCR_UniversalInventoryStorageComponent "{5222CB03A40528FA}" {
+     Enabled 0
+    }
+    ActionsManagerComponent "{511E9C6ADE70F786}" {
+     Enabled 0
+    }
+   }
+   coords -2.894 0.456 2.025
+   angleX -60
+   angleY 90
+  }
+  GenericEntity : "{5E6CBF60621C39CD}Prefabs/Systems/Arsenal/AmmoBoxes/USSR/AmmoBoxArsenal_Ammunition_USSR.et" {
+   ID "5E1EFBF8517CA3E8"
+   coords 1.491 0.754 -2.773
+  }
+  GenericEntity : "{5FFD91CF507BFFFB}Prefabs/Systems/Arsenal/AmmoBoxes/US/AmmoBoxArsenal_Ammunition_US.et" {
+   ID "5E1EFBF8517CA316"
+   coords 1.543 0.264 -2.303
+   angleY -180
+  }
+  GenericEntity : "{691E1CE1800ABC13}Prefabs/Object/FRM_Screen/TV_FRM.et" {
+   ID "5E1EFBF8517CA312"
+   components {
+    MeshObject "{5E1AB2860762021F}" {
+     Materials {
+      MaterialAssignClass "{5E1AB28607620217}" {
+       SourceMaterial "Boutons"
+       AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
+      }
+      MaterialAssignClass "{5E1AB28607620213}" {
+       SourceMaterial "Cables"
+       AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
+      }
+      MaterialAssignClass "{5E1AB2860762026E}" {
+       SourceMaterial "Cache_Cables"
+       AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
+      }
+      MaterialAssignClass "{5E1AB2860762026D}" {
+       SourceMaterial "DefaultGeneratedMaterial"
+       AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
+      }
+      MaterialAssignClass "{5E1AB2860762026B}" {
+       SourceMaterial "Fixation_mur"
+       AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
+      }
+      MaterialAssignClass "{5E1AB28607620266}" {
+       SourceMaterial "LOGO"
+       AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
+      }
+      MaterialAssignClass "{5E1AB28607620264}" {
+       SourceMaterial "Plug"
+       AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
+      }
+      MaterialAssignClass "{5E1AB28607620260}" {
+       SourceMaterial "Support"
+       AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
+      }
+      MaterialAssignClass "{5E1AB2860762027E}" {
+       SourceMaterial "Vis"
+       AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
+      }
+     }
+    }
+   }
+   coords 3.147 1.289 3.247
+   angleY -180
+   angleZ 15
+  }
+  GenericEntity : "{7030822F7A54F479}Prefabs/Props/Crates/CrateWooden_01_base.et" {
+   ID "5E1EFBF8517CA31F"
+   coords 0.37 -0.051 -3.283
+  }
+  $grp GenericEntity : "{811C18BEC8B8B245}Prefabs/Props/Commercial/CabinetCardFile_01/CabinetCardFile_01_green.et" {
+   {
+    ID "5E1EFBF8517CA31C"
+    coords 2.916 -0.053 2.004
+    angleY -90
+   }
+   {
+    ID "5E1EFBF8517CD05A"
+    coords 2.916 -0.053 1.525
+    angleY -90
+   }
+  }
+  GenericEntity : "{85FA88E33837DC43}Prefabs/Structures/Military/Flags/FlagPole_02/FlagPole_02_Blufor.et" {
+   ID "5E1EFBF8517CD05F"
+   components {
+    SlotManagerComponent "{55DAE04E55ECE7FA}" {
+     Slots {
+      EntitySlotInfo Flag {
+      }
+     }
+    }
+   }
+   coords 3.279 2.54 4.383
+   angleY 90
+  }
+  StaticModelEntity : "{862818969D70726C}Prefabs/Compositions/Misc/SubCompositions/TableMilitary_Cluttered_USSR_01.et" {
+   ID "5E1EFBF8517CD042"
+   coords 0 -0.054 1.455
+   angleY 90
+  }
+  GameEntity : "{8A5424D1A2AA6595}Prefabs/Characters/Uniforms/Jacket_US_BDU_base.et" {
+   ID "5E1EFBF8517CD049"
+   components {
+    SCR_UniversalInventoryStorageComponent "{5222CB01D5B9A306}" {
+     Enabled 0
+    }
+    ActionsManagerComponent "{5104869D194C6245}" {
+     Enabled 0
+    }
+   }
+   coords -3.199 0.76 2.717
+   angleY 90
+  }
+  $grp GenericEntity : "{8F05D427252644F8}Prefabs/Props/Civilian/Suitcase_01.et" {
+   {
+    ID "5E1EFBF8517CD04A"
+    coords -2.322 -0.052 2.623
+    angleY 60
+   }
+   {
+    ID "5E1EFBF8517D05A8"
+    coords -2.432 0.077 3.393
+    angleX -90
+    angleY 90
+   }
+  }
+  GenericEntity : "{9134C20BE9368D76}Prefabs/Structures/BuildingParts/Entry/ConcreteStairs_02_SideLong.et" {
+   ID "5E1EFBF8517D05AC"
+   coords -1.734 -0.126 6.999
+   angleY 90
+  }
+  $grp SCR_DestructibleBuildingEntity : "{93575223CBE0E68D}Prefabs/Structures/Infrastructure/Bridges/ConcreteBridge_01/ConcreteBridge_01_Pillar_narrow.et" {
+   {
+    ID "5E1EFBF8517D0596"
+    coords -1.809 -7.866 -0.082
+    scale 1.1
+   }
+   {
+    ID "5E1EFBF8517D0597"
+    coords 3.78 -7.849 -0.063
+    scale 1.1
+   }
+  }
+  GenericEntity : "{9DD476816836FFED}Prefabs/Props/Military/AmmoBoxes/EquipmentBoxStack/US/EquipmentBoxStack_US_01_V5_covered.et" {
+   ID "5E1EFBF8517D059B"
+   coords -3.048 -0.053 -2.126
+   angleY -180
+   {
+    GenericEntity {
+     ID "56B6871A278AB642"
+     coords 0 0 0
+    }
+   }
+  }
+  GameEntity : "{9F546CCA2582D16F}Prefabs/Characters/Uniforms/Jacket_M88.et" {
+   ID "5E1EFBF8517D0599"
+   components {
+    SCR_UniversalInventoryStorageComponent "{5222CB01D5B9A306}" {
+     Enabled 0
+    }
+    ActionsManagerComponent "{5104869D194C6245}" {
+     Enabled 0
+    }
+   }
+   coords -2.708 0.269 3.336
+   angleY 90
+  }
+  $grp GenericEntity : "{B08DF585ECD2CF4D}Prefabs/Structures/BuildingParts/Entry/ConcreteStairs_02_SideSquareNarrow.et" {
+   {
+    ID "5E1EFBF8517D059F"
+    coords -2.691 -0.125 6.998
+    angleY 90
+   }
+   {
+    ID "5E1EFBF8517D25A9"
+    coords -3.731 -0.122 6.174
+   }
+  }
+  $grp GenericEntity : "{B4764656D8C07441}Prefabs/Props/Military/AmmoBoxes/EquipmentBoxStack/US/EquipmentBoxStack_US_01_V2_covered.et" {
+   {
+    ID "5E1EFBF8517D25AA"
+    coords 1.412 -0.052 -2.556
+    angleY -180
+   }
+   {
+    ID "5E1EFBF8517D25B4"
+    coords -2.981 -0.052 2.355
+    angleY -90
+   }
+   {
+    ID "5E1EFBF8517D25B5"
+    coords -2.981 -0.052 3.549
+    angleY -90
+   }
+  }
+  GenericEntity : "{BC81E968D1B4C6B4}Prefabs/Props/Military/Camps/BoardingLadder_01/BoardingLadder_USSR_01.et" {
+   ID "5E1EFBF8517D25B0"
+   coords 0.589 -0.149 -5.294
+   angleY -180
+  }
+  GenericEntity : "{CAF8666F26CEB7AD}Prefabs/Structures/BuildingParts/Entry/ConcreteStairs_02_Narrow.et" {
+   ID "5E1EFBF8517D25B2"
+   coords -1.751 -0.12 6.038
+   angleY 90
+  }
+  $grp GenericEntity : "{CC66836BF4E211F9}Prefabs/Props/Military/Camps/Duckboard_01.et" {
+   {
+    ID "5E1EFBF8517D25BC"
+    coords -1.83 -0.148 0.821
+    angleY 90
+   }
+   {
+    ID "5E1EFBF8517D25BD"
+    coords 1.963 -0.148 -0.623
+    angleY -90
+   }
+   {
+    ID "5E1EFBF8517D7138"
+    coords 1.963 -0.148 2.229
+    angleY -90
+   }
+   {
+    ID "5E1EFBF8517D713B"
+    coords 1.963 -0.148 0.821
+    angleY 90
+   }
+   {
+    ID "5E1EFBF8517DDB46"
+    coords -1.83 -0.148 -3.646
+    angleY -90
+   }
+   {
+    ID "5E1EFBF8517DDB47"
+    coords -1.83 -0.148 -0.623
+    angleY -90
+   }
+   {
+    ID "5E1EFBF8517E470B"
+    coords 1.963 -0.148 -2.202
+    angleY 90
+   }
+   {
+    ID "5E1EFBF8517E470C"
+    coords 1.963 -0.148 3.668
+    angleY 90
+   }
+   {
+    ID "5E1EFBF8517E6611"
+    coords -1.83 -0.148 -2.202
+    angleY 90
+   }
+   {
+    ID "5E1EFBF8517E6612"
+    coords -1.83 -0.148 2.229
+    angleY -90
+   }
+   {
+    ID "5E1EFBF8517E66D0"
+    coords -1.83 -0.148 3.668
+    angleY 90
+   }
+   {
+    ID "5E1EFBF8517E66D1"
+    coords 1.963 -0.148 -3.646
+    angleY -90
+   }
+  }
+  GenericEntity : "{E74C02B60805F7C7}Prefabs/Systems/Arsenal/AmmoBoxes/USSR/AmmoBoxArsenal_Weapons_USSR.et" {
+   ID "5E1EFBF8517E666E"
+   coords 0.496 0.777 -3.288
+   angleY -90
+  }
+  GenericEntity : "{ED4996370C8C7518}Prefabs/Compositions/Misc/SubCompositions/PalletFuel_Camo_Cluttered_US_01.et" {
+   ID "5E1EFBF8517E6668"
+   coords 2.972 -0.148 -3.236
+  }
+  GenericEntity : "{FF181C2921B7A4F3}Prefabs/Props/Furniture/CabinetMetal_01_olive_V2.et" {
+   ID "5E1EFBF8517E6665"
+   components {
+    Hierarchy "{5E1918326E05A7B4}" {
+    }
+    ActionsManagerComponent "{5E1918326AE57A59}" {
+     ActionContexts {
+      UserActionContext "{5E191831955126FB}" {
+       ContextName "Default"
+       Position PointInfo "{5E1918319CDF2E32}" {
+        Offset 0 1.0099 0.2499
+       }
+      }
+     }
+    }
+    RplComponent "{5624A88DC2D9928D}" {
+     Enabled 1
+    }
+   }
+   coords -2.927 -0.054 1.34
+   angleY 90
+  }
+ }
+}
