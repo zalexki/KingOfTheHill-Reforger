@@ -86,6 +86,7 @@ FrameWidgetClass {
       SizeY 30
       OffsetBottom -200.956
      }
+     "Is Visible" 0
      Opacity 0.5
      Color 0 0 0 1
     }
