@@ -1538,25 +1538,26 @@ SCR_BaseGameMode {
  coords 2827.112 62.917 2010.608
  Flags 0
  {
-  SCR_MapEntity : "{731564B66F91B107}Prefabs/World/Game/MapEntity.et" {
+  SCR_MapEntity "5E1F591715EDC4E3" : "{731564B66F91B107}Prefabs/World/Game/MapEntity.et" {
    ID "5E1ED724B33BC815"
   }
   DestructionManager : "{E5B570B5F32A7BAE}Prefabs/Systems/Destruction/DestructionManager.et" {
    ID "5E1F0BA227A27EF0"
    coords -1365.027 -39.01 -2217.766
   }
-  PerceptionManager : "{028DAEAD63E056BE}Prefabs/World/Game/PerceptionManager.et" {
+  PerceptionManager "5E1F591715EDC4BA" : "{028DAEAD63E056BE}Prefabs/World/Game/PerceptionManager.et" {
    ID "5E1ED724B33BC817"
   }
   TagManager : "{2FA9E172CAB1857A}Prefabs/MP/Managers/TagManager.et" {
    ID "5E1F0BA227A27ECC"
    coords -1365.027 -39.01 -2217.766
   }
-  SCR_FactionManager : "{589540B35EBA8CDC}Prefabs/MP/Managers/Factions/FactionManager_USxUSSR.et" {
+  SCR_FactionManager "5E1F591715EDC402" : "{589540B35EBA8CDC}Prefabs/MP/Managers/Factions/FactionManager_USxUSSR.et" {
    ID "5E1F0BA227A27EF8"
    coords -203.715 74.032 358.066
    Factions {
     SCR_Faction "{56B2B46E999BF3BF}" {
+     FactionKey "US"
      UIInfo SCR_FactionUIInfo "{528C961236B7DCD3}" {
       Name "BLUFOR"
       m_sNameUpper "BLUEFOR"
@@ -1565,6 +1566,7 @@ SCR_BaseGameMode {
      m_FactionFlagMaterial "{16A1F05D460A444F}Assets/Props/Fabric/Flags/Data/Flag_1_BLUFOR.emat"
     }
     SCR_Faction "{56B2B46E9AF80999}" {
+     FactionKey "USSR"
      UIInfo SCR_FactionUIInfo "{528C96127F8B6B08}" {
       Name "OPFOR"
       m_sNameUpper "OPFOR"
@@ -1573,6 +1575,7 @@ SCR_BaseGameMode {
      m_FactionFlagMaterial "{C255CA73E24384E2}Assets/Props/Fabric/Flags/Data/Flag_1_OPFOR.emat"
     }
     SCR_Faction "{5E0F433DFA16BF7F}" : "{8053DB656DD18B14}Configs/Factions/FIA.conf" {
+     FactionKey "FIA"
      UIInfo SCR_FactionUIInfo "{5570936866E0AD08}" {
       Name "INDFOR"
       m_sNameUpper "INDFOR"
@@ -1598,7 +1601,7 @@ SCR_BaseGameMode {
    VehicleLifetime 300
    ItemLifetime 10
   }
-  HitRegistrationManager : "{0EDA3D48791120DD}Prefabs/MP/HitRegManager.et" {
+  HitRegistrationManager "5E1F591715EDC332" : "{0EDA3D48791120DD}Prefabs/MP/HitRegManager.et" {
    ID "5E1F0BA227A3D055"
    coords -1365.027 -39.01 -2217.766
   }
@@ -1674,7 +1677,7 @@ SCR_BaseGameMode {
     }
    }
   }
-  ItemPreviewManagerEntity : "{9F18C476AB860F3B}Prefabs/World/Game/ItemPreviewManager.et" {
+  ItemPreviewManagerEntity "5E1F591715EDC19F" : "{9F18C476AB860F3B}Prefabs/World/Game/ItemPreviewManager.et" {
    ID "5E1F0BA227A3D04A"
    coords -1364.373 -39.01 -2218.007
   }
