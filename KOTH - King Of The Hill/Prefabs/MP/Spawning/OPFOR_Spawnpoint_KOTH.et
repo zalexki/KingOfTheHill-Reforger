@@ -1,0 +1,9 @@
+SCR_SpawnPoint : "{4FEA25583D0975F7}Prefabs/MP/Spawning/SpawnPoint_USSR.et" {
+ ID "544EB04DCBFBD126"
+ coords 1353.178 40.465 2131.436
+ angleY 55.146
+ m_Info SCR_UIInfo "{56B4CC4ECACA2C37}" {
+  Name "OPFOR Spawn"
+  Icon "{095A44DAFA378980}Art/OPFOR_Flag.edds"
+ }
+}

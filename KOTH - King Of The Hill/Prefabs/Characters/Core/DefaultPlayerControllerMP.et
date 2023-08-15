@@ -1,10 +1,12 @@
 SCR_PlayerController : "{6E2BB64764E3BE9B}Prefabs/Characters/Core/DefaultPlayerController.et" {
  ID "1A9BA6BEFA06E3B1"
  components {
+  KOTH_SCR_MapMarkerHandlerComponent "{5E1F1064315CB689}" {
+  }
   SCR_HUDManagerComponent "{2FDC275D9EBCDB8B}" {
    InfoDisplays {
-    KOTH_HUD "{5E0ABE861EAFD038}" {
-     m_LayoutPath "{01215B90439669CE}UI/GameMode.layout"
+    KOTH_HUD "{5E1D6C2C8EF4FCEC}" {
+     m_LayoutPath "{EBEA5B43BE732A85}UI/Layouts/HUD/KingOfTheHill/KOTH_ScoringLayout.layout"
     }
    }
   }

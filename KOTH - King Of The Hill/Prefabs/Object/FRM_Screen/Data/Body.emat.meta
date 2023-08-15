@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{E43F56A28A33ECF7}Prefabs/Object/FRM_Screen/Data/Body.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

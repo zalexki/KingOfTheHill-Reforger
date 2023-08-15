@@ -5,4 +5,81 @@ GameProject {
  Dependencies {
   "58D0FB3206B6F859"
  }
+ Configurations {
+  GameProjectConfig PC {
+   WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
+    StringTables {
+     StringTableDefinition "{518AE2E5A9361F76}" {
+      Languages {
+       LanguageDefinition "{516CA5DA9BCB536C}" {
+       }
+       LanguageDefinition "{5174991ACFFBD1F3}" {
+       }
+      }
+     }
+     StringTableDefinition "{5E133960ED443637}" {
+      StringTableSource "{D54E40A6F1A63E70}String/localization_koth.st"
+      Languages {
+       LanguageDefinition "{5E133960EE8DE2B5}" {
+        Code "cs_cz"
+        StringTableRuntime "{A2F4EFEA64D7F21C}String/localization_koth.cs_cz.conf"
+       }
+       LanguageDefinition "{5E133960EE8DE2C9}" {
+        Code "de_de"
+        StringTableRuntime "{778AF5D97774E33C}String/localization_koth.de_de.conf"
+       }
+       LanguageDefinition "{5E133960EE8D9D2A}" {
+        Code "en_us"
+        StringTableRuntime "{297A7F921D87E63D}String/localization_koth.en_us.conf"
+       }
+       LanguageDefinition "{5E133960EE8D9D0F}" {
+        Code "es_es"
+        StringTableRuntime "{EC36321BF3858D22}String/localization_koth.es_es.conf"
+       }
+       LanguageDefinition "{5E133960EE8D9D15}" {
+        Code "fr_fr"
+        StringTableRuntime "{579EC72C15066E20}String/localization_koth.fr_fr.conf"
+       }
+       LanguageDefinition "{5E133960EE8D9D77}" {
+        Code "it_it"
+        StringTableRuntime "{D7824818B824EDD9}String/localization_koth.it_it.conf"
+       }
+       LanguageDefinition "{5E133960EE8D9D40}" {
+        Code "ja_jp"
+        StringTableRuntime "{C799F58A8655DD72}String/localization_koth.ja_jp.conf"
+       }
+       LanguageDefinition "{5E133960EE8D9DA9}" {
+        Code "ko_kr"
+        StringTableRuntime "{6727DD261578DE4D}String/localization_koth.ko_kr.conf"
+       }
+       LanguageDefinition "{5E133960EE8D9DB1}" {
+        Code "pl_pl"
+        StringTableRuntime "{3B567BDCAB974231}String/localization_koth.pl_pl.conf"
+       }
+       LanguageDefinition "{5E133960EE8D9D98}" {
+        Code "pt_br"
+        StringTableRuntime "{EE21E1109069888B}String/localization_koth.pt_br.conf"
+       }
+       LanguageDefinition "{5E133960EE8D9DF6}" {
+        Code "ru_ru"
+        StringTableRuntime "{BB60F5B80D10EDFD}String/localization_koth.ru_ru.conf"
+       }
+       LanguageDefinition "{5E133960EE8D9DDB}" {
+        Code "zh_cn"
+        StringTableRuntime "{EB88CE73589E83B5}String/localization_koth.zh_cn.conf"
+       }
+      }
+     }
+    }
+   }
+  }
+  GameProjectConfig HEADLESS {
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+ }
 }

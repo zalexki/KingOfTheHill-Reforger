@@ -1,0 +1,1682 @@
+SCR_BaseGameMode {
+ ID "5E1F0BA227A27EFF"
+ components {
+  SCR_CallsignManagerComponent "{5E1F0BA23AC53C37}" {
+  }
+  SCR_DataCollectorComponent "{5E1F0BA23AC53C75}" {
+   m_aModules {
+    SCR_DataCollectorBasicActionsModule "{5E1F0BA23AC53C5F}" {
+    }
+    SCR_DataCollectorDriverModule "{5E1F0BA23AC53C53}" {
+    }
+    SCR_DataCollectorShootingModule "{5E1F0BA23AC53C6A}" {
+    }
+    SCR_DataCollectorHealingItemsModule "{5E1F0BA23AC53C76}" {
+     m_aConsumableTypes {
+      ConsumableTypeStats "{5E1F0BA23AC53C7A}" {
+       m_eConsumableType BANDAGE
+       m_eDataStatsSelf BANDAGE_SELF
+       m_eDataStatsFriend BANDAGE_FRIENDLIES
+      }
+      ConsumableTypeStats "{5E1F0BA23AC53C7E}" {
+       m_eConsumableType TOURNIQUET
+       m_eDataStatsSelf TOURNIQUET_SELF
+       m_eDataStatsFriend TOURNIQUET_FRIENDLIES
+      }
+      ConsumableTypeStats "{5E1F0BA23AC53C73}" {
+       m_eConsumableType SALINE
+       m_eDataStatsSelf SALINE_SELF
+       m_eDataStatsFriend SALINE_FRIENDLIES
+      }
+      ConsumableTypeStats "{5E1F0BA23AC53C77}" {
+       m_eConsumableType MORPHINE
+       m_eDataStatsSelf MORPHINE_SELF
+       m_eDataStatsFriend MORPHINE_FRIENDLIES
+      }
+     }
+    }
+   }
+   m_bOptionalKicking 1
+  }
+  SCR_DestructionManagerComponent "{5E1F0BA23AC53C89}" {
+  }
+  SCR_EntityCatalogManagerComponent "{5E1F0BA23AC53CB4}" {
+   m_aEntityCatalogs {
+    SCR_EntityCatalogMultiList "{5E1F0BA23AC53CBA}" {
+     m_eEntityCatalogType CHARACTER
+    }
+    SCR_EntityCatalogMultiList "{5E1F0BA23AC53CB3}" {
+     m_eEntityCatalogType VEHICLE
+    }
+    SCR_EntityCatalogMultiList "{5E1F0BA23AC53CB5}" {
+     m_eEntityCatalogType ITEM
+    }
+   }
+  }
+  SCR_GameModeHealthSettings "{5E1F0BA23AC53CC8}" {
+  }
+  SCR_GameOverScreenManagerComponent "{5E1F0BA23AC53211}" {
+   m_GameOverScreenConfig SCR_GameOverScreenConfig "{5E1F0BA23AC53212}" {
+    m_aGameOverScreens {
+     SCR_BaseGameOverScreenInfo "{5E1F0BA23AC53CFE}" {
+      m_GameOverScreenId NEUTRAL
+      m_GameOverContentLayout "{E04021BC742BE432}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_Default.layout"
+      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC53CF9}" {
+       m_sTitle "#AR-MatchResult_Default-UC"
+       m_sImageTexture "{BD2E2F871E6A3EBF}UI/Textures/Flags/Flag_Faction_Base.edds"
+       m_sAudioOneShot "SOUND_ONVICTORY"
+      }
+     }
+     SCR_FactionGameOverScreenInfo "{5E1F0BA23AC53301}" {
+      m_GameOverScreenId FACTION_NEUTRAL
+      m_GameOverContentLayout "{E04021BC742BE432}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_Default.layout"
+      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC53302}" {
+       m_sTitle "#AR-MatchResult_Default-UC"
+       m_sSubtitle "#AR-Campaign_MatchResult"
+       m_sDebriefing "#AR-MatchResult_FactionNeutral_Subtitle"
+       m_sAudioOneShot "SOUND_ONVICTORY"
+      }
+     }
+     SCR_FactionVictoryGameOverScreenInfo "{5E1F0BA23AC5331C}" {
+      m_GameOverScreenId FACTION_VICTORY_SCORE
+      m_GameOverContentLayout "{E04021BC742BE432}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_Default.layout"
+      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC5331E}" {
+       m_sTitle "#AR-MatchResult_Victory-UC"
+       m_sSubtitle "#AR-Campaign_MatchResult"
+       m_sDebriefing "#AR-Campaign_MatchResult_VictoryDetail_Score"
+       m_sAudioOneShot "SOUND_ONVICTORY"
+      }
+     }
+     SCR_FactionGameOverScreenInfo "{5E1F0BA23AC5332C}" {
+      m_GameOverScreenId FACTION_DEFEAT_SCORE
+      m_GameOverContentLayout "{E04021BC742BE432}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_Default.layout"
+      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC5332E}" {
+       m_sTitle "#AR-MatchResult_Defeat-UC"
+       m_sSubtitle "#AR-Campaign_MatchResult"
+       m_sDebriefing "#AR-Campaign_MatchResult_DefeatDetail_Score"
+       m_sAudioOneShot "SOUND_ONDEFEAT"
+      }
+     }
+     SCR_FactionVictoryGameOverScreenInfo "{5E1F0BA23AC5333E}" {
+      m_GameOverScreenId FACTION_VICTORY_TIME
+      m_GameOverContentLayout "{E04021BC742BE432}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_Default.layout"
+      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC5333F}" {
+       m_sTitle "#AR-MatchResult_Victory-UC"
+       m_sSubtitle "#AR-Campaign_MatchResult"
+       m_sDebriefing "#AR-Campaign_MatchResult_VictoryDetail_Time"
+       m_sAudioOneShot "SOUND_ONVICTORY"
+      }
+     }
+     SCR_FactionGameOverScreenInfo "{5E1F0BA23AC53349}" {
+      m_GameOverScreenId FACTION_DEFEAT_TIME
+      m_GameOverContentLayout "{E04021BC742BE432}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_Default.layout"
+      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC5334B}" {
+       m_sTitle "#AR-MatchResult_Defeat-UC"
+       m_sSubtitle "#AR-Campaign_MatchResult"
+       m_sDebriefing "#AR-Campaign_MatchResult_DefeatDetail_Time"
+       m_sAudioOneShot "SOUND_ONDEFEAT"
+      }
+     }
+     SCR_BaseGameOverScreenInfo "{5E1F0BA23AC5335A}" {
+      m_GameOverScreenId FACTION_DRAW
+      m_GameOverContentLayout "{E04021BC742BE432}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_Default.layout"
+      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC5335B}" {
+       m_sTitle "#AR-MatchResult_Draw-UC"
+       m_sSubtitle "#AR-MatchResult_Draw"
+       m_sDebriefing "#AR-Campaign_MatchResult_DrawDetail"
+       m_sAudioOneShot "SOUND_ONDEFEAT"
+      }
+     }
+     SCR_DeathMatchGameOverScreenInfo "{5E1F0BA23AC53356}" {
+      m_GameOverScreenId DEATHMATCH_VICTORY_SCORE
+      m_GameOverContentLayout "{E04021BC742BE432}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_Default.layout"
+      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC53350}" {
+       m_sTitle "#AR-MatchResult_Victory-UC"
+       m_sSubtitle "#AR-Campaign_MatchResult"
+       m_sImageTexture "{0B03F611D52043AE}UI/Textures/placeholder.edds"
+       m_sDebriefing "#AR-MatchResult_DM_Score_Debrief"
+       m_sAudioOneShot "SOUND_ONVICTORY"
+      }
+     }
+     SCR_DeathMatchGameOverScreenInfo "{5E1F0BA23AC53363}" {
+      m_GameOverScreenId DEATHMATCH_DEFEAT_SCORE
+      m_GameOverContentLayout "{E04021BC742BE432}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_Default.layout"
+      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC5336C}" {
+       m_sTitle "#AR-MatchResult_Defeat-UC"
+       m_sSubtitle "#AR-Campaign_MatchResult"
+       m_sImageTexture "{3E294459ED6AAF48}UI/Textures/EditorPreviews/Auto/Editor/PlaceholderObjects/E_Placeholder_BasicDoubleSign_01.edds"
+       m_sDebriefing "#AR-MatchResult_DM_Score_Debrief"
+       m_sAudioOneShot "SOUND_ONDEFEAT"
+      }
+     }
+     SCR_DeathMatchGameOverScreenInfo "{5E1F0BA23AC5337F}" {
+      m_GameOverScreenId DEATHMATCH_VICTORY_TIME
+      m_GameOverContentLayout "{E04021BC742BE432}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_Default.layout"
+      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC53378}" {
+       m_sTitle "#AR-MatchResult_Victory-UC"
+       m_sSubtitle "#AR-Campaign_MatchResult"
+       m_sImageTexture "{3E294459ED6AAF48}UI/Textures/EditorPreviews/Auto/Editor/PlaceholderObjects/E_Placeholder_BasicDoubleSign_01.edds"
+       m_sDebriefing "#AR-MatchResult_DM_Time_Debrief"
+       m_sAudioOneShot "SOUND_ONVICTORY"
+      }
+     }
+     SCR_DeathMatchGameOverScreenInfo "{5E1F0BA23AC53374}" {
+      m_GameOverScreenId DEATHMATCH_DEFEAT_TIME
+      m_GameOverContentLayout "{E04021BC742BE432}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_Default.layout"
+      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC53376}" {
+       m_sTitle "#AR-MatchResult_Defeat-UC"
+       m_sSubtitle "#AR-Campaign_MatchResult"
+       m_sImageTexture "{3E294459ED6AAF48}UI/Textures/EditorPreviews/Auto/Editor/PlaceholderObjects/E_Placeholder_BasicDoubleSign_01.edds"
+       m_sDebriefing "loc DM debrief"
+       m_sAudioOneShot "SOUND_ONDEFEAT"
+      }
+     }
+     SCR_BaseGameOverScreenInfo "{5E1F0BA23AC53399}" {
+      m_GameOverScreenId EDITOR_NEUTRAL
+      m_GameOverContentLayout "{E04021BC742BE432}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_Default.layout"
+      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC53382}" {
+       m_sTitle "#AR-MatchResult_EditorSessionEnd-UC"
+       m_sSubtitle "#AR-MatchResult_EditorNeutral_Subtitle"
+       m_sImageTexture "{45BF8792AAF74C6E}UI/Textures/Editor/Logos/Logo_Editor_GameOver.edds"
+       m_sDebriefing "#AR-MatchResult_EditorNeutral_Debrief"
+       m_sAudioOneShot "SOUND_ONVICTORY"
+      }
+      m_OptionalEditorParams SCR_BaseGameOverScreenInfoEditor "{5E1F0BA23AC5339A}" {
+       m_sDisplayName "#AR-Editor_GameOverAttribute_Neutral_Name"
+       m_sDescription "#AR-Editor_GameOverAttribute_Neutral_Description"
+      }
+     }
+     SCR_BaseGameOverScreenInfo "{5E1F0BA23AC533A9}" {
+      m_GameOverScreenId SERVER_RESTART
+      m_GameOverContentLayout "{C4507D07F3C54831}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_NoImage.layout"
+      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC53390}" {
+       m_sTitle "#AR-ServerRestart_Title-UC"
+       m_sSubtitle "#AR-ServerRestart_Description"
+      }
+      m_OptionalEditorParams SCR_BaseGameOverScreenInfoEditor "{5E1F0BA23AC533AA}" {
+       m_sDisplayName "#AR-Editor_GameOverAttribute_RestartServer_Name"
+       m_sDescription "#AR-Editor_GameOverAttribute_RestartServer_Description"
+      }
+     }
+     SCR_FactionGameOverScreenInfo "{5E1F0BA23AC533BB}" {
+      m_GameOverScreenId EDITOR_FACTION_NEUTRAL
+      m_GameOverContentLayout "{E04021BC742BE432}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_Default.layout"
+      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC533A0}" {
+       m_sTitle "#AR-MatchResult_EditorSessionEnd-UC"
+       m_sSubtitle "#AR-MatchResult_FactionNeutral_Subtitle"
+       m_sDebriefing "#AR-MatchResult_EditorNeutral_Debrief"
+       m_sAudioOneShot "SOUND_ONVICTORY"
+      }
+      m_OptionalEditorParams SCR_BaseGameOverScreenInfoEditor "{5E1F0BA23AC533A4}" {
+       m_bCanBeSetByGameMaster 0
+      }
+     }
+     SCR_FactionVictoryGameOverScreenInfo "{5E1F0BA23AC533CC}" {
+      m_GameOverScreenId EDITOR_FACTION_VICTORY
+      m_GameOverContentLayout "{E04021BC742BE432}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_Default.layout"
+      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC533B4}" {
+       m_sTitle "#AR-MatchResult_Victory-UC"
+       m_sSubtitle "#AR-Campaign_MatchResult"
+       m_sDebriefing "#AR-MatchResult_EditorNeutral_Debrief"
+       m_sAudioOneShot "SOUND_ONVICTORY"
+      }
+      m_OptionalEditorParams SCR_BaseGameOverScreenInfoEditor "{5E1F0BA23AC533CD}" {
+       m_bNeedsPlayableFactions 1
+       m_sDisplayName "#AR-Editor_GameOverAttribute_FactionVictory_Name"
+       m_sDescription "#AR-Editor_GameOverAttribute_FactionVictory_Description"
+       m_MirroredState EDITOR_FACTION_DEFEAT
+      }
+     }
+     SCR_EditorFactionGameOverScreenInfo "{5E1F0BA23AC533D1}" {
+      m_GameOverScreenId EDITOR_FACTION_DEFEAT
+      m_GameOverContentLayout "{E04021BC742BE432}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_Default.layout"
+      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC533DF}" {
+       m_sTitle "#AR-MatchResult_Defeat-UC"
+       m_sSubtitle "#AR-Campaign_MatchResult"
+       m_sDebriefing "#AR-MatchResult_EditorNeutral_Debrief"
+       m_sAudioOneShot "SOUND_ONDEFEAT"
+      }
+      m_OptionalEditorParams SCR_BaseGameOverScreenInfoEditor "{5E1F0BA23AC533D2}" {
+       m_bCanBeSetByGameMaster 0
+       m_MirroredState EDITOR_FACTION_VICTORY
+      }
+      m_sMultiFactionsSubtiteText "#AR-MatchResult_MultiFactions"
+     }
+     SCR_FactionGameOverScreenInfo "{5E1F0BA23AC533E5}" {
+      m_GameOverScreenId EDITOR_FACTION_DRAW
+      m_GameOverContentLayout "{E04021BC742BE432}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_Default.layout"
+      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC533E3}" {
+       m_sTitle "#AR-MatchResult_Draw-UC"
+       m_sSubtitle "#AR-MatchResult_Draw"
+       m_sDebriefing "#AR-MatchResult_EditorNeutral_Debrief"
+       m_sAudioOneShot "SOUND_ONDEFEAT"
+      }
+      m_OptionalEditorParams SCR_BaseGameOverScreenInfoEditor "{5E1F0BA23AC533E6}" {
+       m_bNeedsPlayableFactions 1
+       m_sDisplayName "#AR-Editor_GameOverAttribute_FactionDraw_Name"
+       m_sDescription "#AR-Editor_GameOverAttribute_FactionDraw_Description"
+      }
+      m_bGetWinningFactionImage 0
+      m_bGetWinningSubtitleParam 0
+     }
+     SCR_BaseGameOverScreenInfo "{5E1F0BA23AC533F3}" {
+      m_GameOverScreenId COMBATPATROL_VICTORY
+      m_GameOverContentLayout "{77DC985790BEDC1C}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_CombatPatrol.layout"
+      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC533FC}" {
+       m_sTitle "#AR-MatchResult_Victory-UC"
+       m_sSubtitle "#AR-CombatScenario_Debriefing_Good"
+       m_sAudioOneShot "SOUND_ONVICTORY"
+      }
+     }
+     SCR_BaseGameOverScreenInfo "{5E1F0BA23AC533F4}" {
+      m_GameOverScreenId COMBATPATROL_PARTIAL_SUCCESS
+      m_GameOverContentLayout "{77DC985790BEDC1C}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_CombatPatrol.layout"
+      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC533F5}" {
+       m_sTitle "#AR-MatchResult_Victory-UC"
+       m_sSubtitle "#AR-CombatScenario_Debriefing_Normal"
+       m_sAudioOneShot "SOUND_ONVICTORY"
+      }
+     }
+     SCR_BaseGameOverScreenInfo "{5E1F0BA23AC53204}" {
+      m_GameOverScreenId COMBATPATROL_DRAW
+      m_GameOverContentLayout "{77DC985790BEDC1C}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_CombatPatrol.layout"
+      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC53205}" {
+       m_sTitle "#AR-MatchResult_Draw-UC"
+       m_sSubtitle "#AR-CombatScenario_Debriefing_Bad"
+       m_sAudioOneShot "SOUND_ONDEFEAT"
+      }
+     }
+     SCR_BaseGameOverScreenInfo "{5E1F0BA23AC53213}" {
+      m_GameOverScreenId COMBATPATROL_DEFEAT
+      m_GameOverContentLayout "{77DC985790BEDC1C}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_CombatPatrol.layout"
+      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC5321C}" {
+       m_sTitle "#AR-MatchResult_Defeat-UC"
+       m_sSubtitle "#AR-CombatScenario_Debriefing_Good_Timeout"
+       m_sAudioOneShot "SOUND_ONDEFEAT"
+      }
+     }
+    }
+   }
+  }
+  SCR_GroupsManagerComponent "{5E1F0BA23AC5322A}" {
+   m_sDefaultGroupPrefab "{8B4D49A9F324E7D5}Prefabs/Groups/PlayableGroup.et"
+   m_iPlayableGroupFrequencyOffset 500
+  }
+  SCR_HintManagerComponent "{5E1F0BA23AC5322F}" {
+  }
+  SCR_MapConfigComponent "{5E1F0BA23AC5322D}" {
+  }
+  SCR_NametagConfigComponent "{5E1F0BA23AC5323C}" {
+   m_sConfigPath "{09F7AAA14A642683}Configs/NameTags/NametagFriendlies.conf"
+  }
+  SCR_NightModeGameModeComponent "{5E1F0BA23AC53232}" {
+  }
+  SCR_NotificationSenderComponent "{5E1F0BA23AC5686C}" {
+   m_aKillfeedTypeNames {
+    SCR_NotificationKillfeedTypeName "{5E1F0BA23AC53240}" {
+     m_iKillfeedType DISABLED
+     m_sKillfeedTypeName "#AR-Notification_KillfeedType_DISABLED"
+    }
+    SCR_NotificationKillfeedTypeName "{5E1F0BA23AC53244}" {
+     m_iKillfeedType UNKNOWN_KILLER
+     m_sKillfeedTypeName "#AR-Notification_KillfeedType_UNKNOWN_KILLER"
+    }
+    SCR_NotificationKillfeedTypeName "{5E1F0BA23AC5325F}" {
+     m_iKillfeedType FULL
+     m_sKillfeedTypeName "#AR-Notification_KillfeedType_FULL"
+    }
+   }
+   m_aKillfeedReceiveTypeNames {
+    SCR_NotificationKillfeedreceiveTypeName "{5E1F0BA23AC5326A}" {
+     m_iKillfeedreceiveType ALL
+     m_sKillfeedReceiveTypeName "#AR-Notification_KillfeedReceiveType_ALL"
+    }
+    SCR_NotificationKillfeedreceiveTypeName "{5E1F0BA23AC5326E}" {
+     m_iKillfeedreceiveType ALLIES_ONLY
+     m_sKillfeedReceiveTypeName "#AR-Notification_KillfeedReceiveType_ALLIES_ONLY"
+    }
+    SCR_NotificationKillfeedreceiveTypeName "{5E1F0BA23AC53261}" {
+     m_iKillfeedreceiveType SAME_FACTION_ONLY
+     m_sKillfeedReceiveTypeName "#AR-Notification_KillfeedReceiveType_SAME_FACTION_ONLY"
+    }
+    SCR_NotificationKillfeedreceiveTypeName "{5E1F0BA23AC53265}" {
+     m_iKillfeedreceiveType GROUP_ONLY
+     m_sKillfeedReceiveTypeName "#AR-Notification_KillfeedReceiveType_GROUP_ONLY"
+    }
+    SCR_NotificationKillfeedreceiveTypeName "{5E1F0BA23AC53278}" {
+     m_iKillfeedreceiveType ENEMIES_ONLY
+     m_sKillfeedReceiveTypeName "#AR-Notification_KillfeedReceiveType_ENEMIES_ONLY"
+    }
+   }
+   m_PlayerKickReasonsConfig SCR_ConfigurableDialogUiPresets "{5E1F0BA23AC5686D}" {
+    m_aPresets {
+     SCR_KickDialogUiPreset "{5E1F0BA23AC53132}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "DEFAULT_ERROR"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_Default"
+      m_sTitle "#AR-ServerBrowser_SessionError"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC532B5}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_bCanBeReconnected 0
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC532F6}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC532EF}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC532F0}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC5318C}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "REPLICATION"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_Default"
+      m_sTitle "#AR-ServerBrowser_SessionError"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC5315F}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_bCanBeReconnected 0
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC5317D}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC53163}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC5317E}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC531E8}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "REPLICATION_SYSTEM_FAILURE"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_Default"
+      m_sTitle "#AR-ServerBrowser_SessionError"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC53194}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC531DA}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC531BB}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC531CA}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC53017}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "REPLICATION_DISCONNECTION"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_Replication_Disconect"
+      m_sTitle "#AR-ServerBrowser_SessionError"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC531FD}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC5301A}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC5300D}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC5301B}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC5305D}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "REPLICATION_CONNECTION_FAILURE"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_Replication_ConnectionFail"
+      m_sTitle "#AR-ServerBrowser_SessionError"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC53024}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC53043}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC53036}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC5304C}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC5309F}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "REPLICATION_TIMEOUT"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_Replication_Timeout"
+      m_sTitle "#AR-ServerBrowser_SessionError"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC5306D}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC5308D}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC5307D}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC5308E}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC53711}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "REPLICATION_FLOODED"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_Default"
+      m_sTitle "#AR-ServerBrowser_SessionError"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC530CC}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC5370B}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC530E7}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC530F4}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC53779}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "REPLICATION_STALLED"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_Default"
+      m_sTitle "#AR-ServerBrowser_SessionError"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC53720}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC53769}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC5374A}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC53751}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC537A7}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "REPLICATION_JIP_ERROR"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_Default"
+      m_sTitle "#AR-ServerBrowser_SessionError"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC53788}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC53795}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC5379A}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC53796}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC5361F}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "REPLICATION_CREATION_FAILURE"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_Default"
+      m_sTitle "#AR-ServerBrowser_SessionError"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC537C7}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC5360D}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC537E5}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC5360E}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC53659}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "BATTLEYE_INIT"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_Default"
+      m_sTitle "#AR-ServerBrowser_SessionError"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC53627}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_bCanBeReconnected 0
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC5364E}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC53630}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC5364F}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC53682}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "BATTLEYE_INIT_LOAD_ERROR"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_BattlEye_NotInstalled"
+      m_sTitle "#AR-ServerBrowser_SessionError"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC53668}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_bCanBeReconnected 0
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC53670}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC5367A}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC53671}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC536CB}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "BATTLEYE_INIT_UNSUPPORTED_VERSION"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_BattlEye_Unsupported"
+      m_sTitle "#AR-ServerBrowser_SessionError"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC53693}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_bCanBeReconnected 0
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC536BA}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC536AD}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC536BB}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC53501}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "DATA"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_Default"
+      m_sTitle "#AR-ServerBrowser_SessionError"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC536DF}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_bCanBeReconnected 0
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC536F0}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC536E3}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC536F1}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC53545}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "DATA_VERSION_MISMATCH"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_Data_VersionMismatch"
+      m_sTitle "#AR-ServerBrowser_SessionError"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC5352A}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_bCanBeReconnected 0
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC5354A}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC53539}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC5354B}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC51754}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "DATA_RDB_MISMATCH"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_Data_RDBMismatch"
+      m_sTitle "#AR-ServerBrowser_SessionError"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC53555}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_bCanBeReconnected 0
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC517A9}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC53565}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC53573}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC5176E}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "DATA_SCRIPT_MISMATCH"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_Data_ScriptMismatch"
+      m_sTitle "#AR-ServerBrowser_SessionError"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC51744}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_bCanBeReconnected 0
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC51762}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC51774}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC51763}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC51725}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "DATA_WORLD_LOAD_ERROR"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_Data_WorldLoad"
+      m_sTitle "#AR-ServerBrowser_SessionError"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC5171F}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC51736}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC5170D}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC51737}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC516EA}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "PLATFORM"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_Default"
+      m_sTitle "#AR-ServerBrowser_SessionError"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC516D6}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_bCanBeReconnected 0
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC516FD}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC516CB}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC516FA}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC516AB}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "PLATFORM_NO_MP_PRIVILEGE"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_Platform_NoPrivilege"
+      m_sTitle "#AR-ServerBrowser_SessionError"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC51684}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_bCanBeReconnected 0
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC516BF}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC516B2}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC516BC}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC5167F}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "PLAYER"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_Default"
+      m_sTitle "#AR-ServerBrowser_SessionError"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC51658}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_bCanBeReconnected 0
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC51673}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC51646}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC51670}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC51635}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "PLAYER_MANAGER"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_PM_Kicked"
+      m_sTitle "#AR-ServerBrowser_SessionError"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC5166C}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_bCanBeReconnected 0
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC51608}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC5161D}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC51606}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC569CA}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "PLAYER_MANAGER_KICK"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_PM_Kicked"
+      m_sTitle "#AR-ServerBrowser_SessionError"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC51622}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_bCanBeReconnected 0
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC569DE}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC569D0}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC569DA}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC56982}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "PLAYER_MANAGER_KICK_VOTED"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_PM_Kicked"
+      m_sTitle "#AR-ServerBrowser_SessionError"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC569F8}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_bCanBeReconnected 0
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC56997}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC569ED}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC56994}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC56944}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "PLAYER_MANAGER_FRIENDLY_FIRE"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_Behavior_FriendlyFire"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC569B2}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_bCanBeReconnected 0
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC56956}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC569A4}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC56957}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC5691E}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "PLAYER_MANAGER_DISRUPTIVE_BEHAVIOUR"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_Behavior_Trolling"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC56975}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_bCanBeReconnected 0
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC56910}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC56962}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC56911}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC568D4}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "PLAYER_MANAGER_KICKED_BY_GM"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_Editor_KickedByGM"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC5690F}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_bCanBeReconnected 0
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC56928}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC5693A}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC56924}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC56894}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "PLAYER_MANAGER_BANNED_BY_GM"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-KickDialog_Editor_BannedByGM"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC568C4}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_bCanBeReconnected 0
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC568E9}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC568F8}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC568E7}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC56855}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "PLAYER_MANAGER_BAN"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-ServerBrowser_JoinErrorBanMsg"
+      m_sTitle "#AR-ServerBrowser_JoinErrorBanTittle"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC5688D}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_bCanBeReconnected 0
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC568A8}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC568BD}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC568A6}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+     SCR_KickDialogUiPreset "{5E1F0BA23AC5686A}" {
+      m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+      m_sTag "PLAYER_MANAGER_TEMP_BAN"
+      m_eVisualStyle WARNING
+      m_sTitleIconImageName "warning"
+      m_sMessage "#AR-ServerBrowser_JoinErrorBanMsg"
+      m_sTitle "#AR-ServerBrowser_JoinErrorBanTittle"
+      m_aButtons {
+       SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC56845}" {
+        m_sTag "confirm"
+        m_sActionName "DialogConfirm"
+        m_sLabel "#AR-Button_Confirm-UC"
+        m_eAlign RIGHT
+       }
+      }
+      m_bCanBeReconnected 0
+      m_ReconnectPreset SCR_ConfigurableDialogUiPreset "{5E1F0BA23AC5687F}" {
+       m_sLayout "{0AD1F1993FE94C28}UI/layouts/Menus/Dialogs/KickDialog.layout"
+       m_eVisualStyle WARNING
+       m_sTitleIconImageName "warning"
+       m_aButtons {
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC56870}" {
+         m_sTag "confirm"
+         m_sActionName "DialogConfirm"
+         m_sLabel "#AR-Button_Confirm-UC"
+         m_eAlign RIGHT
+        }
+        SCR_ConfigurableDialogUiButtonPreset "{5E1F0BA23AC5687C}" {
+         m_sTag "cancel"
+         m_sActionName "MenuBack"
+         m_sLabel "#AR-Workshop_ButtonCancel"
+         m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+  SCR_PlayersRestrictionZoneManagerComponent "{5E1F0BA23AC56811}" {
+  }
+  SCR_PossessingManagerComponent "{5E1F0BA23AC56812}" {
+  }
+  SCR_RadialMenuItemsComponent "{5E1F0BA23AC56809}" {
+   m_MenuController SCR_RadialMenuController "{5E1F0BA23AC56806}" {
+    m_RMControls SCR_RadialMenuControllerInputs "{5E1F0BA23AC56807}" {
+     m_sControllerContext "WeaponSelectionContext"
+     m_sOpenAction "Inventory_WeaponSwitchingRadial"
+     m_bCloseOnPerform 1
+    }
+   }
+  }
+  SCR_ReconnectComponent "{5E1F0BA23AC5680D}" {
+   m_bEnableReconnect 0
+  }
+  SCR_RespawnSystemComponent "{5E1F0BA23AC5682D}" {
+   components {
+    SCR_FreeSpawnHandlerComponent "{5E1F0BA23AC56838}" {
+    }
+    SCR_PossessSpawnHandlerComponent "{5E1F0BA23AC5683C}" {
+    }
+    SCR_SpawnPointSpawnHandlerComponent "{5E1F0BA23AC5683E}" {
+    }
+   }
+   m_SpawnLogic SCR_MenuSpawnLogic "{5E1F0BA23AC56825}" {
+   }
+  }
+  SCR_RespawnTimerComponent "{5E1F0BA23AC5682F}" {
+  }
+  SCR_SaveLoadComponent "{5E1F0BA23AC56BD0}" {
+  }
+  SCR_ScoringSystemComponent "{5E1F0BA23AC56BC0}" {
+   m_aActions {
+    EndGameAction "{5E1F0BA23AC56BDE}" {
+     m_eScoringMode SLM_Faction
+    }
+   }
+  }
+  SCR_SpawnerAIGroupManagerComponent "{5E1F0BA23AC56BC2}" {
+  }
+  SCR_VotingManagerComponent "{5E1F0BA23AC56B4B}" {
+   m_aVotingTemplates {
+    SCR_VotingKick "{5E1F0BA23AC56BBC}" {
+     m_bIsValuePlayerID 1
+     m_fThreshold 0.3
+     m_iMinParticipation 0.3
+     m_Info SCR_VotingUIInfo "{5E1F0BA23AC56BFD}" {
+      Name "#AR-Voting_KICK_AddVoteName"
+      m_sStartVotingName "#AR-Voting_KICK_StartVotingName"
+      m_sCancelVotingName "#AR-Voting_KICK_CancelVotingName"
+      m_sStickyNotificationText "#AR-Notification_Sticky_VoteKickPlayer"
+      m_iStartNotificationId VOTING_KICK_START
+      m_iSucceededNotificationId VOTING_KICK_SUCCEED
+      m_iFailedNotificationId VOTING_KICK_FAIL
+     }
+     m_KickReason KICK_VOTED
+     m_bFactionSpecific 1
+    }
+    SCR_VotingLightBan "{5E1F0BA23AC56B57}" {
+     m_Type LIGHTBAN
+     m_bIsValuePlayerID 1
+     m_fThreshold 0.3
+     m_iMinParticipation 0.3
+     m_Info SCR_VotingUIInfo "{5E1F0BA23AC56B55}" {
+      Name "#AR-Voting_LIGHTBAN_AddVoteName"
+      m_sStartVotingName "#AR-Voting_LIGHTBAN_StartVotingName"
+      m_sCancelVotingName "#AR-Voting_LIGHTBAN_CancelVotingName"
+      m_sStickyNotificationText "#AR-Notification_Sticky_VoteLightBanPlayer"
+     }
+     m_KickReason TEMP_BAN
+     m_bFactionSpecific 1
+    }
+    SCR_VotingHeavyBan "{5E1F0BA23AC56B45}" {
+     m_Type HEAVYBAN
+     m_bIsValuePlayerID 1
+     m_fThreshold 0.3
+     m_iMinParticipation 0.3
+     m_Info SCR_VotingUIInfo "{5E1F0BA23AC56B42}" {
+      Name "#AR-Voting_HEAVYBAN_AddVoteName"
+      m_sStartVotingName "#AR-Voting_HEAVYBAN_StartVotingName"
+      m_sCancelVotingName "#AR-Voting_HEAVYBAN_CancelVotingName"
+      m_sStickyNotificationText "#AR-Notification_Sticky_VoteHeavyBanPlayer"
+     }
+     m_KickReason BAN
+     m_bFactionSpecific 1
+    }
+   }
+  }
+  SCR_WelcomeScreenComponent "{5E1F0BA23AC56B36}" {
+   m_sHeaderTitle "King of the Hill REFORGED"
+   m_BaseLayout SCR_WelcomeScreenThreeHorizontalColumns "{5E1F0BA23AC56B35}" {
+    m_LeftColumn SCR_WelcomeScreenFactionContent "{5E1F0BA23AC56B6B}" {
+     m_sTitleText "#AR-DeployScreen_AvailableFactionsTitle"
+    }
+    m_MiddleColumn SCR_WelcomeScreenMissionObjectivesContent "{5E1F0BA23AC56B18}" {
+    }
+    m_RightColumn SCR_WelcomeScreenIntroductionContent "{5E1F0BA23AC56B0E}" {
+     m_sTitleText "#AR-DeployScreen_OverviewTitle"
+     m_aIntroduction {
+      SCR_WelcomeScreenIntroduction "{5E1F0BA23AC56B0D}" {
+       m_sContentImage "{3BD92DD99C3E1890}Art/FRM_Fond.edds"
+       m_sContentTitleText "King of the Hill Reforged by FRM"
+       m_sContentDescriptionText "#KOTH-ResumedText"
+      }
+     }
+     m_sIntroductionColumnLayout "{EDE12BE09AF9C168}UI/Layouts/Menus/DeployMenu/WelcomeScreenIntroductionColumn_KOTH.layout"
+    }
+   }
+  }
+  RplComponent "{5E1F0BA23AC56B3E}" {
+   "Rpl State Override" None
+   Streamable Disabled
+  }
+ }
+ coords 2827.112 62.917 2010.608
+ Flags 0
+ {
+  SCR_MapEntity : "{731564B66F91B107}Prefabs/World/Game/MapEntity.et" {
+   ID "5E1ED724B33BC815"
+  }
+  DestructionManager : "{E5B570B5F32A7BAE}Prefabs/Systems/Destruction/DestructionManager.et" {
+   ID "5E1F0BA227A27EF0"
+   coords -1365.027 -39.01 -2217.766
+  }
+  PerceptionManager : "{028DAEAD63E056BE}Prefabs/World/Game/PerceptionManager.et" {
+   ID "5E1ED724B33BC817"
+  }
+  TagManager : "{2FA9E172CAB1857A}Prefabs/MP/Managers/TagManager.et" {
+   ID "5E1F0BA227A27ECC"
+   coords -1365.027 -39.01 -2217.766
+  }
+  SCR_FactionManager : "{589540B35EBA8CDC}Prefabs/MP/Managers/Factions/FactionManager_USxUSSR.et" {
+   ID "5E1F0BA227A27EF8"
+   coords -203.715 74.032 358.066
+   Factions {
+    SCR_Faction "{56B2B46E999BF3BF}" {
+     UIInfo SCR_FactionUIInfo "{528C961236B7DCD3}" {
+      Name "BLUFOR"
+      m_sNameUpper "BLUEFOR"
+     }
+     m_sFactionFlag "{636ED9CA5F7B7BCA}Art/BLUFOR_Flag.edds"
+     m_FactionFlagMaterial "{16A1F05D460A444F}Assets/Props/Fabric/Flags/Data/Flag_1_BLUFOR.emat"
+    }
+    SCR_Faction "{56B2B46E9AF80999}" {
+     UIInfo SCR_FactionUIInfo "{528C96127F8B6B08}" {
+      Name "OPFOR"
+      m_sNameUpper "OPFOR"
+     }
+     m_sFactionFlag "{095A44DAFA378980}Art/OPFOR_Flag.edds"
+     m_FactionFlagMaterial "{C255CA73E24384E2}Assets/Props/Fabric/Flags/Data/Flag_1_OPFOR.emat"
+    }
+    SCR_Faction "{5E0F433DFA16BF7F}" : "{8053DB656DD18B14}Configs/Factions/FIA.conf" {
+     UIInfo SCR_FactionUIInfo "{5570936866E0AD08}" {
+      Name "INDFOR"
+      m_sNameUpper "INDFOR"
+     }
+     m_sFactionFlag "{D9D8B9A41A6FD19F}Art/INDFOR_Flag.edds"
+     m_FactionFlagMaterial "{D66CFD74585F60E4}Assets/Props/Fabric/Flags/Data/Flag_1_INDFOR.emat"
+    }
+   }
+  }
+  RadioManagerEntity : "{B8E09FAB91C4ECCD}Prefabs/Radio/RadioManager.et" {
+   ID "5E1F0BA227A27EC4"
+   coords -1365.027 -39.01 -2217.766
+  }
+  ScriptedChatEntity : "{F69BC912AC8236F9}Prefabs/MP/ScriptedChatEntity.et" {
+   ID "5E1F0BA227A27EC2"
+   coords -1365.027 -39.01 -2217.766
+   "Default channel" "Faction"
+  }
+  SCR_GarbageManager {
+   ID "5E1F0BA227A3D057"
+   coords -1364.152 -39.01 -2218.587
+   CharacterLifetime 10
+   VehicleLifetime 300
+   ItemLifetime 10
+  }
+  HitRegistrationManager : "{0EDA3D48791120DD}Prefabs/MP/HitRegManager.et" {
+   ID "5E1F0BA227A3D055"
+   coords -1365.027 -39.01 -2217.766
+  }
+  SCR_LoadoutManager : "{97EF4C1A41F63DDB}Prefabs/MP/Managers/Loadouts/LoadoutManager_USxUSSR.et" {
+   ID "5E1F0BA227A3D054"
+   coords 1145.161 109.199 53.63
+   m_aPlayerLoadouts {
+    SCR_FactionPlayerLoadout "{56B2B461C34A570F}" {
+     m_sLoadoutName "BLUEFOR Rifleman"
+    }
+    SCR_FactionPlayerLoadout "{5A2494BE3D648F60}" {
+     m_sLoadoutName "BLUEFOR AR"
+    }
+    SCR_FactionPlayerLoadout "{56B2B461C275B309}" {
+     m_sLoadoutName "BLUEFOR MG"
+    }
+    SCR_FactionPlayerLoadout "{56B2B461C7495F41}" {
+     m_sLoadoutName "BLUEFOR GL"
+    }
+    SCR_FactionPlayerLoadout "{56B2B461C047DCDA}" {
+     m_sLoadoutName "BLUEFOR LAT"
+    }
+    SCR_FactionPlayerLoadout "{56B2B4613C48D08E}" {
+     m_sLoadoutName "BLUEFOR Sniper"
+    }
+    SCR_FactionPlayerLoadout "{56B2B46134D39388}" {
+     m_sLoadoutName "OPFOR Rifleman"
+    }
+    SCR_FactionPlayerLoadout "{5A2494B91167F3F6}" {
+     m_sLoadoutName "OPFOR AR"
+    }
+    SCR_FactionPlayerLoadout "{56B2B461341EA370}" {
+     m_sLoadoutName "OPFOR MG"
+    }
+    SCR_FactionPlayerLoadout "{56B2B4613FB900E5}" {
+     m_sLoadoutName "OPFOR GL"
+    }
+    SCR_FactionPlayerLoadout "{56B2B4613DCD3341}" {
+     m_sLoadoutName "OPFOR AT"
+    }
+    SCR_FactionPlayerLoadout "{56B2B4613581570A}" {
+     m_sLoadoutName "OPFOR Sharpshooter"
+    }
+    SCR_FactionPlayerLoadout "{5E1140CB98A6CB43}" {
+     m_sLoadoutName "INDFOR Rifleman"
+     m_sLoadoutResource "{84B40583F4D1B7A3}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_Rifleman.et"
+     m_sAffiliatedFaction "FIA"
+    }
+    SCR_FactionPlayerLoadout "{5E1140CB9AA304BA}" {
+     m_sLoadoutName "INDFOR AR"
+     m_sLoadoutResource "{77EF21EAB7CC0382}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_AR.et"
+     m_sAffiliatedFaction "FIA"
+    }
+    SCR_FactionPlayerLoadout "{5E1140CB86A3EE3E}" {
+     m_sLoadoutName "INDFOR MG"
+     m_sLoadoutResource "{58E47E5A4D599432}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_MG.et"
+     m_sAffiliatedFaction "FIA"
+    }
+    SCR_FactionPlayerLoadout "{5E1140CB87893F8E}" {
+     m_sLoadoutName "INDFOR GL"
+     m_sLoadoutResource "{7A3A5FCB407B6AA8}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_GL.et"
+     m_sAffiliatedFaction "FIA"
+    }
+    SCR_FactionPlayerLoadout "{5E1140CB817A6A44}" {
+     m_sLoadoutName "INDFOR AT"
+     m_sLoadoutResource "{D25BC9815A9F9E8D}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_AT.et"
+     m_sAffiliatedFaction "FIA"
+    }
+    SCR_FactionPlayerLoadout "{5E1140CB920FD4CD}" {
+     m_sLoadoutName "INDFOR Sharpshooter"
+     m_sLoadoutResource "{CE33AB22F61F3365}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_Sharpshooter.et"
+     m_sAffiliatedFaction "FIA"
+    }
+   }
+  }
+  ItemPreviewManagerEntity : "{9F18C476AB860F3B}Prefabs/World/Game/ItemPreviewManager.et" {
+   ID "5E1F0BA227A3D04A"
+   coords -1364.373 -39.01 -2218.007
+  }
+ }
+}

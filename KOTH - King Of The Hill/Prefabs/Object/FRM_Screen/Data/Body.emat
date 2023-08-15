@@ -1,0 +1,8 @@
+MatPBRBasic {
+ Color 0 0 0 1
+ Specular 0.227 0.227 0.227 1
+ RoughnessScale 0.257
+ AOScale 0.5
+ CavityFromAO 0.1
+ NMOMap "{678C7AE394DD0CBD}Assets/_SharedData/Plastic/ST_Plastic_Fine01_1m_NMO.edds"
+}

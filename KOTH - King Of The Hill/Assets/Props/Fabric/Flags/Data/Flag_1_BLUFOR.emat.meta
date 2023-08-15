@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{16A1F05D460A444F}Assets/Props/Fabric/Flags/Data/Flag_1_BLUFOR.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

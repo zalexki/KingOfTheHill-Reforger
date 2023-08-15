@@ -1,0 +1,133 @@
+GenericEntity : "{FBD32285925CFBE7}Prefabs/Editor/Plane_01/GridPlane_100x100.et" {
+ coords 0 1.001 0
+ scale 0.25
+ {
+  $grp GenericEntity : "{FBD32285925CFBE7}Prefabs/Editor/Plane_01/GridPlane_100x100.et" {
+   {
+    coords 0 0 200
+   }
+   {
+    coords 0 0 400
+   }
+   {
+    coords 0 0 600
+   }
+   {
+    coords 0 0 800
+   }
+   {
+    coords 0 0 1000
+   }
+   {
+    coords 200 0 0
+    {
+     $grp GenericEntity : "{FBD32285925CFBE7}Prefabs/Editor/Plane_01/GridPlane_100x100.et" {
+      {
+       coords 0 0 400
+      }
+      {
+       coords 0 0 600
+      }
+      {
+       coords 0 0 800
+      }
+      {
+       coords 0 0 1000
+      }
+      {
+       coords 0 0 200
+      }
+     }
+    }
+   }
+   {
+    coords 400 0 0
+    {
+     $grp GenericEntity : "{FBD32285925CFBE7}Prefabs/Editor/Plane_01/GridPlane_100x100.et" {
+      {
+       coords 0 0 400
+      }
+      {
+       coords 0 0 600
+      }
+      {
+       coords 0 0 800
+      }
+      {
+       coords 0 0 1000
+      }
+      {
+       coords 0 0 200
+      }
+     }
+    }
+   }
+   {
+    coords 600 0 0
+    {
+     $grp GenericEntity : "{FBD32285925CFBE7}Prefabs/Editor/Plane_01/GridPlane_100x100.et" {
+      {
+       coords 0 0 400
+      }
+      {
+       coords 0 0 600
+      }
+      {
+       coords 0 0 800
+      }
+      {
+       coords 0 0 1000
+      }
+      {
+       coords 0 0 200
+      }
+     }
+    }
+   }
+   {
+    coords 800 0 0
+    {
+     $grp GenericEntity : "{FBD32285925CFBE7}Prefabs/Editor/Plane_01/GridPlane_100x100.et" {
+      {
+       coords 0 0 400
+      }
+      {
+       coords 0 0 600
+      }
+      {
+       coords 0 0 800
+      }
+      {
+       coords 0 0 1000
+      }
+      {
+       coords 0 0 200
+      }
+     }
+    }
+   }
+   {
+    coords 1000 0 0
+    {
+     $grp GenericEntity : "{FBD32285925CFBE7}Prefabs/Editor/Plane_01/GridPlane_100x100.et" {
+      {
+       coords 0 0 400
+      }
+      {
+       coords 0 0 600
+      }
+      {
+       coords 0 0 800
+      }
+      {
+       coords 0 0 1000
+      }
+      {
+       coords 0 0 200
+      }
+     }
+    }
+   }
+  }
+ }
+}

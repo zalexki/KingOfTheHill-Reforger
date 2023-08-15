@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{96D6FB4EB6747F7F}Prefabs/Object/FRM_Screen/Data/RTMaterial02.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

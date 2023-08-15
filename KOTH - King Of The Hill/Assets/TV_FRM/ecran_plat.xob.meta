@@ -1,0 +1,148 @@
+MetaFileClass {
+ Name "{6FAB8742489435AE}Assets/TV_FRM/ecran_plat.xob"
+ Configurations {
+  FBXResourceClass PC {
+   ExportSkinning 1
+   MaterialAssigns {
+    MaterialAssignClass "{5E02D100A78268A5}" {
+     SourceMaterial "DefaultGeneratedMaterial"
+     AssignedMaterial "{C935BB9322350E69}Prefabs/Object/FRM_Screen/Data/DefaultGeneratedMaterial.emat"
+    }
+    MaterialAssignClass "{5E02D100A7826880}" {
+     SourceMaterial "Support"
+     AssignedMaterial "{CF605F7B79A8DE09}Prefabs/Object/FRM_Screen/Data/Support.emat"
+    }
+    MaterialAssignClass "{5E02D100A7826898}" {
+     SourceMaterial "Body"
+     AssignedMaterial "{E43F56A28A33ECF7}Prefabs/Object/FRM_Screen/Data/Body.emat"
+    }
+    MaterialAssignClass "{5E02D100A782689D}" {
+     SourceMaterial "Boutons"
+     AssignedMaterial "{36D982F91C570A31}Prefabs/Object/FRM_Screen/Data/Boutons.emat"
+    }
+    MaterialAssignClass "{5E02D100A7826892}" {
+     SourceMaterial "Cables"
+     AssignedMaterial "{59577F068E2146F2}Prefabs/Object/FRM_Screen/Data/Cables.emat"
+    }
+    MaterialAssignClass "{5E02D100A7826894}" {
+     SourceMaterial "Cache_Cables"
+     AssignedMaterial "{48FE1212774833C5}Prefabs/Object/FRM_Screen/Data/Cache_Cables.emat"
+    }
+    MaterialAssignClass "{5E02D100A78268EA}" {
+     SourceMaterial "Vis"
+     AssignedMaterial "{C2C00D91EADE7AAE}Prefabs/Object/FRM_Screen/Data/Vis.emat"
+    }
+    MaterialAssignClass "{5E02D100A78268EF}" {
+     SourceMaterial "LOGO"
+     AssignedMaterial "{3C1833B4576E20FE}Prefabs/Object/FRM_Screen/Data/Logo.emat"
+    }
+    MaterialAssignClass "{5E02D100A78268EC}" {
+     SourceMaterial "Fixation_mur"
+     AssignedMaterial "{2286CEDB465BE575}Prefabs/Object/FRM_Screen/Data/Fixation_mur.emat"
+    }
+    MaterialAssignClass "{5E02D100A78268E2}" {
+     SourceMaterial "Plug"
+     AssignedMaterial "{AD7F4778D44DC68E}Prefabs/Object/FRM_Screen/Data/Plug.emat"
+    }
+    MaterialAssignClass "{5E02D100A78268F8}" {
+     SourceMaterial "Material"
+     AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
+    }
+    MaterialAssignClass "{5E02D100A78268FD}" {
+     SourceMaterial "Screen"
+     AssignedMaterial "{96D6FB4EB6747F7F}Prefabs/Object/FRM_Screen/Data/RTMaterial02.emat"
+    }
+   }
+   MeshParams {
+    MeshParam Air_grilles {
+    }
+    MeshParam Air_grilles_02 {
+    }
+    MeshParam BOuton03 {
+    }
+    MeshParam Barre_Support {
+    }
+    MeshParam Body {
+    }
+    MeshParam Bouton01 {
+    }
+    MeshParam Bouton02 {
+    }
+    MeshParam Bras {
+    }
+    MeshParam Cable_01 {
+    }
+    MeshParam Cable_02 {
+    }
+    MeshParam Cover_branchements {
+    }
+    MeshParam Fix_support {
+    }
+    MeshParam Logo {
+    }
+    MeshParam Plate_support {
+    }
+    MeshParam Plate_support02 {
+    }
+    MeshParam Plug_02 {
+    }
+    MeshParam Plug_Hdmi {
+    }
+    MeshParam Power_Led {
+    }
+    MeshParam Screen {
+    }
+    MeshParam Sorties_air_rond {
+    }
+   }
+   GeometryParams {
+    GeometryParam UTM_Body {
+     SurfaceProperties {
+      "{536BF67B2052B869}material/metal.gamemat"
+     }
+     Mass 0
+     Margin 0
+    }
+    GeometryParam UTM_support01 {
+     SurfaceProperties {
+      "{536BF67B2052B869}material/metal.gamemat"
+     }
+     Mass 0
+     Margin 0
+    }
+    GeometryParam UTM_support02 {
+     SurfaceProperties {
+      "{536BF67B2052B869}material/metal.gamemat"
+     }
+     Mass 0
+     Margin 0
+    }
+    GeometryParam UTM_support_mur {
+     SurfaceProperties {
+      "{536BF67B2052B869}material/metal.gamemat"
+     }
+     Mass 0
+     Margin 0
+    }
+   }
+   Common TXOCommonClass "{5E02D100A791F1B9}" : "{0877E7C4BB2B2C9A}Configs/System/ResourceTypes/PC/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass XBOX_ONE : PC {
+   Common TXOCommonClass "{5E02D100A791F179}" : "{9D5B6207F7628CE2}Configs/System/ResourceTypes/XBOX_ONE/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass XBOX_SERIES : PC {
+   Common TXOCommonClass "{5E02D100A791F155}" : "{DD9F02115C764647}Configs/System/ResourceTypes/XBOX_SERIES/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass PS4 : PC {
+   Common TXOCommonClass "{5E02D100A791CEB7}" : "{53EC476BC921D99A}Configs/System/ResourceTypes/PS4/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass HEADLESS : PC {
+   Common TXOCommonClass "{5E02D100A791CE91}" : "{3A5B3356978039E8}Configs/System/ResourceTypes/HEADLESS/MeshObjectCommon.conf" {
+   }
+  }
+ }
+}

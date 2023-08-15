@@ -1,0 +1,14 @@
+GenericEntity : "{AE09DA7896F9DB37}Prefabs/Props/Fabric/Flags/Flag_1_2.et" {
+ ID "50E2C85E7DD38DD0"
+ components {
+  MeshObject "{52AE82368499B365}" {
+   Materials {
+    MaterialAssignClass "{5E173B246BBC9AE5}" {
+     SourceMaterial "Flag_1_2"
+     AssignedMaterial "{C255CA73E24384E2}Assets/Props/Fabric/Flags/Data/Flag_1_OPFOR.emat"
+    }
+   }
+  }
+ }
+ coords 116.802 1.001 114.497
+}

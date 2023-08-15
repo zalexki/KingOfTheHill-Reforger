@@ -1,0 +1,81 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Enabled 0
+  }
+  KOTH_ScoreboardComponent "{5E1AB287A4F4234F}" {
+   m_sLayoutPath "{2DA88DD8ECDD3310}Assets/Props/Civilian/ScoreMap_01/Data/Screen_Picture.layout"
+  }
+  MeshObject "{5E1AB2860762021F}" {
+   Object "{6FAB8742489435AE}Assets/FRM_Screen/ecran_plat.xob"
+   Materials {
+    MaterialAssignClass "{5E1AB28607620218}" {
+     SourceMaterial "Body"
+     AssignedMaterial "{E43F56A28A33ECF7}Prefabs/Object/FRM_Screen/Data/Body.emat"
+    }
+    MaterialAssignClass "{5E1AB28607620217}" {
+     SourceMaterial "Boutons"
+     AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
+    }
+    MaterialAssignClass "{5E1AB28607620213}" {
+     SourceMaterial "Cables"
+     AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
+    }
+    MaterialAssignClass "{5E1AB2860762026E}" {
+     SourceMaterial "Cache_Cables"
+     AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
+    }
+    MaterialAssignClass "{5E1AB2860762026D}" {
+     SourceMaterial "DefaultGeneratedMaterial"
+     AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
+    }
+    MaterialAssignClass "{5E1AB2860762026B}" {
+     SourceMaterial "Fixation_mur"
+     AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
+    }
+    MaterialAssignClass "{5E1AB28607620266}" {
+     SourceMaterial "LOGO"
+     AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
+    }
+    MaterialAssignClass "{5E1AB28607620267}" {
+     SourceMaterial "Material"
+     AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
+    }
+    MaterialAssignClass "{5E1AB28607620264}" {
+     SourceMaterial "Plug"
+     AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
+    }
+    MaterialAssignClass "{5E1AB28607620262}" {
+     SourceMaterial "Screen"
+     AssignedMaterial "{96D6FB4EB6747F7F}Prefabs/Object/FRM_Screen/Data/RTMaterial02.emat"
+    }
+    MaterialAssignClass "{5E1AB28607620260}" {
+     SourceMaterial "Support"
+     AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
+    }
+    MaterialAssignClass "{5E1AB2860762027E}" {
+     SourceMaterial "Vis"
+     AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
+    }
+   }
+  }
+  RigidBody "{5E1AB2860762027A}" {
+   ResponseIndex "TinyDestructible"
+   ModelGeometry 1
+   Static 1
+  }
+  ActionsManagerComponent "{508AB5952B584B2E}" {
+   Enabled 1
+   ActionContexts {
+    UserActionContext "{508AC2ABEC97066C}" {
+     Position PointInfo "{508AC2ABEAC4A0F5}" {
+      Offset 0 0.2451 0
+     }
+    }
+   }
+  }
+ }
+ coords 121.773 2.486 129.201
+ angleY 90
+}

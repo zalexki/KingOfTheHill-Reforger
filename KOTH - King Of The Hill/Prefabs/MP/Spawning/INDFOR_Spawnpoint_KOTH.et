@@ -1,0 +1,10 @@
+SCR_SpawnPoint : "{5392C4D80E4B18F8}Prefabs/MP/Spawning/SpawnPoint_FFA.et" {
+ ID "544EB04DCBFBD126"
+ coords 1253.707 40.582 2167.047
+ angleY 57.061
+ m_sFaction "FIA"
+ m_Info SCR_UIInfo "{56B4CC4ECACA2C37}" {
+  Name "INDFOR Spawn"
+  Icon "{D9D8B9A41A6FD19F}Art/INDFOR_Flag.edds"
+ }
+}

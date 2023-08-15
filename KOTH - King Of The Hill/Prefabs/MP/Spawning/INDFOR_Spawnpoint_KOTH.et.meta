@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{9AA087563AE90A88}Prefabs/MP/Modes/KingOfTheHill/SpawnAreas/INDFOR_Spawnpoint_KOTH.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

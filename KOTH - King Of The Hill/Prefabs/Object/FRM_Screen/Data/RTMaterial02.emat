@@ -1,0 +1,11 @@
+MatPBRBasic {
+ Emissive 1 1 1 0
+ EmissiveAbsoluteLV 0
+ ApplyAlbedoToEmissive 1
+ Cull none
+ Sort overlay
+ ReceiveShadow 0
+ OccludeRain 0
+ OccludeWetness 0
+ BCRMap "$rendertarget"
+}

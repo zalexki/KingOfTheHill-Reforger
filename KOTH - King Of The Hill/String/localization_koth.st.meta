@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{D54E40A6F1A63E70}String/localization_koth.st"
+ Configurations {
+  StringTableResourceClass PC {
+  }
+  StringTableResourceClass XBOX_ONE : PC {
+  }
+  StringTableResourceClass XBOX_SERIES : PC {
+  }
+  StringTableResourceClass PS4 : PC {
+  }
+  StringTableResourceClass HEADLESS : PC {
+  }
+ }
+}

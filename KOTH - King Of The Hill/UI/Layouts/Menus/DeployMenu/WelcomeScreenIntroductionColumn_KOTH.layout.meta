@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{EDE12BE09AF9C168}UI/Layouts/Menus/DeployMenu/WelcomeScreenIntroductionColumn_KOTH.layout"
+ Configurations {
+  LayoutResourceClass PC {
+  }
+  LayoutResourceClass XBOX_ONE : PC {
+  }
+  LayoutResourceClass XBOX_SERIES : PC {
+  }
+  LayoutResourceClass PS4 : PC {
+  }
+  LayoutResourceClass HEADLESS : PC {
+  }
+ }
+}

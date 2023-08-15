@@ -7,9 +7,9 @@
 }*/
 
 typedef func Log;
-void Log(string log)
+void Log(string log, LogLevel level = LogLevel.NORMAL)
 {
-	Print("KOTH: "+log, LogLevel.NORMAL);
+	Print("KOTH: "+log, level);
 }
 
 /*

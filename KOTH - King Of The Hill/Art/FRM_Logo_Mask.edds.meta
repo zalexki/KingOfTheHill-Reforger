@@ -1,0 +1,20 @@
+MetaFileClass {
+ Name "{DD35A57D66DE194B}Art/FRM_Logo_Mask.edds"
+ Configurations {
+  PNGResourceClass PC : "{2231C67ACC4BB0AC}Configs/System/ResourceTypes/PC/TextureMask.conf" {
+   ColorSpace ToSRGB
+  }
+  PNGResourceClass XBOX_ONE : "{3B78A666261DD8B4}Configs/System/ResourceTypes/XBOX_ONE/TextureMask.conf" {
+   ColorSpace ToSRGB
+  }
+  PNGResourceClass XBOX_SERIES : "{9A79E1F659B378E7}Configs/System/ResourceTypes/XBOX_SERIES/TextureMask.conf" {
+   ColorSpace ToSRGB
+  }
+  PNGResourceClass PS4 : "{5CB64ED6EEBDE368}Configs/System/ResourceTypes/PS4/TextureMask.conf" {
+   ColorSpace ToSRGB
+  }
+  PNGResourceClass HEADLESS : "{0B025DFAF55852CD}Configs/System/ResourceTypes/HEADLESS/TextureMask.conf" {
+   ColorSpace ToSRGB
+  }
+ }
+}

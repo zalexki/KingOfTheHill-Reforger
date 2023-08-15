@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{F607201D6D19DAA3}Prefabs/MP/Modes/KingOfTheHill/SpawnAreas/OPFOR_Spawnpoint_KOTH.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}
