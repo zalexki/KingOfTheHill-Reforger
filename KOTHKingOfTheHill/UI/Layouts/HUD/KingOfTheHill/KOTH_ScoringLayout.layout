@@ -255,7 +255,7 @@ FrameWidgetClass {
        }
        {
         TextWidgetClass "{5E10A7B4AB76C1DF}" {
-         Name "GreenforPlayers"
+         Name "BlueforPlayers"
          Slot LayoutSlot "{5E0F5D62981B7372}" {
           Padding 55 0 0 0
           SizeMode Fill
@@ -287,7 +287,7 @@ FrameWidgetClass {
          Texture "{70417B54F33ED6E5}UI/Textures/PlayableSlots/DefaultPlayableSlot.edds"
         }
         TextWidgetClass "{5E10A7B4AB76C1D9}" {
-         Name "BlueforPlayers"
+         Name "GreenforPlayers"
          Slot LayoutSlot "{5E0F5D62981B73C3}" {
           Padding 0 0 0 0
           SizeMode Fill

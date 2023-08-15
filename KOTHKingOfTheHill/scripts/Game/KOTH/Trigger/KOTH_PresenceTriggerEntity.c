@@ -66,15 +66,14 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 					if (faction) {
 						m_mapDescriptor.ChangeMarker(faction.GetFactionName());
 						
-						if (faction.GetFactionName() == "BLUFOR") {
+						if (faction.GetFactionName() == "BLUFOR")
 							blueforPlayerNumber++;
-						}
-						if (faction.GetFactionName() == "OPFOR") {
+
+						if (faction.GetFactionName() == "OPFOR")
 							redforPlayerNumber++;
-						}
-						if (faction.GetFactionName() == "INDFOR") {
+
+						if (faction.GetFactionName() == "INDFOR")
 							greenforPlayerNumber++;
-						}
 					}
 				}
 			}
