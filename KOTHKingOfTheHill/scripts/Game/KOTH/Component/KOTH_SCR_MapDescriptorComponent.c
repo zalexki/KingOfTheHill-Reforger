@@ -9,10 +9,10 @@ class KOTH_SCR_MapDescriptorComponent : SCR_MapDescriptorComponent
 
 	void KOTH_SCR_MapDescriptorComponent(IEntityComponentSource src, IEntity ent, IEntity parent)
 	{
-		GetGame().GetCallqueue().CallLater(createMarker, 100, false);
+		GetGame().GetCallqueue().CallLater(CreateMarker, 100, false);
 	}
 
-	void createMarker()
+	void CreateMarker()
 	{
 		m_item = Item();
 
@@ -31,7 +31,7 @@ class KOTH_SCR_MapDescriptorComponent : SCR_MapDescriptorComponent
 		m_item.SetProps(props);
 	}
 
-    void changeMarker(string factionName)
+    void ChangeMarker(string factionName)
     {
         MapDescriptorProps props = m_item.GetProps();
         
@@ -39,6 +39,7 @@ class KOTH_SCR_MapDescriptorComponent : SCR_MapDescriptorComponent
         switch (factionName)
         {
             case "none": color = color.Gray25; break;
+            case "contested": color = color.Violet; break;
             case "OPFOR": color = color.DarkRed; break;
             case "BLUFOR": color = color.DarkBlue; break;
             case "INDFOR": color = color.DarkGreen; break;

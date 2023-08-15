@@ -34,7 +34,7 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 		
 		if (outEntities.Count() < 1) 
 		{
-			m_mapDescriptor.changeMarker("none");
+			m_mapDescriptor.ChangeMarker("none");
 			m_counterTickPoints = 0;
 		}
 	}
