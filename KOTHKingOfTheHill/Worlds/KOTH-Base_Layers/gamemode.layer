@@ -1,4 +1,20 @@
 SCR_BaseGameMode KOTH_GameMode1 : "{E5118D0809DD3CDF}Prefabs/MP/Modes/KOTH_GameMode.et" {
+ components {
+  SCR_GameOverScreenManagerComponent "{5E1F0BA23AC53211}" {
+   m_GameOverScreenConfig SCR_GameOverScreenConfig "{5E1F0BA23AC53212}" {
+    m_aGameOverScreens {
+     SCR_FactionVictoryGameOverScreenInfo "{5E1F0BA23AC5331C}" {
+      m_GameOverContentLayout "{D7CCDDA709B57FA0}UI/Layouts/HUD/GameOver/EndScreen/EndScreenContent_KOTH.layout"
+     }
+     SCR_FactionGameOverScreenInfo "{5E1F0BA23AC5332C}" {
+      m_GameOverContentLayout "{D7CCDDA709B57FA0}UI/Layouts/HUD/GameOver/EndScreen/EndScreenContent_KOTH.layout"
+     }
+     SCR_FactionVictoryGameOverScreenInfo "{5E1F0BA23AC5333E}" {
+     }
+    }
+   }
+  }
+ }
  coords 2826.275 63.021 2008.978
  {
   SCR_MapEntity "5E1F106408AEF35E" {

@@ -1,7 +1,7 @@
 SCR_SpawnPoint : "{5A2220DD0C16958B}Prefabs/MP/Spawning/SpawnPoint_US.et" {
  ID "544EB04DCBFBD126"
- coords 1365.157 40.817 2228.949
- angleY 57.09
+ coords 0.104 0.254 -0.01
+ angleY 90
  m_Info SCR_UIInfo "{56B4CC4ECACA2C37}" {
   Name "BLUFOR Spawn"
   Icon "{636ED9CA5F7B7BCA}Art/BLUFOR_Flag.edds"

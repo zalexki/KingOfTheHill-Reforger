@@ -7,7 +7,7 @@ FrameWidgetClass {
    Slot FrameWidgetSlot "{5E0F433D9A374E3D}" {
     PositionX 1586.1
     OffsetLeft 1586.1
-    PositionY 548.098
+    PositionY 548.1
     OffsetTop 548.1
     SizeX 330
     OffsetRight -1916.1
@@ -15,173 +15,136 @@ FrameWidgetClass {
     OffsetBottom -788.1
    }
    {
-    SizeLayoutWidgetClass "{5E1140C87E7A51D7}" : "{8C63C2E7AE0092B7}UI/layouts/WidgetLibrary/WLib_ProgressBar.layout" {
-     Name "ProgressBar_EXP"
-     Slot FrameWidgetSlot "{5E1140C87E7A50CD}" {
-      PositionX 65.941
-      OffsetLeft 65.941
-      PositionY 27.778
-      OffsetTop 27.778
-      SizeX 207.242
-      OffsetRight -273.182
-      SizeY 30
-      OffsetBottom -57.778
+    VerticalLayoutWidgetClass "{5E1F523980423B10}" {
+     Name "Back"
+     Slot FrameWidgetSlot "{5E1F523980423B70}" {
+      OffsetLeft 0
+      OffsetTop 0
+      SizeX 330
+      OffsetRight -330
+      SizeY 240
+      OffsetBottom -240
      }
-     "Is Enabled" 0
-     components {
-      SCR_WLibProgressBarComponent "{5570DACE374D2D4B}" {
-       m_fMax 100
-       m_fValue 75
-       m_SliderColor 0.078 0.512 0.76 1
-       m_BackgroundColor 0.023 0.023 0.023 1
-      }
-     }
-     HeightOverride 14
      {
-      OverlayWidgetClass "{5570DACE2F0FC6B4}" {
-       Prefab "{5570DACE2F0FC6B4}"
+      HorizontalLayoutWidgetClass "{5E1F5239CAB9A837}" {
+       Name "HorizontalLayout0"
+       Slot LayoutSlot "{5E1F5239CAB9A877}" {
+        Padding 0 12 0 0
+       }
        {
-        ImageWidgetClass "{5570DAC1C9A243D1}" {
-         Prefab "{5570DAC1C9A243D1}"
-         Opacity 0.8
-         Color 0.023 0.023 0.023 1
-        }
-        HorizontalLayoutWidgetClass "{5570DAC1CCE8D8B6}" {
-         Prefab "{5570DAC1CCE8D8B6}"
-         Slot OverlayWidgetSlot "{5570DACE2F1E73F1}" {
-          Padding 4 4 4 4
+        ImageWidgetClass "{5E10A7B4AB76C1FC}" {
+         Name "FondLVL"
+         Slot LayoutSlot "{5E1F523BFEF64454}" {
+          Padding 0 0 0 0
+          SizeMode Auto
          }
+         Opacity 0.6
+         Color 0 0 0 1
+         Texture "{66B5C425FCD66BD8}UI/Textures/Icons/icons_keyboard/icons_keyboard.imageset"
+         Image "key"
+         Size 60 60
+        }
+        SizeLayoutWidgetClass "{5E1140C87E7A51D7}" : "{8C63C2E7AE0092B7}UI/layouts/WidgetLibrary/WLib_ProgressBar.layout" {
+         Name "ProgressBar_EXP"
+         Slot LayoutSlot "{5E1F523BFEF64326}" {
+          Padding 0 10 50 10
+          SizeMode Fill
+         }
+         components {
+          SCR_WLibProgressBarComponent "{5570DACE374D2D4B}" {
+           m_fValue 0.5
+          }
+         }
+         AllowHeightOverride 0
+         HeightOverride 0
+         {
+          OverlayWidgetClass "{5570DACE2F0FC6B4}" {
+           Prefab "{5570DACE2F0FC6B4}"
+           {
+            ImageWidgetClass "{5E1F52384346F0E1}" {
+             Name "Image0"
+             Slot OverlayWidgetSlot "{5E1F52384346F0D7}" {
+             }
+             Opacity 0.3
+             Color 0 0 0 1
+             Size 250 36
+            }
+            ImageWidgetClass "{5570DAC1C9A243D1}" {
+             Prefab "{5570DAC1C9A243D1}"
+             Opacity 0.8
+             Color 0.023 0.023 0.023 1
+            }
+            HorizontalLayoutWidgetClass "{5570DAC1CCE8D8B6}" {
+             Prefab "{5570DAC1CCE8D8B6}"
+             Slot OverlayWidgetSlot "{5570DACE2F1E73F1}" {
+              Padding 4 4 4 4
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+      HorizontalLayoutWidgetClass "{5E1F5238889E024B}" {
+       Name "HorizontalLayout1"
+       Slot LayoutSlot "{5E1F5238889E02BA}" {
+        Padding 0 3 0 0
+       }
+       {
+        ImageWidgetClass "{5E10A7B4AB76C1F3}" {
+         Name "Bluefor_point_fond"
+         Slot LayoutSlot "{5E1F523BFEF643CD}" {
+          Padding 57 0 0 0
+          SizeMode Auto
+         }
+         Opacity 0.8
+         Color 0 0.125 0.502 1
+         Size 55 55
+        }
+        ImageWidgetClass "{5E10A7B4AB76C1F4}" {
+         Name "Redfor_point_fond"
+         Slot LayoutSlot "{5E1F523BFEF6422C}" {
+          Padding 32 0 0 0
+          SizeMode Auto
+         }
+         Opacity 0.8
+         Color 0.502 0 0 1
+         Size 55 55
+        }
+        ImageWidgetClass "{5E10A7B4AB76C1F9}" {
+         Name "Greenfor_point_fond"
+         Slot LayoutSlot "{5E1F523BFEF6420F}" {
+          Padding 33 0 0 0
+          SizeMode Auto
+         }
+         Opacity 0.8
+         Color 0 0.502 0.125 1
+         Size 55 55
+        }
+       }
+      }
+      HorizontalLayoutWidgetClass "{5E1F52388B2F3E86}" {
+       Name "HorizontalLayout2"
+       Slot LayoutSlot "{5E1F52388B2F3EE1}" {
+        Padding 0 40 0 0
+       }
+       {
+        ImageWidgetClass "{5E10A7B4AB76C1FA}" {
+         Name "Fond_Money"
+         Slot LayoutSlot "{5E1F523BFEF64274}" {
+          Padding 75 0 75 0
+          SizeMode Fill
+         }
+         Opacity 0.5
+         Color 0 0 0 1
         }
        }
       }
      }
     }
-    ImageWidgetClass "{5E10A7B4AB76C1FC}" {
-     Name "Image0"
-     Slot FrameWidgetSlot "{5E0F64202FEE4BE2}" {
-      PositionX -2.038
-      OffsetLeft -2.038
-      PositionY 9.938
-      OffsetTop 9.938
-      SizeX 65
-      OffsetRight -62.962
-      SizeY 65
-      OffsetBottom -74.938
-     }
-     Opacity 0.6
-     Color 0 0 0 1
-     Texture "{66B5C425FCD66BD8}UI/Textures/Icons/icons_keyboard/icons_keyboard.imageset"
-     Image "key"
-     Size 32 32
-    }
-    ImageWidgetClass "{5E10A7B4AB76C1FA}" {
-     Name "Fond_Money"
-     Slot FrameWidgetSlot "{5E0F64219244C2E3}" {
-      PositionX 83.815
-      OffsetLeft 83.815
-      PositionY 170.956
-      OffsetTop 170.956
-      SizeX 174.7
-      OffsetRight -258.515
-      SizeY 30
-      OffsetBottom -200.956
-     }
-     "Is Visible" 0
-     Opacity 0.5
-     Color 0 0 0 1
-    }
-    ImageWidgetClass "{5E10A7B4AB76C1FB}" {
-     Name "Fond_PL3"
-     Slot FrameWidgetSlot "{5E0F642433505486}" {
-      PositionX 232.5
-      OffsetLeft 232.5
-      PositionY 74.5
-      OffsetTop 74.5
-      SizeX 55
-      OffsetRight -287.5
-      SizeY 55
-      OffsetBottom -129.5
-     }
-     Opacity 0.8
-     Color 0 0.047 0.012 1
-    }
-    ImageWidgetClass "{5E10A7B4AB76C1F9}" {
-     Name "Greenfor_point_fond"
-     Slot FrameWidgetSlot "{5E0F642433505486}" {
-      PositionX 235
-      OffsetLeft 235
-      PositionY 77
-      OffsetTop 77
-      SizeX 50
-      OffsetRight -285
-      SizeY 50
-      OffsetBottom -127
-     }
-     Opacity 0.8
-     Color 0 0.502 0.125 1
-    }
-    ImageWidgetClass "{5E10A7B4AB76C1F6}" {
-     Name "Fond_PL2"
-     Slot FrameWidgetSlot "{5E0F642433505486}" {
-      PositionX 143.5
-      OffsetLeft 143.5
-      PositionY 74.5
-      OffsetTop 74.5
-      SizeX 55
-      OffsetRight -198.5
-      SizeY 55
-      OffsetBottom -129.5
-     }
-     Opacity 0.8
-     Color 0.039 0 0 1
-    }
-    ImageWidgetClass "{5E10A7B4AB76C1F4}" {
-     Name "Redfor_point_fond"
-     Slot FrameWidgetSlot "{5E0F642433505486}" {
-      PositionX 146
-      OffsetLeft 146
-      PositionY 77
-      OffsetTop 77
-      SizeX 50
-      OffsetRight -196
-      SizeY 50
-      OffsetBottom -127
-     }
-     Opacity 0.8
-     Color 0.502 0 0 1
-    }
-    ImageWidgetClass "{5E10A7B4AB76C1F5}" {
-     Name "Fond_PL1"
-     Slot FrameWidgetSlot "{5E0F642433505486}" {
-      PositionX 57.5
-      OffsetLeft 57.5
-      PositionY 74.5
-      OffsetTop 74.5
-      SizeX 55
-      OffsetRight -112.5
-      SizeY 55
-      OffsetBottom -129.5
-     }
-     Opacity 0.8
-     Color 0 0.011 0.043 1
-    }
-    ImageWidgetClass "{5E10A7B4AB76C1F3}" {
-     Name "Bluefor_point_fond"
-     Slot FrameWidgetSlot "{5E0F642433505486}" {
-      PositionX 60
-      OffsetLeft 60
-      PositionY 77
-      OffsetTop 77
-      SizeX 50
-      OffsetRight -110
-      SizeY 50
-      OffsetBottom -127
-     }
-     Opacity 0.8
-     Color 0 0.125 0.502 1
-    }
     VerticalLayoutWidgetClass "{5E10A7B4AB76C1CF}" {
-     Name "VerticalLayout0"
+     Name "Front"
      Slot FrameWidgetSlot "{5E0F5D606E46341D}" {
       PositionX 0
       OffsetLeft 0
@@ -205,6 +168,7 @@ FrameWidgetClass {
           Padding 15 0 0 0
          }
          Text "43"
+         "Horizontal Alignment" Center
          FontProperties FontProperties "{5E0F43399CF1A959}" {
           Font "{DE4B66C39B62E39B}UI/Fonts/Purista/Purista Medium.fnt"
           OutlineSize 1
@@ -237,37 +201,49 @@ FrameWidgetClass {
         TextWidgetClass "{5E10A7B4AB76C1C4}" {
          Name "BlueforPoints"
          Slot LayoutSlot "{5E0F6423191C2A7C}" {
-          Padding 68 0 0 0
+          Padding 40 0 0 0
+          SizeMode Fill
          }
-         Text "12"
+         Text "1"
          "Font Size" 35
          "Horizontal Alignment" Center
          FontProperties FontProperties "{5E0F6424F6E43853}" {
           Font "{DE4B66C39B62E39B}UI/Fonts/Purista/Purista Medium.fnt"
+          ShadowSize 32
+          ShadowOffset 3 3
+          ShadowOpacity 0.5
          }
         }
         TextWidgetClass "{5E10A7B4AB76C1C2}" {
          Name "RedforPoints"
          Slot LayoutSlot "{5E0F6423191C2A51}" {
-          Padding 50 0 0 0
+          Padding 0 0 0 0
+          SizeMode Fill
          }
-         Text "50"
+         Text "5"
          "Font Size" 35
          "Horizontal Alignment" Center
          FontProperties FontProperties "{5E0F6424FC0496D5}" {
           Font "{DE4B66C39B62E39B}UI/Fonts/Purista/Purista Medium.fnt"
+          ShadowSize 32
+          ShadowOffset 3 3
+          ShadowOpacity 0.5
          }
         }
         TextWidgetClass "{5E10A7B4AB76C1C3}" {
          Name "GreenforPoints"
          Slot LayoutSlot "{5E0F6423191C2A86}" {
-          Padding 50 0 0 0
+          Padding 0 0 29 0
+          SizeMode Fill
          }
-         Text "41"
+         Text "4"
          "Font Size" 35
          "Horizontal Alignment" Center
          FontProperties FontProperties "{5E0F6424FFCE12CB}" {
           Font "{DE4B66C39B62E39B}UI/Fonts/Purista/Purista Medium.fnt"
+          ShadowSize 32
+          ShadowOffset 3 3
+          ShadowOpacity 0.5
          }
         }
        }
@@ -275,14 +251,18 @@ FrameWidgetClass {
       HorizontalLayoutWidgetClass "{5E10A7B4AB76C1C1}" {
        Name "CountPlayer_Footer"
        Slot LayoutSlot "{5E0F5D62981B7368}" {
-        Padding 58 15 0 0
+        Padding 0 15 0 0
        }
        {
         TextWidgetClass "{5E10A7B4AB76C1DF}" {
-         Name "BluforPlayers"
+         Name "GreenforPlayers"
          Slot LayoutSlot "{5E0F5D62981B7372}" {
+          Padding 55 0 0 0
+          SizeMode Fill
          }
          Text "12"
+         "Horizontal Alignment" Center
+         "Vertical Alignment" Center
         }
         ImageWidgetClass "{5E10A7B4AB76C1DC}" {
          Name "IconPPL"
@@ -293,9 +273,12 @@ FrameWidgetClass {
         TextWidgetClass "{5E10A7B4AB76C1DA}" {
          Name "RedforPlayers"
          Slot LayoutSlot "{5E0F5D62981B7398}" {
-          Padding 30 0 0 0
+          Padding 0 0 0 0
+          SizeMode Fill
          }
          Text "10"
+         "Horizontal Alignment" Center
+         "Vertical Alignment" Center
         }
         ImageWidgetClass "{5E10A7B4AB76C1DB}" {
          Name "IconPPL2"
@@ -304,15 +287,19 @@ FrameWidgetClass {
          Texture "{70417B54F33ED6E5}UI/Textures/PlayableSlots/DefaultPlayableSlot.edds"
         }
         TextWidgetClass "{5E10A7B4AB76C1D9}" {
-         Name "GreenforPlayers"
+         Name "BlueforPlayers"
          Slot LayoutSlot "{5E0F5D62981B73C3}" {
-          Padding 34 0 0 0
+          Padding 0 0 0 0
+          SizeMode Fill
          }
-         Text "99"
+         Text "10"
+         "Horizontal Alignment" Center
+         "Vertical Alignment" Center
         }
         ImageWidgetClass "{5E10A7B4AB76C1D6}" {
          Name "IconPPL3"
          Slot LayoutSlot "{5E0F5D63235B07B0}" {
+          Padding 0 0 11 0
          }
          Texture "{70417B54F33ED6E5}UI/Textures/PlayableSlots/DefaultPlayableSlot.edds"
         }

@@ -18,17 +18,17 @@ class KOTH_HUD : SCR_InfoDisplay
 			if (!koth_hub)
 				return;
 			
-	        m_blueforPointsText = TextWidget.Cast(koth_hub.FindWidget("VerticalLayout0.CountPoint_Footer.BlueforPoints"));
-			m_greenforPointsText = TextWidget.Cast(koth_hub.FindWidget("VerticalLayout0.CountPoint_Footer.GreenforPoints"));
-			m_redforPointsText = TextWidget.Cast(koth_hub.FindWidget("VerticalLayout0.CountPoint_Footer.RedforPoints"));
+	        m_blueforPointsText = TextWidget.Cast(koth_hub.FindWidget("Front.CountPoint_Footer.BlueforPoints"));
+			m_greenforPointsText = TextWidget.Cast(koth_hub.FindWidget("Front.CountPoint_Footer.GreenforPoints"));
+			m_redforPointsText = TextWidget.Cast(koth_hub.FindWidget("Front.CountPoint_Footer.RedforPoints"));
 
 			m_blueforPointsText.SetText("0");
 			m_greenforPointsText.SetText("0");
 			m_redforPointsText.SetText("0");
 
-			m_blueforPlayersText = TextWidget.Cast(koth_hub.FindWidget("VerticalLayout0.CountPlayer_Footer.BluforPlayers"));
-			m_greenforPlayersText = TextWidget.Cast(koth_hub.FindWidget("VerticalLayout0.CountPlayer_Footer.GreenforPlayers"));
-			m_redforPlayersText = TextWidget.Cast(koth_hub.FindWidget("VerticalLayout0.CountPlayer_Footer.RedforPlayers"));
+			m_blueforPlayersText = TextWidget.Cast(koth_hub.FindWidget("Front.CountPlayer_Footer.BlueforPlayers"));
+			m_greenforPlayersText = TextWidget.Cast(koth_hub.FindWidget("Front.CountPlayer_Footer.GreenforPlayers"));
+			m_redforPlayersText = TextWidget.Cast(koth_hub.FindWidget("Front.CountPlayer_Footer.RedforPlayers"));
 
 			m_blueforPlayersText.SetText("0");
 			m_greenforPlayersText.SetText("0");

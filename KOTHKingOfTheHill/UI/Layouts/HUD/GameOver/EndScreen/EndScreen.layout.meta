@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{144919871D65F121}UI/layouts/HUD/GameOver/EndScreen/EndScreen.layout"
+ Configurations {
+  LayoutResourceClass PC {
+  }
+  LayoutResourceClass XBOX_ONE : PC {
+  }
+  LayoutResourceClass XBOX_SERIES : PC {
+  }
+  LayoutResourceClass PS4 : PC {
+  }
+  LayoutResourceClass HEADLESS : PC {
+  }
+ }
+}
