@@ -27,27 +27,16 @@ modded class SCR_BaseGameMode
 		array<Faction> factions = {};
 		GetGame().GetFactionManager().GetFactionsList(factions);
 		
+		string factionName;
+		if (m_blueforPoints >= m_winnerPointsNeeded) { factionName = "BLUFOR"; };
+		if (m_redforPoints >= m_winnerPointsNeeded) { factionName = "OPFOR"; };
+		if (m_greenforPoints >= m_winnerPointsNeeded) { factionName = "INDFOR"; };
+		
 		foreach (Faction faction : factions)
 		{
-			if (m_blueforPoints >= m_winnerPointsNeeded) {
-				if (faction.GetFactionName() == "BLUFOR") {
-					int factionIndex = GetGame().GetFactionManager().GetFactionIndex(faction);
-					EndGameWithFactionWin(factionIndex);
-				}
-			}
-			
-			if (m_redforPoints >= m_winnerPointsNeeded) {
-				if (faction.GetFactionName() == "OPFOR") {
-					int factionIndex = GetGame().GetFactionManager().GetFactionIndex(faction);
-					EndGameWithFactionWin(factionIndex);
-				}
-			}
-			
-			if (m_greenforPoints >= m_winnerPointsNeeded) {
-				if (faction.GetFactionName() == "INDFOR") {
-					int factionIndex = GetGame().GetFactionManager().GetFactionIndex(faction);
-					EndGameWithFactionWin(factionIndex);
-				}
+			if (faction.GetFactionName() == factionName) {
+				int factionIndex = GetGame().GetFactionManager().GetFactionIndex(faction);
+				EndGameWithFactionWin(factionIndex);
 			}
 		}
 	}

@@ -1,4 +1,4 @@
-[ComponentEditorProps(category: "GameScripted/KOTH", description: "map markers.")]
+[ComponentEditorProps(category: "GameScripted/KOTH", description: "map markers")]
 class KOTH_SCR_MapDescriptorComponentClass : SCR_MapDescriptorComponentClass
 {
 };
@@ -9,10 +9,10 @@ class KOTH_SCR_MapDescriptorComponent : SCR_MapDescriptorComponent
 
 	void KOTH_SCR_MapDescriptorComponent(IEntityComponentSource src, IEntity ent, IEntity parent)
 	{
-		GetGame().GetCallqueue().CallLater(createMarker, 100, false);
+		GetGame().GetCallqueue().CallLater(CreateMarker, 100, false);
 	}
 
-	void createMarker()
+	void CreateMarker()
 	{
 		m_item = Item();
 
@@ -30,20 +30,21 @@ class KOTH_SCR_MapDescriptorComponent : SCR_MapDescriptorComponent
 	
 		m_item.SetProps(props);
 	}
-	
-	 //------------------------------------------------------------------------------------------------
-    void changeMarker(FactionKey factionkey)
+
+    void ChangeMarker(string factionName)
     {
         MapDescriptorProps props = m_item.GetProps();
         
         Color color;
-        switch (factionkey)
+        switch (factionName)
         {
-            case "USSR": color = color.DarkRed; break;
-            case "US": color = color.DarkBlue; break;
-            case "FIA": color = color.DarkGreen; break;
+            case "none": color = color.Gray25; break;
+            case "contested": color = color.Violet; break;
+            case "OPFOR": color = color.DarkRed; break;
+            case "BLUFOR": color = color.DarkBlue; break;
+            case "INDFOR": color = color.DarkGreen; break;
         }
-        color.SetA(0.7);
+        color.SetA(0.6);
         props.SetFrontColor(color);
     }
 };

@@ -5,6 +5,7 @@ class KOTH_PresenceTriggerEntityClass : BaseGameTriggerEntityClass
 class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 {
 	SCR_BaseGameMode m_gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
+	KOTH_SCR_MapDescriptorComponent m_mapDescriptor;
 	private int m_counterTickPoints = 0;
 	
 	override protected void EOnInit(IEntity owner)
@@ -17,6 +18,11 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 		trigger.SetUpdateRate(1);
 		
 		m_gameMode.m_kothTrigger = this;
+		m_mapDescriptor = KOTH_SCR_MapDescriptorComponent.Cast(this.FindComponent(KOTH_SCR_MapDescriptorComponent));
+		if (!m_mapDescriptor)
+		{
+			Log("missing KOTH_SCR_MapDescriptorComponent on KOTH_PresenceTriggerEntity", LogLevel.ERROR);
+		}
 	}
 	
 	override protected void OnDeactivate(IEntity ent)
@@ -28,6 +34,7 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 		
 		if (outEntities.Count() < 1) 
 		{
+			m_mapDescriptor.ChangeMarker("none");
 			m_counterTickPoints = 0;
 		}
 	}
@@ -45,10 +52,7 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 			GetEntitiesInside(outEntities);
 			
 			KOTH_SCR_MapDescriptorComponent mapDescriptor = KOTH_SCR_MapDescriptorComponent.Cast(this.FindComponent(KOTH_SCR_MapDescriptorComponent));
-			if (!mapDescriptor)
-			{
-				Log("missing KOTH_SCR_MapDescriptorComponent on KOTH_PresenceTriggerEntity", LogLevel.ERROR);
-			}
+			
 			
 			int blueforPlayerNumber = 0;
 			int greenforPlayerNumber = 0;
@@ -60,30 +64,41 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 				if (targetFactionComp) {
 					Faction faction = targetFactionComp.GetAffiliatedFaction();
 					if (faction) {
-						mapDescriptor.changeMarker(faction.GetFactionKey());
+						m_mapDescriptor.ChangeMarker(faction.GetFactionName());
 						
-						if (faction.GetFactionKey() == "US") {
+						if (faction.GetFactionName() == "BLUFOR") {
 							blueforPlayerNumber++;
 						}
-						if (faction.GetFactionKey() == "USSR") {
+						if (faction.GetFactionName() == "OPFOR") {
 							redforPlayerNumber++;
 						}
-						if (faction.GetFactionKey() == "FIA") {
+						if (faction.GetFactionName() == "INDFOR") {
 							greenforPlayerNumber++;
 						}
 					}
 				}
 			}
 			
-			if (blueforPlayerNumber > greenforPlayerNumber && blueforPlayerNumber > redforPlayerNumber)
+			bool isZoneContested = true;
+			
+			if (blueforPlayerNumber > greenforPlayerNumber && blueforPlayerNumber > redforPlayerNumber) {
+				isZoneContested = false;
 				m_gameMode.m_blueforPoints++;
+			}
 			
-			if (greenforPlayerNumber > blueforPlayerNumber && greenforPlayerNumber > redforPlayerNumber)
+			if (greenforPlayerNumber > blueforPlayerNumber && greenforPlayerNumber > redforPlayerNumber) {
+				isZoneContested = false;
 				m_gameMode.m_greenforPoints++;
+			}
 			
-			if (redforPlayerNumber > greenforPlayerNumber && redforPlayerNumber > blueforPlayerNumber)
+			if (redforPlayerNumber > greenforPlayerNumber && redforPlayerNumber > blueforPlayerNumber) {
+				isZoneContested = false;
 				m_gameMode.m_redforPoints++;
+			}
 			
+			if (true == isZoneContested) 
+				m_mapDescriptor.ChangeMarker("contested");
+
 			m_counterTickPoints = 0;
 			m_gameMode.CheckGameEnd();
 		}
