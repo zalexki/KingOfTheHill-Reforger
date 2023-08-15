@@ -11,6 +11,7 @@ modded class SCR_NameTagData
 			{
 				Faction faction = targetFactionComp.GetAffiliatedFaction();
 				Print(faction.GetFactionKey());
+				
 				ActivateEntityState(ENameTagEntityState.RED);
 			}
 		}

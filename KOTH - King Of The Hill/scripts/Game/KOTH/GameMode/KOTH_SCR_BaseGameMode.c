@@ -14,7 +14,7 @@ modded class SCR_BaseGameMode
 	{
 		SCR_GameModeEndData gameModeEndData = SCR_GameModeEndData.CreateSimple(EGameOverTypes.FACTION_VICTORY_SCORE, winnerFactionId: factionIndex);
 		EndGameMode(gameModeEndData);
-		GetGame().GetCallqueue().CallLater(RequestClose, 15000, false);
+		GetGame().GetCallqueue().CallLater(CloseGame, 15000, false);
 	}
 	
 	void CloseGame()
