@@ -4,9 +4,10 @@ class KOTH_PresenceTriggerEntityClass : BaseGameTriggerEntityClass
 
 class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 {
-	SCR_BaseGameMode m_gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
+	SCR_BaseGameMode m_gameMode;
 	KOTH_SCR_MapDescriptorComponent m_mapDescriptor;
-	private int m_counterTickPoints = 0;
+	KOTH_ScoringGameModeComponent m_scoreComp;
+	private int m_counterTick = 0;
 	
 	override protected void EOnInit(IEntity owner)
 	{
@@ -17,8 +18,11 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 		trigger.AddClassType(ChimeraCharacter);
 		trigger.SetUpdateRate(1);
 		
+		m_gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
 		m_gameMode.m_kothTrigger = this;
 		m_mapDescriptor = KOTH_SCR_MapDescriptorComponent.Cast(this.FindComponent(KOTH_SCR_MapDescriptorComponent));
+		m_scoreComp = KOTH_ScoringGameModeComponent.Cast(m_gameMode.FindComponent(KOTH_ScoringGameModeComponent));
+
 		if (!m_mapDescriptor)
 		{
 			Log("missing KOTH_SCR_MapDescriptorComponent on KOTH_PresenceTriggerEntity", LogLevel.ERROR);
@@ -35,7 +39,7 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 		if (outEntities.Count() < 1) 
 		{
 			m_mapDescriptor.ChangeMarker("none");
-			m_counterTickPoints = 0;
+			m_counterTick = 0;
 		}
 	}
 	
@@ -45,22 +49,34 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 		if (!m_gameMode.IsRunning())
 			return;
 		
-		m_counterTickPoints++;
+		m_counterTick++;
 		
-		if (m_counterTickPoints >= 2) {
+		if (m_counterTick >= 5) {
 			array<IEntity> outEntities = {};
 			GetEntitiesInside(outEntities);
-			
-			KOTH_SCR_MapDescriptorComponent mapDescriptor = KOTH_SCR_MapDescriptorComponent.Cast(this.FindComponent(KOTH_SCR_MapDescriptorComponent));
-			
-			
+
+			PlayerManager playerManager = GetGame().GetPlayerManager();
 			int blueforPlayerNumber = 0;
 			int greenforPlayerNumber = 0;
 			int redforPlayerNumber = 0;
+			
 			foreach (IEntity entity: outEntities)
 			{
-				FactionAffiliationComponent targetFactionComp = FactionAffiliationComponent.Cast(entity.FindComponent(FactionAffiliationComponent));
+				int playerId = playerManager.GetPlayerIdFromControlledEntity(entity);
+				PlayerController playerController = playerManager.GetPlayerController(playerId);
+				if (!playerController) {
+					Log("Missing KOTH_SCR_PlayerProfileComponent on player with KOTH_HUD", LogLevel.FATAL);
+					return;
+				}
+				KOTH_SCR_PlayerProfileComponent profile = KOTH_SCR_PlayerProfileComponent.Cast(playerController.FindComponent(KOTH_SCR_PlayerProfileComponent));
+				if (!profile) {
+					Log("Missing KOTH_SCR_PlayerProfileComponent on player with KOTH_HUD", LogLevel.FATAL);
+					return;
+				}
+				profile.AddInZoneXpAndMoney();
 				
+				
+				FactionAffiliationComponent targetFactionComp = FactionAffiliationComponent.Cast(entity.FindComponent(FactionAffiliationComponent));
 				if (targetFactionComp) {
 					Faction faction = targetFactionComp.GetAffiliatedFaction();
 					if (faction) {
@@ -76,32 +92,39 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 							greenforPlayerNumber++;
 					}
 				}
+
 			}
+			
 			
 			bool isZoneContested = true;
 			
 			if (blueforPlayerNumber > greenforPlayerNumber && blueforPlayerNumber > redforPlayerNumber) {
 				isZoneContested = false;
-				m_gameMode.m_blueforPoints++;
+				if (m_gameMode.IsMaster())
+					m_scoreComp.m_blueforPoints++;
 			}
 			
 			if (greenforPlayerNumber > blueforPlayerNumber && greenforPlayerNumber > redforPlayerNumber) {
 				isZoneContested = false;
-				m_gameMode.m_greenforPoints++;
+				if (m_gameMode.IsMaster())
+					m_scoreComp.m_greenforPoints++;
 			}
 			
 			if (redforPlayerNumber > greenforPlayerNumber && redforPlayerNumber > blueforPlayerNumber) {
 				isZoneContested = false;
-				m_gameMode.m_redforPoints++;
+				if (m_gameMode.IsMaster())
+					m_scoreComp.m_redforPoints++;
 			}
 			
+			if (m_gameMode.IsMaster())
+				m_scoreComp.BumpMe();
+					
 			if (true == isZoneContested) 
 				m_mapDescriptor.ChangeMarker("contested");
 
-			m_counterTickPoints = 0;
+			
+			m_counterTick = 0;
 			m_gameMode.CheckGameEnd();
 		}
 	}
-	
-	
 }

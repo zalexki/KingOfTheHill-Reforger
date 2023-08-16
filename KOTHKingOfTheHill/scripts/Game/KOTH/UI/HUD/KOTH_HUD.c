@@ -8,6 +8,11 @@ class KOTH_HUD : SCR_InfoDisplay
 	TextWidget m_greenforPlayersText;
 	TextWidget m_redforPlayersText;
 	
+	TextWidget m_moneyText;
+	TextWidget m_lvlText;
+	TextWidget m_xpText;
+	SCR_WLibProgressBarComponent m_xpProgressBar;
+
 	override event void OnStartDraw(IEntity owner)
 	{
 		super.OnStartDraw(owner);
@@ -18,21 +23,23 @@ class KOTH_HUD : SCR_InfoDisplay
 			if (!koth_hub)
 				return;
 			
+			// points
 	        m_blueforPointsText = TextWidget.Cast(koth_hub.FindWidget("Front.CountPoint_Footer.BlueforPoints"));
 			m_greenforPointsText = TextWidget.Cast(koth_hub.FindWidget("Front.CountPoint_Footer.GreenforPoints"));
 			m_redforPointsText = TextWidget.Cast(koth_hub.FindWidget("Front.CountPoint_Footer.RedforPoints"));
 
-			m_blueforPointsText.SetText("0");
-			m_greenforPointsText.SetText("0");
-			m_redforPointsText.SetText("0");
-
+			// players
 			m_blueforPlayersText = TextWidget.Cast(koth_hub.FindWidget("Front.CountPlayer_Footer.BlueforPlayers"));
 			m_greenforPlayersText = TextWidget.Cast(koth_hub.FindWidget("Front.CountPlayer_Footer.GreenforPlayers"));
 			m_redforPlayersText = TextWidget.Cast(koth_hub.FindWidget("Front.CountPlayer_Footer.RedforPlayers"));
-
-			m_blueforPlayersText.SetText("0");
-			m_greenforPlayersText.SetText("0");
-			m_redforPlayersText.SetText("0");
+			
+			// money/xp/lvl
+			SizeLayoutWidget m_xpSizeLayout = SizeLayoutWidget.Cast(koth_hub.FindWidget("Back.HorizontalLayout0.ProgressBar_EXP"));			
+			m_xpProgressBar = SCR_WLibProgressBarComponent.Cast(m_xpSizeLayout.FindHandler(SCR_WLibProgressBarComponent));
+			
+			m_xpText = TextWidget.Cast(koth_hub.FindWidget("Front.EXPERIENCE_Footer.Exp"));
+			m_lvlText = TextWidget.Cast(koth_hub.FindWidget("Front.EXPERIENCE_Footer.Level"));
+			m_moneyText = TextWidget.Cast(koth_hub.FindWidget("Front.Money"));
 		}
 	}
 	
@@ -43,12 +50,28 @@ class KOTH_HUD : SCR_InfoDisplay
 		if (!gameMode)
 			return;
 		
-		m_blueforPointsText.SetText(gameMode.m_blueforPoints.ToString());
-		m_greenforPointsText.SetText(gameMode.m_greenforPoints.ToString());
-		m_redforPointsText.SetText(gameMode.m_redforPoints.ToString());
+		// money/xp
+		KOTH_SCR_PlayerProfileComponent profile = KOTH_SCR_PlayerProfileComponent.Cast(owner.FindComponent(KOTH_SCR_PlayerProfileComponent));
+		if (!profile) {
+			Log("Missing KOTH_SCR_PlayerProfileComponent on player with HUD", LogLevel.FATAL);
+			return;
+		}
+		m_moneyText.SetText(profile.GetMoney().ToString());
+		m_xpText.SetText(profile.GetXp().ToString() + " - " + profile.GetXpNextLevel().ToString());
+		m_lvlText.SetText(profile.GetLevel().ToString());
+		m_xpProgressBar.SetValue(profile.GetXp() / profile.GetXpNextLevel(),true);
 		
-		// ----------------
+		// teamPoints
+		KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(gameMode.FindComponent(KOTH_ScoringGameModeComponent));
+		if (!scoreComp) {
+			Log("Missing KOTH_ScoringGameModeComponent on gameMode", LogLevel.FATAL);
+			return;
+		}
+		m_blueforPointsText.SetText(scoreComp.m_blueforPoints.ToString());
+		m_greenforPointsText.SetText(scoreComp.m_greenforPoints.ToString());
+		m_redforPointsText.SetText(scoreComp.m_redforPoints.ToString());
 		
+		// playerCounts
 		array<int> playerIds = new array<int>();
 		PlayerManager playerManager = GetGame().GetPlayerManager();
 		if (!playerManager)

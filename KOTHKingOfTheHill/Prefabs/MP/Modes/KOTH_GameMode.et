@@ -79,7 +79,7 @@ SCR_BaseGameMode {
      }
      SCR_FactionVictoryGameOverScreenInfo "{5E1F0BA23AC5331C}" {
       m_GameOverScreenId FACTION_VICTORY_SCORE
-      m_GameOverContentLayout "{E04021BC742BE432}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_Default.layout"
+      m_GameOverContentLayout "{D7CCDDA709B57FA0}UI/Layouts/HUD/GameOver/EndScreen/EndScreenContent_KOTH.layout"
       m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC5331E}" {
        m_sTitle "#AR-MatchResult_Victory-UC"
        m_sSubtitle "#AR-Campaign_MatchResult"
@@ -89,7 +89,7 @@ SCR_BaseGameMode {
      }
      SCR_FactionGameOverScreenInfo "{5E1F0BA23AC5332C}" {
       m_GameOverScreenId FACTION_DEFEAT_SCORE
-      m_GameOverContentLayout "{E04021BC742BE432}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_Default.layout"
+      m_GameOverContentLayout "{D7CCDDA709B57FA0}UI/Layouts/HUD/GameOver/EndScreen/EndScreenContent_KOTH.layout"
       m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC5332E}" {
        m_sTitle "#AR-MatchResult_Defeat-UC"
        m_sSubtitle "#AR-Campaign_MatchResult"
@@ -1534,8 +1534,10 @@ SCR_BaseGameMode {
    "Rpl State Override" None
    Streamable Disabled
   }
+  KOTH_ScoringGameModeComponent "{5E20F3CD56EAC26E}" {
+  }
  }
- coords 2827.112 62.917 2010.608
+ coords 2826.275 63.021 2008.978
  Flags 0
  {
   SCR_MapEntity "5E1F591715EDC4E3" : "{731564B66F91B107}Prefabs/World/Game/MapEntity.et" {

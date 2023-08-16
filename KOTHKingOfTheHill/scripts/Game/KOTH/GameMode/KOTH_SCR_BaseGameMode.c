@@ -1,20 +1,68 @@
 modded class SCR_BaseGameMode
 {
-	int m_winnerPointsNeeded = 10;
+	const string saveFilePath = "$profile:koth_profiles.json";
+	const int m_winnerPointsNeeded = 100;
 	
 	IEntity m_kothTrigger;
 	
-    int m_blueforPoints = 0;
-    int m_redforPoints = 0;
-    int m_greenforPoints = 0;
+	protected ref KOTH_ListPlayerProfileJson listPlayerProfiles = new KOTH_ListPlayerProfileJson();
 	
-	ref array<int> winnersFactionId = {};
-	
-	void EndGameWithFactionWin(int factionIndex)
+	override void StartGameMode()
 	{
-		SCR_GameModeEndData gameModeEndData = SCR_GameModeEndData.CreateSimple(EGameOverTypes.FACTION_VICTORY_SCORE, winnerFactionId: factionIndex);
-		EndGameMode(gameModeEndData);
-		GetGame().GetCallqueue().CallLater(CloseGame, 15000, false);
+		super.StartGameMode();
+		
+		if (!Replication.IsServer())
+			return;
+		
+		if (FileIO.FileExists(saveFilePath)) {
+			listPlayerProfiles.LoadFromFile(saveFilePath);
+			Replication.BumpMe();
+			Print("file loaded");
+		} else {
+			listPlayerProfiles.SaveToFile(saveFilePath);
+			Print("file saved");
+		}
+		
+		GetGame().GetCallqueue().CallLater(SavePlayersProfile, 10000, true);
+	}
+	
+	void SavePlayersProfile()
+	{
+		PlayerManager playerManager = GetGame().GetPlayerManager();
+		if (!playerManager)
+			return;
+		
+		array<int> playerIds = new array<int>();
+		playerManager.GetPlayers(playerIds);
+		foreach (int playerId : playerIds) 
+		{
+			PlayerController playerController = playerManager.GetPlayerController(playerId);
+			KOTH_SCR_PlayerProfileComponent profileComp = KOTH_SCR_PlayerProfileComponent.Cast(playerController.FindComponent(KOTH_SCR_PlayerProfileComponent));
+			
+			KOTH_PlayerProfileJson playerInfos = new KOTH_PlayerProfileJson();
+			string playerName = playerManager.GetPlayerName(playerId);
+			playerInfos.m_name = playerName;
+			playerInfos.m_money = profileComp.GetMoney();
+			playerInfos.m_xp = profileComp.GetXp();
+			playerInfos.m_level = profileComp.GetLevel();
+			
+			bool playerIsInList = false;
+			foreach (int index, KOTH_PlayerProfileJson profile : listPlayerProfiles.m_list) 
+			{
+				if (profile.m_name == playerName) {
+					listPlayerProfiles.m_list.Set(index, playerInfos);
+					playerIsInList = true;
+				}
+			}
+			
+			if (!playerIsInList)
+				listPlayerProfiles.m_list.Insert(playerInfos);
+			
+			//listPlayerProfiles.m_list.Set(playerName, playerInfos);
+		}
+		
+		bool success = listPlayerProfiles.SaveToFile(saveFilePath);
+		Log(" --------- SAVING IS " + success);
 	}
 	
 	void CloseGame()
@@ -28,24 +76,28 @@ modded class SCR_BaseGameMode
 		GetGame().GetFactionManager().GetFactionsList(factions);
 		
 		string factionName;
-		if (m_blueforPoints >= m_winnerPointsNeeded) { factionName = "BLUFOR"; };
-		if (m_redforPoints >= m_winnerPointsNeeded) { factionName = "OPFOR"; };
-		if (m_greenforPoints >= m_winnerPointsNeeded) { factionName = "INDFOR"; };
+		KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(FindComponent(KOTH_ScoringGameModeComponent));
+		if (!scoreComp) {
+			Log("Missing KOTH_ScoringGameModeComponent on gameMode", LogLevel.FATAL);
+			return;
+		}
+		if (scoreComp.m_blueforPoints >= m_winnerPointsNeeded) { factionName = "BLUFOR"; };
+		if (scoreComp.m_redforPoints >= m_winnerPointsNeeded) { factionName = "OPFOR"; };
+		if (scoreComp.m_greenforPoints >= m_winnerPointsNeeded) { factionName = "INDFOR"; };
 		
 		foreach (Faction faction : factions)
 		{
 			if (faction.GetFactionName() == factionName) {
 				int factionIndex = GetGame().GetFactionManager().GetFactionIndex(faction);
-				EndGameWithFactionWin(factionIndex);
+				SCR_GameModeEndData gameModeEndData = SCR_GameModeEndData.CreateSimple(EGameOverTypes.FACTION_VICTORY_SCORE, winnerFactionId: factionIndex);
+				EndGameMode(gameModeEndData);
+				GetGame().GetCallqueue().CallLater(CloseGame, 15000, false);
 			}
 		}
 	}
 	
-	
-	
-	/*override void StartGameMode()
-	{
 		
+		/*
 		IEntity firstSpawn = GetGame().GetWorld().FindEntityByName("KOTH_FirstSpawn");
 		IEntity secondSpawn = GetGame().GetWorld().FindEntityByName("KOTH_SecondSpawn");
 		IEntity thirdSpawn = GetGame().GetWorld().FindEntityByName("KOTH_ThirdSpawn");
