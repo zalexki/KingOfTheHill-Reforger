@@ -1,0 +1,85 @@
+GenericEntity Tower {
+ components {
+  MeshObject "{5E215A86C5CE5E1D}" {
+   Object "{6F0709C2AC1692F5}Assets/Tower_FRM/tour_guet.xob"
+   Materials {
+    MaterialAssignClass "{5E215A8659BB3EF3}" {
+     SourceMaterial "DefaultGeneratedMaterial"
+     AssignedMaterial "{9B509330764FC897}Assets/Props/Industrial/BarrelMetal_01/Data/BarrelMetal_01_Nocover_Green.emat"
+    }
+    MaterialAssignClass "{5E215A8659BB392D}" {
+     SourceMaterial "Details01"
+     AssignedMaterial "{9B509330764FC897}Assets/Props/Industrial/BarrelMetal_01/Data/BarrelMetal_01_Nocover_Green.emat"
+    }
+    MaterialAssignClass "{5E215A8659BB3926}" {
+     SourceMaterial "Logo"
+     AssignedMaterial "{014711066783BAF1}Assets/Props/Industrial/BarrelMetal_01/Data/BarrelMetal_01_ColorPallete_Blue.emat"
+    }
+    MaterialAssignClass "{5E215A8659BB393D}" {
+     SourceMaterial "LogoB"
+     AssignedMaterial "{014711066783BAF1}Assets/Props/Industrial/BarrelMetal_01/Data/BarrelMetal_01_ColorPallete_Blue.emat"
+    }
+    MaterialAssignClass "{5E215A8659BB3936}" {
+     SourceMaterial "LogoR"
+     AssignedMaterial "{014711066783BAF1}Assets/Props/Industrial/BarrelMetal_01/Data/BarrelMetal_01_ColorPallete_Blue.emat"
+    }
+    MaterialAssignClass "{5E215A8659BB3931}" {
+     SourceMaterial "Metal1"
+     AssignedMaterial "{9B509330764FC897}Assets/Props/Industrial/BarrelMetal_01/Data/BarrelMetal_01_Nocover_Green.emat"
+    }
+    MaterialAssignClass "{5E215A8659BB390B}" {
+     SourceMaterial "Metal2"
+     AssignedMaterial "{9B509330764FC897}Assets/Props/Industrial/BarrelMetal_01/Data/BarrelMetal_01_Nocover_Green.emat"
+    }
+    MaterialAssignClass "{5E215A8659BB3904}" {
+     SourceMaterial "Pieds"
+     AssignedMaterial "{9B509330764FC897}Assets/Props/Industrial/BarrelMetal_01/Data/BarrelMetal_01_Nocover_Green.emat"
+    }
+    MaterialAssignClass "{5E215A8659BB3901}" {
+     SourceMaterial "Plateformes"
+     AssignedMaterial "{9B509330764FC897}Assets/Props/Industrial/BarrelMetal_01/Data/BarrelMetal_01_Nocover_Green.emat"
+    }
+   }
+  }
+  Hierarchy "{5E215A8602AB8098}" {
+  }
+  RigidBody "{5E215A860E742910}" {
+   ModelGeometry 1
+   Static 1
+  }
+  RplComponent "{5E215A8606B3F178}" {
+  }
+ }
+ coords 1409.393 38.987 2787.982
+ {
+  $grp GenericEntity : "{74A8427A65A5B423}Prefabs/Structures/BuildingParts/Doors/Door_Bunker_E_03/DoorSet_Bunker_E_03_A_R_EXT_COV_B.et" {
+   {
+    coords -2.196 24.57 1.2
+    angleY 90
+   }
+   {
+    coords 1.342 17.61 4.024
+   }
+   {
+    coords -3.55 17.591 -5.916
+    angleY 90
+   }
+   {
+    coords 2.447 17.612 -0.042
+    angleY 90
+   }
+  }
+  $grp GameEntity : "{C6D39474528BDB97}Prefabs/Structures/BuildingParts/Ladders/Ladder_Office_E_01_317_B.et" {
+   {
+    coords 1.787 20.503 -3.671
+   }
+   {
+    coords 0.437 24.981 -0.395
+    angleY 180
+   }
+  }
+ }
+}
+GenericEntity : "{A73205DEA8361F26}Prefabs/Systems/AmbientPatrol/AmbientPatrolSpawnpoint_USSR.et" {
+ coords 2932.473 55.527 2220.453
+}

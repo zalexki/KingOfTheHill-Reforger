@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{20EF71DE68A5887E}UI/Layouts/ShopSystem/ItemListUILayout.layout"
+ Configurations {
+  LayoutResourceClass PC {
+  }
+  LayoutResourceClass XBOX_ONE : PC {
+  }
+  LayoutResourceClass XBOX_SERIES : PC {
+  }
+  LayoutResourceClass PS4 : PC {
+  }
+  LayoutResourceClass HEADLESS : PC {
+  }
+ }
+}

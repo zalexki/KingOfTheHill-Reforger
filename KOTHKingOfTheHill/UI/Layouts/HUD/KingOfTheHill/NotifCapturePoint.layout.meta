@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{CA8EAA6F42A76988}UI/Layouts/HUD/Shop/NotifCapturePoint.layout"
+ Configurations {
+  LayoutResourceClass PC {
+  }
+  LayoutResourceClass XBOX_ONE : PC {
+  }
+  LayoutResourceClass XBOX_SERIES : PC {
+  }
+  LayoutResourceClass PS4 : PC {
+  }
+  LayoutResourceClass HEADLESS : PC {
+  }
+ }
+}
