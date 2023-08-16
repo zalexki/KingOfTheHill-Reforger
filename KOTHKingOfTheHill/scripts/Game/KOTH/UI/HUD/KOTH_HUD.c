@@ -38,7 +38,7 @@ class KOTH_HUD : SCR_InfoDisplay
 			m_xpProgressBar = SCR_WLibProgressBarComponent.Cast(m_xpSizeLayout.FindHandler(SCR_WLibProgressBarComponent));
 			
 			m_xpText = TextWidget.Cast(koth_hub.FindWidget("Front.EXPERIENCE_Footer.Exp"));
-			m_lvlText = TextWidget.Cast(koth_hub.FindWidget("Front.EXPERIENCE_Footer.Level"));
+			m_lvlText = TextWidget.Cast(koth_hub.FindWidget("Demi_Front.Demi_EXPERIENCE_Footer.Level"));
 			m_moneyText = TextWidget.Cast(koth_hub.FindWidget("Front.Money"));
 		}
 	}

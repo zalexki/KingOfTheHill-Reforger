@@ -47,7 +47,7 @@ FrameWidgetClass {
         SizeLayoutWidgetClass "{5E1140C87E7A51D7}" : "{8C63C2E7AE0092B7}UI/layouts/WidgetLibrary/WLib_ProgressBar.layout" {
          Name "ProgressBar_EXP"
          Slot LayoutSlot "{5E1F523BFEF64326}" {
-          Padding 0 10 50 10
+          Padding 0 11 48 11
           SizeMode Fill
          }
          components {
@@ -133,11 +133,48 @@ FrameWidgetClass {
         ImageWidgetClass "{5E10A7B4AB76C1FA}" {
          Name "Fond_Money"
          Slot LayoutSlot "{5E1F523BFEF64274}" {
-          Padding 75 0 75 0
+          Padding 75 0 60 0
           SizeMode Fill
          }
          Opacity 0.5
          Color 0 0 0 1
+        }
+       }
+      }
+     }
+    }
+    VerticalLayoutWidgetClass "{5E213A83D5D0DCB3}" {
+     Name "Demi_Front"
+     Slot FrameWidgetSlot "{5E0F5D606E46341D}" {
+      PositionX 0
+      OffsetLeft 0
+      PositionY 0
+      OffsetTop 0
+      SizeX 330
+      OffsetRight -330
+      SizeY 240
+      OffsetBottom -240
+     }
+     {
+      HorizontalLayoutWidgetClass "{5E213A83D5D0DCB1}" {
+       Name "Demi_EXPERIENCE_Footer"
+       Slot LayoutSlot "{5E0F5D62981B70A3}" {
+        Padding 0 30 0 0
+       }
+       {
+        TextWidgetClass "{5E213A83D5D0DC8E}" {
+         Name "Level"
+         Slot LayoutSlot "{5E213A83D5D02231}" {
+          Padding 0 0 269 0
+          SizeMode Fill
+         }
+         Text "1"
+         "Horizontal Alignment" Center
+         "Vertical Alignment" Center
+         FontProperties FontProperties "{5E0F43399CF1A959}" {
+          Font "{DE4B66C39B62E39B}UI/Fonts/Purista/Purista Medium.fnt"
+          OutlineSize 1
+         }
         }
        }
       }
@@ -159,29 +196,20 @@ FrameWidgetClass {
       HorizontalLayoutWidgetClass "{5E10A7B4AB76C1CA}" {
        Name "EXPERIENCE_Footer"
        Slot LayoutSlot "{5E0F5D62981B70A3}" {
-        Padding 0 30 0 0
+        Padding 0 33 0 0
        }
        {
-        TextWidgetClass "{5E10A7B4AB76C1CB}" {
-         Name "Level"
-         Slot LayoutSlot "{5E0F43394B39F9B1}" {
-          Padding 15 0 0 0
-         }
-         Text "43"
-         "Horizontal Alignment" Center
-         FontProperties FontProperties "{5E0F43399CF1A959}" {
-          Font "{DE4B66C39B62E39B}UI/Fonts/Purista/Purista Medium.fnt"
-          OutlineSize 1
-         }
-        }
         TextWidgetClass "{5E10A7B4AB76C1C9}" {
          Name "Exp"
          Slot LayoutSlot "{5E0F43394B39F9C5}" {
-          Padding 41 0 0 0
+          HorizontalAlign 1
+          VerticalAlign 1
+          Padding 18 0 0 3
+          SizeMode Fill
          }
-         Text "215900 - 650000"
+         Text "50 - 100"
          "Font Size" 20
-         "Min Font Size" 18
+         "Min Font Size" 20
          "Horizontal Alignment" Center
          "Vertical Alignment" Center
          FontProperties FontProperties "{5E0F433E41D70C67}" {
@@ -220,7 +248,7 @@ FrameWidgetClass {
           Padding 0 0 0 0
           SizeMode Fill
          }
-         Text "5"
+         Text "1"
          "Font Size" 35
          "Horizontal Alignment" Center
          FontProperties FontProperties "{5E0F6424FC0496D5}" {
@@ -236,7 +264,7 @@ FrameWidgetClass {
           Padding 0 0 29 0
           SizeMode Fill
          }
-         Text "4"
+         Text "1"
          "Font Size" 35
          "Horizontal Alignment" Center
          FontProperties FontProperties "{5E0F6424FFCE12CB}" {
@@ -260,7 +288,7 @@ FrameWidgetClass {
           Padding 55 0 0 0
           SizeMode Fill
          }
-         Text "12"
+         Text "1"
          "Horizontal Alignment" Center
          "Vertical Alignment" Center
         }
@@ -276,7 +304,7 @@ FrameWidgetClass {
           Padding 0 0 0 0
           SizeMode Fill
          }
-         Text "10"
+         Text "1"
          "Horizontal Alignment" Center
          "Vertical Alignment" Center
         }
@@ -292,7 +320,7 @@ FrameWidgetClass {
           Padding 0 0 0 0
           SizeMode Fill
          }
-         Text "10"
+         Text "1"
          "Horizontal Alignment" Center
          "Vertical Alignment" Center
         }
@@ -308,10 +336,12 @@ FrameWidgetClass {
       TextWidgetClass "{5E10A7B4AB76C1D4}" {
        Name "Money"
        Slot LayoutSlot "{5E0F6423191C2585}" {
-        Padding 0 5 90 0
+        HorizontalAlign 1
+        VerticalAlign 1
+        Padding 15 5 0 0
        }
        Color 0.376 0.749 0.471 1
-       Text "257800 $"
+       Text "0 $"
        "Font Size" 30
        "Horizontal Alignment" Right
        "Vertical Alignment" Center
@@ -322,6 +352,19 @@ FrameWidgetClass {
       }
      }
     }
+   }
+  }
+  ScrollLayoutWidgetClass "{5E2162B0F5200732}" {
+   Name "ScrollLayout0"
+   Slot FrameWidgetSlot "{5E2162B0F5200767}" {
+    PositionX 1312.05
+    OffsetLeft 1312.1
+    PositionY 668
+    OffsetTop 668
+    SizeX 275
+    OffsetRight -1587.1
+    SizeY 120
+    OffsetBottom -788
    }
   }
  }

@@ -1,0 +1,14 @@
+$grp GenericEntity : "{6F1B7BFE78ECAE16}Prefabs/Structures/KOTH/TowerV1.et" {
+ {
+  coords 3107.585 17.316 2629.586
+  angleY -45
+ }
+ {
+  coords 3229.86 9.844 2771.52
+  angleY -131.191
+ }
+ {
+  coords 3015.924 14.65 2816.852
+  angleY 75.541
+ }
+}

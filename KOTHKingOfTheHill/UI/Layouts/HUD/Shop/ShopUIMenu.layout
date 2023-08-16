@@ -1,0 +1,149 @@
+FrameWidgetClass {
+ Name "rootFrame"
+ {
+  OverlayWidgetClass "{5E1D46E28D610F69}" {
+   Name "Overlay"
+   Slot FrameWidgetSlot "{5C982A39D1EEDAA5}" {
+    Anchor 0.5 0.5 0.5 0.5
+    PositionX -960
+    OffsetLeft -960
+    PositionY -540
+    OffsetTop -540
+    SizeX 1920
+    OffsetRight -960
+    SizeY 1080
+    OffsetBottom -540
+   }
+   {
+    VerticalLayoutWidgetClass "{5E1D46E28D610F66}" {
+     Name "VerticalLayout0"
+     Slot OverlayWidgetSlot "{5CA449954168F9F4}" {
+      HorizontalAlign 3
+      VerticalAlign 3
+     }
+     {
+      HorizontalLayoutWidgetClass "{5E1D46E28D610F64}" {
+       Name "HorizontalLayout1"
+       Slot LayoutSlot "{5CA449954CA519E8}" {
+       }
+       {
+        VerticalLayoutWidgetClass "{5E1D46E28D610F65}" {
+         Name "VerticalLayout0"
+         Slot LayoutSlot "{5CA63B7F5C87005E}" {
+          SizeMode Fill
+         }
+         {
+          ButtonWidgetClass "{5E1D46E28D610F63}" {
+           Name "Close"
+           Slot LayoutSlot "{5C5F7574C86CA642}" {
+            HorizontalAlign 2
+            Padding 10 0 50 0
+           }
+           Clipping False
+           Color 0 0 0 0
+           "no focus" 1
+           {
+            SizeLayoutWidgetClass "{5E1D46E28D610F61}" {
+             Name "SizeLayout"
+             Slot ButtonWidgetSlot "{5C5F7912A3BAFE40}" {
+              HorizontalAlign 3
+              VerticalAlign 3
+             }
+             AllowWidthOverride 1
+             WidthOverride 48
+             AllowHeightOverride 1
+             HeightOverride 48
+             {
+              ImageWidgetClass "{5E1D46E28D610F7F}" {
+               Name "Image0"
+               Slot AlignableSlot "{5CA449956BE1547B}" {
+               }
+               Texture "{E0B1311CCED2471A}UI/Textures/Icons/iconExit.edds"
+               Size 96 96
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+      HorizontalLayoutWidgetClass "{5E1D46E28D610F7D}" {
+       Name "HorizontalLayout0"
+       Slot LayoutSlot "{5CA449954F8BCED3}" {
+        SizeMode Fill
+       }
+       {
+        HorizontalLayoutWidgetClass "{5E1D46E28D610F7A}" {
+         Name "Container"
+         Slot LayoutSlot "{5CA63B7A7A6AE2CC}" {
+          SizeMode Fill
+         }
+         {
+          VerticalLayoutWidgetClass "{5E1D46E28D610F48}" {
+           Name "Content"
+           Slot LayoutSlot "{5C982A399BDC9FE0}" {
+            Padding 10 50 50 50
+            SizeMode Fill
+            FillWeight 3
+           }
+           {
+            ScrollLayoutWidgetClass "{5E1D46E28D610F59}" {
+             Name "Scroll"
+             Slot LayoutSlot "{5C982A39B86FEA48}" {
+              SizeMode Fill
+             }
+             style Small
+             {
+              VerticalLayoutWidgetClass "{5E1D46E28D610F57}" {
+               Name "ContentContainer"
+               Slot AlignableSlot "{5C982A3820F3F1D9}" {
+                HorizontalAlign 3
+                VerticalAlign 3
+                Padding 0 1 0 0
+               }
+               {
+                OverlayWidgetClass "{5E1D46E28D610F54}" {
+                 Name "Overlay0"
+                 Slot LayoutSlot "{5C9E2A9FCB0ACE51}" {
+                  Padding 0 5 0 5
+                 }
+                 {
+                  SizeLayoutWidgetClass "{5E1D46ED9F252BBD}" : "{20EF71DE68A5887E}UI/Layouts/ShopSystem/ItemListUILayout.layout" {
+                   Name "SizeLayout00"
+                   Slot OverlayWidgetSlot "{5C9E2A9FC993FEE7}" {
+                    Padding 0 0 0 0
+                   }
+                   HeightOverride 100
+                   {
+                    HorizontalLayoutWidgetClass "{5E1D46E396412EF8}" {
+                     Prefab "{5E1D46E396412EF8}"
+                     {
+                      OverlayWidgetClass "{5E1D46E396412EF6}" {
+                       Prefab "{5E1D46E396412EF6}"
+                       Slot LayoutSlot "{5C982A3F129726D2}" {
+                       }
+                      }
+                     }
+                    }
+                   }
+                  }
+                 }
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

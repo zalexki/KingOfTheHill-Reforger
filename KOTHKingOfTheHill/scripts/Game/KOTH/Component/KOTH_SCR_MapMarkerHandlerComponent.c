@@ -71,7 +71,7 @@ class KOTH_SCR_MapMarkerHandlerComponent : ScriptComponent
 		{
 			MapDescriptorProps props = item.GetProps();
 			//props.SetIconSize(256, -currentZoom * 1.25, -currentZoom * 1.25);
-			props.SetIconSize(256, -currentZoom * 0.40, -currentZoom * 0.40);
+			props.SetIconSize(256, -currentZoom * 0.80, -currentZoom * 0.80);
 			item.SetProps(props);
 		}
 	}
