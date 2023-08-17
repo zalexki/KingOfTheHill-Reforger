@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{67DDD8A66C5FC5D3}UI/layouts/Menus/LoadingScreen/loadingScreen.layout"
+ Configurations {
+  LayoutResourceClass PC {
+  }
+  LayoutResourceClass XBOX_ONE : PC {
+  }
+  LayoutResourceClass XBOX_SERIES : PC {
+  }
+  LayoutResourceClass PS4 : PC {
+  }
+  LayoutResourceClass HEADLESS : PC {
+  }
+ }
+}

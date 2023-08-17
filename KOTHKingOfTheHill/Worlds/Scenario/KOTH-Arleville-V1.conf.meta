@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{43A2DC866897E5FE}Worlds/Scenario/KOTH-Arleville-V1.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}

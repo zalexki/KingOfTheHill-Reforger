@@ -55,6 +55,13 @@ class KOTH_HUD : SCR_InfoDisplay
 			
 			UpdateMoneyAndXp();
 		}
+		
+			//ScrollLayoutWidget koth_scrollList = ScrollLayoutWidget.Cast(root.FindWidget("ScrollList"));
+		
+			//Widget w = GetGame().GetWorkspace().CreateWidgets("{7340801CEE0A37E9}UI/Layouts/HUD/KingOfTheHill/NotifCaptureKill.layout", koth_scrollList);
+			//entries.Insert(w);
+			// Store widgets and component
+			//m_aEntriesComponents.Insert(item, comp);
 	}
 	
 	private void UpdateMoneyAndXp()

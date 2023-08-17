@@ -2,6 +2,54 @@ FrameWidgetClass {
  Name "rootFrame"
  "Z Order" 1000
  {
+  HorizontalLayoutWidgetClass "{5CEAB7C94A55AF1E}" {
+   Prefab "{5CEAB7C94A55AF1E}"
+   Name "ComponentWidget"
+   {
+    TextWidgetClass "{5E2352944EFDC433}" {
+     Name "Text0"
+     Slot LayoutSlot "{5E2352944EFDC464}" {
+      HorizontalAlign 2
+      Padding 4 0 4 0
+     }
+     Text "FRM Alpha test build"
+     "Font Size" 12
+     "Min Font Size" 12
+     "Vertical Alignment" Center
+     FontProperties FontProperties "{5E2352947ACDFB6B}" {
+      Font "{EABA4FE9D014CCEF}UI/Fonts/RobotoCondensed/RobotoCondensed_Bold.fnt"
+      ShadowSize 20
+      ShadowOpacity 0.35
+     }
+    }
+    TextWidgetClass "{5E235294486F570B}" {
+     Name "Text1"
+     Slot LayoutSlot "{5E235294486F5767}" {
+      HorizontalAlign 2
+     }
+     Text "1.0.0 (steam)"
+     "Font Size" 12
+     "Min Font Size" 12
+     "Vertical Alignment" Center
+     FontProperties FontProperties "{5E2352946F44F286}" {
+      Font "{EABA4FE9D014CCEF}UI/Fonts/RobotoCondensed/RobotoCondensed_Bold.fnt"
+      ShadowSize 20
+      ShadowOpacity 0.35
+     }
+    }
+    TextWidgetClass "{5CEAB7C94A55AF1D}" {
+     Prefab "{5CEAB7C94A55AF1D}"
+     "Is Enabled" 0
+     "Is Visible" 0
+     Text "Alpha access build"
+    }
+    TextWidgetClass "{5CEAB7C94A55AF1C}" {
+     Prefab "{5CEAB7C94A55AF1C}"
+     "Is Enabled" 0
+     "Is Visible" 0
+    }
+   }
+  }
   FrameWidgetClass "{5E10A7B4AB76C1E0}" {
    Name "KOTH_HUD"
    Slot FrameWidgetSlot "{5E0F433D9A374E3D}" {
@@ -350,21 +398,42 @@ FrameWidgetClass {
         OutlineSize 1
        }
       }
+      TextWidgetClass "{5E235293CC48D418}" : "{3132F64DB8B4CB44}UI/layouts/WidgetLibrary/TextWidgets/Text_Body.layout" {
+       Name "Session_Time"
+       Slot LayoutSlot "{5E23529487CD79D0}" {
+        Padding 0 5 0 0
+       }
+       Color 0.51 0.51 0.51 1
+       components {
+        SCR_SessionDurationUIComponent "{5630B47DFD416DD4}" {
+        }
+       }
+       Text "00:01:22:59"
+       "Font Size" 24
+       "Min Font Size" 24
+       "Horizontal Alignment" Center
+       "Vertical Alignment" Center
+       FontProperties FontProperties "{546AF489DFD25402}" {
+        ShadowSize 16
+        ShadowOffset 3 3
+        ShadowOpacity 0.3
+       }
+      }
      }
     }
    }
   }
   ScrollLayoutWidgetClass "{5E2162B0F5200732}" {
-   Name "ScrollLayout0"
+   Name "ScrollList"
    Slot FrameWidgetSlot "{5E2162B0F5200767}" {
-    PositionX 1312.05
-    OffsetLeft 1312.1
-    PositionY 668
-    OffsetTop 668
+    PositionX 1309.48
+    OffsetLeft 1309.48
+    PositionY 668.515
+    OffsetTop 668.515
     SizeX 275
-    OffsetRight -1587.1
+    OffsetRight -1584.48
     SizeY 120
-    OffsetBottom -788
+    OffsetBottom -788.515
    }
   }
  }

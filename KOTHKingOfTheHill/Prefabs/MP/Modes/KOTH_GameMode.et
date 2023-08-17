@@ -1,6 +1,8 @@
 SCR_BaseGameMode {
  ID "5E1F0BA227A27EFF"
  components {
+  KOTH_ScoringGameModeComponent "{5E20F3CD56EAC26E}" {
+  }
   SCR_CallsignManagerComponent "{5E1F0BA23AC53C37}" {
   }
   SCR_DataCollectorComponent "{5E1F0BA23AC53C75}" {
@@ -1434,7 +1436,7 @@ SCR_BaseGameMode {
    }
   }
   SCR_ReconnectComponent "{5E1F0BA23AC5680D}" {
-   m_bEnableReconnect 0
+   m_bEnableReconnect 1
   }
   SCR_RespawnSystemComponent "{5E1F0BA23AC5682D}" {
    components {
@@ -1534,11 +1536,10 @@ SCR_BaseGameMode {
    "Rpl State Override" None
    Streamable Disabled
   }
-  KOTH_ScoringGameModeComponent "{5E20F3CD56EAC26E}" {
-  }
  }
- coords 2826.275 63.021 2008.978
+ coords 7071.133 118.908 6029.669
  Flags 0
+ m_bAllowFactionChange 0
  {
   SCR_MapEntity "5E1F591715EDC4E3" : "{731564B66F91B107}Prefabs/World/Game/MapEntity.et" {
    ID "5E1ED724B33BC815"

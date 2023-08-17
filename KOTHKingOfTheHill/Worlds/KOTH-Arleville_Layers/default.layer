@@ -1,0 +1,8 @@
+GenericEntity : "{6F1B7BFE78ECAE16}Prefabs/Structures/KOTH/TowerV1.et" {
+ coords 2739.489 76.143 1665.764
+ angleY 45
+}
+KOTH_PresenceTriggerEntity : "{F9467A5734030343}Prefabs/MP/Triggers/KOTH_zoneTrigger.et" {
+ coords 2739.489 77.516 1665.764
+ DrawShape 0
+}

@@ -1,12 +1,8 @@
 KOTH_PresenceTriggerEntity {
  ID "5E0F4336F4301C65"
- components {
-  SCR_KOTCH_MapDescriptorComponent "{5E1F10663FB687A1}" {
-  }
- }
- coords 2521.13 147.127 2253.05
+ coords 2739.489 77.516 1665.764
  TriggerShapeType Sphere
- SphereRadius 50
+ SphereRadius 100
  DrawShape 1
  TriggerActivationType "Every query"
  PeriodicQueries 1
