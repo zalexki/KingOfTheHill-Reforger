@@ -5,66 +5,6 @@ modded class SCR_BaseGameMode
 	
 	IEntity m_kothTrigger;
 	
-	protected ref KOTH_ListPlayerProfileJson listPlayerProfiles = new KOTH_ListPlayerProfileJson();
-	
-	override void StartGameMode()
-	{
-		super.StartGameMode();
-		
-		if (!Replication.IsServer())
-			return;
-		
-		if (FileIO.FileExists(saveFilePath)) {
-			listPlayerProfiles.LoadFromFile(saveFilePath);
-			Replication.BumpMe();
-			Print("file loaded");
-		} else {
-			listPlayerProfiles.SaveToFile(saveFilePath);
-			Print("file saved");
-		}
-		
-		GetGame().GetCallqueue().CallLater(SavePlayersProfile, 10000, true);
-	}
-	
-	void SavePlayersProfile()
-	{
-		PlayerManager playerManager = GetGame().GetPlayerManager();
-		if (!playerManager)
-			return;
-		
-		array<int> playerIds = new array<int>();
-		playerManager.GetPlayers(playerIds);
-		foreach (int playerId : playerIds) 
-		{
-			PlayerController playerController = playerManager.GetPlayerController(playerId);
-			KOTH_SCR_PlayerProfileComponent profileComp = KOTH_SCR_PlayerProfileComponent.Cast(playerController.FindComponent(KOTH_SCR_PlayerProfileComponent));
-			
-			KOTH_PlayerProfileJson playerInfos = new KOTH_PlayerProfileJson();
-			string playerName = playerManager.GetPlayerName(playerId);
-			playerInfos.m_name = playerName;
-			playerInfos.m_money = profileComp.GetMoney();
-			playerInfos.m_xp = profileComp.GetXp();
-			playerInfos.m_level = profileComp.GetLevel();
-			
-			bool playerIsInList = false;
-			foreach (int index, KOTH_PlayerProfileJson profile : listPlayerProfiles.m_list) 
-			{
-				if (profile.m_name == playerName) {
-					listPlayerProfiles.m_list.Set(index, playerInfos);
-					playerIsInList = true;
-				}
-			}
-			
-			if (!playerIsInList)
-				listPlayerProfiles.m_list.Insert(playerInfos);
-			
-			//listPlayerProfiles.m_list.Set(playerName, playerInfos);
-		}
-		
-		bool success = listPlayerProfiles.SaveToFile(saveFilePath);
-		Log(" --------- SAVING IS " + success);
-	}
-	
 	void CloseGame()
 	{
 		GetGame().RequestClose();
