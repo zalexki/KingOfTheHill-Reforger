@@ -30,36 +30,43 @@ FrameWidgetClass {
         VerticalLayoutWidgetClass "{5E1D46E28D610F65}" {
          Name "VerticalLayout0"
          Slot LayoutSlot "{5CA63B7F5C87005E}" {
+          Padding 0 20 0 0
           SizeMode Fill
          }
          {
-          ButtonWidgetClass "{5E1D46E28D610F63}" {
-           Name "Close"
-           Slot LayoutSlot "{5C5F7574C86CA642}" {
+          ButtonWidgetClass "{5E22B9EBC364C921}" : "{0114A06AD44D49BD}UI/layouts/WidgetLibrary/Buttons/DialogButtonCancel.layout" {
+           Name "Cancel"
+           Slot LayoutSlot "{5CC2F7A314C9440B}" {
             HorizontalAlign 2
-            Padding 10 0 50 0
+            Padding 0 0 0 0
            }
-           Clipping False
-           Color 0 0 0 0
-           "no focus" 1
+           components {
+            SCR_NavigationButtonComponent "{5474BAC5DBCF129A}" {
+            }
+           }
            {
-            SizeLayoutWidgetClass "{5E1D46E28D610F61}" {
-             Name "SizeLayout"
-             Slot ButtonWidgetSlot "{5C5F7912A3BAFE40}" {
-              HorizontalAlign 3
-              VerticalAlign 3
+            SizeLayoutWidgetClass "{5562AD435529FB36}" {
+             Prefab "{5562AD435529FB36}"
+             Slot ButtonWidgetSlot "{5562AD435529FB5D}" {
              }
-             AllowWidthOverride 1
-             WidthOverride 48
-             AllowHeightOverride 1
-             HeightOverride 48
              {
-              ImageWidgetClass "{5E1D46E28D610F7F}" {
-               Name "Image0"
-               Slot AlignableSlot "{5CA449956BE1547B}" {
+              OverlayWidgetClass "{000000005E70868E}" {
+               Prefab "{000000005E70868E}"
+               {
+                HorizontalLayoutWidgetClass "{00000000E3602307}" {
+                 Prefab "{00000000E3602307}"
+                 {
+                  RichTextWidgetClass "{00000000B0FD85CE}" {
+                   Prefab "{00000000B0FD85CE}"
+                   "Font Size" 30
+                  }
+                  RichTextWidgetClass "{00000000DB061E92}" {
+                   Prefab "{00000000DB061E92}"
+                   "Font Size" 30
+                  }
+                 }
+                }
                }
-               Texture "{E0B1311CCED2471A}UI/Textures/Icons/iconExit.edds"
-               Size 96 96
               }
              }
             }
@@ -110,7 +117,7 @@ FrameWidgetClass {
                   Padding 0 5 0 5
                  }
                  {
-                  SizeLayoutWidgetClass "{5E1D46ED9F252BBD}" : "{20EF71DE68A5887E}UI/Layouts/ShopSystem/ItemListUILayout.layout" {
+                  SizeLayoutWidgetClass "{5E1D46ED9F252BBD}" : "{20EF71DE68A5887E}UI/Layouts/HUD/Shop/ItemListUILayout.layout" {
                    Name "SizeLayout00"
                    Slot OverlayWidgetSlot "{5C9E2A9FC993FEE7}" {
                     Padding 0 0 0 0
@@ -123,6 +130,12 @@ FrameWidgetClass {
                       OverlayWidgetClass "{5E1D46E396412EF6}" {
                        Prefab "{5E1D46E396412EF6}"
                        Slot LayoutSlot "{5C982A3F129726D2}" {
+                       }
+                       {
+                        ImageWidgetClass "{5E1D46E396412EF7}" {
+                         Prefab "{5E1D46E396412EF7}"
+                         Color 0.075 0.075 0.075 0.498
+                        }
                        }
                       }
                      }
