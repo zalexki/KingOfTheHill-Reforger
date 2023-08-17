@@ -51,7 +51,7 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 		
 		m_counterTick++;
 		
-		if (m_counterTick >= 1) {
+		if (m_counterTick >= 10) {
 			array<IEntity> outEntities = {};
 			GetEntitiesInside(outEntities);
 

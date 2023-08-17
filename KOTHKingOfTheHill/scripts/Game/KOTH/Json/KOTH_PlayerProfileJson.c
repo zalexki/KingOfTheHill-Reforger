@@ -27,8 +27,8 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 	
 	void RemoveFriendlyKillXpAndMoney()
 	{
-		m_money = m_money - 50;
-		m_xp = m_xp - 10;
+		m_money = m_money - 300;
+		m_xp = m_xp - 300;
 	}
 	
 	int GetMoney()
