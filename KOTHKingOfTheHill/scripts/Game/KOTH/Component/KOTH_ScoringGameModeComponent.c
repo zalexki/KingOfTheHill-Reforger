@@ -45,13 +45,48 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		SavePlayersProfile();
 	}
 	
-	void SavePlayersProfile()
+	override bool HandlePlayerKilled(int playerId, IEntity player, IEntity killer)
 	{
 		if (!Replication.IsServer())
-			return;
+			return false;
+		
+		FactionAffiliationComponent playerFactionComp = FactionAffiliationComponent.Cast(player.FindComponent(FactionAffiliationComponent));
+		FactionAffiliationComponent killerFactionComp = FactionAffiliationComponent.Cast(killer.FindComponent(FactionAffiliationComponent));
+		Log("OnPlayerKilled");
 		
 		PlayerManager playerManager = GetGame().GetPlayerManager();
 		if (!playerManager)
+			return false;
+		
+		int killerId = playerManager.GetPlayerIdFromControlledEntity(killer);				
+		string killerName = playerManager.GetPlayerName(killerId);
+		Log("killerName " + killerName);
+		
+		if (playerFactionComp.GetAffiliatedFaction() == killerFactionComp.GetAffiliatedFaction())
+		{
+			foreach (int index, KOTH_PlayerProfileJson savedProfile : listPlayerProfiles) 
+			{
+				if (savedProfile.m_name == killerName) {
+					savedProfile.RemoveFriendlyKillXpAndMoney();
+					listPlayerProfiles.Set(index, savedProfile);
+				}
+			}
+		} else {
+			foreach (int index, KOTH_PlayerProfileJson savedProfile : listPlayerProfiles) 
+			{
+				if (savedProfile.m_name == killerName) {
+					savedProfile.AddKillXpAndMoney();
+					listPlayerProfiles.Set(index, savedProfile);
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	void SavePlayersProfile()
+	{
+		if (!Replication.IsServer())
 			return;
 		
 		listPlayerProfilesJson.m_list = listPlayerProfiles;
@@ -59,46 +94,6 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		bool success = listPlayerProfilesJson.SaveToFile(saveFilePath);
 		Log(" --------- SAVING IS " + success);
 	}
-	
-	/*override bool RplSave(ScriptBitWriter writer)
-    {
-		super.RplSave(writer);
-		
-        writer.WriteInt(m_blueforPoints);
-        writer.WriteInt(m_redforPoints);
-        writer.WriteInt(m_greenforPoints);
-		
-		int players = listPlayerProfiles.Count();
-        writer.WriteInt(players);
-		foreach (KOTH_PlayerProfileJson profile : listPlayerProfiles)
-		{
-			profile.RplSave(writer);
-		}
-		return true;
-    }
-	
-	override bool RplLoad(ScriptBitReader reader)
-    {
-		reader.ReadInt(m_blueforPoints);
-		reader.ReadInt(m_redforPoints);
-		reader.ReadInt(m_greenforPoints);
-	
-		int players;
-		if (!reader.ReadInt(players))
-			return false;
-		
-		for (int i = 0; i < players; i++)
-		{
-			ref KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
-
-			if (!profile.RplLoad(reader))
-				return false;
-
-			listPlayerProfiles.Insert(profile);
-		}
-
-        return true;
-    }*/
 	
 	void BumpMe()
 	{

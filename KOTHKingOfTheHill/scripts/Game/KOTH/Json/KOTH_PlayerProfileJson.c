@@ -1,9 +1,9 @@
 class KOTH_PlayerProfileJson : JsonApiStruct
 {
     string m_name;
-    int m_money = 0;
-	int m_level = 1;
-	int m_xp = 0;
+    private int m_money = 0;
+	private int m_level = 1;
+	private int m_xp = 0;
 
     void KOTH_PlayerProfileJson()
 	{
@@ -23,6 +23,12 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 	{
 		AddXp(100);
 		AddMoney(100);
+	}
+	
+	void RemoveFriendlyKillXpAndMoney()
+	{
+		m_money = m_money - 50;
+		m_xp = m_xp - 10;
 	}
 	
 	int GetMoney()
