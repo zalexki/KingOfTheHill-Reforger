@@ -81,6 +81,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 			}
 		}
 		
+		Replication.BumpMe();
 		return true;
 	}
 	
