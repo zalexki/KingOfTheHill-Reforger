@@ -59,7 +59,7 @@ class KOTH_HUD : SCR_InfoDisplay
 	
 	private void UpdateMoneyAndXp()
 	{
-		KOTH_PlayerProfileJson currentProfile;
+		KOTH_PlayerProfileJson currentProfile = new KOTH_PlayerProfileJson();
 		foreach (KOTH_PlayerProfileJson savedProfile : m_scoreComp.listPlayerProfiles) 
 		{
 			if (savedProfile.m_name == m_playerName) {
