@@ -8,11 +8,11 @@ It has been initiated by the FRM (FrenchReforgerMods) mod team.
 
 ### Credits
 
-Aqkwa: Layouts, Configs, Mapping, Dev ...
-CptChris: 3D artist
+Aqkwa: Layouts, Configs, Mapping, Dev ... \
+CptChris: 3D artist \
 Sen: Lead dev
 
-Inspirations/Help from teams/devs and their work :
-[EveronLife](https://everon.life/) 
-Lab6 ([Sparker95](https://github.com/Sparker95) & [jpetanjek](https://github.com/jpetanjek)) 
+Inspirations/Help from teams/devs and their work : \
+[EveronLife](https://everon.life/) \
+Lab6 ([Sparker95](https://github.com/Sparker95) & [jpetanjek](https://github.com/jpetanjek)) \
 htom0104 for the marker zoom resize script 
