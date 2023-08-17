@@ -14,7 +14,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
     int m_greenforPoints = 0;
 	
 	[RplProp()]
-	ref array<ref KOTH_PlayerProfileJson> listPlayerProfiles = new array<ref KOTH_PlayerProfileJson>;
+	ref array<ref KOTH_PlayerProfileJson> listPlayerProfiles = new array<ref KOTH_PlayerProfileJson>();
 	
 	override void OnGameModeStart()
 	{
@@ -91,7 +91,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 			return;
 		
 		listPlayerProfilesJson.m_list = listPlayerProfiles;
-		
+			
 		bool success = listPlayerProfilesJson.SaveToFile(saveFilePath);
 		Log(" --------- SAVING IS " + success);
 	}

@@ -1,9 +1,9 @@
 class KOTH_PlayerProfileJson : JsonApiStruct
 {
     string m_name;
-    private int m_money = 0;
-	private int m_level = 1;
-	private int m_xp = 0;
+    int m_money = 0;
+	int m_level = 1;
+	int m_xp = 0;
 
     void KOTH_PlayerProfileJson()
 	{

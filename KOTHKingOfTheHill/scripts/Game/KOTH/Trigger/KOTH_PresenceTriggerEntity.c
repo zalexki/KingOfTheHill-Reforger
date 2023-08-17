@@ -31,7 +31,7 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 	
 	override protected void OnDeactivate(IEntity ent)
 	{
-		Log("OnDeactivate");
+		//Log("OnDeactivate");
 		
 		array<IEntity> outEntities = {};
 		GetEntitiesInside(outEntities);
@@ -45,13 +45,13 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 	
 	override protected void OnActivate(IEntity ent)
 	{
-		Log("OnActivate");
+		//Log("OnActivate");
 		if (!m_gameMode.IsRunning())
 			return;
 		
 		m_counterTick++;
 		
-		if (m_counterTick >= 15) {
+		if (m_counterTick >= 1) {
 			array<IEntity> outEntities = {};
 			GetEntitiesInside(outEntities);
 
@@ -62,16 +62,26 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 			
 			foreach (IEntity entity: outEntities)
 			{
-				if (m_gameMode.IsMaster()) {
+				if (Replication.IsServer()) {
 					int playerId = playerManager.GetPlayerIdFromControlledEntity(entity);				
 					string playerName = playerManager.GetPlayerName(playerId);
+					bool playerIsInList = false;
 					foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.listPlayerProfiles) 
 					{
 						if (savedProfile.m_name == playerName) {
 							savedProfile.AddInZoneXpAndMoney();
 							m_scoreComp.listPlayerProfiles.Set(index, savedProfile);
+							playerIsInList = true;
 						}
 					}
+					
+					if (!playerIsInList) {
+						KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
+						profile.AddInZoneXpAndMoney();
+						profile.m_name = playerName;
+						m_scoreComp.listPlayerProfiles.Insert(profile);
+					}
+						
 				}
 
 				FactionAffiliationComponent targetFactionComp = FactionAffiliationComponent.Cast(entity.FindComponent(FactionAffiliationComponent));
@@ -114,7 +124,7 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 					m_scoreComp.m_redforPoints++;
 			}
 			
-			if (m_gameMode.IsMaster())
+			if (Replication.IsServer())
 				m_scoreComp.BumpMe();
 					
 			if (true == isZoneContested) 
