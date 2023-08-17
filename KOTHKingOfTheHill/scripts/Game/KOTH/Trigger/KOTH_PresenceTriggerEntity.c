@@ -62,20 +62,18 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 			
 			foreach (IEntity entity: outEntities)
 			{
-				int playerId = playerManager.GetPlayerIdFromControlledEntity(entity);
-				PlayerController playerController = playerManager.GetPlayerController(playerId);
-				if (!playerController) {
-					Log("Missing KOTH_SCR_PlayerProfileComponent on player with KOTH_HUD", LogLevel.FATAL);
-					return;
+				if (m_gameMode.IsMaster()) {
+					int playerId = playerManager.GetPlayerIdFromControlledEntity(entity);				
+					string playerName = playerManager.GetPlayerName(playerId);
+					foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.listPlayerProfiles) 
+					{
+						if (savedProfile.m_name == playerName) {
+							savedProfile.AddInZoneXpAndMoney();
+							m_scoreComp.listPlayerProfiles.Set(index, savedProfile);
+						}
+					}
 				}
-				KOTH_SCR_PlayerProfileComponent profile = KOTH_SCR_PlayerProfileComponent.Cast(playerController.FindComponent(KOTH_SCR_PlayerProfileComponent));
-				if (!profile) {
-					Log("Missing KOTH_SCR_PlayerProfileComponent on player with KOTH_HUD", LogLevel.FATAL);
-					return;
-				}
-				profile.AddInZoneXpAndMoney();
-				
-				
+
 				FactionAffiliationComponent targetFactionComp = FactionAffiliationComponent.Cast(entity.FindComponent(FactionAffiliationComponent));
 				if (targetFactionComp) {
 					Faction faction = targetFactionComp.GetAffiliatedFaction();
