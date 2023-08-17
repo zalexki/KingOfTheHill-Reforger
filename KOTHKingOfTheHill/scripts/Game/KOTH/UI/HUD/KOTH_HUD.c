@@ -56,9 +56,15 @@ class KOTH_HUD : SCR_InfoDisplay
 			UpdateMoneyAndXp();
 		}
 		
-			//ScrollLayoutWidget koth_scrollList = ScrollLayoutWidget.Cast(root.FindWidget("ScrollList"));
+			ScrollLayoutWidget koth_scrollList = ScrollLayoutWidget.Cast(root.FindWidget("ScrollList"));
 		
-			//Widget w = GetGame().GetWorkspace().CreateWidgets("{7340801CEE0A37E9}UI/Layouts/HUD/KingOfTheHill/NotifCaptureKill.layout", koth_scrollList);
+			Widget w = GetGame().GetWorkspace().CreateWidgets("{7340801CEE0A37E9}UI/Layouts/HUD/KingOfTheHill/NotifCaptureKill.layout", koth_scrollList);
+			SCR_FadeUIComponent compFade = SCR_FadeUIComponent.Cast(w.FindHandler(SCR_FadeUIComponent));
+			compFade.DelayedFadeOut(5000, true);
+		
+			//Widget wz = GetGame().GetWorkspace().CreateWidgets("{CA8EAA6F42A76988}UI/Layouts/HUD/KingOfTheHill/NotifCapturePoint.layout", koth_scrollList);
+//			SCR_FadeUIComponent compFadeBis = SCR_FadeUIComponent.Cast(wz.FindHandler(SCR_FadeUIComponent));
+//			compFadeBis.DelayedFadeOut(5000, true);
 			//entries.Insert(w);
 			// Store widgets and component
 			//m_aEntriesComponents.Insert(item, comp);

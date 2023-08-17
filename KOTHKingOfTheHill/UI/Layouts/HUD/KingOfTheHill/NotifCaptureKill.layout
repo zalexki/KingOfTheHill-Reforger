@@ -7,8 +7,9 @@ SizeLayoutWidgetClass {
  }
  components {
   SCR_FadeUIComponent "{5E2162B19146991E}" {
-   m_fFadeInAnimationSpeed 50
+   m_fFadeInAnimationSpeed 0
    m_fFadeOutAnimationSpeed 50
+   m_bFadeDoneUpdateSpeed 1
   }
  }
  HeightOverride 0
