@@ -97,7 +97,7 @@ class KOTH_HUD : SCR_InfoDisplay
 		MoneyNotif.SetColor(Color.Red);
 		
 		SCR_FadeUIComponent compFade = SCR_FadeUIComponent.Cast(w.FindHandler(SCR_FadeUIComponent));
-		compFade.DelayedFadeOut(5000, true);
+		compFade.DelayedFadeOut(2000, true);
 	}
 	
 	void NotifCapture()
@@ -117,7 +117,7 @@ class KOTH_HUD : SCR_InfoDisplay
 		MoneyNotif.SetText("10 $");
 		
 		SCR_FadeUIComponent compFade = SCR_FadeUIComponent.Cast(w.FindHandler(SCR_FadeUIComponent));
-		compFade.DelayedFadeOut(5000, true);
+		compFade.DelayedFadeOut(2000, true);
 	}
 	
 	private void UpdateMoneyAndXp()

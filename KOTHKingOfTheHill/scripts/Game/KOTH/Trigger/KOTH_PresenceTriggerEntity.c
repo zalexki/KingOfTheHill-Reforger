@@ -43,6 +43,22 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 		}
 	}
 	
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	void NotifCapture(int killerId)
+	{
+		Log("---------------- NotifCapture from rpc call");
+		if (GetGame().GetPlayerController().GetPlayerId() != killerId)
+			return;
+		
+		SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
+		if (hudManager) {
+			KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
+			if (kothHud) {
+				kothHud.NotifCapture();
+			}
+		}
+	}
+	
 	override protected void OnActivate(IEntity ent)
 	{
 		//Log("OnActivate");
@@ -63,23 +79,28 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 			foreach (IEntity entity: outEntities)
 			{
 				// verify player is not dead or unconscious
-//				CharacterControllerComponent controllerComp = ChimeraCharacter.Cast(entity).GetCharacterController();
-//				if (controllerComp.IsDead() || controllerComp.IsUnconscious())
-//					continue;
-				
+				CharacterControllerComponent controllerComp = ChimeraCharacter.Cast(entity).GetCharacterController();
+				if (controllerComp.IsDead() || controllerComp.IsUnconscious())
+					continue;
+
 				int playerId = playerManager.GetPlayerIdFromControlledEntity(entity);
-				string playerName = playerManager.GetPlayerName(playerId);
-				bool playerIsInList = false;
-				
-				SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
-				if (hudManager) {
-					KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
-					if (kothHud) {
-						kothHud.NotifCapture();
+				if (GetGame().GetPlayerController().GetPlayerId() == playerId)
+				{
+					SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
+					if (hudManager) {
+						KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
+						if (kothHud) {
+							kothHud.NotifCapture();
+						}
 					}
 				}
 				
 				if (Replication.IsServer()) {
+					string playerName = playerManager.GetPlayerName(playerId);
+					bool playerIsInList = false;
+//					Log("---------------- DO NotifCapture");
+//					Rpc(NotifCapture, playerId);
+					
 					foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.m_listPlayerProfiles) 
 					{
 						if (savedProfile.m_name == playerName) {

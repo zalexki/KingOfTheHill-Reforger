@@ -40,10 +40,8 @@ modded class SCR_BaseGameMode
 		}
 	}
 
-	override void StartGameMode()
+	/*override void StartGameMode()
 	{
-		return;
-		
 		if (!Replication.IsServer())
 			return;
 
@@ -90,5 +88,5 @@ modded class SCR_BaseGameMode
 		thirdSpawn.SetLocalTransform(placesLocal.Get(randomIndex));
 		placesWorld.Remove(randomIndex);
 		placesLocal.Remove(randomIndex);
-	}
+	}*/
 };

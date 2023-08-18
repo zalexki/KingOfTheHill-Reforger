@@ -68,8 +68,10 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 					savedProfile.RemoveFriendlyKillXpAndMoney();
 					m_listPlayerProfiles.Set(index, savedProfile);
 					playerIsInList = true;
-				}
+				}	
 			}
+			
+			Rpc(NotifFriendlyKill, killerId);
 			
 			if (!playerIsInList) {
 				KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
@@ -87,10 +89,10 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 						m_listPlayerProfiles.Set(index, savedProfile);
 						playerIsInList = true;
 					}
-					
-					Rpc(NotifEnemyKill, killerId);
 				}
 			}
+			
+			Rpc(NotifEnemyKill, killerId);
 			
 			if (!playerIsInList) {
 				KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
@@ -99,8 +101,6 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 				m_listPlayerProfiles.Insert(profile);
 			}
 		}
-		
-		
 		
 		Replication.BumpMe();
 		return true;
