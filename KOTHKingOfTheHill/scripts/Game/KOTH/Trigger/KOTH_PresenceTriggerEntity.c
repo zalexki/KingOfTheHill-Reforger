@@ -43,6 +43,22 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 		}
 	}
 	
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	void NotifCapture(int killerId)
+	{
+		Log("---------------- NotifCapture from rpc call");
+		if (GetGame().GetPlayerController().GetPlayerId() != killerId)
+			return;
+		
+		SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
+		if (hudManager) {
+			KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
+			if (kothHud) {
+				kothHud.NotifCapture();
+			}
+		}
+	}
+	
 	override protected void OnActivate(IEntity ent)
 	{
 		//Log("OnActivate");
@@ -62,11 +78,14 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 			
 			foreach (IEntity entity: outEntities)
 			{
-				if (Replication.IsServer()) {
-					int playerId = playerManager.GetPlayerIdFromControlledEntity(entity);				
-					string playerName = playerManager.GetPlayerName(playerId);
-					bool playerIsInList = false;
-					
+				// verify player is not dead or unconscious
+				CharacterControllerComponent controllerComp = ChimeraCharacter.Cast(entity).GetCharacterController();
+				if (controllerComp.IsDead() || controllerComp.IsUnconscious())
+					continue;
+
+				int playerId = playerManager.GetPlayerIdFromControlledEntity(entity);
+				if (GetGame().GetPlayerController().GetPlayerId() == playerId)
+				{
 					SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
 					if (hudManager) {
 						KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
@@ -74,12 +93,19 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 							kothHud.NotifCapture();
 						}
 					}
+				}
+				
+				if (Replication.IsServer()) {
+					string playerName = playerManager.GetPlayerName(playerId);
+					bool playerIsInList = false;
+//					Log("---------------- DO NotifCapture");
+//					Rpc(NotifCapture, playerId);
 					
-					foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.listPlayerProfiles) 
+					foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.m_listPlayerProfiles) 
 					{
 						if (savedProfile.m_name == playerName) {
 							savedProfile.AddInZoneXpAndMoney();
-							m_scoreComp.listPlayerProfiles.Set(index, savedProfile);
+							m_scoreComp.m_listPlayerProfiles.Set(index, savedProfile);
 							playerIsInList = true;
 						}
 					}
@@ -88,9 +114,8 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 						KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
 						profile.AddInZoneXpAndMoney();
 						profile.m_name = playerName;
-						m_scoreComp.listPlayerProfiles.Insert(profile);
+						m_scoreComp.m_listPlayerProfiles.Insert(profile);
 					}
-						
 				}
 
 				FactionAffiliationComponent targetFactionComp = FactionAffiliationComponent.Cast(entity.FindComponent(FactionAffiliationComponent));
@@ -109,30 +134,29 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 							greenforPlayerNumber++;
 					}
 				}
-
 			}
-			
 			
 			bool isZoneContested = true;
 			
 			if (blueforPlayerNumber > greenforPlayerNumber && blueforPlayerNumber > redforPlayerNumber) {
 				isZoneContested = false;
-				if (m_gameMode.IsMaster())
+				if (Replication.IsServer())
 					m_scoreComp.m_blueforPoints++;
 			}
 			
 			if (greenforPlayerNumber > blueforPlayerNumber && greenforPlayerNumber > redforPlayerNumber) {
 				isZoneContested = false;
-				if (m_gameMode.IsMaster())
+				if (Replication.IsServer())
 					m_scoreComp.m_greenforPoints++;
 			}
 			
 			if (redforPlayerNumber > greenforPlayerNumber && redforPlayerNumber > blueforPlayerNumber) {
 				isZoneContested = false;
-				if (m_gameMode.IsMaster())
+				if (Replication.IsServer())
 					m_scoreComp.m_redforPoints++;
 			}
 			
+			// send new stats to clients
 			if (Replication.IsServer())
 				m_scoreComp.BumpMe();
 					
