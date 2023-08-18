@@ -1,5 +1,9 @@
 KOTH_PresenceTriggerEntity {
  ID "5E0F4336F4301C65"
+ components {
+  KOTH_SCR_MapMarkerHandlerComponent "{5E2562C453F885D4}" {
+  }
+ }
  coords 2739.489 77.516 1665.764
  TriggerShapeType Sphere
  SphereRadius 100

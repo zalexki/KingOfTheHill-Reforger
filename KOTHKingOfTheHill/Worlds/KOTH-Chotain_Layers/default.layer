@@ -4,4 +4,5 @@ GenericEntity : "{6F1B7BFE78ECAE16}Prefabs/Structures/KOTH/TowerV1.et" {
 }
 KOTH_PresenceTriggerEntity : "{F9467A5734030343}Prefabs/MP/Triggers/KOTH_zoneTrigger.et" {
  coords 7069.289 118.892 6028.371
+ DrawShape 0
 }

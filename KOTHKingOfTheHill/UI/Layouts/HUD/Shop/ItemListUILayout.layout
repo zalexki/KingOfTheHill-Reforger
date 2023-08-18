@@ -67,12 +67,14 @@ SizeLayoutWidgetClass {
           HorizontalLayoutWidgetClass "{5E1D46E3F35C971B}" {
            Name "BuyOnce_Layout"
            Slot LayoutSlot "{5E1D46E3F35C9779}" {
+            Padding 0 0 0 0
             SizeMode Fill
            }
            {
             OverlayWidgetClass "{5E1D46E396412ED9}" {
              Name "PurchaseOnce"
              Slot LayoutSlot "{5C982A3F129726D2}" {
+              Padding 0 0 0 0
               SizeMode Fill
               FillWeight 0.25
              }
