@@ -54,12 +54,11 @@ class KOTH_HUD : SCR_InfoDisplay
 			m_playerName = playerManager.GetPlayerName(playerId);
 			
 			UpdateMoneyAndXp();
-			NotifKill();
 		}
 		
 	}
 	
-	void NotifKill()
+	void NotifEnemyKill()
 	{
 		Widget root = GetRootWidget();
 		VerticalLayoutWidget koth_scrollList = VerticalLayoutWidget.Cast(root.FindWidget("OverlayRoot.VerticalLayoutRoot.ScrollList.NotifContainer"));
@@ -74,6 +73,28 @@ class KOTH_HUD : SCR_InfoDisplay
 		
 		TextWidget MoneyNotif = TextWidget.Cast(w.FindAnyWidget("MoneyNotif"));
 		MoneyNotif.SetText("100 $");
+		
+		SCR_FadeUIComponent compFade = SCR_FadeUIComponent.Cast(w.FindHandler(SCR_FadeUIComponent));
+		compFade.DelayedFadeOut(5000, true);
+	}
+	
+	void NotifFriendlyKill()
+	{
+		Widget root = GetRootWidget();
+		VerticalLayoutWidget koth_scrollList = VerticalLayoutWidget.Cast(root.FindWidget("OverlayRoot.VerticalLayoutRoot.ScrollList.NotifContainer"));
+		
+		Widget w = GetGame().GetWorkspace().CreateWidgets("{74686613FDE00759}UI/Layouts/HUD/KingOfTheHill/KOTH_Notification.layout", koth_scrollList);
+		
+		TextWidget TextNotif = TextWidget.Cast(w.FindAnyWidget("TextNotif"));
+		TextNotif.SetText("Friendly killed ");
+		
+		TextWidget XpNotif = TextWidget.Cast(w.FindAnyWidget("XpNotif"));
+		XpNotif.SetText("-300 xp ");
+		XpNotif.SetColor(Color.DarkRed);
+		
+		TextWidget MoneyNotif = TextWidget.Cast(w.FindAnyWidget("MoneyNotif"));
+		MoneyNotif.SetText("-300 $");
+		MoneyNotif.SetColor(Color.Red);
 		
 		SCR_FadeUIComponent compFade = SCR_FadeUIComponent.Cast(w.FindHandler(SCR_FadeUIComponent));
 		compFade.DelayedFadeOut(5000, true);
@@ -102,7 +123,7 @@ class KOTH_HUD : SCR_InfoDisplay
 	private void UpdateMoneyAndXp()
 	{
 		KOTH_PlayerProfileJson currentProfile = new KOTH_PlayerProfileJson();
-		foreach (KOTH_PlayerProfileJson savedProfile : m_scoreComp.listPlayerProfiles) 
+		foreach (KOTH_PlayerProfileJson savedProfile : m_scoreComp.m_listPlayerProfiles) 
 		{
 			if (savedProfile.m_name == m_playerName) {
 				currentProfile = savedProfile;

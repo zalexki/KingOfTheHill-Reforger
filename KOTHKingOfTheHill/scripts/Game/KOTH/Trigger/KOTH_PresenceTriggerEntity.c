@@ -63,9 +63,9 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 			foreach (IEntity entity: outEntities)
 			{
 				// verify player is not dead or unconscious
-				CharacterControllerComponent controllerComp = ChimeraCharacter.Cast(entity).GetCharacterController();
-				if (controllerComp.IsDead() || controllerComp.IsUnconscious())
-					continue;
+//				CharacterControllerComponent controllerComp = ChimeraCharacter.Cast(entity).GetCharacterController();
+//				if (controllerComp.IsDead() || controllerComp.IsUnconscious())
+//					continue;
 				
 				int playerId = playerManager.GetPlayerIdFromControlledEntity(entity);
 				string playerName = playerManager.GetPlayerName(playerId);
@@ -80,11 +80,11 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 				}
 				
 				if (Replication.IsServer()) {
-					foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.listPlayerProfiles) 
+					foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.m_listPlayerProfiles) 
 					{
 						if (savedProfile.m_name == playerName) {
 							savedProfile.AddInZoneXpAndMoney();
-							m_scoreComp.listPlayerProfiles.Set(index, savedProfile);
+							m_scoreComp.m_listPlayerProfiles.Set(index, savedProfile);
 							playerIsInList = true;
 						}
 					}
@@ -93,9 +93,8 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 						KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
 						profile.AddInZoneXpAndMoney();
 						profile.m_name = playerName;
-						m_scoreComp.listPlayerProfiles.Insert(profile);
+						m_scoreComp.m_listPlayerProfiles.Insert(profile);
 					}
-						
 				}
 
 				FactionAffiliationComponent targetFactionComp = FactionAffiliationComponent.Cast(entity.FindComponent(FactionAffiliationComponent));
