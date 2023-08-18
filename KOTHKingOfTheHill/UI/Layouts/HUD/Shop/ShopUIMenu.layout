@@ -108,7 +108,7 @@ FrameWidgetClass {
                Slot AlignableSlot "{5C982A3820F3F1D9}" {
                 HorizontalAlign 3
                 VerticalAlign 3
-                Padding 0 1 0 0
+                Padding 300 1 300 0
                }
                {
                 OverlayWidgetClass "{5E1D46E28D610F54}" {
@@ -120,6 +120,7 @@ FrameWidgetClass {
                   SizeLayoutWidgetClass "{5E1D46ED9F252BBD}" : "{20EF71DE68A5887E}UI/Layouts/HUD/Shop/ItemListUILayout.layout" {
                    Name "SizeLayout00"
                    Slot OverlayWidgetSlot "{5C9E2A9FC993FEE7}" {
+                    VerticalAlign 1
                     Padding 0 0 0 0
                    }
                    HeightOverride 100
@@ -134,7 +135,26 @@ FrameWidgetClass {
                        {
                         ImageWidgetClass "{5E1D46E396412EF7}" {
                          Prefab "{5E1D46E396412EF7}"
+                         Slot OverlayWidgetSlot "{5C982A3373E4C91A}" {
+                          Padding 0 0 0 0
+                         }
                          Color 0.075 0.075 0.075 0.498
+                        }
+                        HorizontalLayoutWidgetClass "{5E1D46E396412EF5}" {
+                         Prefab "{5E1D46E396412EF5}"
+                         {
+                          ItemPreviewWidgetClass "{5E1D46E396412EF3}" {
+                           Prefab "{5E1D46E396412EF3}"
+                           Slot LayoutSlot "{5C982A19141049F3}" {
+                            Padding 0 0 0 0
+                           }
+                          }
+                          VerticalLayoutWidgetClass "{5E1D46E396412EF1}" {
+                           Prefab "{5E1D46E396412EF1}"
+                           Slot LayoutSlot "{5C982A3ED9633687}" {
+                           }
+                          }
+                         }
                         }
                        }
                       }

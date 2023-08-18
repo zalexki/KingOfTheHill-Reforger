@@ -89,11 +89,11 @@ class KOTH_HUD : SCR_InfoDisplay
 		TextNotif.SetText("Friendly killed ");
 		
 		TextWidget XpNotif = TextWidget.Cast(w.FindAnyWidget("XpNotif"));
-		XpNotif.SetText("-300 xp ");
+		XpNotif.SetText(" - 300 xp ");
 		XpNotif.SetColor(Color.DarkRed);
 		
 		TextWidget MoneyNotif = TextWidget.Cast(w.FindAnyWidget("MoneyNotif"));
-		MoneyNotif.SetText("-300 $");
+		MoneyNotif.SetText(" - 300 $");
 		MoneyNotif.SetColor(Color.Red);
 		
 		SCR_FadeUIComponent compFade = SCR_FadeUIComponent.Cast(w.FindHandler(SCR_FadeUIComponent));
@@ -130,8 +130,8 @@ class KOTH_HUD : SCR_InfoDisplay
 			}
 		}
 		
-		m_moneyText.SetText(currentProfile.GetMoney().ToString());
-		m_xpText.SetText(currentProfile.GetXp().ToString() + " - " + currentProfile.GetXpNextLevel().ToString());
+		m_moneyText.SetText(currentProfile.GetMoney().ToString() + " $");
+		m_xpText.SetText(currentProfile.GetXp().ToString() + " / " + currentProfile.GetXpNextLevel().ToString());
 		m_lvlText.SetText(currentProfile.GetLevel().ToString());
 		m_xpProgressBar.SetValue(currentProfile.GetXp() / currentProfile.GetXpNextLevel(),true);
 	}
