@@ -24,7 +24,7 @@ class KOTH_HUD : SCR_InfoDisplay
 		Widget root = GetRootWidget();
 
 		if (root) {
-	        FrameWidget koth_hub = FrameWidget.Cast(root.FindWidget("KOTH_HUD"));
+	        OverlayWidget koth_hub = OverlayWidget.Cast(root.FindWidget("OverlayRoot.VerticalLayoutRoot.HorizontalLayoutRoot.KOTH_HUD"));
 			if (!koth_hub)
 				return;
 			
@@ -39,12 +39,12 @@ class KOTH_HUD : SCR_InfoDisplay
 			m_redforPlayersText = TextWidget.Cast(koth_hub.FindWidget("Front.CountPlayer_Footer.RedforPlayers"));
 			
 			// money/xp/lvl
-			SizeLayoutWidget m_xpSizeLayout = SizeLayoutWidget.Cast(koth_hub.FindWidget("Back.HorizontalLayout0.ProgressBar_EXP"));			
+			SizeLayoutWidget m_xpSizeLayout = SizeLayoutWidget.Cast(koth_hub.FindWidget("Back.HorizontalLayoutXpLVL.ProgressBar_EXP"));			
 			m_xpProgressBar = SCR_WLibProgressBarComponent.Cast(m_xpSizeLayout.FindHandler(SCR_WLibProgressBarComponent));
 			
 			m_xpText = TextWidget.Cast(koth_hub.FindWidget("Front.EXPERIENCE_Footer.Exp"));
 			m_lvlText = TextWidget.Cast(koth_hub.FindWidget("Demi_Front.Demi_EXPERIENCE_Footer.Level"));
-			m_moneyText = TextWidget.Cast(koth_hub.FindWidget("Front.Money"));
+			m_moneyText = TextWidget.Cast(koth_hub.FindWidget("Back.HorizontalLayout2.Money"));
 			
 			SCR_BaseGameMode gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
 			m_scoreComp = KOTH_ScoringGameModeComponent.Cast(gameMode.FindComponent(KOTH_ScoringGameModeComponent));
@@ -54,6 +54,7 @@ class KOTH_HUD : SCR_InfoDisplay
 			m_playerName = playerManager.GetPlayerName(playerID);
 			
 			UpdateMoneyAndXp();
+			NotifKill();
 		}
 		
 	}
@@ -61,9 +62,19 @@ class KOTH_HUD : SCR_InfoDisplay
 	void NotifKill()
 	{
 		Widget root = GetRootWidget();
-		ScrollLayoutWidget koth_scrollList = ScrollLayoutWidget.Cast(root.FindWidget("ScrollList"));
+		VerticalLayoutWidget koth_scrollList = VerticalLayoutWidget.Cast(root.FindWidget("OverlayRoot.VerticalLayoutRoot.ScrollList.NotifContainer"));
 		
-		Widget w = GetGame().GetWorkspace().CreateWidgets("{7340801CEE0A37E9}UI/Layouts/HUD/KingOfTheHill/NotifCaptureKill.layout", koth_scrollList);
+		Widget w = GetGame().GetWorkspace().CreateWidgets("{74686613FDE00759}UI/Layouts/HUD/KingOfTheHill/KOTH_Notification.layout", koth_scrollList);
+		
+		TextWidget TextNotif = TextWidget.Cast(w.FindAnyWidget("TextNotif"));
+		TextNotif.SetText("Enemy killed ");
+		
+		TextWidget XpNotif = TextWidget.Cast(w.FindAnyWidget("XpNotif"));
+		XpNotif.SetText("100 xp ");
+		
+		TextWidget MoneyNotif = TextWidget.Cast(w.FindAnyWidget("MoneyNotif"));
+		MoneyNotif.SetText("100 $");
+		
 		SCR_FadeUIComponent compFade = SCR_FadeUIComponent.Cast(w.FindHandler(SCR_FadeUIComponent));
 		compFade.DelayedFadeOut(5000, true);
 	}
@@ -71,11 +82,21 @@ class KOTH_HUD : SCR_InfoDisplay
 	void NotifCapture()
 	{
 		Widget root = GetRootWidget();
-		ScrollLayoutWidget koth_scrollList = ScrollLayoutWidget.Cast(root.FindWidget("ScrollList"));
-	
-		Widget wz = GetGame().GetWorkspace().CreateWidgets("{CA8EAA6F42A76988}UI/Layouts/HUD/KingOfTheHill/NotifCapturePoint.layout", koth_scrollList);
-		SCR_FadeUIComponent compFadeBis = SCR_FadeUIComponent.Cast(wz.FindHandler(SCR_FadeUIComponent));
-		compFadeBis.DelayedFadeOut(5000, true);
+		VerticalLayoutWidget koth_scrollList = VerticalLayoutWidget.Cast(root.FindWidget("OverlayRoot.VerticalLayoutRoot.ScrollList.NotifContainer"));
+		
+		Widget w = GetGame().GetWorkspace().CreateWidgets("{74686613FDE00759}UI/Layouts/HUD/KingOfTheHill/KOTH_Notification.layout", koth_scrollList);
+		
+		TextWidget TextNotif = TextWidget.Cast(w.FindAnyWidget("TextNotif"));
+		TextNotif.SetText("Objectif offensive ");
+		
+		TextWidget XpNotif = TextWidget.Cast(w.FindAnyWidget("XpNotif"));
+		XpNotif.SetText("10 xp ");
+		
+		TextWidget MoneyNotif = TextWidget.Cast(w.FindAnyWidget("MoneyNotif"));
+		MoneyNotif.SetText("10 $");
+		
+		SCR_FadeUIComponent compFade = SCR_FadeUIComponent.Cast(w.FindHandler(SCR_FadeUIComponent));
+		compFade.DelayedFadeOut(5000, true);
 	}
 	
 	private void UpdateMoneyAndXp()
