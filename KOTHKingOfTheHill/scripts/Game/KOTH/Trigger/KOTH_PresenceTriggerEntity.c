@@ -62,19 +62,24 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 			
 			foreach (IEntity entity: outEntities)
 			{
-				if (Replication.IsServer()) {
-					int playerId = playerManager.GetPlayerIdFromControlledEntity(entity);				
-					string playerName = playerManager.GetPlayerName(playerId);
-					bool playerIsInList = false;
-					
-					SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
-					if (hudManager) {
-						KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
-						if (kothHud) {
-							kothHud.NotifCapture();
-						}
+				// verify player is not dead or unconscious
+				CharacterControllerComponent controllerComp = ChimeraCharacter.Cast(entity).GetCharacterController();
+				if (controllerComp.IsDead() || controllerComp.IsUnconscious())
+					continue;
+				
+				int playerId = playerManager.GetPlayerIdFromControlledEntity(entity);
+				string playerName = playerManager.GetPlayerName(playerId);
+				bool playerIsInList = false;
+				
+				SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
+				if (hudManager) {
+					KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
+					if (kothHud) {
+						kothHud.NotifCapture();
 					}
-					
+				}
+				
+				if (Replication.IsServer()) {
 					foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.listPlayerProfiles) 
 					{
 						if (savedProfile.m_name == playerName) {
@@ -109,30 +114,29 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 							greenforPlayerNumber++;
 					}
 				}
-
 			}
-			
 			
 			bool isZoneContested = true;
 			
 			if (blueforPlayerNumber > greenforPlayerNumber && blueforPlayerNumber > redforPlayerNumber) {
 				isZoneContested = false;
-				if (m_gameMode.IsMaster())
+				if (Replication.IsServer())
 					m_scoreComp.m_blueforPoints++;
 			}
 			
 			if (greenforPlayerNumber > blueforPlayerNumber && greenforPlayerNumber > redforPlayerNumber) {
 				isZoneContested = false;
-				if (m_gameMode.IsMaster())
+				if (Replication.IsServer())
 					m_scoreComp.m_greenforPoints++;
 			}
 			
 			if (redforPlayerNumber > greenforPlayerNumber && redforPlayerNumber > blueforPlayerNumber) {
 				isZoneContested = false;
-				if (m_gameMode.IsMaster())
+				if (Replication.IsServer())
 					m_scoreComp.m_redforPoints++;
 			}
 			
+			// send new stats to clients
 			if (Replication.IsServer())
 				m_scoreComp.BumpMe();
 					

@@ -47,9 +47,6 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 	
 	override bool HandlePlayerKilled(int playerId, IEntity player, IEntity killer)
 	{
-		if (!Replication.IsServer())
-			return false;
-		
 		FactionAffiliationComponent playerFactionComp = FactionAffiliationComponent.Cast(player.FindComponent(FactionAffiliationComponent));
 		FactionAffiliationComponent killerFactionComp = FactionAffiliationComponent.Cast(killer.FindComponent(FactionAffiliationComponent));
 		Log("OnPlayerKilled");
@@ -62,35 +59,48 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		string killerName = playerManager.GetPlayerName(killerId);
 		Log("killerName " + killerName);
 		
-		if (playerFactionComp.GetAffiliatedFaction() == killerFactionComp.GetAffiliatedFaction())
-		{
+		if (playerFactionComp.GetAffiliatedFaction() == killerFactionComp.GetAffiliatedFaction()) {
+			// teamkill
 			foreach (int index, KOTH_PlayerProfileJson savedProfile : listPlayerProfiles) 
 			{
 				if (savedProfile.m_name == killerName) {
 					savedProfile.RemoveFriendlyKillXpAndMoney();
 					listPlayerProfiles.Set(index, savedProfile);
+					
 				}
 			}
 		} else {
+			// kill
 			foreach (int index, KOTH_PlayerProfileJson savedProfile : listPlayerProfiles) 
 			{
 				if (savedProfile.m_name == killerName) {
-					savedProfile.AddKillXpAndMoney();
-					listPlayerProfiles.Set(index, savedProfile);
-					
-					SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
-					if (hudManager) {
-						KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
-						if (kothHud) {
-							kothHud.NotifKill();
-						}
+					if (Replication.IsServer()) {
+						savedProfile.AddKillXpAndMoney();
+						listPlayerProfiles.Set(index, savedProfile);
 					}
+					
+					Rpc(NotifKill, killerId);
 				}
 			}
 		}
 		
 		Replication.BumpMe();
 		return true;
+	}
+	
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	void NotifKill(int killerId)
+	{
+		if (GetGame().GetPlayerController().GetPlayerId() != killerId)
+			return;
+		
+		SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
+		if (hudManager) {
+			KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
+			if (kothHud) {
+				kothHud.NotifKill();
+			}
+		}
 	}
 	
 	void SavePlayersProfile()

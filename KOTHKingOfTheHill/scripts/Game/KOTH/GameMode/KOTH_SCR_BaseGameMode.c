@@ -12,6 +12,9 @@ modded class SCR_BaseGameMode
 	
 	void CheckGameEnd()
 	{
+		if (!Replication.IsServer())
+			return;
+		
 		array<Faction> factions = {};
 		GetGame().GetFactionManager().GetFactionsList(factions);
 		

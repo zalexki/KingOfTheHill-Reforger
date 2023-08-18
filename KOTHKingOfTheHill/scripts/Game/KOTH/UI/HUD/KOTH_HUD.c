@@ -50,8 +50,8 @@ class KOTH_HUD : SCR_InfoDisplay
 			m_scoreComp = KOTH_ScoringGameModeComponent.Cast(gameMode.FindComponent(KOTH_ScoringGameModeComponent));
 			PlayerManager playerManager = GetGame().GetPlayerManager();
 			PlayerController controller = GetGame().GetPlayerController();
-			int playerID = controller.GetPlayerId();
-			m_playerName = playerManager.GetPlayerName(playerID);
+			int playerId = controller.GetPlayerId();
+			m_playerName = playerManager.GetPlayerName(playerId);
 			
 			UpdateMoneyAndXp();
 			NotifKill();
