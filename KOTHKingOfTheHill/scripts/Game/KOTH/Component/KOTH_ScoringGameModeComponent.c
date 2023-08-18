@@ -77,6 +77,14 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 				if (savedProfile.m_name == killerName) {
 					savedProfile.AddKillXpAndMoney();
 					listPlayerProfiles.Set(index, savedProfile);
+					
+					SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
+					if (hudManager) {
+						KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
+						if (kothHud) {
+							kothHud.NotifKill();
+						}
+					}
 				}
 			}
 		}

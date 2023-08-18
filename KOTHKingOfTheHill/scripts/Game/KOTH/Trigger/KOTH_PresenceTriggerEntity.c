@@ -66,6 +66,15 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 					int playerId = playerManager.GetPlayerIdFromControlledEntity(entity);				
 					string playerName = playerManager.GetPlayerName(playerId);
 					bool playerIsInList = false;
+					
+					SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
+					if (hudManager) {
+						KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
+						if (kothHud) {
+							kothHud.NotifCapture();
+						}
+					}
+					
 					foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.listPlayerProfiles) 
 					{
 						if (savedProfile.m_name == playerName) {
