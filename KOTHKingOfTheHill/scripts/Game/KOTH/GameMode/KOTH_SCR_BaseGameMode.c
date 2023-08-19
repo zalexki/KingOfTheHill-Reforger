@@ -39,164 +39,79 @@ modded class SCR_BaseGameMode
 		}
 	}
 
-	// you want very dodgy way to do randomization of spawns, brace yourself and read below
-	// TODO: fix this shit
+	protected override void OnGameStart()
+	{
+		super.OnGameStart();
+		
+		IEntity firstSpawn = GetGame().GetWorld().FindEntityByName("KOTH_FirstSpawn");
+		IEntity secondSpawn = GetGame().GetWorld().FindEntityByName("KOTH_SecondSpawn");
+		IEntity thirdSpawn = GetGame().GetWorld().FindEntityByName("KOTH_ThirdSpawn");
+		
+		GetGame().GetCallqueue().CallLater(AttachProperFlag, 1000, false, firstSpawn);
+		GetGame().GetCallqueue().CallLater(AttachProperFlag, 1000, false, secondSpawn);
+		GetGame().GetCallqueue().CallLater(AttachProperFlag, 1000, false, thirdSpawn);
+	}
+	
+	void AttachProperFlag(IEntity spawn)
+	{
+		SCR_SpawnPoint sp = SCR_SpawnPoint.Cast(FindSpawnPoint(spawn));
+		IEntity flagPoleEntity = FindFlag(spawn);
+		Resource res;
+		
+		if (sp.GetFactionKey() == "US") {
+			res = Resource.Load("{31F54FB5494520B8}Prefabs/Props/Fabric/Flags/Flag_1_Blufor.et");
+		}
+		if (sp.GetFactionKey() == "USSR") {
+			res = Resource.Load("{167B394478139624}Prefabs/Props/Fabric/Flags/Flag_1_Opfor.et");
+		}
+		if (sp.GetFactionKey() == "FIA") {
+			res = Resource.Load("{AC8F5AFDF613616F}Prefabs/Props/Fabric/Flags/Flag_1_Indfor.et");
+		}
+		
+		EntitySpawnParams spawnParams = new EntitySpawnParams();
+		IEntity flagEntity = GetGame().SpawnEntityPrefab(res, params: spawnParams);
+		
+		SlotManagerComponent compSec = SlotManagerComponent.Cast(flagPoleEntity.FindComponent(SlotManagerComponent));
+		EntitySlotInfo slotInfo = compSec.GetSlotByName("Flag");
+		slotInfo.AttachEntity(flagEntity);
+	}
+	
+	// called only server side 
 	override void StartGameMode()
 	{
-		if (!Replication.IsServer())
-			return;
-		
-		super.StartGameMode();
-		Log(" --------- StartGameMode");
-			
-		vector worldTransformFirst[4];
-		vector worldTransformFirstFlag[4];
-		vector worldTransformSecond[4];
-		vector worldTransformSecondFlag[4];
-		vector worldTransformThird[4];
-		vector worldTransformThirdFlag[4];
 		IEntity firstSpawn = GetGame().GetWorld().FindEntityByName("KOTH_FirstSpawn");
 		IEntity spawnPointFirst = FindSpawnPoint(firstSpawn);
-		spawnPointFirst.GetWorldTransform(worldTransformFirst);
 		IEntity firstFlag = FindFlag(firstSpawn);
-		firstFlag.GetWorldTransform(worldTransformFirstFlag);
-		
-		Rpc(DoRpcFlag);
 		
 		IEntity secondSpawn = GetGame().GetWorld().FindEntityByName("KOTH_SecondSpawn");
 		IEntity spawnPointSecond = FindSpawnPoint(secondSpawn);
-		spawnPointSecond.GetWorldTransform(worldTransformSecond);
 		IEntity secondFlag = FindFlag(secondSpawn);
-		secondFlag.GetWorldTransform(worldTransformSecondFlag);
 		
 		IEntity thirdSpawn = GetGame().GetWorld().FindEntityByName("KOTH_ThirdSpawn");
 		IEntity spawnPointThird = FindSpawnPoint(thirdSpawn);
-		spawnPointThird.GetWorldTransform(worldTransformThird);
 		IEntity thirdFlag = FindFlag(thirdSpawn);
-		thirdFlag.GetWorldTransform(worldTransformThirdFlag);
-		
 		
 		SCR_SpawnPoint spf = SCR_SpawnPoint.Cast(spawnPointFirst);
-		spf.SetFactionKey("US");
 		SCR_SpawnPoint sps = SCR_SpawnPoint.Cast(spawnPointSecond);
-		sps.SetFactionKey("US");
-		
-		Resource res = Resource.Load("{31F54FB5494520B8}Prefabs/Props/Fabric/Flags/Flag_1_Blufor.et");
-		EntitySpawnParams spawnParams = new EntitySpawnParams();
-		spawnParams.Parent = this;
-		IEntity flagEntity = GetGame().SpawnEntityPrefab(res, params: spawnParams);
-		
-		SlotManagerComponent compSec = SlotManagerComponent.Cast(secondFlag.FindComponent(SlotManagerComponent));
-		EntitySlotInfo slotInfo = compSec.GetSlotByName("Flag");
-		slotInfo.AttachEntity(flagEntity);
 		SCR_SpawnPoint spt = SCR_SpawnPoint.Cast(spawnPointThird);
-		spt.SetFactionKey("US");
-		
-		return;
-		
-		
-		
-		
-		
+
 		// randomize
 		array<int> randomInts = GetUniqueRandomInts();
-		switch (randomInts[0])
-		{
-			case 0:
-				spawnPointFirst.SetWorldTransform(worldTransformFirst);
-				//firstFlag.SetWorldTransform(worldTransformFirstFlag);
-			break;
-			case 1:
-				spawnPointFirst.SetWorldTransform(worldTransformSecond);
-				//firstFlag.SetWorldTransform(worldTransformFirstFlag);
-			break;
-			case 2:
-				spawnPointFirst.SetWorldTransform(worldTransformThird);
-				//firstFlag.SetWorldTransform(worldTransformFirstFlag);
-			break;
-		}
-		switch (randomInts[1])
-		{
-			case 0:
-				secondSpawn.SetWorldTransform(worldTransformFirst);
-				//secondFlag.SetWorldTransform(worldTransformFirstFlag);
-			break;
-			case 1:
-				secondSpawn.SetWorldTransform(worldTransformSecond);
-				//secondFlag.SetWorldTransform(worldTransformSecondFlag);
-			break;
-			case 2:
-				secondSpawn.SetWorldTransform(worldTransformThird);
-				//secondFlag.SetWorldTransform(worldTransformThirdFlag);
-			break;
-		}
-		switch (randomInts[2])
-		{
-			case 0:
-				thirdSpawn.SetWorldTransform(worldTransformFirst);
-				//thirdFlag.SetWorldTransform(worldTransformFirstFlag);
-			break;
-			case 1:
-				thirdSpawn.SetWorldTransform(worldTransformSecond);
-				//thirdFlag.SetWorldTransform(worldTransformSecondFlag);
-			break;
-			case 2:
-				thirdSpawn.SetWorldTransform(worldTransformThird);
-				//thirdFlag.SetWorldTransform(worldTransformThirdFlag);
-			break;
-		}
+		array<string> factions = {};
+		factions.Insert("US");
+		factions.Insert("USSR");
+		factions.Insert("FIA");
 		
-		//ApplyTransform(randomInts[0], spawnPointFirst, firstFlag, worldTransformFirst, worldTransformSecond, worldTransformThird);
+		Log("rand "+randomInts[0]);
+		Log("rand "+randomInts[1]);
+		Log("rand "+randomInts[2]);
+		spf.SetFactionKey(factions.Get(randomInts[0]));
+		sps.SetFactionKey(factions.Get(randomInts[1]));
+		spt.SetFactionKey(factions.Get(randomInts[2]));
+		
+		super.StartGameMode();
 	}
 	
-	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
-	void DoRpcFlag()
-	{
-		IEntity firstSpawn = GetGame().GetWorld().FindEntityByName("KOTH_FirstSpawn");
-		IEntity spawnPointFirst = FindSpawnPoint(firstSpawn);
-		SCR_SpawnPoint spf = SCR_SpawnPoint.Cast(spawnPointFirst);
-		spf.SetFactionKey("US");
-		
-		IEntity secondSpawn = GetGame().GetWorld().FindEntityByName("KOTH_SecondSpawn");
-		IEntity spawnPointSecond = FindSpawnPoint(secondSpawn);
-		SCR_SpawnPoint sps = SCR_SpawnPoint.Cast(spawnPointSecond);
-		sps.SetFactionKey("US");
-		
-		Resource res = Resource.Load("{31F54FB5494520B8}Prefabs/Props/Fabric/Flags/Flag_1_Blufor.et");
-		EntitySpawnParams spawnParams = new EntitySpawnParams();
-		spawnParams.Parent = this;
-		IEntity flagEntity = GetGame().SpawnEntityPrefab(res, params: spawnParams);
-				IEntity secondFlag = FindFlag(secondSpawn);
-
-		SlotManagerComponent compSec = SlotManagerComponent.Cast(secondFlag.FindComponent(SlotManagerComponent));
-		EntitySlotInfo slotInfo = compSec.GetSlotByName("Flag");
-		slotInfo.AttachEntity(flagEntity);
-		
-		
-		IEntity thirdSpawn = GetGame().GetWorld().FindEntityByName("KOTH_ThirdSpawn");
-		IEntity spawnPointThird = FindSpawnPoint(thirdSpawn);
-		
-		//IEntity flag;
-		//SlotManagerComponent comp = SlotManagerComponent.Cast(flag.FindComponent(SlotManagerComponent));
-		//comp.GetSlotByName("Flag").AttachEntity("{AC8F5AFDF613616F}Prefabs/Props/Fabric/Flags/Flag_1_Indfor.et");
-	}
-	
-	void ApplyTransform(int index, IEntity spawnpoint, SlotManagerComponent flagComp, vector worldTransformFirst, vector worldTransformSecond, vector worldTransformThird)
-	{
-		switch (index)
-		{
-			case 0:
-				spawnpoint.SetWorldTransform(worldTransformFirst);
-			break;
-			case 1:
-				spawnpoint.SetWorldTransform(worldTransformSecond);
-			break;
-			case 2:
-				spawnpoint.SetWorldTransform(worldTransformThird);
-			break;
-		}
-	}
-
 	IEntity FindFlag(IEntity parent) 
 	{
 		IEntity child = parent.GetChildren();
@@ -255,3 +170,4 @@ modded class SCR_BaseGameMode
 		return valueUsed;
 	}
 };
+

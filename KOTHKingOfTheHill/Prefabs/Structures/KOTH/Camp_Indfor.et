@@ -190,16 +190,16 @@ GenericEntity : "{FA9066DE33E8E67D}Prefabs/Structures/Military/Camps/Canvas_Cove
   GenericEntity : "{85FA88E33837DC43}Prefabs/Structures/Military/Flags/FlagPole_02/FlagPole_02_Blufor.et" {
    ID "5E1EFBF821988761"
    components {
-    SlotManagerComponent "{55DAE04E55ECE7FA}" {
-     Slots {
-      EntitySlotInfo Flag {
-       Prefab "{AC8F5AFDF613616F}Prefabs/Props/Fabric/Flags/Flag_1_Indfor.et"
-      }
-     }
+    KOTH_FlagComponent "{5E26BEC02E9DFD68}" {
     }
     Hierarchy "{5E26BEC0AC7A18A3}" {
     }
-    KOTH_FlagComponent "{5E26BEC02E9DFD68}" {
+    SlotManagerComponent "{55DAE04E55ECE7FA}" {
+     Slots {
+      EntitySlotInfo Flag {
+       Prefab ""
+      }
+     }
     }
    }
    coords 3.279 2.54 4.383
