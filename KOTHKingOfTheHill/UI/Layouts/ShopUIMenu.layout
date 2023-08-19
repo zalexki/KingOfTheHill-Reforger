@@ -1,0 +1,159 @@
+FrameWidgetClass {
+ Name "rootFrame"
+ {
+  OverlayWidgetClass "{5E1D46E28D610F69}" {
+   Name "Overlay"
+   Slot FrameWidgetSlot "{5C982A39D1EEDAA5}" {
+    Anchor 0.5 0.5 0.5 0.5
+    PositionX -960
+    OffsetLeft -960
+    PositionY -540
+    OffsetTop -540
+    SizeX 1920
+    OffsetRight -960
+    SizeY 1080
+    OffsetBottom -540
+   }
+   {
+    ImageWidgetClass "{5E27578BC3703C8A}" {
+     Name "BackgroundGlobal"
+     Slot OverlayWidgetSlot "{5E27578BC3703CE9}" {
+      HorizontalAlign 3
+      VerticalAlign 3
+      Padding 300 85 340 94
+     }
+     Opacity 0.6
+     Color 0 0 0 1
+    }
+    ImageWidgetClass "{5E275C78C5EBAEE1}" {
+     Name "BackgroundNameContainer"
+     Slot OverlayWidgetSlot "{5E27578BC3703CE9}" {
+      HorizontalAlign 3
+      VerticalAlign 3
+      Padding 300 42 340 1003
+     }
+     Color 0.761 0.384 0.078 1
+    }
+    HorizontalLayoutWidgetClass "{5E275C7915008832}" {
+     Name "HorizontalLayout0"
+     Slot OverlayWidgetSlot "{5E275C791500886D}" {
+      HorizontalAlign 3
+      VerticalAlign 3
+      Padding 0 0 0 0
+     }
+     {
+      TextWidgetClass "{5E275C791D1F6F14}" {
+       Name "NameContainer"
+       Slot LayoutSlot "{5E275C791D1F6F4C}" {
+        Padding 308 45 0 0
+       }
+       Text "GUN SHOP"
+       "Font Size" 30
+       FontProperties FontProperties "{5E275C7921367BBC}" {
+        Font "{3E7733BAC8C831F6}UI/Fonts/RobotoCondensed/RobotoCondensed_Regular.fnt"
+        Bold 1
+        ShadowSize 16
+        ShadowOffset 3 3
+        ShadowOpacity 0.5
+       }
+      }
+     }
+    }
+    VerticalLayoutWidgetClass "{5E1D46E28D610F66}" {
+     Name "VerticalLayout0"
+     Slot OverlayWidgetSlot "{5CA449954168F9F4}" {
+      HorizontalAlign 3
+      VerticalAlign 3
+      Padding 0 50 0 0
+     }
+     {
+      HorizontalLayoutWidgetClass "{5E1D46E28D610F7D}" {
+       Name "HorizontalLayout0"
+       Slot LayoutSlot "{5CA449954F8BCED3}" {
+        SizeMode Fill
+       }
+       {
+        HorizontalLayoutWidgetClass "{5E1D46E28D610F7A}" {
+         Name "Container"
+         Slot LayoutSlot "{5CA63B7A7A6AE2CC}" {
+          SizeMode Fill
+         }
+         {
+          VerticalLayoutWidgetClass "{5E1D46E28D610F48}" {
+           Name "Content"
+           Slot LayoutSlot "{5C982A399BDC9FE0}" {
+            Padding 10 50 50 50
+            SizeMode Fill
+            FillWeight 3
+           }
+           {
+            ScrollLayoutWidgetClass "{5E1D46E28D610F59}" {
+             Name "Scroll"
+             Slot LayoutSlot "{5C982A39B86FEA48}" {
+              Padding 300 0 300 0
+              SizeMode Fill
+             }
+             Color 0.761 0.384 0.078 1
+             style Small
+             {
+              VerticalLayoutWidgetClass "{5E1D46E28D610F57}" {
+               Name "ContentContainer"
+               Slot AlignableSlot "{5C982A3820F3F1D9}" {
+                HorizontalAlign 3
+                VerticalAlign 3
+                Padding 10 1 10 0
+               }
+              }
+             }
+            }
+            ButtonWidgetClass "{5E22B9EBC364C921}" : "{0114A06AD44D49BD}UI/layouts/WidgetLibrary/Buttons/DialogButtonCancel.layout" {
+             Name "Cancel"
+             Slot LayoutSlot "{5CC2F7A314C9440B}" {
+              HorizontalAlign 0
+              Padding 300 0 0 0
+             }
+             components {
+              SCR_NavigationButtonComponent "{5474BAC5DBCF129A}" {
+              }
+             }
+             {
+              SizeLayoutWidgetClass "{5562AD435529FB36}" {
+               Prefab "{5562AD435529FB36}"
+               Slot ButtonWidgetSlot "{5562AD435529FB5D}" {
+                Padding 300 15 0 0
+               }
+               {
+                OverlayWidgetClass "{000000005E70868E}" {
+                 Prefab "{000000005E70868E}"
+                 {
+                  HorizontalLayoutWidgetClass "{00000000E3602307}" {
+                   Prefab "{00000000E3602307}"
+                   {
+                    RichTextWidgetClass "{00000000B0FD85CE}" {
+                     Prefab "{00000000B0FD85CE}"
+                     "Font Size" 30
+                    }
+                    RichTextWidgetClass "{00000000DB061E92}" {
+                     Prefab "{00000000DB061E92}"
+                     "Font Size" 30
+                    }
+                   }
+                  }
+                 }
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

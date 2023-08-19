@@ -100,6 +100,27 @@ class KOTH_HUD : SCR_InfoDisplay
 		compFade.DelayedFadeOut(2000, true);
 	}
 	
+	void NotifBuy(int amount)
+	{
+		Widget root = GetRootWidget();
+		VerticalLayoutWidget koth_scrollList = VerticalLayoutWidget.Cast(root.FindWidget("OverlayRoot.VerticalLayoutRoot.ScrollList.NotifContainer"));
+		
+		Widget w = GetGame().GetWorkspace().CreateWidgets("{74686613FDE00759}UI/Layouts/HUD/KingOfTheHill/KOTH_Notification.layout", koth_scrollList);
+		
+		TextWidget TextNotif = TextWidget.Cast(w.FindAnyWidget("TextNotif"));
+		TextNotif.SetText("Baguette tax ");
+		
+		TextWidget XpNotif = TextWidget.Cast(w.FindAnyWidget("XpNotif"));
+		XpNotif.SetText(" ‎prout ");
+		
+		TextWidget MoneyNotif = TextWidget.Cast(w.FindAnyWidget("MoneyNotif"));
+		MoneyNotif.SetText(" — "+amount+" $");
+		MoneyNotif.SetColor(Color.Red);
+		
+		SCR_FadeUIComponent compFade = SCR_FadeUIComponent.Cast(w.FindHandler(SCR_FadeUIComponent));
+		compFade.DelayedFadeOut(5000, true);
+	}
+	
 	void NotifCapture()
 	{
 		Widget root = GetRootWidget();
