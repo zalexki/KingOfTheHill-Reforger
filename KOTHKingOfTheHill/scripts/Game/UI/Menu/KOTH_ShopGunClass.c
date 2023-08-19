@@ -1,6 +1,7 @@
-class KOTH_ShopGunClass : ChimeraMenuBase {
-
+class KOTH_ShopGunClass : ChimeraMenuBase 
+{
 	protected Widget m_wRoot;  
+	protected SCR_PlayerController m_playerController;
 	
 	override void OnMenuOpen()
 	{
@@ -32,16 +33,16 @@ class KOTH_ShopGunClass : ChimeraMenuBase {
 	{
 		PlayerManager playerManager = GetGame().GetPlayerManager();
 		PlayerController controller = GetGame().GetPlayerController();
-
+		int playerId = controller.GetPlayerId();
 		string playerName = playerManager.GetPlayerName(playerId);
 
-		
-		SCR_BaseGameMode gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
-		KOTH_ScoringGameModeComponent m_scoreComp = KOTH_ScoringGameModeComponent.Cast(gameMode.FindComponent(KOTH_ScoringGameModeComponent));
-		
-		int amount = 3;
-		m_scoreComp.DoRpcBuy(amount, playerName);
+		IEntity cont = controller.GetControlledEntity();
+		Print(cont);
+		KOTH_SCR_PlayerProfileComponent kothPlayerComp = KOTH_SCR_PlayerProfileComponent.Cast(controller.FindComponent(KOTH_SCR_PlayerProfileComponent));
+		Print(kothPlayerComp);
 
+		int amount = 3;
+		kothPlayerComp.DoAskRpcBuy(amount, playerName);
 		
 		HUD_NotifBuy(amount);
 	}
@@ -55,7 +56,6 @@ class KOTH_ShopGunClass : ChimeraMenuBase {
 				kothHud.NotifBuy(amount);
 			}
 		}
-
 	}
 	
 	protected void OnClickEscape() 

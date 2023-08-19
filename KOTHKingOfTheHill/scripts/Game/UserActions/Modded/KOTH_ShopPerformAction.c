@@ -1,5 +1,6 @@
 // Script File
-modded enum ChimeraMenuPreset {
+modded enum ChimeraMenuPreset 
+{
     	KOTH_ShopGun
 };
 

@@ -1,8 +1,5 @@
 [ComponentEditorProps(category: "GameScripted/KOTH", description: "map markers")]
-class KOTH_SCR_MapDescriptorComponentClass : SCR_MapDescriptorComponentClass
-{
-};
-
+class KOTH_SCR_MapDescriptorComponentClass : SCR_MapDescriptorComponentClass{};
 class KOTH_SCR_MapDescriptorComponent : SCR_MapDescriptorComponent
 {
 	protected MapItem m_item;

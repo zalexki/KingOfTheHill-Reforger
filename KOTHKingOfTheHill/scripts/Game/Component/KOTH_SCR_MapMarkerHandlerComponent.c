@@ -1,8 +1,5 @@
 [EntityEditorProps(category: "GameScripted/Koth", description: "Handles Map Markers.")]
-class KOTH_SCR_MapMarkerHandlerComponentClass: ScriptComponentClass
-{
-};
-
+class KOTH_SCR_MapMarkerHandlerComponentClass: ScriptComponentClass{};
 class KOTH_SCR_MapMarkerHandlerComponent : ScriptComponent
 {
 	protected SCR_PlayerController m_playerController;
@@ -25,6 +22,9 @@ class KOTH_SCR_MapMarkerHandlerComponent : ScriptComponent
 
 	override void EOnInit(IEntity owner)
 	{
+		if (SCR_Global.IsEditMode(owner)) 
+			return;
+		
 		m_playerController = SCR_PlayerController.Cast(PlayerController.Cast(owner));
 		
 		if (!m_playerController)
