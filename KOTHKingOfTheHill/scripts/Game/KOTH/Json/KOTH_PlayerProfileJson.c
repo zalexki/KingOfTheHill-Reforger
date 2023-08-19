@@ -1,6 +1,8 @@
 class KOTH_PlayerProfileJson : JsonApiStruct
 {
     string m_name;
+    int m_kills = 0;
+    int m_friendlyKills = 0;
     int m_money = 0;
 	int m_level = 1;
 	int m_xp = 0;
@@ -11,6 +13,8 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 		RegV("m_money");
 		RegV("m_level");
 		RegV("m_xp");
+		RegV("m_kills");
+		RegV("m_friendlyKills");
 	}
 	
 	void AddInZoneXpAndMoney()
@@ -23,12 +27,14 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 	{
 		AddXp(100);
 		AddMoney(100);
+		m_kills++;
 	}
 	
 	void RemoveFriendlyKillXpAndMoney()
 	{
 		m_money = m_money - 300;
 		m_xp = m_xp - 300;
+		m_friendlyKills++;
 	}
 	
 	int GetMoney()

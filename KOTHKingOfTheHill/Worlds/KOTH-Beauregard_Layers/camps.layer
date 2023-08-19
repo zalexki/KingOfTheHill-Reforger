@@ -1,12 +1,27 @@
 GenericEntity KOTH_FirstSpawn : "{0D777787DAAD3541}Prefabs/Structures/KOTH/Camp_Blufor.et" {
- coords 3550.51 45.661 2642.551
+ coords 3550.51 45.662 2642.551
  angleY -75
+ {
+  SCR_SpawnPoint {
+   ID "5E1F523DAA68A671"
+  }
+ }
 }
 GenericEntity KOTH_SecondSpawn : "{108B69D9D8DDE8B0}Prefabs/Structures/KOTH/Camp_Opfor.et" {
  coords 2934.887 57.344 2231.423
  angleY -87.644
+ {
+  SCR_SpawnPoint {
+   ID "5E1F523DF4404F54"
+  }
+ }
 }
 GenericEntity KOTH_ThirdSpawn : "{900D62CF65FB7496}Prefabs/Structures/KOTH/Camp_Indfor.et" {
  coords 2830.461 37.191 3189.837
  angleY -180
+ {
+  SCR_SpawnPoint {
+   ID "5E1F523DC7E00B89"
+  }
+ }
 }

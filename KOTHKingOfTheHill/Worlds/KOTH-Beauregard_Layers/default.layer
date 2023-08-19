@@ -80,6 +80,3 @@ GenericEntity Tower {
   }
  }
 }
-GenericEntity : "{A73205DEA8361F26}Prefabs/Systems/AmbientPatrol/AmbientPatrolSpawnpoint_USSR.et" {
- coords 2932.473 55.527 2220.453
-}
