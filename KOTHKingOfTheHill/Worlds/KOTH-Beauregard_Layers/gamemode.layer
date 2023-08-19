@@ -1,10 +1,13 @@
 SCR_BaseGameMode KOTH_GameMode1 : "{E5118D0809DD3CDF}Prefabs/MP/Modes/KOTH_GameMode.et" {
  coords 3113.879 16 2724.923
  {
-  SCR_MapEntity {
+  SCR_MapEntity "5E272AA8B2A30052" {
    ID "5E1ED724B33BC815"
    "Map Geometry Data" "{0DD089CCD442399A}worlds/Arland/Arland.topo"
    "Satellite background image" "{F98F3D2CBA523091}UI/Textures/Map/worlds/Arland/ArlandRasterized.edds"
+  }
+  ItemPreviewManagerEntity ItemPreviewManager {
+   ID "5E1F0BA227A3D04A"
   }
  }
 }

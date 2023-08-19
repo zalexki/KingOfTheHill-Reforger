@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{9795C9A322B4D7FE}UI/Layouts/HUD/Shop/ItemListPERMUILayout.layout"
+ Configurations {
+  LayoutResourceClass PC {
+  }
+  LayoutResourceClass XBOX_ONE : PC {
+  }
+  LayoutResourceClass XBOX_SERIES : PC {
+  }
+  LayoutResourceClass PS4 : PC {
+  }
+  LayoutResourceClass HEADLESS : PC {
+  }
+ }
+}

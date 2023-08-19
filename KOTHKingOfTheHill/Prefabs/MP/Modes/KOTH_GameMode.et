@@ -1537,7 +1537,7 @@ SCR_BaseGameMode {
    Streamable Disabled
   }
  }
- coords 7071.133 118.908 6029.669
+ coords 3113.879 16 2724.923
  Flags 0
  m_bAllowFactionChange 0
  {
@@ -1680,7 +1680,7 @@ SCR_BaseGameMode {
     }
    }
   }
-  ItemPreviewManagerEntity "5E1F591715EDC19F" : "{9F18C476AB860F3B}Prefabs/World/Game/ItemPreviewManager.et" {
+  ItemPreviewManagerEntity "ItemPreviewManager" : "{9F18C476AB860F3B}Prefabs/World/Game/ItemPreviewManager.et" {
    ID "5E1F0BA227A3D04A"
    coords -1364.373 -39.01 -2218.007
   }
