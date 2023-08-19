@@ -45,6 +45,25 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		
 		SavePlayersProfile();
 	}
+
+	void DoRpcBuy(int amount, string playerName)
+	{
+		Rpc(BuyStuff, amount, playerName);
+	}
+	
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	void BuyStuff(int amount, string playerName)
+	{
+		foreach (int index, KOTH_PlayerProfileJson savedProfile : m_listPlayerProfiles) 
+		{
+			if (savedProfile.m_name == playerName) {
+				savedProfile.BuyStuff(amount);
+				m_listPlayerProfiles.Set(index, savedProfile);
+			}	
+		}
+		
+		Replication.BumpMe();
+	}
 	
 	override bool HandlePlayerKilled(int playerId, IEntity player, IEntity killer)
 	{

@@ -153,6 +153,25 @@ FrameWidgetClass {
                            Prefab "{5E1D46E396412EF1}"
                            Slot LayoutSlot "{5C982A3ED9633687}" {
                            }
+                           {
+                            HorizontalLayoutWidgetClass "{5E1D46E3F35C971B}" {
+                             Prefab "{5E1D46E3F35C971B}"
+                             {
+                              OverlayWidgetClass "{5E1D46E396412ED9}" {
+                               Prefab "{5E1D46E396412ED9}"
+                               {
+                                ButtonWidgetClass "{5E1D46E396412ED5}" {
+                                 Prefab "{5E1D46E396412ED5}"
+                                 components {
+                                  SCR_NavigationButtonComponent "{5E26F81F466601F5}" {
+                                  }
+                                 }
+                                }
+                               }
+                              }
+                             }
+                            }
+                           }
                           }
                          }
                         }
