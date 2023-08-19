@@ -9,7 +9,6 @@ modded class SCR_BaseGameMode
 	{
 		GetGame().RequestClose();
 	}
-
 	void CheckGameEnd()
 	{
 		if (!Replication.IsServer())
