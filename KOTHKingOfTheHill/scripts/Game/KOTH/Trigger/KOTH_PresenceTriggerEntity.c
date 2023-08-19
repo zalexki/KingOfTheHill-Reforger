@@ -46,7 +46,6 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
 	void NotifCapture(int killerId)
 	{
-		Log("---------------- NotifCapture from rpc call");
 		if (GetGame().GetPlayerController().GetPlayerId() != killerId)
 			return;
 		
@@ -83,6 +82,7 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 				if (controllerComp.IsDead() || controllerComp.IsUnconscious())
 					continue;
 
+				// show notif for players inside zone
 				int playerId = playerManager.GetPlayerIdFromControlledEntity(entity);
 				if (GetGame().GetPlayerController().GetPlayerId() == playerId)
 				{
@@ -95,11 +95,10 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 					}
 				}
 				
+				// add xp/money to players server side
 				if (Replication.IsServer()) {
 					string playerName = playerManager.GetPlayerName(playerId);
 					bool playerIsInList = false;
-//					Log("---------------- DO NotifCapture");
-//					Rpc(NotifCapture, playerId);
 					
 					foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.m_listPlayerProfiles) 
 					{
@@ -159,7 +158,8 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 			// send new stats to clients
 			if (Replication.IsServer())
 				m_scoreComp.BumpMe();
-					
+			
+			// update zone marker
 			if (true == isZoneContested) 
 				m_mapDescriptor.ChangeMarker("contested");
 

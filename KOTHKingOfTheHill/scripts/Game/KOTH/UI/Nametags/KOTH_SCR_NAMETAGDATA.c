@@ -8,7 +8,6 @@ modded enum ENameTagEntityState
 
 modded class SCR_NameTagData
 {
-
 	override protected void InitData(SCR_NameTagConfig config)
 	{
 		super.InitData(config);
