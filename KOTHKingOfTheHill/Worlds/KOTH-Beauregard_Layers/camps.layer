@@ -2,8 +2,22 @@ GenericEntity KOTH_FirstSpawn : "{0D777787DAAD3541}Prefabs/Structures/KOTH/Camp_
  coords 3550.51 45.662 2642.551
  angleY -75
  {
-  SCR_SpawnPoint {
-   ID "5E1F523DAA68A671"
+  GenericEntity {
+   ID "5E1EFBF8517E6665"
+   components {
+    ActionsManagerComponent "{5E1918326AE57A59}" {
+     additionalActions {
+      KOTH_ShopPerformAction "{5E26EC8011E9E185}" {
+       ParentContextList {
+        "Default"
+       }
+       UIInfo UIInfo "{5E26EC801D14FC8D}" {
+        Name "Open Gun Shop"
+       }
+      }
+     }
+    }
+   }
   }
  }
 }

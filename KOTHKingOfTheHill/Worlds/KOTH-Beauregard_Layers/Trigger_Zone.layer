@@ -3,10 +3,6 @@ GenericEntity : "{6F1B7BFE78ECAE16}Prefabs/Structures/KOTH/TowerV1.et" {
  angleY 127.654
 }
 KOTH_PresenceTriggerEntity : "{F9467A5734030343}Prefabs/MP/Triggers/KOTH_zoneTrigger.et" {
- components {
-  KOTH_SCR_MapDescriptorComponent "{5E215A871DEFCADF}" {
-  }
- }
  coords 3104.1 15.95 2750.64
  angleX -1.79
  angleZ -0.895

@@ -1,7 +1,7 @@
 KOTH_PresenceTriggerEntity {
  ID "5E0F4336F4301C65"
  components {
-  KOTH_SCR_MapMarkerHandlerComponent "{5E2562C453F885D4}" {
+  KOTH_SCR_MapDescriptorComponent "{5E26055BA92018F0}" {
   }
  }
  coords 2739.489 77.516 1665.764
