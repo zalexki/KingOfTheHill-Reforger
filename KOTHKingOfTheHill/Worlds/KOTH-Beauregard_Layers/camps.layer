@@ -8,7 +8,7 @@ GenericEntity KOTH_FirstSpawn : "{0D777787DAAD3541}Prefabs/Structures/KOTH/Camp_
     ActionsManagerComponent "{5E1918326AE57A59}" {
      ActionContexts {
       UserActionContext "{5E191831955126FB}" {
-       Radius 1
+       Radius 2
       }
      }
      additionalActions {

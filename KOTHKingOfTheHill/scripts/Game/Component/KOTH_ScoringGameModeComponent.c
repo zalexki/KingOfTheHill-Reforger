@@ -46,20 +46,18 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		SavePlayersProfile();
 	}
 
-	void DoRpcBuy(int amount, string playerName)
-	{
-		Rpc(BuyStuff, amount, playerName);
-	}
-	
-	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
 	void BuyStuff(int amount, string playerName)
 	{
+		Log("----------- BuyStuff from rpc call");
+		if (!Replication.IsServer())
+			return;
+		
 		foreach (int index, KOTH_PlayerProfileJson savedProfile : m_listPlayerProfiles) 
 		{
 			if (savedProfile.m_name == playerName) {
 				savedProfile.BuyStuff(amount);
 				m_listPlayerProfiles.Set(index, savedProfile);
-			}	
+			}
 		}
 		
 		Replication.BumpMe();
@@ -91,7 +89,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 				}	
 			}
 			
-			Rpc(NotifFriendlyKill, killerId);
+			Rpc(RpcDo_NotifFriendlyKill, killerId);
 			
 			if (!playerIsInList) {
 				KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
@@ -112,7 +110,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 				}
 			}
 			
-			Rpc(NotifEnemyKill, killerId);
+			Rpc(RpcDo_NotifEnemyKill, killerId);
 			
 			if (!playerIsInList) {
 				KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
@@ -126,8 +124,8 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		return true;
 	}
 	
-	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
-	void NotifEnemyKill(int killerId)
+	[RplRpc(RplChannel.Unreliable, RplRcver.Broadcast)]
+	void RpcDo_NotifEnemyKill(int killerId)
 	{
 		if (GetGame().GetPlayerController().GetPlayerId() != killerId)
 			return;
@@ -141,8 +139,8 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		}
 	}
 	
-	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
-	void NotifFriendlyKill(int killerId)
+	[RplRpc(RplChannel.Unreliable, RplRcver.Broadcast)]
+	void RpcDo_NotifFriendlyKill(int killerId)
 	{
 		if (GetGame().GetPlayerController().GetPlayerId() != killerId)
 			return;
