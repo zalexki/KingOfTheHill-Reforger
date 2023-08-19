@@ -129,13 +129,59 @@ FrameWidgetClass {
                   HorizontalLayoutWidgetClass "{00000000E3602307}" {
                    Prefab "{00000000E3602307}"
                    {
-                    RichTextWidgetClass "{00000000B0FD85CE}" {
-                     Prefab "{00000000B0FD85CE}"
-                     "Font Size" 30
-                    }
-                    RichTextWidgetClass "{00000000DB061E92}" {
-                     Prefab "{00000000DB061E92}"
-                     "Font Size" 30
+                    HorizontalLayoutWidgetClass "{5E1D46E396412EF8}" {
+                     Prefab "{5E1D46E396412EF8}"
+                     {
+                      OverlayWidgetClass "{5E1D46E396412EF6}" {
+                       Prefab "{5E1D46E396412EF6}"
+                       Slot LayoutSlot "{5C982A3F129726D2}" {
+                       }
+                       {
+                        ImageWidgetClass "{5E1D46E396412EF7}" {
+                         Prefab "{5E1D46E396412EF7}"
+                         Slot OverlayWidgetSlot "{5C982A3373E4C91A}" {
+                          Padding 0 0 0 0
+                         }
+                         Color 0.075 0.075 0.075 0.498
+                        }
+                        HorizontalLayoutWidgetClass "{5E1D46E396412EF5}" {
+                         Prefab "{5E1D46E396412EF5}"
+                         {
+                          ItemPreviewWidgetClass "{5E1D46E396412EF3}" {
+                           Prefab "{5E1D46E396412EF3}"
+                           Slot LayoutSlot "{5C982A19141049F3}" {
+                            Padding 0 0 0 0
+                           }
+                          }
+                          VerticalLayoutWidgetClass "{5E1D46E396412EF1}" {
+                           Prefab "{5E1D46E396412EF1}"
+                           Slot LayoutSlot "{5C982A3ED9633687}" {
+                           }
+                           {
+                            HorizontalLayoutWidgetClass "{5E1D46E3F35C971B}" {
+                             Prefab "{5E1D46E3F35C971B}"
+                             {
+                              OverlayWidgetClass "{5E1D46E396412ED9}" {
+                               Prefab "{5E1D46E396412ED9}"
+                               {
+                                ButtonWidgetClass "{5E1D46E396412ED5}" {
+                                 Prefab "{5E1D46E396412ED5}"
+                                 components {
+                                  SCR_NavigationButtonComponent "{5E26F81F466601F5}" {
+                                  }
+                                 }
+                                }
+                               }
+                              }
+                             }
+                            }
+                           }
+                          }
+                         }
+                        }
+                       }
+                      }
+                     }
                     }
                    }
                   }
