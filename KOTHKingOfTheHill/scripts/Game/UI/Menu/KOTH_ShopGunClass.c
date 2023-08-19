@@ -13,13 +13,16 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 		{
 			cancel.m_OnActivated.Insert(OnClickEscape);
 		}
+
+		VerticalLayoutWidget contentContainer = VerticalLayoutWidget.Cast(m_wRoot.FindAnyWidget("ContentContainer"));
+		Widget w = GetGame().GetWorkspace().CreateWidgets("{20EF71DE68A5887E}UI/Layouts/HUD/Shop/ItemListUILayout.layout", contentContainer);
 		
 		SCR_ButtonBaseComponent buy = SCR_ButtonBaseComponent.GetButtonBase("PurchaseOnceButton", m_wRoot);
 		if (buy)
 		{
 			buy.m_OnClicked.Insert(OnClickBuy);
-		}	
-	
+		}
+		
 		ItemPreviewManagerEntity m_PreviewManager = GetGame().GetItemPreviewManager();
 		
 		ItemPreviewWidget wRenderTarget = ItemPreviewWidget.Cast(m_wRoot.FindAnyWidget("Preview_Image"));

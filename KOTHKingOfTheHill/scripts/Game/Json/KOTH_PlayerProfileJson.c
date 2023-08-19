@@ -35,11 +35,6 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 	 	m_money = m_money - amount;
 	}
 	
-	void BuyStuff(int amount)
-	{
-	 	m_money = m_money - amount;
-	}
-	
 	void RemoveFriendlyKillXpAndMoney()
 	{
 		m_money = m_money - 300;

@@ -111,7 +111,7 @@ class KOTH_HUD : SCR_InfoDisplay
 		TextNotif.SetText("Baguette tax ");
 		
 		TextWidget XpNotif = TextWidget.Cast(w.FindAnyWidget("XpNotif"));
-		XpNotif.SetText(" ‎prout ");
+		XpNotif.SetVisible(false);
 		
 		TextWidget MoneyNotif = TextWidget.Cast(w.FindAnyWidget("MoneyNotif"));
 		MoneyNotif.SetText(" — "+amount+" $");
