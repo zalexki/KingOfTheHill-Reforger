@@ -75,9 +75,27 @@ modded class SCR_BaseGameMode
 		slotInfo.AttachEntity(flagEntity);
 	}
 	
+	void prout()
+	{
+		IEntity vehicleSpawnOne = GetGame().GetWorld().FindEntityByName("vehicleSpawnOne");
+		SCR_AmbientVehicleSpawnPointComponent compSec = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnOne.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
+		compSec.SpawnVehicle();
+		
+		IEntity vehicleSpawnTwo = GetGame().GetWorld().FindEntityByName("vehicleSpawnTwo");
+		SCR_AmbientVehicleSpawnPointComponent compSecTwo = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnTwo.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
+		compSecTwo.SpawnVehicle();
+		
+		IEntity vehicleSpawnThree = GetGame().GetWorld().FindEntityByName("vehicleSpawnThree");
+		SCR_AmbientVehicleSpawnPointComponent compSecThree = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnThree.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
+		compSecThree.SpawnVehicle();
+	}
+	
 	// called only server side 
 	override void StartGameMode()
 	{
+		prout();
+		GetGame().GetCallqueue().CallLater(prout, 10000, true);
+		
 		IEntity firstSpawn = GetGame().GetWorld().FindEntityByName("KOTH_FirstSpawn");
 		IEntity spawnPointFirst = FindSpawnPoint(firstSpawn);
 		IEntity firstFlag = FindFlag(firstSpawn);

@@ -6,6 +6,17 @@ GenericEntity KOTH_SecondSpawn : "{108B69D9D8DDE8B0}Prefabs/Structures/KOTH/Camp
  coords 6732.346 105.034 5804.55
  angleY -162.401
 }
+$grp GenericEntity : "{67EE7343073E3AF4}Prefabs/Systems/AmbientVehicles/AmbientVehicleSpawnpoint_US.et" {
+ vehicleSpawnOne {
+  coords 7413.872 110.437 5688.459
+ }
+ vehicleSpawnTwo {
+  coords 6719.591 102.631 5791.51
+ }
+ vehicleSpawnThree {
+  coords 6913.601 113.695 6452.451
+ }
+}
 $grp GenericEntity : "{6F1B7BFE78ECAE16}Prefabs/Structures/KOTH/TowerV1.et" {
  {
   coords 7034.49 110.887 5910.219
