@@ -279,6 +279,7 @@ SizeLayoutWidgetClass {
                 VerticalAlign 3
                 Padding 2 2 2 2
                }
+               "Is Visible" 0
               }
               OverlayWidgetClass "{5E28034B9DA71B13}" {
                Name "PurchasePermHINT"
@@ -307,6 +308,43 @@ SizeLayoutWidgetClass {
                  Clipping False
                  "Inherit Color" 1
                  Text "OWNED"
+                 "Font Size" 25
+                 "Min Font Size" 25
+                 FontProperties FontProperties "{546AF489DFD25402}" {
+                  Font "{3E7733BAC8C831F6}UI/Fonts/RobotoCondensed/RobotoCondensed_Regular.fnt"
+                  ShadowSize 16
+                  ShadowOffset 3 3
+                  ShadowOpacity 0.3
+                 }
+                }
+               }
+              }
+              OverlayWidgetClass "{5E28DC073BDF63C3}" {
+               Name "DesactivatePermHINT"
+               Slot OverlayWidgetSlot "{5E2803422E4EEF65}" {
+                HorizontalAlign 3
+                VerticalAlign 3
+               }
+               Color 1 1 1 1
+               {
+                ImageWidgetClass "{5E28DC073BDF63C0}" {
+                 Name "Background"
+                 Slot OverlayWidgetSlot "{5452C531C2876D22}" {
+                  HorizontalAlign 3
+                  VerticalAlign 3
+                  Padding 0 0 0 0
+                 }
+                 Color 0.502 0 0.016 0.745
+                 "Shadow Color" 0 0 0 1
+                }
+                TextWidgetClass "{5E28DC073BDF63DC}" : "{A6E079574AACF9A0}UI/layouts/WidgetLibrary/TextWidgets/Text_Interactive.layout" {
+                 Name "Content"
+                 Slot OverlayWidgetSlot "{547290FBCA5E9358}" {
+                  Padding 0 12 0 12
+                 }
+                 Clipping False
+                 "Inherit Color" 1
+                 Text "DISABLED"
                  "Font Size" 25
                  "Min Font Size" 25
                  FontProperties FontProperties "{546AF489DFD25402}" {

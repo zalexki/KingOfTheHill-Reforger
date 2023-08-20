@@ -11,16 +11,6 @@ GenericEntity KOTH_FirstSpawn : "{0D777787DAAD3541}Prefabs/Structures/KOTH/Camp_
        Radius 2
       }
      }
-     additionalActions {
-      KOTH_ShopPerformAction "{5E26EC8011E9E185}" {
-       ParentContextList {
-        "Default"
-       }
-       UIInfo UIInfo "{5E26EC801D14FC8D}" {
-        Name "Open Gun Shop"
-       }
-      }
-     }
     }
    }
   }

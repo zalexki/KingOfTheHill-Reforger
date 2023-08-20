@@ -3,7 +3,7 @@ SCR_SpawnPoint : "{4FEA25583D0975F7}Prefabs/MP/Spawning/SpawnPoint_USSR.et" {
  coords 0.09 0.253 -0.102
  angleY 90
  m_Info SCR_UIInfo "{56B4CC4ECACA2C37}" {
-  Name "OPFOR Spawn"
+  Name "Spawn Base"
   Icon "{095A44DAFA378980}Art/OPFOR_Flag.edds"
  }
 }

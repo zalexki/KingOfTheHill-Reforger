@@ -20,7 +20,7 @@ class KOTH_SCR_MapDescriptorComponent : SCR_MapDescriptorComponent
 		MapDescriptorProps props = m_item.GetProps();
 		props.SetDetail(96);
 		props.SetIconSize(256, 1, 1);
-		props.SetFrontColor(Color.Gray25);
+		props.SetFrontColor(Color.Gray75);
 		props.SetTextVisible(false);
 		props.SetIconVisible(true);
 		props.Activate(true);
@@ -35,7 +35,7 @@ class KOTH_SCR_MapDescriptorComponent : SCR_MapDescriptorComponent
         Color color;
         switch (factionName)
         {
-            case "none": color = color.Gray25; break;
+            case "none": color = color.Gray75; break;
             case "contested": color = color.Violet; break;
             case "OPFOR": color = color.DarkRed; break;
             case "BLUFOR": color = color.DarkBlue; break;
