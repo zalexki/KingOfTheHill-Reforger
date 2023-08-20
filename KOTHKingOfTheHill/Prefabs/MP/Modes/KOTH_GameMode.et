@@ -1481,34 +1481,6 @@ SCR_BaseGameMode {
      m_KickReason KICK_VOTED
      m_bFactionSpecific 1
     }
-    SCR_VotingLightBan "{5E1F0BA23AC56B57}" {
-     m_Type LIGHTBAN
-     m_bIsValuePlayerID 1
-     m_fThreshold 0.3
-     m_iMinParticipation 0.3
-     m_Info SCR_VotingUIInfo "{5E1F0BA23AC56B55}" {
-      Name "#AR-Voting_LIGHTBAN_AddVoteName"
-      m_sStartVotingName "#AR-Voting_LIGHTBAN_StartVotingName"
-      m_sCancelVotingName "#AR-Voting_LIGHTBAN_CancelVotingName"
-      m_sStickyNotificationText "#AR-Notification_Sticky_VoteLightBanPlayer"
-     }
-     m_KickReason TEMP_BAN
-     m_bFactionSpecific 1
-    }
-    SCR_VotingHeavyBan "{5E1F0BA23AC56B45}" {
-     m_Type HEAVYBAN
-     m_bIsValuePlayerID 1
-     m_fThreshold 0.3
-     m_iMinParticipation 0.3
-     m_Info SCR_VotingUIInfo "{5E1F0BA23AC56B42}" {
-      Name "#AR-Voting_HEAVYBAN_AddVoteName"
-      m_sStartVotingName "#AR-Voting_HEAVYBAN_StartVotingName"
-      m_sCancelVotingName "#AR-Voting_HEAVYBAN_CancelVotingName"
-      m_sStickyNotificationText "#AR-Notification_Sticky_VoteHeavyBanPlayer"
-     }
-     m_KickReason BAN
-     m_bFactionSpecific 1
-    }
    }
   }
   SCR_WelcomeScreenComponent "{5E1F0BA23AC56B36}" {
@@ -1539,7 +1511,7 @@ SCR_BaseGameMode {
  }
  coords 3113.879 16 2724.923
  Flags 0
- m_bAllowFactionChange 0
+ m_bAllowFactionChange 1
  {
   SCR_MapEntity "5E1F591715EDC4E3" : "{731564B66F91B107}Prefabs/World/Game/MapEntity.et" {
    ID "5E1ED724B33BC815"
@@ -1587,6 +1559,7 @@ SCR_BaseGameMode {
      m_FactionFlagMaterial "{D66CFD74585F60E4}Assets/Props/Fabric/Flags/Data/Flag_1_INDFOR.emat"
     }
    }
+   m_bCanChangeFactionsPlayable 1
   }
   RadioManagerEntity : "{B8E09FAB91C4ECCD}Prefabs/Radio/RadioManager.et" {
    ID "5E1F0BA227A27EC4"

@@ -2,8 +2,6 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 {
 	protected Widget m_wRoot;  
 	protected SCR_PlayerController m_playerController;
-	protected ButtonWidget m_PurchaseOnceButton;
-	protected OverlayWidget m_PurchaseOnceHINT;
 	protected ItemPreviewManagerEntity m_PreviewManager;
 	
 	override void OnMenuInit()
@@ -34,7 +32,7 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 		foreach (KOTH_SCR_ShopGunItem item : itemList.GetItems())
 		{
 			Log("add item to shop " + item.m_itemName);
-			Widget newRow = GetGame().GetWorkspace().CreateWidgets("{20EF71DE68A5887E}UI/Layouts/HUD/Shop/ItemListUILayout.layout", contentContainer);
+			Widget newRow = GetGame().GetWorkspace().CreateWidgets("{20EF71DE68A5887E}UI/Layouts/HUD/Shop/ShopGun_ItemList.layout", contentContainer);
 			
 			// add click events
 			SCR_ButtonBaseComponent buyOnce = SCR_ButtonBaseComponent.GetButtonBase("PurchaseOnceButton", newRow);
@@ -42,9 +40,9 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 				buyOnce.m_OnClicked.Insert(OnClickBuyOnce);
 
 			
-			SCR_ButtonBaseComponent buyPermanent = SCR_ButtonBaseComponent.GetButtonBase("PurchasePermanentButton", newRow);
+			/*SCR_ButtonBaseComponent buyPermanent = SCR_ButtonBaseComponent.GetButtonBase("PurchasePermanentButton", newRow);
 			if (buyPermanent)
-				buyPermanent.m_OnClicked.Insert(OnClickBuyPermanent);
+				buyPermanent.m_OnClicked.Insert(OnClickBuyPermanent);*/
 
 			// set text infos
 			TextWidget nameWidget = TextWidget.Cast(newRow.FindAnyWidget("ItemName"));
@@ -53,6 +51,12 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 			priceOnceWidget.SetText(item.m_priceOnce.ToString());
 			TextWidget pricePermWidget = TextWidget.Cast(newRow.FindAnyWidget("PricePermText"));
 			pricePermWidget.SetText(item.m_pricePermanent.ToString());
+			
+			// set visible or not buy
+			ButtonWidget purchaseOnceButton = ButtonWidget.Cast(newRow.FindAnyWidget("PurchaseOnceButton"));
+			OverlayWidget purchaseOnceHINT = OverlayWidget.Cast(newRow.FindAnyWidget("PurchaseOnceHINT"));
+			purchaseOnceButton.SetVisible(true);
+			purchaseOnceHINT.SetVisible(false);
 			
 			// add item preview
 			ItemPreviewWidget wRenderTarget = ItemPreviewWidget.Cast(newRow.FindAnyWidget("Preview_Image"));
@@ -81,6 +85,12 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 		int amount = priceOnceWidget.GetText().ToInt();
 		kothPlayerComp.DoAskRpcBuy(amount, playerName);
 		
+		// set widget equiped visible
+		ButtonWidget purchaseOnceButton = ButtonWidget.Cast(row.FindAnyWidget("PurchaseOnceButton"));
+		OverlayWidget purchaseOnceHINT = OverlayWidget.Cast(row.FindAnyWidget("PurchaseOnceHINT"));
+		purchaseOnceButton.SetVisible(false);
+		purchaseOnceHINT.SetVisible(true);
+		
 		HUD_NotifBuy(amount);
 	}
 	
@@ -99,10 +109,6 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 		
 		int amount = priceOnceWidget.GetText().ToInt();
 		kothPlayerComp.DoAskRpcBuy(amount, playerName);
-		//------------------------------------------------------------------------------------------------
-		m_PurchaseOnceButton.SetVisible(false);
-		m_PurchaseOnceHINT.SetVisible(true);
-		//------------------------------------------------------------------------------------------------
 		HUD_NotifBuy(amount);
 	}
 

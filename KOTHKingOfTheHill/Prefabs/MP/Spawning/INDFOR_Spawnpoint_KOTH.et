@@ -4,7 +4,7 @@ SCR_SpawnPoint : "{5392C4D80E4B18F8}Prefabs/MP/Spawning/SpawnPoint_FFA.et" {
  angleY 90
  m_sFaction "FIA"
  m_Info SCR_UIInfo "{56B4CC4ECACA2C37}" {
-  Name "INDFOR Spawn"
+  Name "Spawn Base"
   Icon "{D9D8B9A41A6FD19F}Art/INDFOR_Flag.edds"
  }
 }

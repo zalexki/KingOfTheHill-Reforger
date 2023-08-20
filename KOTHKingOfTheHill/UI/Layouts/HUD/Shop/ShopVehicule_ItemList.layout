@@ -97,7 +97,7 @@ SizeLayoutWidgetClass {
               }
               OverlayWidgetClass "{5E2803416A5EA8EE}" {
                Name "PurcheseOnceHINT"
-               Slot OverlayWidgetSlot {
+               Slot OverlayWidgetSlot "{5E28DC07E340FD1C}" {
                 HorizontalAlign 3
                 VerticalAlign 3
                }
