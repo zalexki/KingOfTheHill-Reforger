@@ -197,7 +197,7 @@ SizeLayoutWidgetClass {
                Color 0 0 0 0.498
               }
               ButtonWidgetClass "{5E272AA5189C9DD3}" : "{DA0E2FDE98B85756}UI/Layouts/Deprecated/KOTH_BuyPermButton.layout" {
-               Name "PurchaseOnceButton0"
+               Name "PurchasePermanentButton"
                Slot OverlayWidgetSlot "{5E272AA5189C9C17}" {
                 HorizontalAlign 3
                 VerticalAlign 3

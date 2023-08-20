@@ -117,7 +117,6 @@ modded class SCR_BaseGameMode
 		KOTH_FlagComponent flag;
 		for (int i = 0; i < 100; i++) 
 		{
-			Log(i.ToString());
 			if (child) {
 				flag = KOTH_FlagComponent.Cast(child.FindComponent(KOTH_FlagComponent));
 				if (flag)
