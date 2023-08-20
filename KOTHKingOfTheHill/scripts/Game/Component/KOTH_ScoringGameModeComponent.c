@@ -14,7 +14,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
     int m_greenforPoints = 0;
 	
 	// TODO: rethink this ugly thing
-	[RplProp()]
+	//[RplProp()]
 	ref array<ref KOTH_PlayerProfileJson> m_listPlayerProfiles = new array<ref KOTH_PlayerProfileJson>();
 	
 	void AddBlueforPoint()

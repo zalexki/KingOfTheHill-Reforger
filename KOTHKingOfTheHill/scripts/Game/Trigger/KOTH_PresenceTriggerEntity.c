@@ -31,7 +31,7 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 		}
 		
 		
-		GetGame().GetCallqueue().CallLater(OnActivation, 10000, true);
+		GetGame().GetCallqueue().CallLater(OnPeriodicCall, 10000, true);
 	}
 	
 	protected void OnDeactivation(IEntity ent)
@@ -48,22 +48,7 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 		}
 	}
 	
-	[RplRpc(RplChannel.Unreliable, RplRcver.Broadcast)]
-	void NotifCapture(int killerId)
-	{
-		if (GetGame().GetPlayerController().GetPlayerId() != killerId)
-			return;
-		
-		SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
-		if (hudManager) {
-			KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
-			if (kothHud) {
-				kothHud.NotifCapture();
-			}
-		}
-	}
-	
-	protected void OnActivation()
+	protected void OnPeriodicCall()
 	{
 		if (!m_gameMode.IsRunning())
 			return;
@@ -103,6 +88,9 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 				if (Replication.IsServer()) {
 					string playerName = playerManager.GetPlayerName(playerId);
 					bool playerIsInList = false;
+				
+					SCR_PlayerController clientPlayerController = SCR_PlayerController.Cast(playerManager.GetPlayerController(playerId));
+					KOTH_SCR_PlayerProfileComponent kothPlayerComp = KOTH_SCR_PlayerProfileComponent.Cast(clientPlayerController.FindComponent(KOTH_SCR_PlayerProfileComponent));
 					
 					foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.m_listPlayerProfiles) 
 					{
@@ -110,6 +98,7 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 							savedProfile.AddInZoneXpAndMoney();
 							m_scoreComp.m_listPlayerProfiles.Set(index, savedProfile);
 							playerIsInList = true;
+							kothPlayerComp.Update(savedProfile.m_money, savedProfile.m_level, savedProfile.m_xp);
 						}
 					}
 					
@@ -118,6 +107,7 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 						profile.AddInZoneXpAndMoney();
 						profile.m_name = playerName;
 						m_scoreComp.m_listPlayerProfiles.Insert(profile);
+						kothPlayerComp.Update(profile.m_money, profile.m_level, profile.m_xp);
 					}
 				}
 
