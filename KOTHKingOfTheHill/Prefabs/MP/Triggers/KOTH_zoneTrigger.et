@@ -3,11 +3,17 @@ KOTH_PresenceTriggerEntity {
  components {
   KOTH_SCR_MapDescriptorComponent "{5E26055BA92018F0}" {
   }
+  Hierarchy "{5E290E09B2B8B581}" {
+  }
+  RplComponent "{5E290E09A8E5E26A}" {
+  }
  }
- coords 2739.489 77.516 1665.764
+ coords 3104.1 15.95 2750.64
+ angleX -1.79
+ angleZ -0.895
  TriggerShapeType Sphere
  SphereRadius 100
- DrawShape 1
+ DrawShape 0
  TriggerActivationType "Every query"
  PeriodicQueries 1
  NamesFilter {

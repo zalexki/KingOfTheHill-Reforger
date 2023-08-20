@@ -17,6 +17,21 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 	[RplProp()]
 	ref array<ref KOTH_PlayerProfileJson> m_listPlayerProfiles = new array<ref KOTH_PlayerProfileJson>();
 	
+	void AddBlueforPoint()
+	{
+		m_blueforPoints++;
+	}
+	
+	void AddRedforPoint()
+	{
+		m_redforPoints++;
+	}
+	
+	void AddGreenforPoint()
+	{
+		m_greenforPoints++;
+	}
+	
 	override void OnGameModeStart()
 	{
 		super.OnGameModeStart();

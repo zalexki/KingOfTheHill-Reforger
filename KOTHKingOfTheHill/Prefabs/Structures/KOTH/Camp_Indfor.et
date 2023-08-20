@@ -27,6 +27,10 @@ GenericEntity : "{FA9066DE33E8E67D}Prefabs/Structures/Military/Camps/Canvas_Cove
    ID "5E1EFBF821986CD6"
    coords 1.454 -0.051 -3.661
   }
+  GenericEntity : "{10F9EE0FB9EC0E4E}Prefabs/Systems/Arsenal/AmmoBoxes/FIA/AmmoBoxArsenal_Ammunition_FIA.et" {
+   ID "5E29171997B617FE"
+   coords 0.637 -0.052 -2.315
+  }
   $grp StaticModelEntity : "{172DD50ACF177B9E}Prefabs/Props/Military/Furniture/ChairMilitary_USSR_01.et" {
    {
     ID "5E1EFBF821986CD0"
