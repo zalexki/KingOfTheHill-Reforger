@@ -1,8 +1,8 @@
-class KOTH_PresenceTriggerEntityClass : BaseGameTriggerEntityClass
+class KOTH_PresenceTriggerEntityClass : SCR_BaseTriggerEntityClass
 {
 }
 
-class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
+class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 {
 	SCR_BaseGameMode m_gameMode;
 	KOTH_SCR_MapDescriptorComponent m_mapDescriptor;
@@ -16,20 +16,25 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 			return;
 		
 		trigger.AddClassType(ChimeraCharacter);
-		trigger.SetUpdateRate(1);
+		trigger.SetUpdateRate(10);
 		
 		m_gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
 		m_gameMode.m_kothTrigger = this;
 		m_mapDescriptor = KOTH_SCR_MapDescriptorComponent.Cast(this.FindComponent(KOTH_SCR_MapDescriptorComponent));
 		m_scoreComp = KOTH_ScoringGameModeComponent.Cast(m_gameMode.FindComponent(KOTH_ScoringGameModeComponent));
-
+	
+		GetOnDeactivate().Insert(OnDeactivation);
+		//GetOnActivate().Insert(OnActivation);
 		if (!m_mapDescriptor)
 		{
 			Log("missing KOTH_SCR_MapDescriptorComponent on KOTH_PresenceTriggerEntity", LogLevel.ERROR);
 		}
+		
+		
+		GetGame().GetCallqueue().CallLater(OnActivation, 10000, true);
 	}
 	
-	override protected void OnDeactivate(IEntity ent)
+	protected void OnDeactivation(IEntity ent)
 	{
 		//Log("OnDeactivate");
 		
@@ -58,15 +63,14 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 		}
 	}
 	
-	override protected void OnActivate(IEntity ent)
+	protected void OnActivation()
 	{
-		//Log("OnActivate");
 		if (!m_gameMode.IsRunning())
 			return;
+
+		//m_counterTick++;
 		
-		m_counterTick++;
-		
-		if (m_counterTick >= 20) {
+		//if (m_counterTick >= 10) {
 			array<IEntity> outEntities = {};
 			GetEntitiesInside(outEntities);
 
@@ -140,19 +144,19 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 			if (blueforPlayerNumber > greenforPlayerNumber && blueforPlayerNumber > redforPlayerNumber) {
 				isZoneContested = false;
 				if (Replication.IsServer())
-					m_scoreComp.m_blueforPoints++;
+					m_scoreComp.AddBlueforPoint();
 			}
 			
 			if (greenforPlayerNumber > blueforPlayerNumber && greenforPlayerNumber > redforPlayerNumber) {
 				isZoneContested = false;
 				if (Replication.IsServer())
-					m_scoreComp.m_greenforPoints++;
+					m_scoreComp.AddGreenforPoint();
 			}
 			
 			if (redforPlayerNumber > greenforPlayerNumber && redforPlayerNumber > blueforPlayerNumber) {
 				isZoneContested = false;
 				if (Replication.IsServer())
-					m_scoreComp.m_redforPoints++;
+					m_scoreComp.AddRedforPoint();
 			}
 			
 			// send new stats to clients
@@ -162,10 +166,9 @@ class KOTH_PresenceTriggerEntity : BaseGameTriggerEntity
 			// update zone marker
 			if (true == isZoneContested) 
 				m_mapDescriptor.ChangeMarker("contested");
-
 			
-			m_counterTick = 0;
+			//m_counterTick = 0;
 			m_gameMode.CheckGameEnd();
-		}
+		//}
 	}
 }
