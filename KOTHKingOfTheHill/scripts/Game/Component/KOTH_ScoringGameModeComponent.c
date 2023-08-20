@@ -48,7 +48,6 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		}
 		
 		m_listPlayerProfiles = listPlayerProfilesJson.m_list;
-		Replication.BumpMe();
 		
 		GetGame().GetCallqueue().CallLater(SavePlayersProfile, 10000, true);
 	}

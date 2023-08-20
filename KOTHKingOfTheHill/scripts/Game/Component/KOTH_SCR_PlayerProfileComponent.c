@@ -20,6 +20,11 @@ class KOTH_SCR_PlayerProfileComponent : ScriptComponent
 		Rpc(RpcDo_Update, money, level, xp);
 	}
 	
+	int GetXpNextLevel()
+	{
+		return (m_level + m_level - 1) * 1000;
+	}
+	
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
 	void RpcDo_Update(int money, int level, int xp)
 	{

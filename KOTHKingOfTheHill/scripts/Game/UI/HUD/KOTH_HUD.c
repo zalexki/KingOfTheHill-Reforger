@@ -17,7 +17,14 @@ class KOTH_HUD : SCR_InfoDisplay
 	string m_playerName;
 	
 	float timeUpdateNetwork = 0;
-
+	
+	protected override event void OnInit(IEntity owner)
+	{
+		super.OnInit(owner);
+		
+		
+	}
+	
 	override event void OnStartDraw(IEntity owner)
 	{
 		super.OnStartDraw(owner);
@@ -143,23 +150,15 @@ class KOTH_HUD : SCR_InfoDisplay
 	
 	private void UpdateMoneyAndXp()
 	{
-		KOTH_PlayerProfileJson currentProfile = new KOTH_PlayerProfileJson();
-		foreach (KOTH_PlayerProfileJson savedProfile : m_scoreComp.m_listPlayerProfiles) 
-		{
-			if (savedProfile.m_name == m_playerName) {
-				currentProfile = savedProfile;
-			}
-		}
-		
 		IEntity controller = GetGame().GetPlayerController();
 		KOTH_SCR_PlayerProfileComponent kothPlayerComp = KOTH_SCR_PlayerProfileComponent.Cast(controller.FindComponent(KOTH_SCR_PlayerProfileComponent));
 		if (!kothPlayerComp)
 			return;
 		
 		m_moneyText.SetText(kothPlayerComp.m_money.ToString() + " $");
-		m_xpText.SetText(kothPlayerComp.m_xp.ToString() + " / " + currentProfile.GetXpNextLevel().ToString());
-		m_lvlText.SetText(kothPlayerComp.m_xp.ToString());
-		m_xpProgressBar.SetValue(currentProfile.GetXp() / currentProfile.GetXpNextLevel(),true);
+		m_xpText.SetText(kothPlayerComp.m_xp.ToString() + " / " + kothPlayerComp.GetXpNextLevel().ToString());
+		m_lvlText.SetText(kothPlayerComp.m_level.ToString());
+		m_xpProgressBar.SetValue(kothPlayerComp.m_xp / kothPlayerComp.GetXpNextLevel(), true);
 	}
 	
 	protected override event void UpdateValues(IEntity owner, float timeSlice)
