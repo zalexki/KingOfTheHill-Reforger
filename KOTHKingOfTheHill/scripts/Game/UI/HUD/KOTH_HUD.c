@@ -66,10 +66,10 @@ class KOTH_HUD : SCR_InfoDisplay
 		Widget w = GetGame().GetWorkspace().CreateWidgets("{74686613FDE00759}UI/Layouts/HUD/KingOfTheHill/KOTH_Notification.layout", koth_scrollList);
 		
 		TextWidget TextNotif = TextWidget.Cast(w.FindAnyWidget("TextNotif"));
-		TextNotif.SetText("Enemy killed ");
+		TextNotif.SetText("Enemy killed");
 		
 		TextWidget XpNotif = TextWidget.Cast(w.FindAnyWidget("XpNotif"));
-		XpNotif.SetText("100 xp ");
+		XpNotif.SetText("100 xp");
 		
 		TextWidget MoneyNotif = TextWidget.Cast(w.FindAnyWidget("MoneyNotif"));
 		MoneyNotif.SetText("100 $");
@@ -86,14 +86,14 @@ class KOTH_HUD : SCR_InfoDisplay
 		Widget w = GetGame().GetWorkspace().CreateWidgets("{74686613FDE00759}UI/Layouts/HUD/KingOfTheHill/KOTH_Notification.layout", koth_scrollList);
 		
 		TextWidget TextNotif = TextWidget.Cast(w.FindAnyWidget("TextNotif"));
-		TextNotif.SetText("Friendly killed ");
+		TextNotif.SetText("Friendly killed");
 		
 		TextWidget XpNotif = TextWidget.Cast(w.FindAnyWidget("XpNotif"));
-		XpNotif.SetText(" - 300 xp ");
+		XpNotif.SetText("- 300 xp");
 		XpNotif.SetColor(Color.DarkRed);
 		
 		TextWidget MoneyNotif = TextWidget.Cast(w.FindAnyWidget("MoneyNotif"));
-		MoneyNotif.SetText(" - 300 $");
+		MoneyNotif.SetText("- 300 $");
 		MoneyNotif.SetColor(Color.Red);
 		
 		SCR_FadeUIComponent compFade = SCR_FadeUIComponent.Cast(w.FindHandler(SCR_FadeUIComponent));
@@ -108,13 +108,13 @@ class KOTH_HUD : SCR_InfoDisplay
 		Widget w = GetGame().GetWorkspace().CreateWidgets("{74686613FDE00759}UI/Layouts/HUD/KingOfTheHill/KOTH_Notification.layout", koth_scrollList);
 		
 		TextWidget TextNotif = TextWidget.Cast(w.FindAnyWidget("TextNotif"));
-		TextNotif.SetText("Baguette tax ");
+		TextNotif.SetText("Baguette tax");
 		
 		TextWidget XpNotif = TextWidget.Cast(w.FindAnyWidget("XpNotif"));
 		XpNotif.SetVisible(false);
 		
 		TextWidget MoneyNotif = TextWidget.Cast(w.FindAnyWidget("MoneyNotif"));
-		MoneyNotif.SetText(" — "+amount+" $");
+		MoneyNotif.SetText("—"+amount+"$");
 		MoneyNotif.SetColor(Color.Red);
 		
 		SCR_FadeUIComponent compFade = SCR_FadeUIComponent.Cast(w.FindHandler(SCR_FadeUIComponent));
@@ -129,10 +129,10 @@ class KOTH_HUD : SCR_InfoDisplay
 		Widget w = GetGame().GetWorkspace().CreateWidgets("{74686613FDE00759}UI/Layouts/HUD/KingOfTheHill/KOTH_Notification.layout", koth_scrollList);
 		
 		TextWidget TextNotif = TextWidget.Cast(w.FindAnyWidget("TextNotif"));
-		TextNotif.SetText("Objectif offensive ");
+		TextNotif.SetText("Objectif offensive");
 		
 		TextWidget XpNotif = TextWidget.Cast(w.FindAnyWidget("XpNotif"));
-		XpNotif.SetText("10 xp ");
+		XpNotif.SetText("10 xp");
 		
 		TextWidget MoneyNotif = TextWidget.Cast(w.FindAnyWidget("MoneyNotif"));
 		MoneyNotif.SetText("10 $");

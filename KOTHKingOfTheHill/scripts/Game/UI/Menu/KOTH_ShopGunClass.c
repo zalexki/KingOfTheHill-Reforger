@@ -2,6 +2,8 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 {
 	protected Widget m_wRoot;  
 	protected SCR_PlayerController m_playerController;
+	protected ButtonWidget m_PurchaseOnceButton;
+	protected OverlayWidget m_PurchaseOnceHINT;
 	protected ItemPreviewManagerEntity m_PreviewManager;
 	
 	override void OnMenuInit()
@@ -97,7 +99,10 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 		
 		int amount = priceOnceWidget.GetText().ToInt();
 		kothPlayerComp.DoAskRpcBuy(amount, playerName);
-		
+		//------------------------------------------------------------------------------------------------
+		m_PurchaseOnceButton.SetVisible(false);
+		m_PurchaseOnceHINT.SetVisible(true);
+		//------------------------------------------------------------------------------------------------
 		HUD_NotifBuy(amount);
 	}
 

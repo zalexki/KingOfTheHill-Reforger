@@ -138,6 +138,82 @@ SizeLayoutWidgetClass {
                 Padding 2 2 2 2
                }
               }
+              OverlayWidgetClass "{5E28034269E5C081}" {
+               Name "PurchaseOnceHINT"
+               Slot OverlayWidgetSlot "{5E2803422E4EEF65}" {
+                HorizontalAlign 3
+                VerticalAlign 3
+               }
+               "Is Visible" 0
+               Color 1 1 1 1
+               {
+                ImageWidgetClass "{5E28034269E5C09F}" {
+                 Name "Background"
+                 Slot OverlayWidgetSlot "{5452C531C2876D22}" {
+                  HorizontalAlign 3
+                  VerticalAlign 3
+                  Padding 0 0 0 0
+                 }
+                 Color 0 1 0.267 0.196
+                 "Shadow Color" 0 0 0 1
+                }
+                TextWidgetClass "{5E28034269E5C09A}" : "{A6E079574AACF9A0}UI/layouts/WidgetLibrary/TextWidgets/Text_Interactive.layout" {
+                 Name "Content"
+                 Slot OverlayWidgetSlot "{547290FBCA5E9358}" {
+                  Padding 0 12 0 12
+                 }
+                 Clipping False
+                 "Inherit Color" 1
+                 Text "EQUIPED"
+                 "Font Size" 25
+                 "Min Font Size" 25
+                 FontProperties FontProperties "{546AF489DFD25402}" {
+                  Font "{3E7733BAC8C831F6}UI/Fonts/RobotoCondensed/RobotoCondensed_Regular.fnt"
+                  ShadowSize 16
+                  ShadowOffset 3 3
+                  ShadowOpacity 0.3
+                 }
+                }
+               }
+              }
+              OverlayWidgetClass "{5E28034BC77265F8}" {
+               Name "EquipePermHINT"
+               Slot OverlayWidgetSlot "{5E2803422E4EEF65}" {
+                HorizontalAlign 3
+                VerticalAlign 3
+               }
+               "Is Visible" 0
+               Color 1 1 1 1
+               {
+                ImageWidgetClass "{5E28034BC77265F9}" {
+                 Name "Background"
+                 Slot OverlayWidgetSlot "{5452C531C2876D22}" {
+                  HorizontalAlign 3
+                  VerticalAlign 3
+                  Padding 0 0 0 0
+                 }
+                 Color 1 1 1 0.49
+                 "Shadow Color" 0 0 0 1
+                }
+                TextWidgetClass "{5E28034BC77265F4}" : "{A6E079574AACF9A0}UI/layouts/WidgetLibrary/TextWidgets/Text_Interactive.layout" {
+                 Name "Content"
+                 Slot OverlayWidgetSlot "{547290FBCA5E9358}" {
+                  Padding 0 12 0 12
+                 }
+                 Clipping False
+                 "Inherit Color" 1
+                 Text "EQUIPE"
+                 "Font Size" 25
+                 "Min Font Size" 25
+                 FontProperties FontProperties "{546AF489DFD25402}" {
+                  Font "{3E7733BAC8C831F6}UI/Fonts/RobotoCondensed/RobotoCondensed_Regular.fnt"
+                  ShadowSize 16
+                  ShadowOffset 3 3
+                  ShadowOpacity 0.3
+                 }
+                }
+               }
+              }
              }
             }
            }
@@ -202,6 +278,44 @@ SizeLayoutWidgetClass {
                 HorizontalAlign 3
                 VerticalAlign 3
                 Padding 2 2 2 2
+               }
+              }
+              OverlayWidgetClass "{5E28034B9DA71B13}" {
+               Name "PurchasePermHINT"
+               Slot OverlayWidgetSlot "{5E2803422E4EEF65}" {
+                HorizontalAlign 3
+                VerticalAlign 3
+               }
+               "Is Visible" 0
+               Color 1 1 1 1
+               {
+                ImageWidgetClass "{5E28034B9DA71B11}" {
+                 Name "Background"
+                 Slot OverlayWidgetSlot "{5452C531C2876D22}" {
+                  HorizontalAlign 3
+                  VerticalAlign 3
+                  Padding 0 0 0 0
+                 }
+                 Color 0.251 0.502 0 0.745
+                 "Shadow Color" 0 0 0 1
+                }
+                TextWidgetClass "{5E28034B9DA71B6B}" : "{A6E079574AACF9A0}UI/layouts/WidgetLibrary/TextWidgets/Text_Interactive.layout" {
+                 Name "Content"
+                 Slot OverlayWidgetSlot "{547290FBCA5E9358}" {
+                  Padding 0 12 0 12
+                 }
+                 Clipping False
+                 "Inherit Color" 1
+                 Text "OWNED"
+                 "Font Size" 25
+                 "Min Font Size" 25
+                 FontProperties FontProperties "{546AF489DFD25402}" {
+                  Font "{3E7733BAC8C831F6}UI/Fonts/RobotoCondensed/RobotoCondensed_Regular.fnt"
+                  ShadowSize 16
+                  ShadowOffset 3 3
+                  ShadowOpacity 0.3
+                 }
+                }
                }
               }
              }

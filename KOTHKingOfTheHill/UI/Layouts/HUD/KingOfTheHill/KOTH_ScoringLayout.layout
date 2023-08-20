@@ -73,7 +73,7 @@ FrameWidgetClass {
                Name "Money"
                Slot LayoutSlot "{5E0F6423191C2585}" {
                 HorizontalAlign 2
-                Padding 0 5 0 0
+                Padding 0 5 13 0
                 SizeMode Fill
                }
                Color 0.376 0.749 0.471 1
@@ -115,7 +115,7 @@ FrameWidgetClass {
                 OverlayWidgetClass "{5570DACE2F0FC6B4}" {
                  Prefab "{5570DACE2F0FC6B4}"
                  Slot AlignableSlot "{5570DACE2F0FC6C4}" {
-                  Padding 42 7 0 7
+                  Padding 45 7 0 7
                  }
                  {
                   ImageWidgetClass "{5E1F52384346F0E1}" {
@@ -160,7 +160,7 @@ FrameWidgetClass {
              Name "HorizontalLayoutFondPoint"
              Slot LayoutSlot "{5E1F5238889E02BA}" {
               HorizontalAlign 1
-              Padding 0 0 0 0
+              Padding 35 0 0 0
              }
              {
               ImageWidgetClass "{5E10A7B4AB76C1F3}" {
@@ -170,7 +170,7 @@ FrameWidgetClass {
                }
                Opacity 0.8
                Color 0 0.125 0.502 1
-               Size 45 45
+               Size 50 45
               }
               ImageWidgetClass "{5E10A7B4AB76C1F4}" {
                Name "Redfor_point_fond"
@@ -180,7 +180,7 @@ FrameWidgetClass {
                }
                Opacity 0.8
                Color 0.502 0 0 1
-               Size 45 45
+               Size 50 45
               }
               ImageWidgetClass "{5E10A7B4AB76C1F9}" {
                Name "Greenfor_point_fond"
@@ -190,7 +190,7 @@ FrameWidgetClass {
                }
                Opacity 0.8
                Color 0 0.502 0.125 1
-               Size 45 45
+               Size 50 45
               }
              }
             }
@@ -218,7 +218,7 @@ FrameWidgetClass {
               ImageWidgetClass "{5E10A7B4AB76C1D6}" {
                Name "IconPPL3"
                Slot LayoutSlot "{5E0F5D63235B07B0}" {
-                Padding 35 0 20 0
+                Padding 35 0 15 0
                 FillWeight 1
                }
                Texture "{70417B54F33ED6E5}UI/Textures/PlayableSlots/DefaultPlayableSlot.edds"
@@ -236,7 +236,7 @@ FrameWidgetClass {
               TextWidgetClass "{5E235293CC48D418}" : "{3132F64DB8B4CB44}UI/layouts/WidgetLibrary/TextWidgets/Text_Body.layout" {
                Name "Session_Time"
                Slot LayoutSlot "{5E23529487CD79D0}" {
-                Padding 0 5 0 0
+                Padding 30 5 0 0
                }
                Color 0.51 0.51 0.51 1
                components {
@@ -268,12 +268,13 @@ FrameWidgetClass {
             HorizontalLayoutWidgetClass "{5E2511CBD30E3484}" {
              Name "Demi_EXPERIENCE_Footer"
              Slot LayoutSlot "{5E2511CBD30E34FE}" {
+              SizeMode Fill
              }
              {
               TextWidgetClass "{5E213A83D5D0DC8E}" {
                Name "Level"
                Slot LayoutSlot "{5E213A83D5D02231}" {
-                Padding 0 43 210 0
+                Padding 0 0 208 77
                 SizeMode Fill
                }
                Text "100"
@@ -308,10 +309,10 @@ FrameWidgetClass {
                Slot LayoutSlot "{5E0F43394B39F9C5}" {
                 HorizontalAlign 1
                 VerticalAlign 1
-                Padding 40 -2 0 0
+                Padding 45 -2 0 0
                 SizeMode Fill
                }
-               Text "50 / 100"
+               Text "500000 / 100000"
                "Font Size" 20
                "Min Font Size" 20
                "Horizontal Alignment" Center
@@ -327,13 +328,13 @@ FrameWidgetClass {
             HorizontalLayoutWidgetClass "{5E10A7B4AB76C1C7}" {
              Name "CountPoint_Footer"
              Slot LayoutSlot "{5E0F64254668E7BD}" {
-              Padding 0 16 0 0
+              Padding 30 16 0 0
              }
              {
               TextWidgetClass "{5E10A7B4AB76C1C4}" {
                Name "BlueforPoints"
                Slot LayoutSlot "{5E0F6423191C2A7C}" {
-                Padding 26 0 0 0
+                Padding 5 0 0 0
                 SizeMode Fill
                }
                Text "1"
@@ -365,7 +366,7 @@ FrameWidgetClass {
               TextWidgetClass "{5E10A7B4AB76C1C3}" {
                Name "GreenforPoints"
                Slot LayoutSlot "{5E0F6423191C2A86}" {
-                Padding 0 0 30 0
+                Padding 0 0 5 0
                 SizeMode Fill
                }
                Text "1"
@@ -383,7 +384,7 @@ FrameWidgetClass {
             HorizontalLayoutWidgetClass "{5E10A7B4AB76C1C1}" {
              Name "CountPlayer_Footer"
              Slot LayoutSlot "{5E0F5D62981B7368}" {
-              Padding 0 15 0 0
+              Padding 10 15 0 0
              }
              {
               TextWidgetClass "{5E10A7B4AB76C1DF}" {

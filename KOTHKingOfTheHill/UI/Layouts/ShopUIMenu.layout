@@ -20,7 +20,7 @@ FrameWidgetClass {
      Slot OverlayWidgetSlot "{5E27578BC3703CE9}" {
       HorizontalAlign 3
       VerticalAlign 3
-      Padding 300 85 340 94
+      Padding 300 85 340 82
      }
      Opacity 0.6
      Color 0 0 0 1
@@ -121,72 +121,6 @@ FrameWidgetClass {
                Prefab "{5562AD435529FB36}"
                Slot ButtonWidgetSlot "{5562AD435529FB5D}" {
                 Padding 300 15 0 0
-               }
-               {
-                OverlayWidgetClass "{000000005E70868E}" {
-                 Prefab "{000000005E70868E}"
-                 {
-                  HorizontalLayoutWidgetClass "{00000000E3602307}" {
-                   Prefab "{00000000E3602307}"
-                   {
-                    HorizontalLayoutWidgetClass "{5E1D46E396412EF8}" {
-                     Prefab "{5E1D46E396412EF8}"
-                     {
-                      OverlayWidgetClass "{5E1D46E396412EF6}" {
-                       Prefab "{5E1D46E396412EF6}"
-                       Slot LayoutSlot "{5C982A3F129726D2}" {
-                       }
-                       {
-                        ImageWidgetClass "{5E1D46E396412EF7}" {
-                         Prefab "{5E1D46E396412EF7}"
-                         Slot OverlayWidgetSlot "{5C982A3373E4C91A}" {
-                          Padding 0 0 0 0
-                         }
-                         Color 0.075 0.075 0.075 0.498
-                        }
-                        HorizontalLayoutWidgetClass "{5E1D46E396412EF5}" {
-                         Prefab "{5E1D46E396412EF5}"
-                         {
-                          ItemPreviewWidgetClass "{5E1D46E396412EF3}" {
-                           Prefab "{5E1D46E396412EF3}"
-                           Slot LayoutSlot "{5C982A19141049F3}" {
-                            Padding 0 0 0 0
-                           }
-                          }
-                          VerticalLayoutWidgetClass "{5E1D46E396412EF1}" {
-                           Prefab "{5E1D46E396412EF1}"
-                           Slot LayoutSlot "{5C982A3ED9633687}" {
-                           }
-                           {
-                            HorizontalLayoutWidgetClass "{5E1D46E3F35C971B}" {
-                             Prefab "{5E1D46E3F35C971B}"
-                             {
-                              OverlayWidgetClass "{5E1D46E396412ED9}" {
-                               Prefab "{5E1D46E396412ED9}"
-                               {
-                                ButtonWidgetClass "{5E1D46E396412ED5}" {
-                                 Prefab "{5E1D46E396412ED5}"
-                                 components {
-                                  SCR_NavigationButtonComponent "{5E26F81F466601F5}" {
-                                  }
-                                 }
-                                }
-                               }
-                              }
-                             }
-                            }
-                           }
-                          }
-                         }
-                        }
-                       }
-                      }
-                     }
-                    }
-                   }
-                  }
-                 }
-                }
                }
               }
              }

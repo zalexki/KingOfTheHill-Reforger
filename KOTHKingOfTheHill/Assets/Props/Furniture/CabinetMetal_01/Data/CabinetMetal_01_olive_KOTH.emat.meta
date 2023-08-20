@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{08796045188EBD49}Assets/Props/Furniture/CabinetMetal_01/Data/CabinetMetal_01_olive_KOTH.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

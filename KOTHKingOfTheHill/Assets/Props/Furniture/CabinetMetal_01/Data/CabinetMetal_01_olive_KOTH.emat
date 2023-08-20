@@ -1,0 +1,56 @@
+MatPBRMulti {
+ SurfaceProperties "{B701566F3B8A0DF6}Common/Materials/Game/metal_sheet.gamemat"
+ OverlayWhitePower 0
+ UVSrcGlobalMaps "UV set 2"
+ MaskMap "{4C995A7223DBD14C}Assets/Props/Furniture/CabinetMetal_01/Data/CabinetMetal_01_V1_GLOBAL_MASK.edds"
+ Enabled_4 1
+ Color_4 0.136 0.145 0.102 1
+ BCR_4 "{884C38B4DD0DD84A}Assets/_SharedData/Metal/ST_Metal_Worn_01_BCR.edds"
+ NMO_4 "{5E9B5A9AF633BD94}Assets/_SharedData/Metal/ST_Steel_Battered_NMO.edds"
+ UVTransform_4 MatUVTransform "{52A61C367C952542}" {
+  TilingU 5
+  TilingV 5
+  OffsetU -0.331
+ }
+ DetNormal_4 1.5
+ Roughness_4 1.9
+ Metalness_4 0.1
+ Enabled_3 1
+ Color_3 0.429 0.553 0.444 1
+ BCR_3 "{0FDD8E566DC8812C}Assets/_SharedData/Dirt/ST_Clay_Rough01_1m_BCR.edds"
+ MaskSharpness_3 0.414
+ MaskOffset_3 0.08
+ Mask_3 "{6BF099C52F07E579}Assets/_SharedData/DetailMask/ST_Rock_Grunge_01_Mask1.edds"
+ MaskUVScale_3 2
+ UVTransform_3 MatUVTransform "{52A61C2698831BC2}" {
+  TilingU 5
+  TilingV 5
+  Rotation 0.621
+ }
+ DetNormal_3 1.8
+ Roughness_3 0.7
+ Metalness_3 0
+ Enabled_2 1
+ Color_2 0.302 0.322 0.289 1
+ BCR_2 "{C5EEAF752073C75C}Assets/_SharedData/Metal/ST_Metal_Rust_Coarse01_1m_BCR.edds"
+ NMO_2 "{FD3614E7F90495C2}Assets/_SharedData/Metal/ST_Metal_Rust_Coarse01_1m_NMO.edds"
+ MaskSharpness_2 1
+ MaskOffset_2 0.131
+ Mask_2 "{F4BF2FE292D334B3}Assets/_SharedData/DetailMask/ST_Concrete_01_Mask1.edds"
+ MaskUVScale_2 2
+ UVTransform_2 MatUVTransform "{52A0654F4836A280}" {
+  TilingU 4
+  TilingV 4
+  OffsetU 0.5
+ }
+ DetNormal_2 0.5
+ Color_1 0.136 0.145 0.102 1
+ BCR_1 "{BB440784A103CB06}Assets/_SharedData/Metal/ST_MetalPaint_Coated_1m_BCR.edds"
+ NMO_1 "{0470164F98BC8DD2}Assets/_SharedData/Metal/ST_MetalBare_01_NMO.edds"
+ UVTransform_1 MatUVTransform "{52A0654CAF22819B}" {
+  TilingU 4
+  TilingV 4
+ }
+ DetNormal_1 0.6
+ Roughness_1 0.8
+}

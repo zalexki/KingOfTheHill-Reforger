@@ -41,6 +41,7 @@ HorizontalLayoutWidgetClass {
           OverlayWidgetClass "{5E2539EE77BDD636}" {
            Name "TEXT"
            Slot LayoutSlot "{5C982A3F129726D2}" {
+            Padding 0 0 0 0
             FillWeight 1
            }
            {
@@ -71,8 +72,7 @@ HorizontalLayoutWidgetClass {
           OverlayWidgetClass "{5E2539EE77BDD632}" {
            Name "XP"
            Slot LayoutSlot "{5C982A3F129726D2}" {
-            Padding 0 0 0 0
-            SizeMode Fill
+            Padding 5 0 0 0
            }
            {
             HorizontalLayoutWidgetClass "{5E2539EE77BDD630}" {
@@ -88,7 +88,7 @@ HorizontalLayoutWidgetClass {
                 SizeMode Fill
                }
                Color 0 0.333 0.083 1
-               Text "100 xp"
+               Text "100 xp "
                "Font Size" 18
                "Min Font Size" 18
                "Horizontal Alignment" Center
@@ -106,8 +106,7 @@ HorizontalLayoutWidgetClass {
           OverlayWidgetClass "{5E2539EE77BDD60F}" {
            Name "MONEY"
            Slot LayoutSlot "{5C982A3F129726D2}" {
-            Padding 0 0 0 0
-            SizeMode Fill
+            Padding 5 0 5 0
            }
            {
             HorizontalLayoutWidgetClass "{5E2539EE77BDD60D}" {
