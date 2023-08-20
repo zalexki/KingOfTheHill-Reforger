@@ -1,4 +1,3 @@
-// Script File
 modded enum ChimeraMenuPreset 
 {
     	KOTH_ShopGun
@@ -6,7 +5,6 @@ modded enum ChimeraMenuPreset
 
 class KOTH_ShopPerformAction : ScriptedUserAction
 {
-	//------------------------------------------------------------------------------------------------
 	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity) 
 	{	
 		SCR_PlayerController scrPlayerController = SCR_PlayerController.Cast(GetGame().GetPlayerController());

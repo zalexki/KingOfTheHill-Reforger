@@ -1,3 +1,14 @@
+$grp GenericEntity : "{67EE7343073E3AF4}Prefabs/Systems/AmbientVehicles/AmbientVehicleSpawnpoint_US.et" {
+ vehicleSpawnOne {
+  coords 2604.423 105.516 2080.808
+ }
+ vehicleSpawnTwo {
+  coords 2328.879 88.8 1336.245
+ }
+ vehicleSpawnThree {
+  coords 3136.01 33.053 1374.117
+ }
+}
 GenericEntity : "{6F1B7BFE78ECAE16}Prefabs/Structures/KOTH/TowerV1.et" {
  coords 2739.489 76.143 1665.764
  angleY 45
