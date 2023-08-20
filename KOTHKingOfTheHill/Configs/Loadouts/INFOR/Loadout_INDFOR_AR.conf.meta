@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{C2CCFAD66730B343}Configs/Loadouts/INFOR/Loadout_INDFOR_AR.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}

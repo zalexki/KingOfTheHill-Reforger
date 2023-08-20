@@ -1,5 +1,5 @@
 ButtonWidgetClass {
- Name "PurchaseOnceButton"
+ Name "PurchasePermButton"
  Slot AlignableSlot "{5584FB749C0E105F}" {
   HorizontalAlign 3
   VerticalAlign 3

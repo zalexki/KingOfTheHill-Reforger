@@ -1608,79 +1608,11 @@ SCR_BaseGameMode {
    ID "5E1F0BA227A3D055"
    coords -1365.027 -39.01 -2217.766
   }
-  SCR_LoadoutManager : "{97EF4C1A41F63DDB}Prefabs/MP/Managers/Loadouts/LoadoutManager_USxUSSR.et" {
+  SCR_LoadoutManager : "{2D9FD3531D381466}Prefabs/MP/Managers/Loadouts/LoadoutManager_BLUEFORxOPFORxINDFOR.et" {
    ID "5E1F0BA227A3D054"
    coords 1145.161 109.199 53.63
-   m_aPlayerLoadouts {
-    SCR_FactionPlayerLoadout "{56B2B461C34A570F}" {
-     m_sLoadoutName "BLUEFOR Rifleman"
-    }
-    SCR_FactionPlayerLoadout "{5A2494BE3D648F60}" {
-     m_sLoadoutName "BLUEFOR AR"
-    }
-    SCR_FactionPlayerLoadout "{56B2B461C275B309}" {
-     m_sLoadoutName "BLUEFOR MG"
-    }
-    SCR_FactionPlayerLoadout "{56B2B461C7495F41}" {
-     m_sLoadoutName "BLUEFOR GL"
-    }
-    SCR_FactionPlayerLoadout "{56B2B461C047DCDA}" {
-     m_sLoadoutName "BLUEFOR LAT"
-    }
-    SCR_FactionPlayerLoadout "{56B2B4613C48D08E}" {
-     m_sLoadoutName "BLUEFOR Sniper"
-    }
-    SCR_FactionPlayerLoadout "{56B2B46134D39388}" {
-     m_sLoadoutName "OPFOR Rifleman"
-    }
-    SCR_FactionPlayerLoadout "{5A2494B91167F3F6}" {
-     m_sLoadoutName "OPFOR AR"
-    }
-    SCR_FactionPlayerLoadout "{56B2B461341EA370}" {
-     m_sLoadoutName "OPFOR MG"
-    }
-    SCR_FactionPlayerLoadout "{56B2B4613FB900E5}" {
-     m_sLoadoutName "OPFOR GL"
-    }
-    SCR_FactionPlayerLoadout "{56B2B4613DCD3341}" {
-     m_sLoadoutName "OPFOR AT"
-    }
-    SCR_FactionPlayerLoadout "{56B2B4613581570A}" {
-     m_sLoadoutName "OPFOR Sharpshooter"
-    }
-    SCR_FactionPlayerLoadout "{5E1140CB98A6CB43}" {
-     m_sLoadoutName "INDFOR Rifleman"
-     m_sLoadoutResource "{84B40583F4D1B7A3}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_Rifleman.et"
-     m_sAffiliatedFaction "FIA"
-    }
-    SCR_FactionPlayerLoadout "{5E1140CB9AA304BA}" {
-     m_sLoadoutName "INDFOR AR"
-     m_sLoadoutResource "{77EF21EAB7CC0382}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_AR.et"
-     m_sAffiliatedFaction "FIA"
-    }
-    SCR_FactionPlayerLoadout "{5E1140CB86A3EE3E}" {
-     m_sLoadoutName "INDFOR MG"
-     m_sLoadoutResource "{58E47E5A4D599432}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_MG.et"
-     m_sAffiliatedFaction "FIA"
-    }
-    SCR_FactionPlayerLoadout "{5E1140CB87893F8E}" {
-     m_sLoadoutName "INDFOR GL"
-     m_sLoadoutResource "{7A3A5FCB407B6AA8}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_GL.et"
-     m_sAffiliatedFaction "FIA"
-    }
-    SCR_FactionPlayerLoadout "{5E1140CB817A6A44}" {
-     m_sLoadoutName "INDFOR AT"
-     m_sLoadoutResource "{D25BC9815A9F9E8D}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_AT.et"
-     m_sAffiliatedFaction "FIA"
-    }
-    SCR_FactionPlayerLoadout "{5E1140CB920FD4CD}" {
-     m_sLoadoutName "INDFOR Sharpshooter"
-     m_sLoadoutResource "{CE33AB22F61F3365}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_Sharpshooter.et"
-     m_sAffiliatedFaction "FIA"
-    }
-   }
   }
-  ItemPreviewManagerEntity "ItemPreviewManager" : "{9F18C476AB860F3B}Prefabs/World/Game/ItemPreviewManager.et" {
+  ItemPreviewManagerEntity ItemPreviewManager : "{9F18C476AB860F3B}Prefabs/World/Game/ItemPreviewManager.et" {
    ID "5E1F0BA227A3D04A"
    coords -1364.373 -39.01 -2218.007
   }

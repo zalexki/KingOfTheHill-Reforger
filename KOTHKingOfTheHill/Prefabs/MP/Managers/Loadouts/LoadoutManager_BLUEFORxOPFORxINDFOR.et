@@ -1,0 +1,11 @@
+SCR_LoadoutManager : "{AA4E7419A1FF65B0}Prefabs/MP/Managers/Loadouts/LoadoutManager_Base.et" {
+ ID "56B2B47708C4F23A"
+ m_aPlayerLoadouts {
+  SCR_FactionPlayerLoadout "{5E27748BF8FDE692}" : "{C2CCFAD66730B343}Configs/Loadouts/INFOR/Loadout_INDFOR_AR.conf" {
+  }
+  SCR_FactionPlayerLoadout "{5E27748BF9E02B84}" : "{667E629EB89D4344}Configs/Loadouts/OPFOR/Loadout_OPFOR_AR.conf" {
+  }
+  SCR_FactionPlayerLoadout "{5E27748BFAA6EC30}" : "{BF6BD075EA226B0B}Configs/Loadouts/BLUFOR/Loadout_BLUFOR_AR.conf" {
+  }
+ }
+}

@@ -1,4 +1,4 @@
-SizeLayoutWidgetClass "{5E272AA468D8962E}" {
+SizeLayoutWidgetClass {
  Name "SizeLayout0"
  Slot OverlayWidgetSlot "{5C9E2A9FC993FEE7}" {
   HorizontalAlign 3
@@ -93,6 +93,43 @@ SizeLayoutWidgetClass "{5E272AA468D8962E}" {
                 HorizontalAlign 3
                 VerticalAlign 3
                 Padding 2 2 2 2
+               }
+              }
+              OverlayWidgetClass "{5E2803416A5EA8EE}" {
+               Name "PurcheseOnceHINT"
+               Slot OverlayWidgetSlot {
+                HorizontalAlign 3
+                VerticalAlign 3
+               }
+               Color 1 1 1 1
+               {
+                ImageWidgetClass "{5E2803416A5EA8EC}" {
+                 Name "Background"
+                 Slot OverlayWidgetSlot "{5452C531C2876D22}" {
+                  HorizontalAlign 3
+                  VerticalAlign 3
+                  Padding 0 0 0 0
+                 }
+                 Color 0 1 0.267 0.196
+                 "Shadow Color" 0 0 0 1
+                }
+                TextWidgetClass "{5E2803416A5EA8EA}" : "{A6E079574AACF9A0}UI/layouts/WidgetLibrary/TextWidgets/Text_Interactive.layout" {
+                 Name "Content"
+                 Slot OverlayWidgetSlot "{547290FBCA5E9358}" {
+                  Padding 0 12 0 12
+                 }
+                 Clipping False
+                 "Inherit Color" 1
+                 Text "EQUIPED"
+                 "Font Size" 25
+                 "Min Font Size" 25
+                 FontProperties FontProperties "{546AF489DFD25402}" {
+                  Font "{3E7733BAC8C831F6}UI/Fonts/RobotoCondensed/RobotoCondensed_Regular.fnt"
+                  ShadowSize 16
+                  ShadowOffset 3 3
+                  ShadowOpacity 0.3
+                 }
+                }
                }
               }
              }

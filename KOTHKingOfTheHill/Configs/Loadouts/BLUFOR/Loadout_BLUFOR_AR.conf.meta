@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{BF6BD075EA226B0B}Configs/Loadouts/US/Loadout_BLUFOR_AR.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}

@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{77EF21EAB7CC0382}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_AR.et"
+ Name "{CE54683961C3A687}Prefabs/Characters/Factions/INDFOR/FIA/Character_INDFOR_Base.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

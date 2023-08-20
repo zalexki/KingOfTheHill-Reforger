@@ -1,0 +1,19 @@
+FrameWidgetClass {
+ {
+  OverlayWidgetClass "{54C4A02A556443D7}" {
+   Prefab "{54C4A02A556443D7}"
+   {
+    VerticalLayoutWidgetClass "{557478C13FE3A622}" {
+     Prefab "{557478C13FE3A622}"
+     {
+      ImageWidgetClass "{54C4A02BEFCFAC85}" {
+       Prefab "{54C4A02BEFCFAC85}"
+       Texture "{F0FEB4722DF996F5}Art/KOTH_Logo.edds"
+       Size 700 100
+      }
+     }
+    }
+   }
+  }
+ }
+}
