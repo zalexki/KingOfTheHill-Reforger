@@ -72,7 +72,8 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 	
 	int GetXpNextLevel()
 	{
-		return (m_level + m_level - 1) * 1000;
+		// TODO: up to 1000 for release
+		return (m_level + m_level - 1) * 100;
 	}
 	
 	int GetLevel()
