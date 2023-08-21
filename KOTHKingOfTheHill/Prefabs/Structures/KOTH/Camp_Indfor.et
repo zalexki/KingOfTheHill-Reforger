@@ -10,6 +10,11 @@ GenericEntity : "{FA9066DE33E8E67D}Prefabs/Structures/Military/Camps/Canvas_Cove
    m_ScaleByDistance 1
    m_FaceCamera 1
   }
+  KOTH_SpawnProtectionTriggerEntity {
+   ID "5E2B41CBEF0E4D7F"
+   TriggerShapeType Sphere
+   DrawShape 1
+  }
   GameEntity : "{06BC3F18B47799AE}Prefabs/Characters/Uniforms/Pants_M70.et" {
    ID "5E1EFBF821986CDF"
    components {
