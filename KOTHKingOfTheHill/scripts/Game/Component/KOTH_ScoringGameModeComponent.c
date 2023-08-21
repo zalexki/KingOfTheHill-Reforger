@@ -87,7 +87,9 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		PlayerManager playerManager = GetGame().GetPlayerManager();
 		if (!playerManager)
 			return false;
-		
+
+
+		string playerName = playerManager.GetPlayerName(playerId);
 		int killerId = playerManager.GetPlayerIdFromControlledEntity(killer);				
 		string killerName = playerManager.GetPlayerName(killerId);
 		bool playerIsInList = false;
@@ -97,6 +99,9 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 			// teamkill
 			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_listPlayerProfiles) 
 			{
+				if (savedProfile.m_name == playerName) {
+					savedProfile.m_deaths++;
+				}
 				if (savedProfile.m_name == killerName) {
 					savedProfile.RemoveFriendlyKillXpAndMoney();
 					m_listPlayerProfiles.Set(index, savedProfile);
