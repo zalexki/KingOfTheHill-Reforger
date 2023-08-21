@@ -314,6 +314,10 @@ GenericEntity : "{FA9066DE33E8E67D}Prefabs/Structures/Military/Camps/Canvas_Cove
     angleY -90
    }
   }
+  GenericEntity : "{B728C4AE0E6EB1E8}Prefabs/Systems/Arsenal/AmmoBoxes/USSR/AmmoBoxArsenal_Equipment_USSR.et" {
+   ID "5E2B41C379037716"
+   coords -0.541 -0.051 -2.31
+  }
   GenericEntity : "{BC81E968D1B4C6B4}Prefabs/Props/Military/Camps/BoardingLadder_01/BoardingLadder_USSR_01.et" {
    ID "5E1EFBF84EED92E8"
    coords 0.589 -0.149 -5.294

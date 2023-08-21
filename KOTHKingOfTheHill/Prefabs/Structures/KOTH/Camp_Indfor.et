@@ -184,6 +184,10 @@ GenericEntity : "{FA9066DE33E8E67D}Prefabs/Structures/Military/Camps/Canvas_Cove
    ID "5E1EFBF821986F09"
    coords 0.37 -0.051 -3.283
   }
+  GenericEntity : "{7F1A910F6EA32A82}Prefabs/Systems/Arsenal/AmmoBoxes/FIA/AmmoBoxArsenal_Equipment_FIA.et" {
+   ID "5E2B41C36BBF8F0A"
+   coords -0.533 -0.051 -2.273
+  }
   $grp GenericEntity : "{811C18BEC8B8B245}Prefabs/Props/Commercial/CabinetCardFile_01/CabinetCardFile_01_green.et" {
    {
     ID "5E1EFBF821986F04"
