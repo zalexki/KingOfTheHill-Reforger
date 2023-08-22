@@ -26,24 +26,37 @@ class KOTH_SCR_PlayerProfileComponent : ScriptComponent
 		SCR_BaseGameMode gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
 		PlayerManager playerManager = GetGame().GetPlayerManager();
 		KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(gameMode.FindComponent(KOTH_ScoringGameModeComponent));
-
-		scoreComp.BuyStuff(item.m_priceOnce, playerManager.GetPlayerName(playerId));
-		IEntity controlledEntity = playerManager.GetPlayerControlledEntity(playerId);
 		
-		//FindAndClearAnyWeaponsInInventory(controlledEntity);
-		//FindAndClearMagazineInInventory(controlledEntity);
+		IEntity controlledEntity = playerManager.GetPlayerControlledEntity(playerId);
 		SCR_InventoryStorageManagerComponent inventory = SCR_InventoryStorageManagerComponent.Cast(controlledEntity.FindComponent(SCR_InventoryStorageManagerComponent));
+//		
+//		bool firstMagInsertOk = false;
+//		array<IEntity> magazineList = new array<IEntity>; 
+//		for (int i = 1; i <= item.m_magazineNumber; i++)
+//		{
+//			IEntity magazineBought = GetGame().SpawnEntityPrefab(Resource.Load(item.m_magazineResource));
+//        	bool tryInsert = inventory.TryInsertItem(magazineBought);
+//			if (i == 3 && tryInsert == false) {
+//				break;
+//			}
+//			firstMagInsertOk = true;
+//			Log("mag "+ magazineBought);
+//		}
+//		
+//		if (false == firstMagInsertOk)
+//		{
+//			// return money
+//			// remove weapon
+//		}
+//		
+		scoreComp.BuyStuff(item.m_priceOnce, playerManager.GetPlayerName(playerId));
+	
+		
+		FindAndClearAnyWeaponsInInventory(controlledEntity);
+		FindAndClearMagazineInInventory(controlledEntity);
 
 		IEntity itemBought = GetGame().SpawnEntityPrefab(Resource.Load(item.m_itemResource));
         inventory.EquipWeapon(itemBought);
-		
-		Log(" item.m_magazineNumber " + item.m_magazineNumber);
-		for (int i = 1; i <= item.m_magazineNumber; i++)
-		{
-			IEntity magazineBought = GetGame().SpawnEntityPrefab(Resource.Load(item.m_magazineResource));
-        	inventory.TryInsertItem(magazineBought);
-			Log("mag "+ magazineBought);
-		}
 		
 //		IEntity secondMagazineResourceName = GetGame().SpawnEntityPrefab(Resource.Load(secondMagazineResourceName));
 //      inventory.TryInsertItem(secondMagazineResourceName);
@@ -71,9 +84,19 @@ class KOTH_SCR_PlayerProfileComponent : ScriptComponent
         InventoryStorageSlot slot2 = inventoryComponent.GetSlot(1);
         InventoryStorageSlot slot3 = inventoryComponent.GetSlot(2);
 		
-		SCR_EntityHelper.DeleteEntityAndChildren(slot1.GetAttachedEntity());
-		SCR_EntityHelper.DeleteEntityAndChildren(slot2.GetAttachedEntity());
-		SCR_EntityHelper.DeleteEntityAndChildren(slot3.GetAttachedEntity());
+		IEntity ent1 = slot1.GetAttachedEntity();
+//		IEntity ent2 = slot2.GetAttachedEntity();
+//		IEntity ent3 = slot3.GetAttachedEntity();
+		
+		if (ent1)
+			RplComponent.DeleteRplEntity(ent1, false)
+			SCR_EntityHelper.DeleteEntityAndChildren(ent1);
+		
+//		if (ent2)
+//			SCR_EntityHelper.DeleteEntityAndChildren(ent2);
+//		
+//		if (ent3)
+//			SCR_EntityHelper.DeleteEntityAndChildren(ent3);
 	}
 	
 	void FindAndClearMagazineInInventory(IEntity player)
