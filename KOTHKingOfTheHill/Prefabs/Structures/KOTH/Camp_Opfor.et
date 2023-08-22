@@ -12,6 +12,10 @@ GenericEntity : "{FA9066DE33E8E67D}Prefabs/Structures/Military/Camps/Canvas_Cove
   }
   KOTH_SpawnProtectionTriggerEntity {
    ID "5E2B41CB1C1EA167"
+   components {
+    Hierarchy "{5E2C91C2ED6FFA6E}" {
+    }
+   }
    coords 0 0 0
    TriggerShapeType Sphere
    DrawShape 1
