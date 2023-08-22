@@ -17,7 +17,6 @@ class KOTH_SpawnProtectionTriggerEntity : SCR_BaseTriggerEntity
 	bool IsPlayerInside(int playerId)
 	{
 		bool isPlayerInside = false;
-		Log("OnActivation for "+playerId);
 		
 		array<IEntity> outEntities = {};
 		GetEntitiesInside(outEntities);
