@@ -42,19 +42,73 @@ FrameWidgetClass {
       Padding 0 0 0 0
      }
      {
-      TextWidgetClass "{5E275C791D1F6F14}" {
-       Name "NameContainer"
-       Slot LayoutSlot "{5E275C791D1F6F4C}" {
-        Padding 308 45 0 0
+      HorizontalLayoutWidgetClass "{5E2AEA0EB88635AA}" {
+       Name "HorizontalLayout0"
+       Slot LayoutSlot "{5E2AEA0EB8863586}" {
        }
-       Text "GUN SHOP"
-       "Font Size" 30
-       FontProperties FontProperties "{5E275C7921367BBC}" {
-        Font "{3E7733BAC8C831F6}UI/Fonts/RobotoCondensed/RobotoCondensed_Regular.fnt"
-        Bold 1
-        ShadowSize 16
-        ShadowOffset 3 3
-        ShadowOpacity 0.5
+       {
+        TextWidgetClass "{5E275C791D1F6F14}" {
+         Name "NameContainer"
+         Slot LayoutSlot "{5E275C791D1F6F4C}" {
+          VerticalAlign 0
+          Padding 308 45 0 0
+         }
+         Text "GUN SHOP"
+         "Font Size" 30
+         FontProperties FontProperties "{5E275C7921367BBC}" {
+          Font "{3E7733BAC8C831F6}UI/Fonts/RobotoCondensed/RobotoCondensed_Regular.fnt"
+          Bold 1
+          ShadowSize 16
+          ShadowOffset 3 3
+          ShadowOpacity 0.5
+         }
+        }
+        ButtonWidgetClass "{5E2AEA0FB87A29A3}" : "{9166209BD49D507A}UI/Layouts/HUD/Shop/ShopCategorie_List.layout" {
+         Name "ShopCategorie_Weapons"
+         Slot LayoutSlot "{5E2AEA0FB87A2994}" {
+          HorizontalAlign 3
+          VerticalAlign 0
+          Padding 750 43 0 0
+         }
+        }
+        ButtonWidgetClass "{5E2AEA082360A679}" : "{9166209BD49D507A}UI/Layouts/HUD/Shop/ShopCategorie_List.layout" {
+         Name "ShopCategorie_Ammo"
+         Slot LayoutSlot "{5E2AEA082360A6AA}" {
+          HorizontalAlign 3
+          VerticalAlign 0
+          Padding 20 43 0 0
+         }
+         {
+          OverlayWidgetClass "{5E2AEA0EC011138E}" {
+           Prefab "{5E2AEA0EC011138E}"
+           {
+            TextWidgetClass "{5E2AEA0E4887BC72}" {
+             Prefab "{5E2AEA0E4887BC72}"
+             Text "AMMO"
+            }
+           }
+          }
+         }
+        }
+        ButtonWidgetClass "{5E2AEA084D07A0CC}" : "{9166209BD49D507A}UI/Layouts/HUD/Shop/ShopCategorie_List.layout" {
+         Name "ShopCategorie_Gadget"
+         Slot LayoutSlot "{5E2AEA082360A6AA}" {
+          HorizontalAlign 3
+          VerticalAlign 0
+          Padding 20 43 0 0
+         }
+         {
+          OverlayWidgetClass "{5E2AEA0EC011138E}" {
+           Prefab "{5E2AEA0EC011138E}"
+           {
+            TextWidgetClass "{5E2AEA0E4887BC72}" {
+             Prefab "{5E2AEA0E4887BC72}"
+             Text "GADGET"
+            }
+           }
+          }
+         }
+        }
        }
       }
      }

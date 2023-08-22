@@ -8,15 +8,31 @@ GenericEntity KOTH_SecondSpawn : "{108B69D9D8DDE8B0}Prefabs/Structures/KOTH/Camp
 }
 $grp GenericEntity : "{6F1B7BFE78ECAE16}Prefabs/Structures/KOTH/TowerV1.et" {
  {
-  coords 2849.174 70.969 1623.447
+  components {
+   KOTH_SCR_TowerMapDescriptorComponent "{5E2CBEC9955ED14B}" {
+    m_sImageQuadKoth "KOTH_Tower_1"
+   }
+  }
+  coords 2826.104 71.221 1593.317
   angleY -45
  }
  {
-  coords 2711.012 75.331 1771.157
-  angleY 150
+  components {
+   KOTH_SCR_TowerMapDescriptorComponent "{5E2CBEC9955ED14B}" {
+    m_sImageQuadKoth "KOTH_Tower_3"
+   }
+  }
+  coords 2806.73 67.296 1752.74
+  angleY -142.346
  }
  {
-  coords 2702.739 65.898 1558.304
+  components {
+   KOTH_SCR_TowerMapDescriptorComponent "{5E2CBEC9955ED14B}" {
+    m_sImageQuadKoth "KOTH_Tower_2"
+   }
+  }
+  coords 2642.832 67.59 1618.561
+  angleY -25.797
  }
 }
 GenericEntity KOTH_ThirdSpawn : "{900D62CF65FB7496}Prefabs/Structures/KOTH/Camp_Indfor.et" {

@@ -1,8 +1,7 @@
 SCR_BaseGameMode KOTH_GameMode1 : "{E5118D0809DD3CDF}Prefabs/MP/Modes/KOTH_GameMode.et" {
  coords 7071.133 118.908 6029.669
  {
-  SCR_MapEntity {
-   ID "5E1ED724B33BC815"
+  SCR_MapEntity "5E2D16918DC33119" {
    "Map Geometry Data" "{984B832A2B86D79B}worlds/Eden/Eden.topo"
    "Satellite background image" "{6EB44A780AF7DDDF}UI/Textures/Map/worlds/EveronRasterized.edds"
   }

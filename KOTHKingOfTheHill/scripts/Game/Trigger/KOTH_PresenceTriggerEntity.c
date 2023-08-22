@@ -11,6 +11,8 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 	
 	override protected void EOnInit(IEntity owner)
 	{
+		
+		
 		BaseGameTriggerEntity trigger = BaseGameTriggerEntity.Cast(owner);
 		if (!trigger) 
 			return;

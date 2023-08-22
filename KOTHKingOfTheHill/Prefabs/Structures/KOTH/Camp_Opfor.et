@@ -191,6 +191,7 @@ GenericEntity : "{FA9066DE33E8E67D}Prefabs/Structures/Military/Camps/Canvas_Cove
    coords 3.147 1.289 3.247
    angleY -180
    angleZ 15
+   Flags 2097154
   }
   GenericEntity : "{7030822F7A54F479}Prefabs/Props/Crates/CrateWooden_01_base.et" {
    ID "5E1EFBF84EED170E"

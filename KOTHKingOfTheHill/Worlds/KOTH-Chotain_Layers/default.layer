@@ -1,8 +1,13 @@
 GenericEntity : "{6F1B7BFE78ECAE16}Prefabs/Structures/KOTH/TowerV1.et" {
+ components {
+  KOTH_SCR_TowerMapDescriptorComponent "{5E2CBEC9955ED14B}" {
+   m_sImageQuadKoth "KOTH_Tower_4"
+  }
+ }
  coords 7069.289 117.041 6028.371
  angleY 41.962
 }
 KOTH_PresenceTriggerEntity : "{F9467A5734030343}Prefabs/MP/Triggers/KOTH_zoneTrigger.et" {
  coords 7069.289 118.892 6028.371
- DrawShape 0
+ DrawShape 1
 }

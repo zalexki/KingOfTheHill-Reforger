@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{9B4C4C4D3B7ABD63}Worlds/KOTH-Montignac.ent"
+ Configurations {
+  ENTResourceClass PC {
+  }
+  ENTResourceClass XBOX_ONE : PC {
+  }
+  ENTResourceClass XBOX_SERIES : PC {
+  }
+  ENTResourceClass PS4 : PC {
+  }
+  ENTResourceClass HEADLESS : PC {
+  }
+ }
+}

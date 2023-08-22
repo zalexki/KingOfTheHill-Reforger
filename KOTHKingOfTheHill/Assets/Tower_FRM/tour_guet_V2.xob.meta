@@ -43,8 +43,6 @@ MetaFileClass {
    MeshParams {
     MeshParam Antenne {
     }
-    MeshParam Barre {
-    }
     MeshParam "Barrières_etage02" {
     }
     MeshParam Escalier01 {
@@ -126,6 +124,10 @@ MetaFileClass {
     MeshParam rembardes_etage02r {
     }
     MeshParam rembardes_etages2 {
+    }
+    MeshParam Details {
+    }
+    MeshParam Escaliers_tour {
     }
    }
    GeometryParams {
@@ -373,6 +375,38 @@ MetaFileClass {
      LayerPreset "BuildingFireView"
      SurfaceProperties {
       "{CCB8BAE847CF1561}Common/Materials/Game/Metal/metal_5mm_min.gamemat"
+     }
+     Mass 0
+     Margin 0
+    }
+    GeometryParam UTM_Antenne {
+     LayerPreset "BuildingFireView"
+     SurfaceProperties {
+      "{EDB153DC99889624}Common/Materials/Game/Metal/metal_3mm.gamemat"
+     }
+     Mass 0
+     Margin 0
+    }
+    GeometryParam UTM_escaliers_interieurs {
+     LayerPreset "BuildingFireView"
+     SurfaceProperties {
+      "{12357E4426EC21F7}Common/Materials/Game/metal_grid.gamemat"
+     }
+     Mass 0
+     Margin 0
+    }
+    GeometryParam UTM_Murs_interieurs {
+     LayerPreset "BuildingFireView"
+     SurfaceProperties {
+      "{1950188BB10D20EA}Common/Materials/Game/Metal/metal_5mm.gamemat"
+     }
+     Mass 0
+     Margin 0
+    }
+    GeometryParam UTM_Poteaux {
+     LayerPreset "BuildingFireView"
+     SurfaceProperties {
+      "{EB387D1072E08951}Common/Materials/Game/Metal/metal_7mm.gamemat"
      }
      Mass 0
      Margin 0

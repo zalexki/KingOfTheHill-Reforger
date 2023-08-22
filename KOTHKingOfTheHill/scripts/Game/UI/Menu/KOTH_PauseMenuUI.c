@@ -26,7 +26,7 @@ modded class PauseMenuUI: ChimeraMenuBase
 		m_FactionBtn = SCR_ButtonTextComponent.GetButtonText("LeaveFaction", m_wRoot);
 		if(m_FactionBtn)
 		{
-			m_FactionBtn.GetRootWidget().SetVisible(false);	
+			m_FactionBtn.GetRootWidget().SetVisible(true);	
 		}
 		
 		m_FieldManualBtn = SCR_ButtonTextComponent.GetButtonText("FieldManual", m_wRoot);

@@ -154,51 +154,10 @@ GenericEntity : "{FA9066DE33E8E67D}Prefabs/Structures/Military/Camps/Canvas_Cove
   }
   GenericEntity : "{691E1CE1800ABC13}Prefabs/Object/FRM_Screen/TV_FRM.et" {
    ID "5E1EFBF8517CA312"
-   components {
-    MeshObject "{5E1AB2860762021F}" {
-     Materials {
-      MaterialAssignClass "{5E1AB28607620217}" {
-       SourceMaterial "Boutons"
-       AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
-      }
-      MaterialAssignClass "{5E1AB28607620213}" {
-       SourceMaterial "Cables"
-       AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
-      }
-      MaterialAssignClass "{5E1AB2860762026E}" {
-       SourceMaterial "Cache_Cables"
-       AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
-      }
-      MaterialAssignClass "{5E1AB2860762026D}" {
-       SourceMaterial "DefaultGeneratedMaterial"
-       AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
-      }
-      MaterialAssignClass "{5E1AB2860762026B}" {
-       SourceMaterial "Fixation_mur"
-       AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
-      }
-      MaterialAssignClass "{5E1AB28607620266}" {
-       SourceMaterial "LOGO"
-       AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
-      }
-      MaterialAssignClass "{5E1AB28607620264}" {
-       SourceMaterial "Plug"
-       AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
-      }
-      MaterialAssignClass "{5E1AB28607620260}" {
-       SourceMaterial "Support"
-       AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
-      }
-      MaterialAssignClass "{5E1AB2860762027E}" {
-       SourceMaterial "Vis"
-       AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
-      }
-     }
-    }
-   }
    coords 3.147 1.289 3.247
    angleY -180
    angleZ 15
+   Flags 2097154
   }
   GenericEntity : "{7030822F7A54F479}Prefabs/Props/Crates/CrateWooden_01_base.et" {
    ID "5E1EFBF8517CA31F"
