@@ -87,9 +87,14 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		PlayerManager playerManager = GetGame().GetPlayerManager();
 		if (!playerManager)
 			return false;
+
+		if (!Replication.IsServer())
+			return true;
 		
+		string playerName = playerManager.GetPlayerName(playerId);
 		int killerId = playerManager.GetPlayerIdFromControlledEntity(killer);				
 		string killerName = playerManager.GetPlayerName(killerId);
+		bool killerIsInList = false;
 		bool playerIsInList = false;
 		Log("killerName " + killerName);
 		
@@ -97,16 +102,17 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 			// teamkill
 			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_listPlayerProfiles) 
 			{
+				
 				if (savedProfile.m_name == killerName) {
 					savedProfile.RemoveFriendlyKillXpAndMoney();
 					m_listPlayerProfiles.Set(index, savedProfile);
-					playerIsInList = true;
+					killerIsInList = true;
 				}	
 			}
 			
 			Rpc(RpcDo_NotifFriendlyKill, killerId);
 			
-			if (!playerIsInList) {
+			if (!killerIsInList) {
 				KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
 				profile.RemoveFriendlyKillXpAndMoney();
 				profile.m_name = killerName;
@@ -116,21 +122,32 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 			// kill
 			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_listPlayerProfiles) 
 			{
+				if (savedProfile.m_name == playerName) {
+					savedProfile.m_deaths++;
+					m_listPlayerProfiles.Set(index, savedProfile);
+					playerIsInList = true;
+				}
+				
 				if (savedProfile.m_name == killerName) {
-					if (Replication.IsServer()) {
-						savedProfile.AddKillXpAndMoney();
-						m_listPlayerProfiles.Set(index, savedProfile);
-						playerIsInList = true;
-					}
+					savedProfile.AddKillXpAndMoney();
+					m_listPlayerProfiles.Set(index, savedProfile);
+					killerIsInList = true;
 				}
 			}
 			
 			Rpc(RpcDo_NotifEnemyKill, killerId);
 			
-			if (!playerIsInList) {
+			if (!killerIsInList) {
 				KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
 				profile.AddKillXpAndMoney();
 				profile.m_name = killerName;
+				m_listPlayerProfiles.Insert(profile);
+			}
+			
+			if (!playerIsInList) {
+				KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
+				profile.m_deaths++;
+				profile.m_name = playerName;
 				m_listPlayerProfiles.Insert(profile);
 			}
 		}

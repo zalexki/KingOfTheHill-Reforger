@@ -1,6 +1,6 @@
 GenericEntity : "{FA9066DE33E8E67D}Prefabs/Structures/Military/Camps/Canvas_Covers/US/CanvasCover_Large_US.et" {
  ID "52F0B4ADDCC2C24E"
- coords 133.109 1.484 129.246
+ coords 4.213 0 2.252
  {
   CommentEntity {
    ID "5E1F523C656107A8"
@@ -9,6 +9,17 @@ GenericEntity : "{FA9066DE33E8E67D}Prefabs/Structures/Military/Camps/Canvas_Cove
    m_Color 0 0.25 1
    m_ScaleByDistance 1
    m_FaceCamera 1
+  }
+  KOTH_SpawnProtectionTriggerEntity {
+   ID "5E2B41CBCBA3E35B"
+   components {
+    Hierarchy "{5E2C91C2C287B46E}" {
+    }
+   }
+   TriggerShapeType Sphere
+   DrawShape 1
+   TriggerActivationType "All changes"
+   PeriodicQueries 1
   }
   GameEntity : "{06BC3F18B47799AE}Prefabs/Characters/Uniforms/Pants_M70.et" {
    ID "5E1EFBF8517CA3C2"
@@ -26,6 +37,10 @@ GenericEntity : "{FA9066DE33E8E67D}Prefabs/Structures/Military/Camps/Canvas_Cove
   GenericEntity : "{09321D1470C3625E}Prefabs/Props/Military/AmmoBoxes/EquipmentBoxStack/US/EquipmentBoxStack_US_01_V4_covered.et" {
    ID "5E1EFBF8517CA3CC"
    coords 1.454 -0.051 -3.661
+  }
+  GenericEntity : "{0FC1D6E9B592F75D}Prefabs/Systems/Arsenal/AmmoBoxes/US/AmmoBoxArsenal_Equipment_US.et" {
+   ID "5E2B41C09ED8EA7E"
+   coords -0.499 -0.051 -2.29
   }
   GenericEntity : "{10F9EE0FB9EC0E4E}Prefabs/Systems/Arsenal/AmmoBoxes/FIA/AmmoBoxArsenal_Ammunition_FIA.et" {
    ID "5E29171A6BD1DE19"

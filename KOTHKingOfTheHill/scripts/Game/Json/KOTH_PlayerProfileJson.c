@@ -1,11 +1,14 @@
 class KOTH_PlayerProfileJson : JsonApiStruct
 {
     string m_name;
-    int m_kills = 0;
-    int m_friendlyKills = 0;
-    int m_money = 0;
+	int m_money = 0;
 	int m_level = 1;
 	int m_xp = 0;
+	
+    int m_kills = 0;
+    int m_deaths = 0;
+    int m_friendlyKills = 0;
+
 
     void KOTH_PlayerProfileJson()
 	{
@@ -13,7 +16,9 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 		RegV("m_money");
 		RegV("m_level");
 		RegV("m_xp");
+		
 		RegV("m_kills");
+		RegV("m_deaths");
 		RegV("m_friendlyKills");
 	}
 	
@@ -72,7 +77,8 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 	
 	int GetXpNextLevel()
 	{
-		return (m_level + m_level - 1) * 1000;
+		// TODO: up to 1000 for release
+		return (m_level + m_level - 1) * 100;
 	}
 	
 	int GetLevel()
