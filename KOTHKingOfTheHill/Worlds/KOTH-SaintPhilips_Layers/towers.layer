@@ -1,0 +1,29 @@
+$grp GenericEntity : "{6F1B7BFE78ECAE16}Prefabs/Structures/KOTH/TowerV1.et" {
+ {
+  components {
+   KOTH_SCR_TowerMapDescriptorComponent "{5E2CBEC9955ED14B}" {
+    m_sImageQuadKoth "KOTH_Tower_1"
+   }
+  }
+  coords 4412.537 4.748 10856.115
+  angleY 105
+ }
+ {
+  components {
+   KOTH_SCR_TowerMapDescriptorComponent "{5E2CBEC9955ED14B}" {
+    m_sImageQuadKoth "KOTH_Tower_2"
+   }
+  }
+  coords 4349.15 10.331 10647.878
+  angleY 90
+ }
+ {
+  components {
+   KOTH_SCR_TowerMapDescriptorComponent "{5E2CBEC9955ED14B}" {
+    m_sImageQuadKoth "KOTH_Tower_3"
+   }
+  }
+  coords 4608.111 17.77 10700.748
+  angleY -102.977
+ }
+}

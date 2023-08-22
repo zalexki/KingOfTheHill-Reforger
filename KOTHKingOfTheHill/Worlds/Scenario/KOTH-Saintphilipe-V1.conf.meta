@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{08096F926A21678B}Worlds/Scenario/KOTH-Saintphilipe-V1.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}
