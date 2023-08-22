@@ -22,12 +22,26 @@ GenericEntity KOTH_FirstSpawn : "{0D777787DAAD3541}Prefabs/Structures/KOTH/Camp_
     }
    }
   }
+  KOTH_SpawnProtectionTriggerEntity {
+   ID "5E2B41CBCBA3E35B"
+   components {
+    Hierarchy "{5E2C91C5C2E83438}" {
+    }
+   }
+  }
  }
 }
 GenericEntity KOTH_SecondSpawn : "{108B69D9D8DDE8B0}Prefabs/Structures/KOTH/Camp_Opfor.et" {
  coords 2934.887 57.344 2231.423
  angleY -87.644
  {
+  KOTH_SpawnProtectionTriggerEntity {
+   ID "5E2B41CB1C1EA167"
+   components {
+    Hierarchy "{5E2C91C5C5D998D6}" {
+    }
+   }
+  }
   SCR_SpawnPoint {
    ID "5E1F523DF4404F54"
   }
@@ -85,6 +99,14 @@ GenericEntity KOTH_ThirdSpawn : "{900D62CF65FB7496}Prefabs/Structures/KOTH/Camp_
      }
     }
    }
+  }
+  KOTH_SpawnProtectionTriggerEntity {
+   ID "5E2B41CBEF0E4D7F"
+   components {
+    Hierarchy "{5E2C91C5CC55276B}" {
+    }
+   }
+   TriggerActivationType "Every query"
   }
   SCR_SpawnPoint {
    ID "5E1F523DC7E00B89"

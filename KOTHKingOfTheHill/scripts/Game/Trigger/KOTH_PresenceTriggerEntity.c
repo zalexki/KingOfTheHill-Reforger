@@ -48,7 +48,7 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 		}
 	}
 	
-	[RplRpc(RplChannel.Unreliable, RplRcver.Broadcast)]
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
 	void NotifCapture(int killerId)
 	{
 		if (GetGame().GetPlayerController().GetPlayerId() != killerId)

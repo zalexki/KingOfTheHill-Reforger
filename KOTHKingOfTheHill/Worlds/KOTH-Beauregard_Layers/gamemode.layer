@@ -1,4 +1,9 @@
 SCR_BaseGameMode KOTH_GameMode1 : "{E5118D0809DD3CDF}Prefabs/MP/Modes/KOTH_GameMode.et" {
+ components {
+  SCR_SpawnProtectionComponent "{5E2B56EDB54EFDD0}" {
+   m_fProtectionTime 1
+  }
+ }
  coords 3113.879 16 2724.923
  {
   SCR_MapEntity "5E272AA8B2A30052" {

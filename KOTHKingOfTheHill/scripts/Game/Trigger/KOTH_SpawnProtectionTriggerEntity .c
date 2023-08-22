@@ -1,8 +1,6 @@
 class KOTH_SpawnProtectionTriggerEntityClass : SCR_BaseTriggerEntityClass{}
 class KOTH_SpawnProtectionTriggerEntity : SCR_BaseTriggerEntity
 {
-	
-	
 	// check restriction zones / players
 	override protected void EOnInit(IEntity owner)
 	{
@@ -16,37 +14,90 @@ class KOTH_SpawnProtectionTriggerEntity : SCR_BaseTriggerEntity
 		trigger.SetSphereRadius(125);
 		
 		//GetOnDeactivate().Insert(OnDeactivation);
-		GetOnActivate().Insert(OnActivation);
-		Log("OnDeactivate");
+		//GetOnActivate().Insert(OnActivation);
+	}
+	
+	bool IsPlayerInside(int playerId)
+	{
+		bool isPlayerInside = false;
+		Log("OnActivation for "+playerId);
+		
+		array<IEntity> outEntities = {};
+		GetEntitiesInside(outEntities);
+		PlayerManager playerManager = GetGame().GetPlayerManager();
+		foreach (IEntity entity: outEntities)
+		{
+			if (playerId == playerManager.GetPlayerIdFromControlledEntity(entity)) 
+			{
+				isPlayerInside = true;
+			}
+		}
+		
+		return isPlayerInside;
+	}
+	
+	protected void OnActivation(IEntity ent)
+	{
+		array<IEntity> outEntities = {};
+		GetEntitiesInside(outEntities);
+		
+		PlayerManager playerManager = GetGame().GetPlayerManager();
+		int playerId = playerManager.GetPlayerIdFromControlledEntity(ent);
+		bool isPlayerInside = false;
+		Log("OnActivation for "+playerId);
+
+		foreach (IEntity entity: outEntities)
+		{
+			if (playerId == playerManager.GetPlayerIdFromControlledEntity(entity)) 
+			{
+				isPlayerInside = true;
+			}
+		}
+		
+		if (true == isPlayerInside) {
+			PlayerController playerController = GetGame().GetPlayerController();
+			KOTH_SCR_PlayerProfileComponent kothPlayerComp = KOTH_SCR_PlayerProfileComponent.Cast(playerController.FindComponent(KOTH_SCR_PlayerProfileComponent));
+			Print(kothPlayerComp);
+			if (kothPlayerComp)
+				kothPlayerComp.DoAskRpcProtection();
+		}
+	
+		
+		Log("OnActivation done "+isPlayerInside);
 	}
 
 	override protected void OnDeactivate(IEntity ent)
 	{
+		return;
+		
 		m_OnDeactivate.Invoke();
 		
-		Log("OnDeactivate");
+		array<IEntity> outEntities = {};
+		GetEntitiesInside(outEntities);
 		
-		SCR_DamageManagerComponent damageManager = SCR_DamageManagerComponent.Cast(ent.FindComponent(SCR_DamageManagerComponent));
-		if (!damageManager)
-			return;
+		PlayerManager playerManager = GetGame().GetPlayerManager();
+		int playerId = playerManager.GetPlayerIdFromControlledEntity(ent);
+		bool isPlayerInside = false;
+		Log("OnDeactivate for "+playerId);
 
-		// Disable damage handling
-		damageManager.EnableDamageHandling(true);
+		foreach (IEntity entity: outEntities)
+		{
+			if (playerId == playerManager.GetPlayerIdFromControlledEntity(entity)) 
+			{
+				isPlayerInside = true;
+			}
+		}
 		
-		Log("OnDeactivate done");
-	}
-	
-	protected void OnActivation(IEntity entity)
-	{
-		Log("OnActivation");
+		if (false == isPlayerInside) 
+		{
+			PlayerController playerController = GetGame().GetPlayerController();
+			KOTH_SCR_PlayerProfileComponent kothPlayerComp = KOTH_SCR_PlayerProfileComponent.Cast(playerController.FindComponent(KOTH_SCR_PlayerProfileComponent));
+			Print(kothPlayerComp);
+			if (kothPlayerComp)
+				kothPlayerComp.DoAskRpcStopProtection();
+		}
 		
-		SCR_DamageManagerComponent damageManager = SCR_DamageManagerComponent.Cast(entity.FindComponent(SCR_DamageManagerComponent));
-		if (!damageManager)
-			return;
-
-		// Disable damage handling
-		damageManager.EnableDamageHandling(false);
 		
-		Log("OnActivation done");
+		Log("OnDeactivate done for "+isPlayerInside);
 	}
 }

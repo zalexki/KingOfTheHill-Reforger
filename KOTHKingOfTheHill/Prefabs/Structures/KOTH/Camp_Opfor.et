@@ -15,6 +15,8 @@ GenericEntity : "{FA9066DE33E8E67D}Prefabs/Structures/Military/Camps/Canvas_Cove
    coords 0 0 0
    TriggerShapeType Sphere
    DrawShape 1
+   TriggerActivationType "All changes"
+   PeriodicQueries 1
   }
   GameEntity : "{06BC3F18B47799AE}Prefabs/Characters/Uniforms/Pants_M70.et" {
    ID "5E1EFBF84EED0162"
