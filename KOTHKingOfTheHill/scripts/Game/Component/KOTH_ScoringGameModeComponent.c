@@ -60,7 +60,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		
 		SavePlayersProfile();
 	}
-
+	
 	void BuyStuff(int amount, string playerName)
 	{
 		Log("----------- BuyStuff from rpc call");

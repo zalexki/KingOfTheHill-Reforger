@@ -56,6 +56,7 @@ SCR_BaseGameMode {
    }
   }
   SCR_GameModeHealthSettings "{5E1F0BA23AC53CC8}" {
+   m_bPermitUnconsciousness 0
   }
   SCR_GameOverScreenManagerComponent "{5E1F0BA23AC53211}" {
    m_GameOverScreenConfig SCR_GameOverScreenConfig "{5E1F0BA23AC53212}" {
@@ -314,6 +315,8 @@ SCR_BaseGameMode {
   SCR_NightModeGameModeComponent "{5E1F0BA23AC53232}" {
   }
   SCR_NotificationSenderComponent "{5E1F0BA23AC5686C}" {
+   m_iKillFeedType FULL
+   m_iReceiveKillFeedType ALL
    m_aKillfeedTypeNames {
     SCR_NotificationKillfeedTypeName "{5E1F0BA23AC53240}" {
      m_iKillfeedType DISABLED
@@ -1509,13 +1512,10 @@ SCR_BaseGameMode {
    Streamable Disabled
   }
  }
- coords 3113.879 16 2724.923
+ coords 7071.133 118.908 6029.669
  Flags 0
  m_bAllowFactionChange 1
  {
-  SCR_MapEntity "5E1F591715EDC4E3" : "{731564B66F91B107}Prefabs/World/Game/MapEntity.et" {
-   ID "5E1ED724B33BC815"
-  }
   DestructionManager : "{E5B570B5F32A7BAE}Prefabs/Systems/Destruction/DestructionManager.et" {
    ID "5E1F0BA227A27EF0"
    coords -1365.027 -39.01 -2217.766

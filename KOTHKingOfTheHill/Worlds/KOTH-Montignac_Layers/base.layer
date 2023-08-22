@@ -1,0 +1,12 @@
+GenericEntity : "{0D777787DAAD3541}Prefabs/Structures/KOTH/Camp_Blufor.et" {
+ coords 5276.292 80.23 6375.162
+ angleY -126.002
+}
+GenericEntity : "{108B69D9D8DDE8B0}Prefabs/Structures/KOTH/Camp_Opfor.et" {
+ coords 3962.221 102.348 6717.102
+ angleY 177.843
+}
+GenericEntity : "{900D62CF65FB7496}Prefabs/Structures/KOTH/Camp_Indfor.et" {
+ coords 4731.449 131.456 7792.334
+ angleY -117.771
+}

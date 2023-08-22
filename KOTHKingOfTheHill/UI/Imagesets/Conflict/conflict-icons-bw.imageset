@@ -964,6 +964,30 @@ ImageSetClass {
      Size 256 256
      Flags 0
     }
+    ImageSetDefClass KOTH_Tower_1 {
+     Name "KOTH_Tower_1"
+     Pos 1536 256
+     Size 128 128
+     Flags 0
+    }
+    ImageSetDefClass KOTH_Tower_2 {
+     Name "KOTH_Tower_2"
+     Pos 1664 256
+     Size 128 128
+     Flags 0
+    }
+    ImageSetDefClass KOTH_Tower_3 {
+     Name "KOTH_Tower_3"
+     Pos 1536 384
+     Size 128 128
+     Flags 0
+    }
+    ImageSetDefClass KOTH_Tower_4 {
+     Name "KOTH_Tower_4"
+     Pos 1664 384
+     Size 128 128
+     Flags 0
+    }
    }
   }
  }

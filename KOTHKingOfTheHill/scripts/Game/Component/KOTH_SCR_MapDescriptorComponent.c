@@ -15,7 +15,7 @@ class KOTH_SCR_MapDescriptorComponent : SCR_MapDescriptorComponent
 
 		m_item.SetBaseType(EMapDescriptorType.MDT_ICON);
 		m_item.SetImageDef("KOTH_Zone");
-		m_item.SetPriority(1);
+		m_item.SetPriority(2);
 
 		MapDescriptorProps props = m_item.GetProps();
 		props.SetDetail(96);

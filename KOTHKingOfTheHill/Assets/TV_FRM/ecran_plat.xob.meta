@@ -4,9 +4,9 @@ MetaFileClass {
   FBXResourceClass PC {
    ExportSkinning 1
    MaterialAssigns {
-    MaterialAssignClass "{5E02D100A78268A5}" {
-     SourceMaterial "DefaultGeneratedMaterial"
-     AssignedMaterial "{C935BB9322350E69}Prefabs/Object/FRM_Screen/Data/DefaultGeneratedMaterial.emat"
+    MaterialAssignClass "{5E02D100A78268FD}" {
+     SourceMaterial "Screen"
+     AssignedMaterial "{96D6FB4EB6747F7F}Prefabs/Object/FRM_Screen/Data/RTMaterial02.emat"
     }
     MaterialAssignClass "{5E02D100A7826880}" {
      SourceMaterial "Support"
@@ -20,9 +20,9 @@ MetaFileClass {
      SourceMaterial "Boutons"
      AssignedMaterial "{36D982F91C570A31}Prefabs/Object/FRM_Screen/Data/Boutons.emat"
     }
-    MaterialAssignClass "{5E02D100A7826892}" {
-     SourceMaterial "Cables"
-     AssignedMaterial "{59577F068E2146F2}Prefabs/Object/FRM_Screen/Data/Cables.emat"
+    MaterialAssignClass "{5E02D100A78268F8}" {
+     SourceMaterial "Material"
+     AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
     }
     MaterialAssignClass "{5E02D100A7826894}" {
      SourceMaterial "Cache_Cables"
@@ -44,20 +44,8 @@ MetaFileClass {
      SourceMaterial "Plug"
      AssignedMaterial "{AD7F4778D44DC68E}Prefabs/Object/FRM_Screen/Data/Plug.emat"
     }
-    MaterialAssignClass "{5E02D100A78268F8}" {
-     SourceMaterial "Material"
-     AssignedMaterial "{5FA5D9AFE79AFD66}Prefabs/Object/FRM_Screen/Data/Material.emat"
-    }
-    MaterialAssignClass "{5E02D100A78268FD}" {
-     SourceMaterial "Screen"
-     AssignedMaterial "{96D6FB4EB6747F7F}Prefabs/Object/FRM_Screen/Data/RTMaterial02.emat"
-    }
    }
    MeshParams {
-    MeshParam Air_grilles {
-    }
-    MeshParam Air_grilles_02 {
-    }
     MeshParam BOuton03 {
     }
     MeshParam Barre_Support {
@@ -69,10 +57,6 @@ MetaFileClass {
     MeshParam Bouton02 {
     }
     MeshParam Bras {
-    }
-    MeshParam Cable_01 {
-    }
-    MeshParam Cable_02 {
     }
     MeshParam Cover_branchements {
     }
@@ -91,8 +75,6 @@ MetaFileClass {
     MeshParam Power_Led {
     }
     MeshParam Screen {
-    }
-    MeshParam Sorties_air_rond {
     }
    }
    GeometryParams {
@@ -120,6 +102,14 @@ MetaFileClass {
     GeometryParam UTM_support_mur {
      SurfaceProperties {
       "{536BF67B2052B869}material/metal.gamemat"
+     }
+     Mass 0
+     Margin 0
+    }
+    GeometryParam UTM_Cylindre {
+     LayerPreset "BuildingFireView"
+     SurfaceProperties {
+      "{5EAA7FB0A83F90CF}Common/Materials/Game/plastic.gamemat"
      }
      Mass 0
      Margin 0

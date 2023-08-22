@@ -1,0 +1,26 @@
+$grp GenericEntity : "{6F1B7BFE78ECAE16}Prefabs/Structures/KOTH/TowerV1.et" {
+ {
+  components {
+   KOTH_SCR_TowerMapDescriptorComponent "{5E2CBEC9955ED14B}" {
+    Enabled 0
+   }
+  }
+  coords 4791.505 165.574 7019.557
+  angleY -96.418
+ }
+ {
+  components {
+   KOTH_SCR_TowerMapDescriptorComponent "{5E2CBEC9955ED14B}" {
+    m_sImageQuadKoth "KOTH_Tower_4"
+   }
+  }
+  coords 4792.209 187.014 7019.046
+  angleY -96.418
+ }
+}
+KOTH_PresenceTriggerEntity : "{F9467A5734030343}Prefabs/MP/Triggers/KOTH_zoneTrigger.et" {
+ coords 4789.731 168.921 7018.457
+ angleX 0
+ angleZ 0
+ DrawShape 1
+}

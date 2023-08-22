@@ -1,0 +1,3 @@
+SCR_BaseGameMode KOTH_GameMode1 : "{E5118D0809DD3CDF}Prefabs/MP/Modes/KOTH_GameMode.et" {
+ coords 4751.08 160.799 7159.792
+}

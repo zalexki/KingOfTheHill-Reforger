@@ -50,7 +50,9 @@ GenericEntity {
   }
   RplComponent "{5E215A8606B3F178}" {
   }
+  KOTH_SCR_TowerMapDescriptorComponent "{5E2CBEC9955ED14B}" {
+  }
  }
- coords 3229.86 9.844 2771.52
- angleY -131.191
+ coords 3104.1 14.536 2750.64
+ angleY -52.346
 }
