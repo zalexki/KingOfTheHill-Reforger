@@ -30,22 +30,24 @@ class KOTH_SCR_PlayerProfileComponent : ScriptComponent
 		scoreComp.BuyStuff(item.m_priceOnce, playerManager.GetPlayerName(playerId));
 		IEntity controlledEntity = playerManager.GetPlayerControlledEntity(playerId);
 		
-		FindAndClearAnyWeaponsInInventory(controlledEntity);
-		FindAndClearMagazineInInventory(controlledEntity);
+		//FindAndClearAnyWeaponsInInventory(controlledEntity);
+		//FindAndClearMagazineInInventory(controlledEntity);
 		SCR_InventoryStorageManagerComponent inventory = SCR_InventoryStorageManagerComponent.Cast(controlledEntity.FindComponent(SCR_InventoryStorageManagerComponent));
 
 		IEntity itemBought = GetGame().SpawnEntityPrefab(Resource.Load(item.m_itemResource));
         inventory.EquipWeapon(itemBought);
 		
-//		IEntity magazineBought = GetGame().SpawnEntityPrefab(Resource.Load(item.m_magazineResource));
-//		for(int i = 0; i++; i == item.m_magazineNumber)
-//		{
-//        	inventory.TryInsertItem(magazineBought);
-//		}
+		Log(" item.m_magazineNumber " + item.m_magazineNumber);
+		for (int i = 1; i <= item.m_magazineNumber; i++)
+		{
+			IEntity magazineBought = GetGame().SpawnEntityPrefab(Resource.Load(item.m_magazineResource));
+        	inventory.TryInsertItem(magazineBought);
+			Log("mag "+ magazineBought);
+		}
 		
 //		IEntity secondMagazineResourceName = GetGame().SpawnEntityPrefab(Resource.Load(secondMagazineResourceName));
-//        inventory.TryInsertItem(secondMagazineResourceName);
-//        inventory.TryInsertItem(secondMagazineResourceName);
+//      inventory.TryInsertItem(secondMagazineResourceName);
+//      inventory.TryInsertItem(secondMagazineResourceName);
 	}
 	
 	void FindAndClearAnyWeaponsInInventory(IEntity player)
@@ -58,7 +60,12 @@ class KOTH_SCR_PlayerProfileComponent : ScriptComponent
 		}
 		
 		BaseInventoryStorageComponent inventoryComponent = inventoryStorage.GetWeaponStorage();
-        
+        if (!inventoryComponent) 
+		{
+			Log("BaseInventoryStorageComponent not found in player entity " + player);
+			return;	
+		}
+		
 		// TODO: if people has random stuff deleted, this is must be this
 		InventoryStorageSlot slot1 = inventoryComponent.GetSlot(0);
         InventoryStorageSlot slot2 = inventoryComponent.GetSlot(1);
@@ -82,10 +89,12 @@ class KOTH_SCR_PlayerProfileComponent : ScriptComponent
 		
 		foreach (IEntity entity : entities)
 		{
-			if (!inventoryStorage.TryDeleteItem(entity))
-			{
-				RplComponent.DeleteRplEntity(entity, false)
-			}
+			inventoryStorage.TryDeleteItem(entity);
+			
+//			if (!inventoryStorage.TryDeleteItem(entity))
+//			{
+//				RplComponent.DeleteRplEntity(entity, false)
+//			}
 		}
 	}
 }
