@@ -1,8 +1,6 @@
 class KOTH_SpawnProtectionTriggerEntityClass : SCR_BaseTriggerEntityClass{}
 class KOTH_SpawnProtectionTriggerEntity : SCR_BaseTriggerEntity
 {
-	
-	
 	// check restriction zones / players
 	override protected void EOnInit(IEntity owner)
 	{
@@ -14,39 +12,23 @@ class KOTH_SpawnProtectionTriggerEntity : SCR_BaseTriggerEntity
 		trigger.SetUpdateRate(0.5);
 		trigger.EnablePeriodicQueries(true);
 		trigger.SetSphereRadius(125);
-		
-		//GetOnDeactivate().Insert(OnDeactivation);
-		GetOnActivate().Insert(OnActivation);
-		Log("OnDeactivate");
-	}
-
-	override protected void OnDeactivate(IEntity ent)
-	{
-		m_OnDeactivate.Invoke();
-		
-		Log("OnDeactivate");
-		
-		SCR_DamageManagerComponent damageManager = SCR_DamageManagerComponent.Cast(ent.FindComponent(SCR_DamageManagerComponent));
-		if (!damageManager)
-			return;
-
-		// Disable damage handling
-		damageManager.EnableDamageHandling(true);
-		
-		Log("OnDeactivate done");
 	}
 	
-	protected void OnActivation(IEntity entity)
+	bool IsPlayerInside(int playerId)
 	{
-		Log("OnActivation");
+		bool isPlayerInside = false;
 		
-		SCR_DamageManagerComponent damageManager = SCR_DamageManagerComponent.Cast(entity.FindComponent(SCR_DamageManagerComponent));
-		if (!damageManager)
-			return;
-
-		// Disable damage handling
-		damageManager.EnableDamageHandling(false);
+		array<IEntity> outEntities = {};
+		GetEntitiesInside(outEntities);
+		PlayerManager playerManager = GetGame().GetPlayerManager();
+		foreach (IEntity entity: outEntities)
+		{
+			if (playerId == playerManager.GetPlayerIdFromControlledEntity(entity)) 
+			{
+				isPlayerInside = true;
+			}
+		}
 		
-		Log("OnActivation done");
+		return isPlayerInside;
 	}
 }

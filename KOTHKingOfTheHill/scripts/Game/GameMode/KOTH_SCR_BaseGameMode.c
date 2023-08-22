@@ -95,6 +95,7 @@ modded class SCR_BaseGameMode
 	{
 		prout();
 		GetGame().GetCallqueue().CallLater(prout, 10000, true);
+		GetGame().GetCallqueue().CallLater(PlayersProtection, 1000, true);
 		
 		IEntity firstSpawn = GetGame().GetWorld().FindEntityByName("KOTH_FirstSpawn");
 		IEntity spawnPointFirst = FindSpawnPoint(firstSpawn);
@@ -119,14 +120,79 @@ modded class SCR_BaseGameMode
 		factions.Insert("USSR");
 		factions.Insert("FIA");
 		
-		Log("rand "+randomInts[0]);
-		Log("rand "+randomInts[1]);
-		Log("rand "+randomInts[2]);
 		spf.SetFactionKey(factions.Get(randomInts[0]));
 		sps.SetFactionKey(factions.Get(randomInts[1]));
 		spt.SetFactionKey(factions.Get(randomInts[2]));
 		
 		super.StartGameMode();
+	}
+	
+	void PlayersProtection()
+	{
+		array<int> playerIds = new array<int>();
+		PlayerManager playerManager = GetGame().GetPlayerManager();
+		playerManager.GetPlayers(playerIds);
+		
+		IEntity firstSpawn = GetGame().GetWorld().FindEntityByName("KOTH_FirstSpawn");
+		IEntity secondSpawn = GetGame().GetWorld().FindEntityByName("KOTH_SecondSpawn");
+		IEntity thirdSpawn = GetGame().GetWorld().FindEntityByName("KOTH_ThirdSpawn");
+
+		foreach(int playerId : playerIds)
+		{
+			bool isPlayerInAnyProtectionZone = false;
+			
+			KOTH_SpawnProtectionTriggerEntity firstProtect = FindSpawnProtection(firstSpawn);
+			if (firstProtect.IsPlayerInside(playerId))
+				isPlayerInAnyProtectionZone = true;
+			
+			KOTH_SpawnProtectionTriggerEntity secondProtect = FindSpawnProtection(secondSpawn);
+			if (secondProtect.IsPlayerInside(playerId))
+				isPlayerInAnyProtectionZone = true;
+			
+			KOTH_SpawnProtectionTriggerEntity thirdProtect = FindSpawnProtection(thirdSpawn);
+			if (thirdProtect.IsPlayerInside(playerId))
+				isPlayerInAnyProtectionZone = true;
+			
+			Log("playerID "+playerId+ " is inside " + isPlayerInAnyProtectionZone);
+			IEntity entity = playerManager.GetPlayerControlledEntity(playerId);
+			if (!entity)
+				return;
+			SCR_DamageManagerComponent damageManager = SCR_DamageManagerComponent.Cast(entity.FindComponent(SCR_DamageManagerComponent));
+			if (!damageManager)
+				return;
+			
+			if (isPlayerInAnyProtectionZone)
+			{
+				damageManager.EnableDamageHandling(false);
+			}
+			else 
+			{
+				damageManager.EnableDamageHandling(true);
+			}
+			
+			Log("done playerID "+playerId);
+		}
+	}
+	
+	KOTH_SpawnProtectionTriggerEntity FindSpawnProtection(IEntity parent) 
+	{
+		IEntity child = parent.GetChildren();
+		KOTH_SpawnProtectionTriggerEntity spawn;
+		for (int i = 0; i < 100; i++) 
+		{
+			spawn = KOTH_SpawnProtectionTriggerEntity.Cast(child);
+			if (spawn)
+				break;
+			
+			if (child)
+				child = child.GetSibling();
+		}
+		
+		if (spawn) {
+			return KOTH_SpawnProtectionTriggerEntity.Cast(child);
+		} else {
+			return null;
+		}
 	}
 	
 	IEntity FindFlag(IEntity parent) 

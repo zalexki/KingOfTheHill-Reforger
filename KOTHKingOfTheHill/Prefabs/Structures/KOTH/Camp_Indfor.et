@@ -12,8 +12,14 @@ GenericEntity : "{FA9066DE33E8E67D}Prefabs/Structures/Military/Camps/Canvas_Cove
   }
   KOTH_SpawnProtectionTriggerEntity {
    ID "5E2B41CBEF0E4D7F"
+   components {
+    Hierarchy "{5E2C91C2FA90AEEF}" {
+    }
+   }
    TriggerShapeType Sphere
    DrawShape 1
+   TriggerActivationType "All changes"
+   PeriodicQueries 1
   }
   GameEntity : "{06BC3F18B47799AE}Prefabs/Characters/Uniforms/Pants_M70.et" {
    ID "5E1EFBF821986CDF"
