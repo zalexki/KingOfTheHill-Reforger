@@ -2,12 +2,9 @@ class KOTH_SCR_PlayerProfileComponentClass : ScriptComponentClass {}
 class KOTH_SCR_PlayerProfileComponent : ScriptComponent 
 {
 	bool m_playerIsProtected = false;
-	
-	
+
 	override protected void OnPostInit(IEntity owner)
-	{ 
-		Log("KOTH_SCR_PlayerProfileComponent OnPostInit");
-		
+	{ 	
 		GetGame().GetCallqueue().CallLater(checkForProtection, 500, true);
 	}
 	
@@ -42,10 +39,6 @@ class KOTH_SCR_PlayerProfileComponent : ScriptComponent
 			DoAskRpcProtection();
 			m_playerIsProtected = true;
 		}
-		Log("m_playerIsProtected "+m_playerIsProtected);
-		Log("isPlayerInAnyProtectionZone "+isPlayerInAnyProtectionZone);
-		Log("playerId "+playerId);
-		
 	}
 	
 	KOTH_SpawnProtectionTriggerEntity FindSpawnProtection(IEntity parent) 
