@@ -1,8 +1,6 @@
 class KOTH_SCR_PlayerProfileComponentClass : ScriptComponentClass {}
 class KOTH_SCR_PlayerProfileComponent : ScriptComponent 
 {
-	bool m_playerIsProtected = false;
-
 	void DoAskRpcBuy(int amount, string playerName)
 	{
 		Log("----------- DoAskRpcBuy");
