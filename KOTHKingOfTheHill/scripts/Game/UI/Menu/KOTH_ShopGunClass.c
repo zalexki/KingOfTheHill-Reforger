@@ -10,6 +10,18 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 		m_PreviewManager = GetGame().GetItemPreviewManager();
 	}
 	
+	void TestRpcBuySucceed()
+	{
+		TextWidget contentContainer = TextWidget.Cast(m_wRoot.FindAnyWidget("NameContainer"));
+		contentContainer.SetText("TestRpcBuySucceed");
+	}
+	
+	void TestRpcBuyFailed()
+	{
+		TextWidget contentContainer = TextWidget.Cast(m_wRoot.FindAnyWidget("NameContainer"));
+		contentContainer.SetText("TestRpcBuyFailed");
+	}
+	
 	override void OnMenuOpen()
 	{
 		super.OnMenuOpen();
