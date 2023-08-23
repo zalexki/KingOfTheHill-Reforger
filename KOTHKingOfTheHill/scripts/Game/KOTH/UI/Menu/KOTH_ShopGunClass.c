@@ -36,7 +36,6 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 		AddItemsFromConfig();
 	}
 
-
 	protected void AddItemsFromConfig()
 	{
 		KOTH_SCR_ShopGunItemList itemList = SCR_ConfigHelperT<KOTH_SCR_ShopGunItemList>.GetConfigObject("{232D181B9F9FE8D1}Configs/ShopGunItemList.conf");
@@ -45,7 +44,7 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 		foreach (int index, KOTH_SCR_ShopGunItem item : itemList.GetItems())
 		{
 			Widget newRow = GetGame().GetWorkspace().CreateWidgets("{20EF71DE68A5887E}UI/Layouts/HUD/Shop/ShopGun_ItemList.layout", contentContainer);
-
+			
 			// add click events
 			SCR_ButtonBaseComponent buyOnce = SCR_ButtonBaseComponent.GetButtonBase("PurchaseOnceButton", newRow);
 			if (buyOnce)
@@ -65,7 +64,29 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 			TextWidget pricePermWidget = TextWidget.Cast(newRow.FindAnyWidget("PricePermText"));
 			pricePermWidget.SetText(item.m_pricePermanent.ToString());
 
+			//get player level
+			int playerLevel = 1;
+			string playerName = GetGame().GetPlayerManager().GetPlayerName(GetGame().GetPlayerController().GetPlayerId());
+			KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
+			foreach (KOTH_PlayerProfileJson profile : scoreComp.m_listPlayerProfiles) {
+				if (profile.m_name == playerName) {
+					playerLevel = profile.GetLevel(); 
+				}
+			}
+			
+			if (playerLevel < item.m_level)
+			{
+				ImageWidget FadeLVLReq = ImageWidget .Cast(newRow.FindAnyWidget("FadeLVLReq"));
+				TextWidget TextLevelReq = TextWidget.Cast(newRow.FindAnyWidget("TextLevelReq"));
+				
+				FadeLVLReq.SetVisible(true);
+				TextLevelReq.SetVisible(true);
+				TextLevelReq.SetText("LEVEL " + item.m_level.ToString() + " REQUIRED");
+			}
+			
+			
 			// set visible or not buy
+			
 			// TODO: can buy from current money
 			ButtonWidget purchaseOnceButton = ButtonWidget.Cast(newRow.FindAnyWidget("PurchaseOnceButton"));
 			OverlayWidget purchaseOnceHINT = OverlayWidget.Cast(newRow.FindAnyWidget("PurchaseOnceHINT"));
@@ -95,7 +116,7 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 		string playerName = playerManager.GetPlayerName(playerId);
 
 		IEntity cont = controller.GetControlledEntity();
-		KOTH_SCR_PlayerProfileComponent kothPlayerComp = KOTH_SCR_PlayerProfileComponent.Cast(controller.FindComponent(KOTH_SCR_PlayerProfileComponent));
+		KOTH_SCR_PlayerShopComponent kothPlayerComp = KOTH_SCR_PlayerShopComponent.Cast(controller.FindComponent(KOTH_SCR_PlayerShopComponent));
 
 		int price = priceOnceWidget.GetText().ToInt();
 		kothPlayerComp.DoRpcBuy(configItemIndexWidget.GetText().ToInt());
@@ -110,12 +131,6 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 		HUD_NotifBuy(price);
 	}
 
-
-
-
-
-
-
 	protected void OnClickBuyPermanent(SCR_ButtonBaseComponent button)
 	{
 		Widget row = button.GetRootWidget().GetParent().GetParent().GetParent();
@@ -128,7 +143,7 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 		string playerName = playerManager.GetPlayerName(playerId);
 
 		IEntity cont = controller.GetControlledEntity();
-		KOTH_SCR_PlayerProfileComponent kothPlayerComp = KOTH_SCR_PlayerProfileComponent.Cast(controller.FindComponent(KOTH_SCR_PlayerProfileComponent));
+		KOTH_SCR_PlayerShopComponent kothPlayerComp = KOTH_SCR_PlayerShopComponent.Cast(controller.FindComponent(KOTH_SCR_PlayerShopComponent));
 
 		int price = priceOnceWidget.GetText().ToInt();
 		string itemResourceName = itemResourceNameWidget.GetText();
