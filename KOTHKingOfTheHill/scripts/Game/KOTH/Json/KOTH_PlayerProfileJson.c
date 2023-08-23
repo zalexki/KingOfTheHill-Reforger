@@ -90,9 +90,10 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 		return m_xp;
 	}
 
-	
-	
-	
+
+
+
+
 	
 	
 	

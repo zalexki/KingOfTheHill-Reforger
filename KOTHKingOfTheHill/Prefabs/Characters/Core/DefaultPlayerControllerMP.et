@@ -5,6 +5,8 @@ SCR_PlayerController : "{6E2BB64764E3BE9B}Prefabs/Characters/Core/DefaultPlayerC
   }
   KOTH_SCR_PlayerProfileComponent "{5E275D7583288A4D}" {
   }
+  KOTH_SCR_PlayerShopComponent "{5E2F45E2E1E7ADB2}" {
+  }
   SCR_HUDManagerComponent "{2FDC275D9EBCDB8B}" {
    InfoDisplays {
     KOTH_HUD "{5E1D6C2C8EF4FCEC}" {
