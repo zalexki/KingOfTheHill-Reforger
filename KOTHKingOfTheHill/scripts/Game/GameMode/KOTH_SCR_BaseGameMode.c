@@ -153,7 +153,7 @@ modded class SCR_BaseGameMode
 			if (thirdProtect.IsPlayerInside(playerId))
 				isPlayerInAnyProtectionZone = true;
 			
-			Log("playerID "+playerId+ " is inside " + isPlayerInAnyProtectionZone);
+			//Log("playerID "+playerId+ " is inside " + isPlayerInAnyProtectionZone);
 			IEntity entity = playerManager.GetPlayerControlledEntity(playerId);
 			if (!entity)
 				return;
@@ -170,7 +170,7 @@ modded class SCR_BaseGameMode
 				damageManager.EnableDamageHandling(true);
 			}
 			
-			Log("done playerID "+playerId);
+			//Log("done playerID "+playerId);
 		}
 	}
 	

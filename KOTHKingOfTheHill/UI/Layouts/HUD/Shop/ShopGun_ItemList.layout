@@ -360,6 +360,20 @@ SizeLayoutWidgetClass {
             }
            }
           }
+          TextWidgetClass "{5E2D2791501BA597}" {
+           Name "ConfigItemIndex"
+           Slot LayoutSlot "{5C982A3EFB88D5EA}" {
+            HorizontalAlign 2
+            Padding 0 0 15 3
+           }
+           "Is Visible" 0
+           Text "Item Name"
+           "Font Size" 28
+           "Min Font Size" 28
+           FontProperties FontProperties "{5C982A3EEE07FC34}" {
+            Bold 1
+           }
+          }
          }
         }
        }

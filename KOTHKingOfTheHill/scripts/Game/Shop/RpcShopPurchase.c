@@ -1,108 +1,30 @@
-class KOTH_PlayerProfileJson : JsonApiStruct
+class KOTH_RpcShopPurchase
 {
-    string m_name;
-	int m_money = 0;
-	int m_level = 1;
-	int m_xp = 0;
-	
-    int m_kills = 0;
-    int m_deaths = 0;
-    int m_friendlyKills = 0;
+	int playerId;
+    string playerName;
+    
+	int price;
+	string itemResourceName;
+	string magazineResourceName;
+	string secondaryMagazineResourceName;
 
+	// bool RplSave(ScriptBitWriter writer)
+    // {
+	// 	writer.WriteString(m_name);
+    //     writer.WriteInt(m_money);
+	// 	writer.WriteInt(m_level);
+	// 	writer.WriteInt(m_xp);
+	// 	return true;
+    // }
 
-    void KOTH_PlayerProfileJson()
-	{
-		RegV("m_name");
-		RegV("m_money");
-		RegV("m_level");
-		RegV("m_xp");
-		
-		RegV("m_kills");
-		RegV("m_deaths");
-		RegV("m_friendlyKills");
-	}
-	
-	void AddInZoneXpAndMoney()
-	{
-		AddXp(10);
-		AddMoney(10);
-	}
-	
-	void AddKillXpAndMoney()
-	{
-		AddXp(100);
-		AddMoney(100);
-		m_kills++;
-	}
-	
-	void BuyStuff(int price)
-	{
-	 	m_money = m_money - price;
-	}
-	
-	void RemoveFriendlyKillXpAndMoney()
-	{
-		m_money = m_money - 300;
-		m_xp = m_xp - 300;
-		m_friendlyKills++;
-	}
-	
-	int GetMoney()
-	{
-		return m_money;
-	}
-	
-	int AddMoney(int amount)
-	{
-		m_money = m_money + amount;
-		return m_money;
-	}
-
-	int AddXp(int amount)
-	{
-		m_xp = m_xp + amount;
-		
-		if (m_xp >= GetXpNextLevel()) {
-			m_level++;
-			m_xp = 0;
-		}
-		
-		return m_xp;
-	}
-	
-	int GetXp()
-	{
-		return m_xp;
-	}
-	
-	int GetXpNextLevel()
-	{
-		// TODO: up to 1000 for release
-		return (m_level + m_level - 1) * 100;
-	}
-	
-	int GetLevel()
-	{
-		return m_level;
-	}
-
-	bool RplSave(ScriptBitWriter writer)
-    {
-		writer.WriteString(m_name);
-        writer.WriteInt(m_money);
-		writer.WriteInt(m_level);
-		writer.WriteInt(m_xp);
-		return true;
-    }
-
-    bool RplLoad(ScriptBitReader reader)
-    {
-		reader.ReadString(m_name);
-		reader.ReadInt(m_money);
-		reader.ReadInt(m_level);
-		reader.ReadInt(m_xp);
-		return true;
-	}
+    // bool RplLoad(ScriptBitReader reader)
+    // {
+	// 	reader.ReadString(m_name);
+	// 	reader.ReadInt(m_money);
+	// 	reader.ReadInt(m_level);
+	// 	reader.ReadInt(m_xp);
+	// 	return true;
+	// }
 	
 	
 	// ## Encode/Decode
@@ -110,7 +32,7 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 	// Packets need to be as small as possible, so this process tries to reduce the size as much as it can.
 	// Knowing what range of values can certain variable have and encoding that range in minimum number of bits required is key.
 	// If it is to assume the full range of values is needed, helpers that already implement those for different types can be used.
-
+/*
 	static bool Extract(KOTH_PlayerProfileJson instance, ScriptCtx ctx, SSnapSerializerBase snapshot)
 	{
 		// Fill a snapshot with values from an instance.
@@ -170,4 +92,5 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 			&& snapshot.CompareInt(instance.m_xp)
 			&& snapshot.CompareString(instance.m_name);
 	}
+    */
 }

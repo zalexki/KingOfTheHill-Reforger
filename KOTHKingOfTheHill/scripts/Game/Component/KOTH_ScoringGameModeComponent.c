@@ -60,8 +60,8 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		
 		SavePlayersProfile();
 	}
-	
-	void BuyStuff(int amount, string playerName)
+
+	void BuyStuff(int price, string playerName)
 	{
 		Log("----------- BuyStuff from rpc call");
 		if (!Replication.IsServer())
@@ -70,7 +70,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		foreach (int index, KOTH_PlayerProfileJson savedProfile : m_listPlayerProfiles) 
 		{
 			if (savedProfile.m_name == playerName) {
-				savedProfile.BuyStuff(amount);
+				savedProfile.BuyStuff(price);
 				m_listPlayerProfiles.Set(index, savedProfile);
 			}
 		}

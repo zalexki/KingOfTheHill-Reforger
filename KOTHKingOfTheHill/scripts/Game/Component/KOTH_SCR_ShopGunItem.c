@@ -22,11 +22,18 @@ class KOTH_SCR_ShopGunItem
 	[Attribute("5", desc: "Level required to buy the item")]
 	int m_level;
 	
-	[Attribute("GUN", desc: "GUN, SCOPE, VEHICLE")]
-	string m_category;
+	[Attribute("0", uiwidget: UIWidgets.ComboBox, enums: ParamEnumArray.FromEnum(WeaponCategory))]
+	WeaponCategory m_category;
 	
 	[Attribute("bigGun", desc: "name")]
 	string m_itemName;
 	
 	//protected ref Resource m_SilencerNumber;
+}
+
+enum WeaponCategory
+{
+	Handgun,
+	Primary,
+	Launcher
 }
