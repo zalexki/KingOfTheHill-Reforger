@@ -5,28 +5,48 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 	ref KOTH_ListPlayerProfileJson listPlayerProfilesJson = new KOTH_ListPlayerProfileJson();
 
 	[RplProp()]
-	int m_blueforPoints = 0;
-
+	protected int m_blueforPoints = 0;
 	[RplProp()]
-	int m_redforPoints = 0;
-
+	protected int m_redforPoints = 0;
 	[RplProp()]
-	int m_greenforPoints = 0;
-
+	protected int m_greenforPoints = 0;
+	
+	[RplProp()]
+	protected int m_bluePlayers = 0;
+	int GetBluePlayers() { return m_bluePlayers; }
+	[RplProp()]
+	protected int m_redPlayers = 0;
+	int GetRedPlayers() { return m_redPlayers; }
+	[RplProp()]
+	protected int m_greenPlayers = 0;
+	int GetGreenPlayers() { return m_greenPlayers; }
+	
 	// TODO: rethink this ugly thing
 	[RplProp()]
 	ref array<ref KOTH_PlayerProfileJson> m_listPlayerProfiles = new array<ref KOTH_PlayerProfileJson>();
-
+	
+	int GetBlueforPoint()
+	{
+		return m_blueforPoints;
+	}
 	void AddBlueforPoint()
 	{
 		m_blueforPoints++;
 	}
-
+	
+	int GetRefforPoint()
+	{
+		return m_redforPoints;
+	}
 	void AddRedforPoint()
 	{
 		m_redforPoints++;
 	}
-
+	
+	int GetGreenforPoint()
+	{
+		return m_greenforPoints;
+	}
 	void AddGreenforPoint()
 	{
 		m_greenforPoints++;
@@ -51,6 +71,79 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		Replication.BumpMe();
 
 		GetGame().GetCallqueue().CallLater(SavePlayersProfile, 10000, true);
+		GetGame().GetCallqueue().CallLater(UpdatePlayerCount, 5000, true);
+	}
+
+	
+	void OnBeforeGameEnd()
+	{
+		// add end game bonus xp / money
+		int base = 100;	
+		float blueFactor = m_blueforPoints / 100;
+		float blueWinOrNot = 0.5;
+		if (m_blueforPoints == 100) { blueWinOrNot = 1; }
+		float blueBonusFloat = base * blueFactor * blueWinOrNot;
+		int blueBonus = blueBonusFloat.ToString(lenDec: 0).ToInt();
+
+		float redFactor = m_redforPoints / 100;
+		float redWinOrNot = 0.5;
+		if (m_redforPoints == 100) { redWinOrNot = 1; }
+		float redBonusFloat = base * redFactor * redWinOrNot;
+		int redBonus = redBonusFloat.ToString(lenDec: 0).ToInt();
+		
+		float greenFactor = m_greenforPoints / 100;
+		float greenWinOrNot = 0.5;
+		if (m_greenforPoints == 100) { greenWinOrNot = 1; }
+		float greenBonusFloat = base * greenFactor * greenWinOrNot;
+		int greenBonus = greenBonusFloat.ToString(lenDec: 0).ToInt();
+		
+		Log("blueWinOrNot "+blueWinOrNot);
+		Log("m_blueforPoints "+m_blueforPoints);
+		Log("blueFactor "+blueFactor);
+		Log("blueBonus "+blueBonus);
+		Log("redBonus "+redBonus);
+		Log("greenBonus "+greenBonus);
+		
+		array<int> playerIds = new array<int>();
+		PlayerManager playerManager = GetGame().GetPlayerManager();
+		if (!playerManager)
+			return;
+
+		playerManager.GetPlayers(playerIds);
+
+		foreach (int playerId : playerIds)
+		{
+			IEntity entity = playerManager.GetPlayerControlledEntity(playerId);
+			string playerName = playerManager.GetPlayerName(playerId);
+			
+			if (entity) {
+				FactionAffiliationComponent targetFactionComp = FactionAffiliationComponent.Cast(entity.FindComponent(FactionAffiliationComponent));
+				if (targetFactionComp) {
+					Faction faction = targetFactionComp.GetAffiliatedFaction();
+					if (faction) {
+						int bonus;
+						if (faction.GetFactionName() == "BLUFOR")
+							bonus = blueBonus;
+							
+						if (faction.GetFactionName() == "OPFOR")
+							bonus = redBonus;
+
+						if (faction.GetFactionName() == "INDFOR")
+							bonus = greenBonus;
+						
+						foreach (int index, KOTH_PlayerProfileJson savedProfile : m_listPlayerProfiles)
+						{
+							if (savedProfile.m_name == playerName) {
+								Rpc(RpcDo_Notif_EnemyKill, playerId);
+								//Rpc(RpcDo_Notif_EndGameBonus, playerId, bonus);
+								savedProfile.AddEndGameBonusXpAndMoney(bonus);
+								m_listPlayerProfiles.Set(index, savedProfile);
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	override void OnGameEnd()
@@ -130,7 +223,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 				}
 			}
 
-			Rpc(RpcDo_NotifFriendlyKill, killerId);
+			Rpc(RpcDo_Notif_FriendlyKill, killerId);
 
 			if (!killerIsInList) {
 				KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
@@ -155,7 +248,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 				}
 			}
 
-			Rpc(RpcDo_NotifEnemyKill, killerId);
+			Rpc(RpcDo_Notif_EnemyKill, killerId);
 
 			if (!killerIsInList) {
 				KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
@@ -177,7 +270,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 	}
 
 	[RplRpc(RplChannel.Unreliable, RplRcver.Broadcast)]
-	void RpcDo_NotifEnemyKill(int killerId)
+	void RpcDo_Notif_EnemyKill(int killerId)
 	{
 		if (GetGame().GetPlayerController().GetPlayerId() != killerId)
 			return;
@@ -192,7 +285,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 	}
 
 	[RplRpc(RplChannel.Unreliable, RplRcver.Broadcast)]
-	void RpcDo_NotifFriendlyKill(int killerId)
+	void RpcDo_Notif_FriendlyKill(int killerId)
 	{
 		if (GetGame().GetPlayerController().GetPlayerId() != killerId)
 			return;
@@ -205,6 +298,21 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 			}
 		}
 	}
+	
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	void RpcDo_Notif_EndGameBonus(int playerId, int bonus)
+	{
+		if (GetGame().GetPlayerController().GetPlayerId() != playerId)
+			return;
+
+		SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
+		if (hudManager) {
+			KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
+			if (kothHud) {
+				kothHud.EndGameBonus(bonus.ToString());
+			}
+		}
+	}
 
 	void SavePlayersProfile()
 	{
@@ -214,7 +322,49 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		listPlayerProfilesJson.m_list = m_listPlayerProfiles;
 
 		bool success = listPlayerProfilesJson.SaveToFile(saveFilePath);
-		Log(" --------- SAVING IS " + success);
+		Log("SAVING IS " + success);
+	}
+	
+	void UpdatePlayerCount()
+	{
+		// playerCounts
+		array<int> playerIds = new array<int>();
+		PlayerManager playerManager = GetGame().GetPlayerManager();
+		if (!playerManager)
+			return;
+
+		playerManager.GetPlayers(playerIds);
+
+		int countBluefor;
+		int countGreenfor;
+		int countRedfor;
+
+		foreach (int playerId : playerIds)
+		{
+			IEntity entity = playerManager.GetPlayerControlledEntity(playerId);
+			if (entity) {
+				FactionAffiliationComponent targetFactionComp = FactionAffiliationComponent.Cast(entity.FindComponent(FactionAffiliationComponent));
+				if (targetFactionComp) {
+					Faction faction = targetFactionComp.GetAffiliatedFaction();
+					if (faction) {
+						if (faction.GetFactionName() == "BLUFOR")
+							countBluefor++;
+						
+						if (faction.GetFactionName() == "OPFOR")
+							countRedfor++;
+						
+						if (faction.GetFactionName() == "INDFOR")
+							countGreenfor++;
+					}
+				}
+			}
+		}
+		
+		m_bluePlayers = countBluefor;
+		m_redPlayers = countRedfor;
+		m_greenPlayers = countGreenfor;
+		
+		Replication.BumpMe();
 	}
 
 	void BumpMe()

@@ -33,6 +33,12 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 		AddMoney(100);
 		m_kills++;
 	}
+	
+	void AddEndGameBonusXpAndMoney(int bonus)
+	{
+		AddXp(bonus);
+		AddMoney(bonus);
+	}
 
 	void Buy(int price)
 	{
