@@ -19,17 +19,16 @@ class KOTH_SCR_PlayerProfileComponent : ScriptComponent
 		Log("----------- BuyStuff from rpc call");		
 		KOTH_SCR_ShopGunItem item = m_shopItemList.Get(configItemIndex);
 		
-		// verif enough money ? or only handled by layout
 		PlayerManager playerManager = GetGame().GetPlayerManager();
 		IEntity controlledEntity = playerManager.GetPlayerControlledEntity(playerId);
-		
-		// Take $$ from player
-		SCR_BaseGameMode gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
 		KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
-		scoreComp.BuyStuff(item.m_priceOnce, playerManager.GetPlayerName(playerId));
 		
-		// Give him new weapon
-		RemoveOldItemsAndAddNewOnes(controlledEntity, item);
+		bool buySuccess = scoreComp.TryBuy(item.m_priceOnce, playerManager.GetPlayerName(playerId));
+		if (buySuccess) {
+			RemoveOldItemsAndAddNewOnes(controlledEntity, item);
+		} else {
+			DoRpc_Notif_Failed_NoSpace();
+		}
 	}
 	
 	void DoRpc_Notif_Succeed()

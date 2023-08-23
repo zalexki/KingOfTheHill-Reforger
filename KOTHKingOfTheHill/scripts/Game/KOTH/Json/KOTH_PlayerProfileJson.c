@@ -1,14 +1,13 @@
 class KOTH_PlayerProfileJson : JsonApiStruct
 {
 	string m_name;
-	int m_money = 0;
-	int m_level = 1;
-	int m_xp = 0;
+	protected int m_money = 1000;
+	protected int m_level = 1;
+	protected int m_xp = 0;
 
 	int m_kills = 0;
 	int m_deaths = 0;
 	int m_friendlyKills = 0;
-
 
 	void KOTH_PlayerProfileJson()
 	{
@@ -37,13 +36,17 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 
 	void BuyStuff(int price)
 	{
-		m_money = m_money - price;
+		m_money -= price;
 	}
 
 	void RemoveFriendlyKillXpAndMoney()
 	{
 		m_money = m_money - 300;
 		m_xp = m_xp - 300;
+		
+		if (m_xp < 0)
+			m_xp = 0;
+		
 		m_friendlyKills++;
 	}
 
@@ -51,25 +54,7 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 	{
 		return m_money;
 	}
-
-	int AddMoney(int amount)
-	{
-		m_money = m_money + amount;
-		return m_money;
-	}
-
-	int AddXp(int amount)
-	{
-		m_xp = m_xp + amount;
-
-		if (m_xp >= GetXpNextLevel()) {
-			m_level++;
-			m_xp = 0;
-		}
-
-		return m_xp;
-	}
-
+	
 	int GetXp()
 	{
 		return m_xp;
@@ -85,6 +70,36 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 	{
 		return m_level;
 	}
+
+	private int AddMoney(int amount)
+	{
+		m_money += amount;
+		
+		return m_money;
+	}
+
+	private int AddXp(int amount)
+	{
+		m_xp = m_xp + amount;
+
+		if (m_xp >= GetXpNextLevel()) {
+			m_level++;
+			m_xp = 0;
+		}
+
+		return m_xp;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// -------------------- RPL stuff
 
 	bool RplSave(ScriptBitWriter writer)
 	{
@@ -103,7 +118,6 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 		reader.ReadInt(m_xp);
 		return true;
 	}
-
 
 	// ## Encode/Decode
 	// Encoding snapshot into a packet and decoding snapshot from a packet.

@@ -61,21 +61,27 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		SavePlayersProfile();
 	}
 
-	void BuyStuff(int price, string playerName)
+	// should only be server side
+	bool TryBuy(int price, string playerName)
 	{
-		Log("----------- BuyStuff from rpc call");
-		if (!Replication.IsServer())
-			return;
-
+		bool hasEnoughMoney = true;
 		foreach (int index, KOTH_PlayerProfileJson savedProfile : m_listPlayerProfiles)
 		{
 			if (savedProfile.m_name == playerName) {
+				if (price > savedProfile.GetMoney()) {
+					hasEnoughMoney = false;
+					break;
+				}
+				
 				savedProfile.BuyStuff(price);
 				m_listPlayerProfiles.Set(index, savedProfile);
 			}
 		}
-
-		Replication.BumpMe();
+		
+		if (hasEnoughMoney)
+			Replication.BumpMe();
+		
+		return hasEnoughMoney;
 	}
 
 	override bool HandlePlayerKilled(int playerId, IEntity player, IEntity killer)
