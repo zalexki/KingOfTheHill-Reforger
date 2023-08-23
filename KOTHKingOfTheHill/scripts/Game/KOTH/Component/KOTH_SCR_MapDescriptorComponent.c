@@ -24,24 +24,24 @@ class KOTH_SCR_MapDescriptorComponent : SCR_MapDescriptorComponent
 		props.SetTextVisible(false);
 		props.SetIconVisible(true);
 		props.Activate(true);
-	
+
 		m_item.SetProps(props);
 	}
 
-    void ChangeMarker(string factionName)
-    {
-        MapDescriptorProps props = m_item.GetProps();
-        
-        Color color;
-        switch (factionName)
-        {
-            case "none": color = color.Gray75; break;
-            case "contested": color = color.Violet; break;
-            case "OPFOR": color = color.DarkRed; break;
-            case "BLUFOR": color = color.DarkBlue; break;
-            case "INDFOR": color = color.DarkGreen; break;
-        }
-        color.SetA(0.6);
-        props.SetFrontColor(color);
-    }
-};
+	void ChangeMarker(string factionName)
+	{
+		MapDescriptorProps props = m_item.GetProps();
+
+		Color color;
+		switch (factionName)
+		{
+			case "none": color = color.Gray75; break;
+			case "contested": color = color.Violet; break;
+			case "OPFOR": color = color.DarkRed; break;
+			case "BLUFOR": color = color.DarkBlue; break;
+			case "INDFOR": color = color.DarkGreen; break;
+		}
+		color.SetA(0.6);
+		props.SetFrontColor(color);
+	}
+}

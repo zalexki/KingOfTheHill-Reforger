@@ -1,12 +1,12 @@
 [ComponentEditorProps(category: "GameScripted/KOTH", description: "map markers")]
 class KOTH_SCR_TowerMapDescriptorComponentClass : SCR_MapDescriptorComponentClass{};
-class KOTH_SCR_TowerMapDescriptorComponent  : SCR_MapDescriptorComponent
+class KOTH_SCR_TowerMapDescriptorComponent : SCR_MapDescriptorComponent
 {
 	protected MapItem m_item;
 
 	[Attribute("", UIWidgets.EditBox, desc: "imageset quad koth")]
 	string m_sImageQuadKoth;
-	
+
 	void KOTH_SCR_TowerMapDescriptorComponent (IEntityComponentSource src, IEntity ent, IEntity parent)
 	{
 		GetGame().GetCallqueue().CallLater(CreateMarker, 100, false);
@@ -27,7 +27,7 @@ class KOTH_SCR_TowerMapDescriptorComponent  : SCR_MapDescriptorComponent
 		props.SetTextVisible(false);
 		props.SetIconVisible(true);
 		props.Activate(true);
-	
+
 		m_item.SetProps(props);
 	}
-};
+}

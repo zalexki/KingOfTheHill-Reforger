@@ -1,57 +1,57 @@
 class KOTH_PlayerProfileJson : JsonApiStruct
 {
-    string m_name;
+	string m_name;
 	int m_money = 0;
 	int m_level = 1;
 	int m_xp = 0;
-	
-    int m_kills = 0;
-    int m_deaths = 0;
-    int m_friendlyKills = 0;
+
+	int m_kills = 0;
+	int m_deaths = 0;
+	int m_friendlyKills = 0;
 
 
-    void KOTH_PlayerProfileJson()
+	void KOTH_PlayerProfileJson()
 	{
 		RegV("m_name");
 		RegV("m_money");
 		RegV("m_level");
 		RegV("m_xp");
-		
+
 		RegV("m_kills");
 		RegV("m_deaths");
 		RegV("m_friendlyKills");
 	}
-	
+
 	void AddInZoneXpAndMoney()
 	{
 		AddXp(10);
 		AddMoney(10);
 	}
-	
+
 	void AddKillXpAndMoney()
 	{
 		AddXp(100);
 		AddMoney(100);
 		m_kills++;
 	}
-	
+
 	void BuyStuff(int price)
 	{
-	 	m_money = m_money - price;
+		m_money = m_money - price;
 	}
-	
+
 	void RemoveFriendlyKillXpAndMoney()
 	{
 		m_money = m_money - 300;
 		m_xp = m_xp - 300;
 		m_friendlyKills++;
 	}
-	
+
 	int GetMoney()
 	{
 		return m_money;
 	}
-	
+
 	int AddMoney(int amount)
 	{
 		m_money = m_money + amount;
@@ -61,50 +61,50 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 	int AddXp(int amount)
 	{
 		m_xp = m_xp + amount;
-		
+
 		if (m_xp >= GetXpNextLevel()) {
 			m_level++;
 			m_xp = 0;
 		}
-		
+
 		return m_xp;
 	}
-	
+
 	int GetXp()
 	{
 		return m_xp;
 	}
-	
+
 	int GetXpNextLevel()
 	{
 		// TODO: up to 1000 for release
 		return (m_level + m_level - 1) * 100;
 	}
-	
+
 	int GetLevel()
 	{
 		return m_level;
 	}
 
 	bool RplSave(ScriptBitWriter writer)
-    {
+	{
 		writer.WriteString(m_name);
-        writer.WriteInt(m_money);
+		writer.WriteInt(m_money);
 		writer.WriteInt(m_level);
 		writer.WriteInt(m_xp);
 		return true;
-    }
+	}
 
-    bool RplLoad(ScriptBitReader reader)
-    {
+	bool RplLoad(ScriptBitReader reader)
+	{
 		reader.ReadString(m_name);
 		reader.ReadInt(m_money);
 		reader.ReadInt(m_level);
 		reader.ReadInt(m_xp);
 		return true;
 	}
-	
-	
+
+
 	// ## Encode/Decode
 	// Encoding snapshot into a packet and decoding snapshot from a packet.
 	// Packets need to be as small as possible, so this process tries to reduce the size as much as it can.
@@ -135,7 +135,7 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 	static void Encode(SSnapSerializerBase snapshot, ScriptCtx ctx, ScriptBitSerializer packet)
 	{
 		// Read values from snapshot, encode them into smaller representation, then
-		// write them into packet.	
+		// write them into packet.
 		snapshot.EncodeString(packet);
 		snapshot.EncodeInt(packet);
 		snapshot.EncodeInt(packet);

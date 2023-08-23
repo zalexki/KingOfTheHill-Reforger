@@ -1,32 +1,32 @@
 class KOTH_RpcShopPurchase
 {
 	int playerId;
-    string playerName;
-    
+	string playerName;
+
 	int price;
 	string itemResourceName;
 	string magazineResourceName;
 	string secondaryMagazineResourceName;
 
 	// bool RplSave(ScriptBitWriter writer)
-    // {
+	// {
 	// 	writer.WriteString(m_name);
-    //     writer.WriteInt(m_money);
+	//     writer.WriteInt(m_money);
 	// 	writer.WriteInt(m_level);
 	// 	writer.WriteInt(m_xp);
 	// 	return true;
-    // }
+	// }
 
-    // bool RplLoad(ScriptBitReader reader)
-    // {
+	// bool RplLoad(ScriptBitReader reader)
+	// {
 	// 	reader.ReadString(m_name);
 	// 	reader.ReadInt(m_money);
 	// 	reader.ReadInt(m_level);
 	// 	reader.ReadInt(m_xp);
 	// 	return true;
 	// }
-	
-	
+
+
 	// ## Encode/Decode
 	// Encoding snapshot into a packet and decoding snapshot from a packet.
 	// Packets need to be as small as possible, so this process tries to reduce the size as much as it can.
@@ -57,7 +57,7 @@ class KOTH_RpcShopPurchase
 	static void Encode(SSnapSerializerBase snapshot, ScriptCtx ctx, ScriptBitSerializer packet)
 	{
 		// Read values from snapshot, encode them into smaller representation, then
-		// write them into packet.	
+		// write them into packet.
 		snapshot.EncodeString(packet);
 		snapshot.EncodeInt(packet);
 		snapshot.EncodeInt(packet);
@@ -92,5 +92,5 @@ class KOTH_RpcShopPurchase
 			&& snapshot.CompareInt(instance.m_xp)
 			&& snapshot.CompareString(instance.m_name);
 	}
-    */
+	*/
 }
