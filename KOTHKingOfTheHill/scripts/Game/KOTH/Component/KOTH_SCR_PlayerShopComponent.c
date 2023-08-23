@@ -22,10 +22,11 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		PlayerManager playerManager = GetGame().GetPlayerManager();
 		IEntity controlledEntity = playerManager.GetPlayerControlledEntity(playerId);
 		KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
+		string playerName = playerManager.GetPlayerName(playerId);
 		
-		bool buySuccess = scoreComp.TryBuy(item.m_priceOnce, playerManager.GetPlayerName(playerId));
+		bool buySuccess = scoreComp.TryBuy(item.m_priceOnce, playerName);
 		if (buySuccess) {
-			RemoveOldItemsAndAddNewOnes(controlledEntity, item);
+			RemoveOldItemsAndAddNewOnes(controlledEntity, item, playerName);
 		} else {
 			DoRpc_Notif_Failed_NoSpace();
 		}
@@ -69,7 +70,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		shopLayout.TestRpcBuyFailed();
 	}
 	
-	void RemoveOldItemsAndAddNewOnes(IEntity player, KOTH_SCR_ShopGunItem item)
+	void RemoveOldItemsAndAddNewOnes(IEntity player, KOTH_SCR_ShopGunItem item, string playerName)
 	{
 		InventoryStorageManagerComponent inventoryStorage = InventoryStorageManagerComponent.Cast(player.FindComponent(InventoryStorageManagerComponent));
 		if (!inventoryStorage)
@@ -83,6 +84,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		if (!inventoryStorageComponent)
 			return;
 		
+		// remove primary and secondary weapon slot
 		IEntity ent1 = inventoryStorageComponent.GetSlot(0).GetAttachedEntity();
 		IEntity ent2 = inventoryStorageComponent.GetSlot(1).GetAttachedEntity();
 		if (ent1)
@@ -92,7 +94,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 			if (category == item.m_category)
 			{
 				inventoryStorage.TryRemoveItemFromStorage(ent1, inventoryStorageComponent);
-				//SCR_EntityHelper.DeleteEntityAndChildren(ent1);
+
 				RplComponent.DeleteRplEntity(ent1, false);
 			}
 		}
@@ -104,23 +106,28 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 			if (category == item.m_category)
 			{
 				inventoryStorage.TryRemoveItemFromStorage(ent2, inventoryStorageComponent);
-				//SCR_EntityHelper.DeleteEntityAndChildren(ent1);
-				RplComponent.DeleteRplEntity(ent1, false);
+				RplComponent.DeleteRplEntity(ent2, false);
 			}
-		}
-		
-		// remove primary and secondary weapon slot
-		
+		}		
 		
 		// add new weapon
 		SCR_InventoryStorageManagerComponent inventory = SCR_InventoryStorageManagerComponent.Cast(player.FindComponent(SCR_InventoryStorageManagerComponent));
 		
-		if (false == AddMags(inventory, item.m_magazineResource, item.m_magazineNumber))
+		if (false == AddMags(inventory, item.m_magazineResource, item.m_magazineNumber)) {
+			// refund
+			KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
+			scoreComp.Refund(item.m_priceOnce, playerName);
+
 			return;
+		}
 		
 		if (item.m_secondaryMagazineResource != "") {
-			if (false == AddMags(inventory, item.m_secondaryMagazineResource, item.m_secondaryMagazineNumber))
-			return;
+			if (false == AddMags(inventory, item.m_secondaryMagazineResource, item.m_secondaryMagazineNumber)) {
+				// refund
+				KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
+				scoreComp.Refund(item.m_priceOnce, playerName);
+				return;
+			}
 		}
 
 		IEntity itemBought = GetGame().SpawnEntityPrefab(Resource.Load(item.m_itemResource));
@@ -189,7 +196,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 			foreach (IEntity magazine : magazineList) {
 				inventory.TryDeleteItem(magazine);
 			}
-			
+
 			DoRpc_Notif_Failed_NoSpace();
 			
 			return false;

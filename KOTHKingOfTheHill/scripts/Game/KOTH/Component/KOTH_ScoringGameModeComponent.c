@@ -60,6 +60,20 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 
 		SavePlayersProfile();
 	}
+	
+	// should only be server side
+	void Refund(int price, string playerName)
+	{
+		foreach (int index, KOTH_PlayerProfileJson savedProfile : m_listPlayerProfiles)
+		{
+			if (savedProfile.m_name == playerName) {
+				savedProfile.Refund(price);
+				m_listPlayerProfiles.Set(index, savedProfile);
+			}
+		}
+
+		Replication.BumpMe();
+	}
 
 	// should only be server side
 	bool TryBuy(int price, string playerName)
@@ -73,7 +87,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 					break;
 				}
 				
-				savedProfile.BuyStuff(price);
+				savedProfile.Buy(price);
 				m_listPlayerProfiles.Set(index, savedProfile);
 			}
 		}

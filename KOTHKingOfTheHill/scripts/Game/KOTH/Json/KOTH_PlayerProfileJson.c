@@ -34,9 +34,14 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 		m_kills++;
 	}
 
-	void BuyStuff(int price)
+	void Buy(int price)
 	{
 		m_money -= price;
+	}
+	
+	void Refund(int price)
+	{
+		m_money += price;
 	}
 
 	void RemoveFriendlyKillXpAndMoney()
