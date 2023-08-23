@@ -9,7 +9,13 @@ class KOTH_SCR_ShopGunItem
 	
 	[Attribute(desc: "Prefab of the Arsenal item", params: "et")]
 	ResourceName m_itemResource;
-
+	
+	[Attribute(desc: "Texture of the Prefab", params: "edds")]
+	ResourceName m_textureResource;
+		
+	[Attribute(desc: "Mask of the Prefab", params: "edds")]
+	ResourceName m_maskResource;
+	
 	[Attribute(desc: "Prefab of the magazine", params: "et")]
 	ResourceName m_magazineResource;
 	

@@ -17,13 +17,12 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 	void TestRpcBuySucceed()
 	{
 		TextWidget contentContainer = TextWidget.Cast(m_wRoot.FindAnyWidget("NameContainer"));
-		contentContainer.SetText("TestRpcBuySucceed");
+		//contentContainer.SetText("TestRpcBuySucceed");
 	}
 
 	void TestRpcBuyFailed()
 	{
-		TextWidget contentContainer = TextWidget.Cast(m_wRoot.FindAnyWidget("NameContainer"));
-		contentContainer.SetText("TestRpcBuyFailed");
+		NotifErrorShop();
 	}
 
 	override void OnMenuOpen()
@@ -64,9 +63,9 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 			TextWidget ConfigItemIndexWidget = TextWidget.Cast(newRow.FindAnyWidget("ConfigItemIndex"));
 			ConfigItemIndexWidget.SetText(index.ToString());
 			TextWidget priceOnceWidget = TextWidget.Cast(newRow.FindAnyWidget("PriceOnceText"));
-			priceOnceWidget.SetText(item.m_priceOnce.ToString());
+			priceOnceWidget.SetText(item.m_priceOnce.ToString() + "$");
 			TextWidget pricePermWidget = TextWidget.Cast(newRow.FindAnyWidget("PricePermText"));
-			pricePermWidget.SetText(item.m_pricePermanent.ToString());
+			pricePermWidget.SetText(item.m_pricePermanent.ToString() + "$");
 
 			//get player level
 			int playerLevel = 1;
@@ -80,33 +79,74 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 			
 			if (playerLevel < item.m_level)
 			{
-				ImageWidget FadeLVLReq = ImageWidget .Cast(newRow.FindAnyWidget("FadeLVLReq"));
-				TextWidget TextLevelReq = TextWidget.Cast(newRow.FindAnyWidget("TextLevelReq"));
+				ButtonWidget purchaseOnceButton = ButtonWidget.Cast(newRow.FindAnyWidget("PurchaseOnceButton"));
+				ButtonWidget PurchasePermanentButton = ButtonWidget.Cast(newRow.FindAnyWidget("PurchasePermanentButton"));
 				
-				FadeLVLReq.SetVisible(true);
-				TextLevelReq.SetVisible(true);
-				TextLevelReq.SetText("LEVEL " + item.m_level.ToString() + " REQUIRED");
+				OverlayWidget purchaseOnceNoLVL = OverlayWidget.Cast(newRow.FindAnyWidget("PurchaseOnceNoLVL"));
+				OverlayWidget purchasePermNoLVL = OverlayWidget.Cast(newRow.FindAnyWidget("PurchasePermNoLVL"));
+				OverlayWidget desactivatePermHINT = OverlayWidget.Cast(newRow.FindAnyWidget("DesactivatePermHINT"));
+				
+				ImageWidget fadeLVLReq = ImageWidget .Cast(newRow.FindAnyWidget("FadeLVLReq"));
+				TextWidget textLevelReq = TextWidget.Cast(newRow.FindAnyWidget("TextLevelReq"));
+				
+				purchaseOnceButton.SetVisible(false);
+				PurchasePermanentButton.SetVisible(false);
+				desactivatePermHINT.SetVisible(false);
+				
+				purchaseOnceNoLVL.SetVisible(true);
+				purchasePermNoLVL.SetVisible(true);
+				
+				fadeLVLReq.SetVisible(true);
+				textLevelReq.SetVisible(true);
+				
+				textLevelReq.SetText("LEVEL " + item.m_level.ToString() + " REQUIRED");
 			}
-			
-			
-			// set visible or not buy
-			
-			// TODO: can buy from current money
-			ButtonWidget purchaseOnceButton = ButtonWidget.Cast(newRow.FindAnyWidget("PurchaseOnceButton"));
-			OverlayWidget purchaseOnceHINT = OverlayWidget.Cast(newRow.FindAnyWidget("PurchaseOnceHINT"));
-			purchaseOnceButton.SetVisible(true);
-			purchaseOnceHINT.SetVisible(false);
+			else 
+			{
+				// set visible or not buy
+				
+				// TODO: can buy from current money
+				ButtonWidget purchaseOnceButton = ButtonWidget.Cast(newRow.FindAnyWidget("PurchaseOnceButton"));
+				OverlayWidget purchaseOnceHINT = OverlayWidget.Cast(newRow.FindAnyWidget("PurchaseOnceHINT"));
+				purchaseOnceButton.SetVisible(true);
+				purchaseOnceHINT.SetVisible(false);
+
+			}
+
 
 			// add item preview
-			ItemPreviewWidget wRenderTarget = ItemPreviewWidget.Cast(newRow.FindAnyWidget("Preview_Image"));
+			
+			ImageWidget imageWeapon = ImageWidget .Cast(newRow.FindAnyWidget("ImageWeapon"));
+			imageWeapon.LoadImageTexture(0, item.m_textureResource);
+			imageWeapon.LoadMaskTexture(item.m_maskResource);
+			
+			
+			/*ItemPreviewWidget wRenderTarget = ItemPreviewWidget.Cast(newRow.FindAnyWidget("Preview_Image"));
 			if (wRenderTarget && m_PreviewManager)
 			{
 				Log("add to shop" + item.m_itemResource);
 				m_PreviewManager.SetPreviewItemFromPrefab(wRenderTarget, item.m_itemResource, null, false);
-			}
+			}*/
 		}
 	}
 
+	void NotifErrorShop()
+	{
+		Widget root = GetRootWidget();
+		VerticalLayoutWidget koth_scrollListshop = VerticalLayoutWidget.Cast(root.FindWidget("Overlay.VerticalLayout1.ScrollList.NotifContainer"));
+
+		Widget w = GetGame().GetWorkspace().CreateWidgets("{993FD33C936EB12C}UI/Layouts/HUD/KingOfTheHill/KOTH_ShopNotification.layout", koth_scrollListshop);
+
+		TextWidget Seconde = TextWidget.Cast(w.FindAnyWidget("Seconde"));
+		Seconde.SetText("You can't buy the weapon");
+
+		TextWidget Third = TextWidget.Cast(w.FindAnyWidget("Third"));
+		Third.SetText("your inventory are full");
+
+		SCR_FadeUIComponent compFade = SCR_FadeUIComponent.Cast(w.FindHandler(SCR_FadeUIComponent));
+		compFade.DelayedFadeOut(10000, true);
+	}
+	
 	// TODO: equip weapon,magazines ...
 	protected void OnClickBuyOnce(SCR_ButtonBaseComponent button)
 	{

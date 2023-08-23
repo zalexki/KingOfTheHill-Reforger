@@ -38,12 +38,47 @@ SizeLayoutWidgetClass {
         VerticalAlign 3
        }
        {
+        ScaleWidgetClass "{5E2F4B7B62833B69}" {
+         Name "Scale0"
+         Slot LayoutSlot "{5E2F4B7B62833BAA}" {
+          Padding 0 0 700 0
+          SizeMode Fill
+         }
+         {
+          OverlayWidgetClass "{5E2F4B635DA794E0}" {
+           Name "Overlay0"
+           Slot AlignableSlot "{5E2F4B635DA794DE}" {
+           }
+           {
+            ImageWidgetClass "{5E2F4B6340DE7D04}" {
+             Name "Image0"
+             Slot OverlayWidgetSlot "{5E2F4B6340DE7D61}" {
+              HorizontalAlign 3
+              VerticalAlign 3
+              Padding 2 2 2 2
+             }
+             Color 1 1 1 0.059
+            }
+            ImageWidgetClass "{5E2F4B7B6F9362B5}" {
+             Name "ImageWeapon"
+             Slot OverlayWidgetSlot {
+             }
+             Texture "{9EDD6DBE2080CD9F}Art/WeaponsList/ALB_RPG.edds"
+             Size 1125 225
+             Mask "{32AC04FB09C47AE0}Art/WeaponsList/Mask_RPG.edds"
+             Progress 0.9
+            }
+           }
+          }
+         }
+        }
         ItemPreviewWidgetClass "{5E1D46E396412EF3}" {
          Name "Preview_Image"
          Slot LayoutSlot "{5C982A19141049F3}" {
           Padding 0 0 700 0
           SizeMode Fill
          }
+         "Is Visible" 0
         }
        }
       }
@@ -143,6 +178,7 @@ SizeLayoutWidgetClass {
                Slot OverlayWidgetSlot "{5E2803422E4EEF65}" {
                 HorizontalAlign 3
                 VerticalAlign 3
+                Padding 2 2 2 2
                }
                "Is Visible" 0
                Color 1 1 1 1
@@ -154,10 +190,10 @@ SizeLayoutWidgetClass {
                   VerticalAlign 3
                   Padding 0 0 0 0
                  }
-                 Color 0 1 0.267 0.196
+                 Color 0 0.165 0.041 0.49
                  "Shadow Color" 0 0 0 1
                 }
-                TextWidgetClass "{5E28034269E5C09A}" : "{A6E079574AACF9A0}UI/layouts/WidgetLibrary/TextWidgets/Text_Interactive.layout" {
+                TextWidgetClass "{5E2F4B73C7EAE2E9}" : "{A6E079574AACF9A0}UI/layouts/WidgetLibrary/TextWidgets/Text_Interactive.layout" {
                  Name "Content"
                  Slot OverlayWidgetSlot "{547290FBCA5E9358}" {
                   Padding 0 12 0 12
@@ -165,8 +201,8 @@ SizeLayoutWidgetClass {
                  Clipping False
                  "Inherit Color" 1
                  Text "EQUIPED"
-                 "Font Size" 25
-                 "Min Font Size" 25
+                 "Font Size" 17
+                 "Min Font Size" 17
                  FontProperties FontProperties "{546AF489DFD25402}" {
                   Font "{3E7733BAC8C831F6}UI/Fonts/RobotoCondensed/RobotoCondensed_Regular.fnt"
                   ShadowSize 16
@@ -195,7 +231,7 @@ SizeLayoutWidgetClass {
                  Color 1 1 1 0.49
                  "Shadow Color" 0 0 0 1
                 }
-                TextWidgetClass "{5E28034BC77265F4}" : "{A6E079574AACF9A0}UI/layouts/WidgetLibrary/TextWidgets/Text_Interactive.layout" {
+                TextWidgetClass "{5E2F4B73DF699A1C}" : "{A6E079574AACF9A0}UI/layouts/WidgetLibrary/TextWidgets/Text_Interactive.layout" {
                  Name "Content"
                  Slot OverlayWidgetSlot "{547290FBCA5E9358}" {
                   Padding 0 12 0 12
@@ -203,8 +239,47 @@ SizeLayoutWidgetClass {
                  Clipping False
                  "Inherit Color" 1
                  Text "EQUIPE"
-                 "Font Size" 25
-                 "Min Font Size" 25
+                 "Font Size" 17
+                 "Min Font Size" 17
+                 FontProperties FontProperties "{546AF489DFD25402}" {
+                  Font "{3E7733BAC8C831F6}UI/Fonts/RobotoCondensed/RobotoCondensed_Regular.fnt"
+                  ShadowSize 16
+                  ShadowOffset 3 3
+                  ShadowOpacity 0.3
+                 }
+                }
+               }
+              }
+              OverlayWidgetClass "{5E2F4B76F91745E6}" {
+               Name "PurchaseOnceNoLVL"
+               Slot OverlayWidgetSlot "{5E2803422E4EEF65}" {
+                HorizontalAlign 3
+                VerticalAlign 3
+                Padding 2 2 2 2
+               }
+               "Is Visible" 0
+               Color 1 1 1 1
+               {
+                ImageWidgetClass "{5E2F4B76F91745E4}" {
+                 Name "Background"
+                 Slot OverlayWidgetSlot "{5452C531C2876D22}" {
+                  HorizontalAlign 3
+                  VerticalAlign 3
+                  Padding 0 0 0 0
+                 }
+                 Color 1 1 1 0.106
+                 "Shadow Color" 0 0 0 1
+                }
+                TextWidgetClass "{5E2F4B76F91745E3}" : "{A6E079574AACF9A0}UI/layouts/WidgetLibrary/TextWidgets/Text_Interactive.layout" {
+                 Name "Content"
+                 Slot OverlayWidgetSlot "{547290FBCA5E9358}" {
+                  Padding 0 12 0 12
+                 }
+                 Clipping False
+                 "Inherit Color" 1
+                 Text "BUY ONCE"
+                 "Font Size" 17
+                 "Min Font Size" 17
                  FontProperties FontProperties "{546AF489DFD25402}" {
                   Font "{3E7733BAC8C831F6}UI/Fonts/RobotoCondensed/RobotoCondensed_Regular.fnt"
                   ShadowSize 16
@@ -297,7 +372,7 @@ SizeLayoutWidgetClass {
                   VerticalAlign 3
                   Padding 0 0 0 0
                  }
-                 Color 0.251 0.502 0 0.745
+                 Color 0.251 0.502 0 0.49
                  "Shadow Color" 0 0 0 1
                 }
                 TextWidgetClass "{5E28034B9DA71B6B}" : "{A6E079574AACF9A0}UI/layouts/WidgetLibrary/TextWidgets/Text_Interactive.layout" {
@@ -324,6 +399,7 @@ SizeLayoutWidgetClass {
                Slot OverlayWidgetSlot "{5E2803422E4EEF65}" {
                 HorizontalAlign 3
                 VerticalAlign 3
+                Padding 2 2 2 2
                }
                Color 1 1 1 1
                {
@@ -334,7 +410,7 @@ SizeLayoutWidgetClass {
                   VerticalAlign 3
                   Padding 0 0 0 0
                  }
-                 Color 0.502 0 0.016 0.745
+                 Color 0.502 0 0 0.49
                  "Shadow Color" 0 0 0 1
                 }
                 TextWidgetClass "{5E28DC073BDF63DC}" : "{A6E079574AACF9A0}UI/layouts/WidgetLibrary/TextWidgets/Text_Interactive.layout" {
@@ -345,8 +421,45 @@ SizeLayoutWidgetClass {
                  Clipping False
                  "Inherit Color" 1
                  Text "DISABLED"
-                 "Font Size" 25
-                 "Min Font Size" 25
+                 "Min Font Size" 20
+                 FontProperties FontProperties "{546AF489DFD25402}" {
+                  Font "{3E7733BAC8C831F6}UI/Fonts/RobotoCondensed/RobotoCondensed_Regular.fnt"
+                  ShadowSize 16
+                  ShadowOffset 3 3
+                  ShadowOpacity 0.3
+                 }
+                }
+               }
+              }
+              OverlayWidgetClass "{5E2F4B760C77D7E1}" {
+               Name "PurchasePermNoLVL"
+               Slot OverlayWidgetSlot "{5E2803422E4EEF65}" {
+                HorizontalAlign 3
+                VerticalAlign 3
+                Padding 2 2 2 2
+               }
+               "Is Visible" 0
+               Color 1 1 1 1
+               {
+                ImageWidgetClass "{5E2F4B760C77D7FF}" {
+                 Name "Background"
+                 Slot OverlayWidgetSlot "{5452C531C2876D22}" {
+                  HorizontalAlign 3
+                  VerticalAlign 3
+                  Padding 0 0 0 0
+                 }
+                 Color 1 1 1 0.102
+                 "Shadow Color" 0 0 0 1
+                }
+                TextWidgetClass "{5E2F4B760C77D7FA}" : "{A6E079574AACF9A0}UI/layouts/WidgetLibrary/TextWidgets/Text_Interactive.layout" {
+                 Name "Content"
+                 Slot OverlayWidgetSlot "{547290FBCA5E9358}" {
+                  Padding 0 12 0 12
+                 }
+                 Clipping False
+                 "Inherit Color" 1
+                 Text "PERMANENT BUY"
+                 "Min Font Size" 20
                  FontProperties FontProperties "{546AF489DFD25402}" {
                   Font "{3E7733BAC8C831F6}UI/Fonts/RobotoCondensed/RobotoCondensed_Regular.fnt"
                   ShadowSize 16

@@ -187,6 +187,35 @@ FrameWidgetClass {
       }
      }
     }
+    VerticalLayoutWidgetClass "{5E2F4B604E7827CB}" {
+     Name "VerticalLayout1"
+     Slot OverlayWidgetSlot "{5E2F4B604E782622}" {
+      HorizontalAlign 3
+      VerticalAlign 3
+      Padding 1580 150 0 0
+     }
+     {
+      ScrollLayoutWidgetClass "{5E2F4B6060EB21C7}" {
+       Name "ScrollList"
+       Slot LayoutSlot "{5E24E96F7FE5C3E8}" {
+        HorizontalAlign 1
+        Padding 0 0 0 0
+        SizeMode Auto
+       }
+       {
+        VerticalLayoutWidgetClass "{5E2F4B6060EB21C5}" {
+         Name "NotifContainer"
+         Slot AlignableSlot "{5E24E9642D093960}" {
+          HorizontalAlign 3
+          VerticalAlign 3
+          Padding 0 0 0 0
+         }
+         "Fill Origin" Bottom
+        }
+       }
+      }
+     }
+    }
    }
   }
  }
