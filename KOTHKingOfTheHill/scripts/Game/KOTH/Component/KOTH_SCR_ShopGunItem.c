@@ -13,6 +13,9 @@ class KOTH_SCR_ShopGunItem
 	[Attribute("5", desc: "Number of magazines added when equiped")]
 	int m_magazineNumber;
 	
+	[Attribute("5", desc: "Number of magazines added when equiped")]
+	int m_secondaryMagazineNumber;
+	
 	[Attribute("1000", desc: "Price buy once")]
 	int m_priceOnce;
 	
