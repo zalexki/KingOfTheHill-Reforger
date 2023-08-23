@@ -25,7 +25,7 @@ class KOTH_SCR_ShopGunItem
 	[Attribute("0", uiwidget: UIWidgets.ComboBox, enums: ParamEnumArray.FromEnum(WeaponCategory))]
 	WeaponCategory m_category;
 	
-	[Attribute("bigGun", desc: "name")]
+	[Attribute("baguette", desc: "name")]
 	string m_itemName;
 	
 	//protected ref Resource m_SilencerNumber;
