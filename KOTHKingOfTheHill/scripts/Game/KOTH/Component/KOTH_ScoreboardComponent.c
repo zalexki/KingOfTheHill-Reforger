@@ -1,12 +1,7 @@
 [EntityEditorProps(category: "GameScripted/Scoreboard", description: "Scoreboard component")]
-class KOTH_ScoreboardComponentClass : ScriptComponentClass
-{
-}
-
-//------------------------------------------------------------------------------------------------
+class KOTH_ScoreboardComponentClass : ScriptComponentClass { }
 class KOTH_ScoreboardComponent : ScriptComponent
 {
-
 	SoundComponent m_soundComponent;
 	TextWidget m_MaintextWidget;
 	TextWidget m_leveltextWidget;
@@ -17,7 +12,6 @@ class KOTH_ScoreboardComponent : ScriptComponent
 	[Attribute("", UIWidgets.ResourceNamePicker, desc: "Path to layout file to create", params: "layout")]
 	ResourceName m_sLayoutPath;
 
-	//------------------------------------------------------------------------------------------------
 	override void EOnInit(IEntity owner)
 	{
 		super.EOnInit(owner);
@@ -42,12 +36,8 @@ class KOTH_ScoreboardComponent : ScriptComponent
 		m_renderTargetTexture.SetGUIWidget(owner, 0);
 	}
 
-	//------------------------------------------------------------------------------------------------
-
 	override void OnPostInit(IEntity owner)
 	{
 		SetEventMask(owner, EntityEvent.INIT);
 	};
-
-	//------------------------------------------------------------------------------------------------
 }

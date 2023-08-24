@@ -2,6 +2,6 @@ modded class SCR_GameOverScreenManagerComponent: SCR_BaseGameModeComponent
 {
 	override void OnGameModeEnd(SCR_GameModeEndData data)
 	{
-		GetGame().GetCallqueue().CallLater(OnInitDelayedEndGame, 5000);
+		GetGame().GetCallqueue().CallLater(OnInitDelayedEndGame, 2000);
 	}
 }

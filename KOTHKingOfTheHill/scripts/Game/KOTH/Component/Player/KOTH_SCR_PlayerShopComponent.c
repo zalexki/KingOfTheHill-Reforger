@@ -1,11 +1,15 @@
 class KOTH_SCR_PlayerShopComponentClass : ScriptComponentClass {}
 class KOTH_SCR_PlayerShopComponent : ScriptComponent 
 {
-	private ref array<ref KOTH_SCR_ShopGunItem> m_shopItemList;
-	
+	protected ref array<ref KOTH_SCR_ShopGunItem> m_shopItemList;
+	protected string m_playerUID;
+
 	override void OnPostInit(IEntity owner)
 	{
 		m_shopItemList = SCR_ConfigHelperT<KOTH_SCR_ShopGunItemList>.GetConfigObject("{232D181B9F9FE8D1}Configs/ShopGunItemList.conf").GetItems();
+		PlayerController controller = GetGame().GetPlayerController();
+		if (controller)
+			m_playerUID = GetGame().GetBackendApi().GetPlayerUID(controller.GetPlayerId());
 	}
 	
 	void DoRpcBuy(int configItemIndex, string playerUID, int playerId)

@@ -5,7 +5,8 @@ class KOTH_SCR_PlayerProfileComponent : ScriptComponent
 	
 	override protected void OnPostInit(IEntity owner)
 	{
-//		if ()
-//		m_playerUID = GetGame().GetBackendApi().GetPlayerUID(GetGame().GetPlayerController().GetPlayerId());
+		PlayerController controller = GetGame().GetPlayerController();
+		if (controller)
+			m_playerUID = GetGame().GetBackendApi().GetPlayerUID(controller.GetPlayerId());
 	}
 }

@@ -53,7 +53,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		m_listPlayerProfiles = listPlayerProfilesJson.m_list;
 		Replication.BumpMe();
 
-		GetGame().GetCallqueue().CallLater(SavePlayersProfile, 10000, true);
+		GetGame().GetCallqueue().CallLater(SavePlayersProfile, 30000, true);
 		GetGame().GetCallqueue().CallLater(UpdatePlayerCount, 5000, true);
 	}
 
@@ -61,7 +61,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 	void OnBeforeGameEnd()
 	{
 		// add end game bonus xp / money
-		int base = 100;	
+		int base = 10000;	
 		float blueFactor = m_blueforPoints / 100;
 		float blueWinOrNot = 0.5;
 		if (m_blueforPoints == 100) { blueWinOrNot = 1; }
