@@ -130,6 +130,7 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 		}
 	}
 
+	//informe player error in buy
 	void NotifErrorShop()
 	{
 		Widget root = GetRootWidget();
