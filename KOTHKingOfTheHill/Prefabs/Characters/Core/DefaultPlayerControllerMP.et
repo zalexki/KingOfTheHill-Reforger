@@ -1,7 +1,7 @@
 SCR_PlayerController : "{6E2BB64764E3BE9B}Prefabs/Characters/Core/DefaultPlayerController.et" {
  ID "1A9BA6BEFA06E3B1"
  components {
-  KOTH_SCR_MapMarkerHandlerComponent "{5E1F1064315CB689}" {
+  KOTH_SCR_PlayerMapMarkerHandlerComponent "{5E1F1064315CB689}" {
   }
   KOTH_SCR_PlayerProfileComponent "{5E275D7583288A4D}" {
   }

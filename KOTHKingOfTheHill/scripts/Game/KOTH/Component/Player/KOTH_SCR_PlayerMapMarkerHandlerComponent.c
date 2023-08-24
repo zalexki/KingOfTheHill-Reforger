@@ -1,6 +1,6 @@
 [EntityEditorProps(category: "GameScripted/Koth", description: "Handles Map Markers.")]
-class KOTH_SCR_MapMarkerHandlerComponentClass : ScriptComponentClass{};
-class KOTH_SCR_MapMarkerHandlerComponent : ScriptComponent
+class KOTH_SCR_PlayerMapMarkerHandlerComponentClass : ScriptComponentClass{};
+class KOTH_SCR_PlayerMapMarkerHandlerComponent : ScriptComponent
 {
 	protected SCR_PlayerController m_playerController;
 	protected SCR_MapEntity m_mapEntity;
@@ -14,7 +14,7 @@ class KOTH_SCR_MapMarkerHandlerComponent : ScriptComponent
 		return (m_rplComponent && m_rplComponent.IsProxy());
 	}
 
-	void ~KOTH_SCR_MapMarkerHandlerComponent()
+	void ~KOTH_SCR_PlayerMapMarkerHandlerComponent()
 	{
 		m_mapEntity.GetOnMapOpen().Remove(OnPlayerMapOpen);
 		m_mapEntity.GetOnMapZoom().Remove(OnPlayerMapZoom);
@@ -29,7 +29,7 @@ class KOTH_SCR_MapMarkerHandlerComponent : ScriptComponent
 
 		if (!m_playerController)
 		{
-			Print("KOTH_SCR_MapMarkerHandlerComponent must be attached to PlayerController!", LogLevel.ERROR);
+			Print("KOTH_SCR_PlayerMapMarkerHandlerComponent must be attached to PlayerController!", LogLevel.ERROR);
 			return;
 		}
 
