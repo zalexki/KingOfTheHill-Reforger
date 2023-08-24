@@ -1,5 +1,5 @@
 [BaseContainerProps(configRoot:true)]
-class KOTH_SCR_ShopGunItem
+class KOTH_SCR_ShopGunItem : KOTH_SCR_ShopItem
 {
 	[Attribute("baguette", desc: "name")]
 	string m_itemName;
@@ -36,6 +36,11 @@ class KOTH_SCR_ShopGunItem
 
 	[Attribute("5", desc: "Level required to buy the item")]
 	int m_level;
+}
+
+class KOTH_SCR_ShopItem
+{
+
 }
 
 enum WeaponCategory

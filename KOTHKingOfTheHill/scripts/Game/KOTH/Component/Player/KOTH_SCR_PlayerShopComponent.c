@@ -30,12 +30,12 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 			bool isSuccess = RemoveOldItemsAndAddNewOnes(controlledEntity, item, playerUID);
 			
 			if (!isSuccess) {
-				DoRpc_Notif_Failed_NoSpace();
+				DoRpc_Notif_Failed_NoSpace(configItemIndex);
 			}
 		} 
 		else 
 		{
-			DoRpc_Notif_Failed_NoMoney();
+			DoRpc_Notif_Failed_NoMoney(configItemIndex);
 		}
 	}
 	
@@ -55,17 +55,16 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		if (!shopLayout)
 			return;
 		
-		shopLayout.TestRpcBuySucceed();
 		shopLayout.HUD_NotifBuy(price);
 	}
 	
-	void DoRpc_Notif_Failed_NoSpace()
+	void DoRpc_Notif_Failed_NoSpace(int configItemIndex)
 	{
-		Rpc(RpcDo_NotifBuy_Failed_NoSpace);
+		Rpc(RpcDo_NotifBuy_Failed_NoSpace, configItemIndex);
 	}
 	
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
-	void RpcDo_NotifBuy_Failed_NoSpace()
+	void RpcDo_NotifBuy_Failed_NoSpace(int configItemIndex)
 	{
 		ChimeraMenuBase menu = ChimeraMenuBase.CurrentChimeraMenu();
 		if (!menu)
@@ -75,16 +74,16 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		if (!shopLayout)
 			return;
 		
-		shopLayout.TestRpcBuyFailed();
+		shopLayout.NotifBuyFailedNoSpace(configItemIndex);
 	}
 	
-	void DoRpc_Notif_Failed_NoMoney()
+	void DoRpc_Notif_Failed_NoMoney(int configItemIndex)
 	{
-		Rpc(RpcDo_NotifBuy_Failed_NoMoney);
+		Rpc(RpcDo_NotifBuy_Failed_NoMoney, configItemIndex);
 	}
 	
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
-	void RpcDo_NotifBuy_Failed_NoMoney()
+	void RpcDo_NotifBuy_Failed_NoMoney(int configItemIndex)
 	{
 		ChimeraMenuBase menu = ChimeraMenuBase.CurrentChimeraMenu();
 		if (!menu)
@@ -94,7 +93,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		if (!shopLayout)
 			return;
 		
-		shopLayout.TestRpcBuyFailed();
+		shopLayout.NotifBuyFailedNoMoney(configItemIndex);
 	}
 	
 	bool RemoveOldItemsAndAddNewOnes(IEntity player, KOTH_SCR_ShopGunItem item, string playerName)
@@ -223,8 +222,6 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 			foreach (IEntity magazine : magazineList) {
 				inventory.TryDeleteItem(magazine);
 			}
-
-			DoRpc_Notif_Failed_NoSpace();
 			
 			return false;
 		}

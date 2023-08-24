@@ -1,5 +1,5 @@
 [BaseContainerProps(configRoot:true)]
-class KOTH_SCR_ShopThrowableItem
+class KOTH_SCR_ShopThrowableItem : KOTH_SCR_ShopItem
 {
 	[Attribute("baguette", desc: "name")]
 	string m_itemName;

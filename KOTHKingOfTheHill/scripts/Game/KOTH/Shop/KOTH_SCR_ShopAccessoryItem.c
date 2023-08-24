@@ -1,5 +1,5 @@
 [BaseContainerProps(configRoot:true)]
-class KOTH_SCR_ShopAccessoryItem
+class KOTH_SCR_ShopAccessoryItem : KOTH_SCR_ShopItem
 {
 	[Attribute("baguette", desc: "name")]
 	string m_itemName;

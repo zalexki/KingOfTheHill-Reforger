@@ -68,11 +68,11 @@ FrameWidgetClass {
          Slot LayoutSlot "{5E2AEA0FB87A2994}" {
           HorizontalAlign 3
           VerticalAlign 0
-          Padding 750 43 0 0
+          Padding 700 43 0 0
          }
         }
         ButtonWidgetClass "{5E2AEA082360A679}" : "{9166209BD49D507A}UI/Layouts/HUD/Shop/ShopCategorie_List.layout" {
-         Name "ShopCategorie_Ammo"
+         Name "ShopCategorie_Throwable"
          Slot LayoutSlot "{5E2AEA082360A6AA}" {
           HorizontalAlign 3
           VerticalAlign 0
@@ -84,7 +84,7 @@ FrameWidgetClass {
            {
             TextWidgetClass "{5E2AEA0E4887BC72}" {
              Prefab "{5E2AEA0E4887BC72}"
-             Text "AMMO"
+             Text "THROWABLE"
             }
            }
           }

@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{76B5EF67E9EAD97E}UI/Layouts/HUD/Shop/ShopThrowable_ItemList.layout"
+ Configurations {
+  LayoutResourceClass PC {
+  }
+  LayoutResourceClass XBOX_ONE : PC {
+  }
+  LayoutResourceClass XBOX_SERIES : PC {
+  }
+  LayoutResourceClass PS4 : PC {
+  }
+  LayoutResourceClass HEADLESS : PC {
+  }
+ }
+}

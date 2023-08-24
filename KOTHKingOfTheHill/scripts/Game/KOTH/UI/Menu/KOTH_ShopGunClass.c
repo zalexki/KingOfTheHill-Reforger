@@ -1,10 +1,10 @@
 class KOTH_ShopGunClass : ChimeraMenuBase
 {
-	private Widget m_wRoot;
-	private SCR_PlayerController m_playerController;
-	private ItemPreviewManagerEntity m_PreviewManager;
-	private KOTH_ScoringGameModeComponent m_scoreComp;
-	private string m_playerUID;
+	protected Widget m_wRoot;
+	protected SCR_PlayerController m_playerController;
+	protected ItemPreviewManagerEntity m_PreviewManager;
+	protected KOTH_ScoringGameModeComponent m_scoreComp;
+	protected string m_playerUID;
 	
 	override void OnMenuInit()
 	{
@@ -13,18 +13,84 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 		m_scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
 		m_playerUID = GetGame().GetBackendApi().GetPlayerUID(GetGame().GetPlayerController().GetPlayerId());
 	}
-
-	void TestRpcBuySucceed()
+	
+	//informe player error in buy
+	void NotifBuyFailedNoMoney(int configItemIndex)
 	{
-		TextWidget contentContainer = TextWidget.Cast(m_wRoot.FindAnyWidget("NameContainer"));
-		//contentContainer.SetText("TestRpcBuySucceed");
+		Widget root = GetRootWidget();
+		VerticalLayoutWidget koth_scrollListshop = VerticalLayoutWidget.Cast(root.FindWidget("Overlay.VerticalLayout1.ScrollList.NotifContainer"));
+
+		Widget w = GetGame().GetWorkspace().CreateWidgets("{993FD33C936EB12C}UI/Layouts/HUD/KingOfTheHill/KOTH_ShopNotification.layout", koth_scrollListshop);
+
+		TextWidget Seconde = TextWidget.Cast(w.FindAnyWidget("Seconde"));
+		Seconde.SetText("You can't buy the weapon");
+
+		TextWidget Third = TextWidget.Cast(w.FindAnyWidget("Third"));
+		Third.SetText("You don't have enough money");
+
+		SCR_FadeUIComponent compFade = SCR_FadeUIComponent.Cast(w.FindHandler(SCR_FadeUIComponent));
+		compFade.DelayedFadeOut(10000, true);
+		
+		GetGame().GetCallqueue().CallLater(DelayNotif, 10, false, configItemIndex);
 	}
 
-	void TestRpcBuyFailed()
+	void NotifBuyFailedNoSpace(int configItemIndex)
 	{
-		NotifErrorShop();
-	}
+		
+		Widget root = GetRootWidget();
+		VerticalLayoutWidget koth_scrollListshop = VerticalLayoutWidget.Cast(root.FindWidget("Overlay.VerticalLayout1.ScrollList.NotifContainer"));
 
+		Widget w = GetGame().GetWorkspace().CreateWidgets("{993FD33C936EB12C}UI/Layouts/HUD/KingOfTheHill/KOTH_ShopNotification.layout", koth_scrollListshop);
+
+		TextWidget Seconde = TextWidget.Cast(w.FindAnyWidget("Seconde"));
+		Seconde.SetText("You can't buy the weapon");
+
+		TextWidget Third = TextWidget.Cast(w.FindAnyWidget("Third"));
+		Third.SetText("Your inventory are full");
+
+		SCR_FadeUIComponent compFade = SCR_FadeUIComponent.Cast(w.FindHandler(SCR_FadeUIComponent));
+		compFade.DelayedFadeOut(10000, true);
+		
+		GetGame().GetCallqueue().CallLater(DelayNotif, 10, false, configItemIndex);
+	}
+	
+	void DelayNotif(int configItemIndex)
+	{
+		Widget root = GetRootWidget();
+		VerticalLayoutWidget koth_ContentContainer = VerticalLayoutWidget.Cast(root.FindWidget("Overlay.VerticalLayout0.HorizontalLayout0.Container.Content.Scroll.ContentContainer"));
+		
+		bool needSearch = true;
+		int i = -1;
+		Widget widget = koth_ContentContainer.GetChildren();
+		TextWidget textIndex = TextWidget.Cast(koth_ContentContainer.FindAnyWidget("ConfigItemIndex"));
+		
+		if (textIndex.GetText() == configItemIndex.ToString())
+		{
+			Print("TROUVER premier coup");
+			needSearch = false;
+		}
+		
+		while (needSearch && i < 50 )
+		{
+			i++;
+			
+			widget = widget.GetSibling();
+			textIndex = TextWidget.Cast(widget.FindAnyWidget("ConfigItemIndex"));
+			
+			if (textIndex.GetText() == configItemIndex.ToString())
+				{
+					Print("TROUVER mais pas au premier coup");
+					needSearch = false;
+				}
+		}
+		
+		ButtonWidget purchaseOnceButton = ButtonWidget.Cast(widget.FindAnyWidget("PurchaseOnceButton"));	
+		OverlayWidget purchaseOnceHINT = OverlayWidget.Cast(widget.FindAnyWidget("PurchaseOnceHINT"));
+		purchaseOnceButton.SetVisible(true);
+		purchaseOnceHINT.SetVisible(false);
+	}
+	
+	
 	override void OnMenuOpen()
 	{
 		super.OnMenuOpen();
@@ -32,13 +98,38 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 		m_wRoot = GetRootWidget();
 		SCR_NavigationButtonComponent cancel = SCR_NavigationButtonComponent.GetNavigationButtonComponent("Cancel", m_wRoot);
 		if (cancel)
-		{
-			cancel.m_OnActivated.Insert(OnClickEscape);
-		}
+			{
+				cancel.m_OnActivated.Insert(OnClickEscape);
+			}
 
+		SCR_ButtonBaseComponent shopCategorieThrowable = SCR_ButtonBaseComponent.GetButtonBase("ShopCategorie_Throwable", m_wRoot);
+		if (shopCategorieThrowable)
+			{
+				shopCategorieThrowable.m_OnClicked.Insert(OnClickThrowable);
+			}
+
+		/*SCR_ButtonBaseComponent shopCategorieThrowable = SCR_ButtonBaseComponent.GetButtonBase("ShopCategorie_Throwable", m_wRoot);
+		if (shopCategorieThrowable)
+			{
+				shopCategorieThrowable.m_OnClicked.Insert(OnClickThrowable);
+			}
+		
+		SCR_ButtonBaseComponent shopCategorieThrowable = SCR_ButtonBaseComponent.GetButtonBase("ShopCategorie_Throwable", m_wRoot);
+		if (shopCategorieThrowable)
+			{
+				shopCategorieThrowable.m_OnClicked.Insert(OnClickThrowable);
+			}
+		
+		SCR_ButtonBaseComponent shopCategorieThrowable = SCR_ButtonBaseComponent.GetButtonBase("ShopCategorie_Throwable", m_wRoot);
+		if (shopCategorieThrowable)
+			{
+				shopCategorieThrowable.m_OnClicked.Insert(OnClickThrowable);
+			}*/
+				
 		AddItemsFromConfig();
 	}
-
+	
+	//===============================================================================================================
 	protected void AddItemsFromConfig()
 	{
 		KOTH_SCR_ShopGunItemList itemList = SCR_ConfigHelperT<KOTH_SCR_ShopGunItemList>.GetConfigObject("{232D181B9F9FE8D1}Configs/ShopGunItemList.conf");
@@ -46,23 +137,29 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 
 		foreach (int index, KOTH_SCR_ShopGunItem item : itemList.GetItems())
 		{
-			Widget newRow = GetGame().GetWorkspace().CreateWidgets("{20EF71DE68A5887E}UI/Layouts/HUD/Shop/ShopGun_ItemList.layout", contentContainer);
+			onForeach("{20EF71DE68A5887E}UI/Layouts/HUD/Shop/ShopGun_ItemList.layout", KOTH_SCR_ShopGunItem.Cast(item), contentContainer, index);
+		}
+	}
+	//===============================================================================================================
+	void onForeach(string itemListlayout, KOTH_SCR_ShopGunItem item, VerticalLayoutWidget contentContainer, int index)
+	{
+		Widget newRow = GetGame().GetWorkspace().CreateWidgets(itemListlayout, contentContainer);
 			
-			// add click events
-			SCR_ButtonBaseComponent buyOnce = SCR_ButtonBaseComponent.GetButtonBase("PurchaseOnceButton", newRow);
-			if (buyOnce)
-				buyOnce.m_OnClicked.Insert(OnClickBuyOnce);
+		// add click events
+		SCR_ButtonBaseComponent buyOnce = SCR_ButtonBaseComponent.GetButtonBase("PurchaseOnceButton", newRow);
+		if (buyOnce)
+			buyOnce.m_OnClicked.Insert(OnClickBuyOnce);
 
-			/*SCR_ButtonBaseComponent buyPermanent = SCR_ButtonBaseComponent.GetButtonBase("PurchasePermanentButton", newRow);
-			if (buyPermanent)
-				buyPermanent.m_OnClicked.Insert(OnClickBuyPermanent); */
+		/*SCR_ButtonBaseComponent buyPermanent = SCR_ButtonBaseComponent.GetButtonBase("PurchasePermanentButton", newRow);
+		if (buyPermanent)
+			buyPermanent.m_OnClicked.Insert(OnClickBuyPermanent); */
 
-			// set text infos
-			TextWidget nameWidget = TextWidget.Cast(newRow.FindAnyWidget("ItemName"));
-			nameWidget.SetText(item.m_itemName);
-			TextWidget ConfigItemIndexWidget = TextWidget.Cast(newRow.FindAnyWidget("ConfigItemIndex"));
-			ConfigItemIndexWidget.SetText(index.ToString());
-			TextWidget priceOnceWidget = TextWidget.Cast(newRow.FindAnyWidget("PriceOnceText"));
+		// set text infos 
+		TextWidget nameWidget = TextWidget.Cast(newRow.FindAnyWidget("ItemName"));
+		nameWidget.SetText(item.m_itemName);
+		TextWidget ConfigItemIndexWidget = TextWidget.Cast(newRow.FindAnyWidget("ConfigItemIndex"));
+		ConfigItemIndexWidget.SetText(index.ToString());
+		TextWidget priceOnceWidget = TextWidget.Cast(newRow.FindAnyWidget("PriceOnceText"));
 			priceOnceWidget.SetText(item.m_priceOnce.ToString() + "$");
 			TextWidget pricePermWidget = TextWidget.Cast(newRow.FindAnyWidget("PricePermText"));
 			pricePermWidget.SetText(item.m_pricePermanent.ToString() + "$");
@@ -80,7 +177,7 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 			if (playerLevel < item.m_level)
 			{
 				ButtonWidget purchaseOnceButton = ButtonWidget.Cast(newRow.FindAnyWidget("PurchaseOnceButton"));
-				ButtonWidget PurchasePermanentButton = ButtonWidget.Cast(newRow.FindAnyWidget("PurchasePermanentButton"));
+				ButtonWidget purchasePermanentButton = ButtonWidget.Cast(newRow.FindAnyWidget("PurchasePermanentButton"));
 				
 				OverlayWidget purchaseOnceNoLVL = OverlayWidget.Cast(newRow.FindAnyWidget("PurchaseOnceNoLVL"));
 				OverlayWidget purchasePermNoLVL = OverlayWidget.Cast(newRow.FindAnyWidget("PurchasePermNoLVL"));
@@ -90,11 +187,24 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 				TextWidget textLevelReq = TextWidget.Cast(newRow.FindAnyWidget("TextLevelReq"));
 				
 				purchaseOnceButton.SetVisible(false);
-				PurchasePermanentButton.SetVisible(false);
-				desactivatePermHINT.SetVisible(false);
+				
+				if (purchasePermanentButton)
+				{
+					purchasePermanentButton.SetVisible(false);
+				}
+				
+				if (desactivatePermHINT)
+				{
+					desactivatePermHINT.SetVisible(false);
+				}
 				
 				purchaseOnceNoLVL.SetVisible(true);
-				purchasePermNoLVL.SetVisible(true);
+				
+				if (purchasePermNoLVL)
+				{
+					purchasePermNoLVL.SetVisible(true);
+				}
+
 				
 				fadeLVLReq.SetVisible(true);
 				textLevelReq.SetVisible(true);
@@ -127,26 +237,29 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 				Log("add to shop" + item.m_itemResource);
 				m_PreviewManager.SetPreviewItemFromPrefab(wRenderTarget, item.m_itemResource, null, false);
 			}*/
-		}
 	}
-
-	//informe player error in buy
-	void NotifErrorShop()
+	//===============================================================================================================
+	void OnClickThrowable()
 	{
-		Widget root = GetRootWidget();
-		VerticalLayoutWidget koth_scrollListshop = VerticalLayoutWidget.Cast(root.FindWidget("Overlay.VerticalLayout1.ScrollList.NotifContainer"));
-
-		Widget w = GetGame().GetWorkspace().CreateWidgets("{993FD33C936EB12C}UI/Layouts/HUD/KingOfTheHill/KOTH_ShopNotification.layout", koth_scrollListshop);
-
-		TextWidget Seconde = TextWidget.Cast(w.FindAnyWidget("Seconde"));
-		Seconde.SetText("You can't buy the weapon");
-
-		TextWidget Third = TextWidget.Cast(w.FindAnyWidget("Third"));
-		Third.SetText("your inventory are full");
-
-		SCR_FadeUIComponent compFade = SCR_FadeUIComponent.Cast(w.FindHandler(SCR_FadeUIComponent));
-		compFade.DelayedFadeOut(10000, true);
+		GetGame().GetMenuManager().CloseMenu(this);
+		//GetGame().GetMenuManager().OpenMenu(ChimeraMenuPreset.KOTH_ShopThrowable);
+	
 	}
+	//===============================================================================================================
+	void OnClickGadget()
+	{
+		GetGame().GetMenuManager().CloseMenu(this);
+		//GetGame().GetMenuManager().OpenMenu(ChimeraMenuPreset.KOTH_ShopGadget);
+	
+	}
+	//===============================================================================================================
+	void OnClickWeapons()
+	{
+		GetGame().GetMenuManager().CloseMenu(this);
+		//GetGame().GetMenuManager().OpenMenu(ChimeraMenuPreset.KOTH_ShopGun);
+	
+	}
+	//===============================================================================================================
 	
 	// TODO: equip weapon,magazines ...
 	protected void OnClickBuyOnce(SCR_ButtonBaseComponent button)
@@ -158,7 +271,7 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 		PlayerController controller = GetGame().GetPlayerController();
 		IEntity cont = controller.GetControlledEntity();
 		KOTH_SCR_PlayerShopComponent kothPlayerComp = KOTH_SCR_PlayerShopComponent.Cast(controller.FindComponent(KOTH_SCR_PlayerShopComponent));
-
+		
 		int price = priceOnceWidget.GetText().ToInt();
 		kothPlayerComp.DoRpcBuy(configItemIndexWidget.GetText().ToInt(), m_playerUID, controller.GetPlayerId());
 
@@ -209,5 +322,6 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 	protected void OnClickEscape()
 	{
 		GetGame().GetMenuManager().CloseMenu(this);
+		
 	}
 }
