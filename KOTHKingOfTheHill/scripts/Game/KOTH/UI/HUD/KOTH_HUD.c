@@ -14,7 +14,7 @@ class KOTH_HUD : SCR_InfoDisplay
 	SCR_WLibProgressBarComponent m_xpProgressBar;
 
 	KOTH_ScoringGameModeComponent m_scoreComp;
-	string m_playerName;
+	string m_playerUID;
 
 	override event void OnStartDraw(IEntity owner)
 	{
@@ -44,12 +44,8 @@ class KOTH_HUD : SCR_InfoDisplay
 			m_lvlText = TextWidget.Cast(koth_hub.FindWidget("Demi_Front.Demi_EXPERIENCE_Footer.Level"));
 			m_moneyText = TextWidget.Cast(koth_hub.FindWidget("Back.HorizontalLayout2.Money"));
 
-			SCR_BaseGameMode gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
-			m_scoreComp = KOTH_ScoringGameModeComponent.Cast(gameMode.FindComponent(KOTH_ScoringGameModeComponent));
-			PlayerManager playerManager = GetGame().GetPlayerManager();
-			PlayerController controller = GetGame().GetPlayerController();
-			int playerId = controller.GetPlayerId();
-			m_playerName = playerManager.GetPlayerName(playerId);
+			m_scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
+			m_playerUID = GetGame().GetBackendApi().GetPlayerUID(GetGame().GetPlayerController().GetPlayerId());
 		}
 
 	}
@@ -159,12 +155,16 @@ class KOTH_HUD : SCR_InfoDisplay
 		super.UpdateValues(owner, timeSlice);
 
 		// money/xp
-		KOTH_PlayerProfileJson currentProfile = new KOTH_PlayerProfileJson();
+		KOTH_PlayerProfileJson currentProfile;
 		foreach (KOTH_PlayerProfileJson savedProfile : m_scoreComp.m_listPlayerProfiles)
 		{
-			if (savedProfile.m_name == m_playerName) {
+			if (savedProfile.m_playerUID == m_playerUID) {
 				currentProfile = savedProfile;
+				break;
 			}
+		}
+		if (!currentProfile) {
+			currentProfile = new KOTH_PlayerProfileJson;
 		}
 
 		m_moneyText.SetText(currentProfile.GetMoney().ToString() + " $");
@@ -179,7 +179,7 @@ class KOTH_HUD : SCR_InfoDisplay
 		}
 		m_blueforPointsText.SetText(m_scoreComp.GetBlueforPoint().ToString());
 		m_greenforPointsText.SetText(m_scoreComp.GetGreenforPoint().ToString());
-		m_redforPointsText.SetText(m_scoreComp.GetRefforPoint().ToString());
+		m_redforPointsText.SetText(m_scoreComp.GetRedforPoint().ToString());
 		
 		// teamPlayers
 		m_blueforPlayersText.SetText(m_scoreComp.GetBluePlayers().ToString());

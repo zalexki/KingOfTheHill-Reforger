@@ -5,17 +5,6 @@ modded class SCR_BaseGameMode
 
 	IEntity m_kothTrigger;
 
-	void EndGame(int factionIndex)
-	{
-		
-		SCR_GameModeEndData gameModeEndData = SCR_GameModeEndData.CreateSimple(EGameOverTypes.FACTION_VICTORY_SCORE, winnerFactionId: factionIndex);
-		EndGameMode(gameModeEndData);
-	}
-	
-	void CloseGame()
-	{
-		GetGame().RequestClose();
-	}
 	void CheckGameEnd()
 	{
 		if (!Replication.IsServer())
@@ -31,7 +20,7 @@ modded class SCR_BaseGameMode
 			return;
 		}
 		if (scoreComp.GetBlueforPoint() >= m_winnerPointsNeeded) { factionName = "BLUFOR"; };
-		if (scoreComp.GetRefforPoint() >= m_winnerPointsNeeded) { factionName = "OPFOR"; };
+		if (scoreComp.GetRedforPoint() >= m_winnerPointsNeeded) { factionName = "OPFOR"; };
 		if (scoreComp.GetGreenforPoint() >= m_winnerPointsNeeded) { factionName = "INDFOR"; };
 
 		foreach (Faction faction : factions)
@@ -39,10 +28,15 @@ modded class SCR_BaseGameMode
 			if (faction.GetFactionName() == factionName) {
 				scoreComp.OnBeforeGameEnd();
 				int factionIndex = GetGame().GetFactionManager().GetFactionIndex(faction);
-				GetGame().GetCallqueue().CallLater(EndGame, 5000, false, factionIndex);
-				GetGame().GetCallqueue().CallLater(CloseGame, 20000, false);
+				SCR_GameModeEndData gameModeEndData = SCR_GameModeEndData.CreateSimple(EGameOverTypes.FACTION_VICTORY_SCORE, winnerFactionId: factionIndex);
+				EndGameMode(gameModeEndData);
+				GetGame().GetCallqueue().CallLater(CloseGame, 15000, false);
 			}
 		}
+	}
+	void CloseGame()
+	{
+		GetGame().RequestClose();
 	}
 
 	protected override void OnGameStart()
@@ -102,7 +96,7 @@ modded class SCR_BaseGameMode
 	{
 		SpawnVehicles();
 		GetGame().GetCallqueue().CallLater(SpawnVehicles, 10000, true);
-		GetGame().GetCallqueue().CallLater(PlayersProtection, 1000, true);
+		GetGame().GetCallqueue().CallLater(PlayersProtection, 5000, true);
 
 		IEntity firstSpawn = GetGame().GetWorld().FindEntityByName("KOTH_FirstSpawn");
 		IEntity spawnPointFirst = FindSpawnPoint(firstSpawn);

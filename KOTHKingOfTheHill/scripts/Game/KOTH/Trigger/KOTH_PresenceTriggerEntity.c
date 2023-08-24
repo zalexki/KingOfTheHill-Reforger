@@ -105,22 +105,25 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 
 				// add xp/money to players server side
 				if (Replication.IsServer()) {
-					string playerName = playerManager.GetPlayerName(playerId);
 					bool playerIsInList = false;
-
+					string playerName = playerManager.GetPlayerName(playerId);
+					string playerUID = GetGame().GetBackendApi().GetPlayerUID(playerId);
+	
 					foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.m_listPlayerProfiles)
 					{
-						if (savedProfile.m_name == playerName) {
+						if (savedProfile.m_playerUID == playerUID) {
 							savedProfile.AddInZoneXpAndMoney();
 							m_scoreComp.m_listPlayerProfiles.Set(index, savedProfile);
 							playerIsInList = true;
+							break;
 						}
 					}
 
 					if (!playerIsInList) {
 						KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
 						profile.AddInZoneXpAndMoney();
-						profile.m_name = playerName;
+						profile.m_playerName = playerName;
+						profile.m_playerUID = playerUID;
 						m_scoreComp.m_listPlayerProfiles.Insert(profile);
 					}
 				}

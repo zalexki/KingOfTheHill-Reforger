@@ -6,17 +6,27 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 
 	[RplProp()]
 	protected int m_blueforPoints = 0;
+	int GetBlueforPoint() { return m_blueforPoints; }
+	void AddBlueforPoint() { m_blueforPoints++; }
+	
 	[RplProp()]
 	protected int m_redforPoints = 0;
+	int GetRedforPoint() { return m_redforPoints; }
+	void AddRedforPoint() { m_redforPoints++; }
+	
 	[RplProp()]
 	protected int m_greenforPoints = 0;
+	int GetGreenforPoint() { return m_greenforPoints; }
+	void AddGreenforPoint() { m_greenforPoints++; }
 	
 	[RplProp()]
 	protected int m_bluePlayers = 0;
 	int GetBluePlayers() { return m_bluePlayers; }
+	
 	[RplProp()]
 	protected int m_redPlayers = 0;
 	int GetRedPlayers() { return m_redPlayers; }
+	
 	[RplProp()]
 	protected int m_greenPlayers = 0;
 	int GetGreenPlayers() { return m_greenPlayers; }
@@ -24,33 +34,6 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 	// TODO: rethink this ugly thing
 	[RplProp()]
 	ref array<ref KOTH_PlayerProfileJson> m_listPlayerProfiles = new array<ref KOTH_PlayerProfileJson>();
-	
-	int GetBlueforPoint()
-	{
-		return m_blueforPoints;
-	}
-	void AddBlueforPoint()
-	{
-		m_blueforPoints++;
-	}
-	
-	int GetRefforPoint()
-	{
-		return m_redforPoints;
-	}
-	void AddRedforPoint()
-	{
-		m_redforPoints++;
-	}
-	
-	int GetGreenforPoint()
-	{
-		return m_greenforPoints;
-	}
-	void AddGreenforPoint()
-	{
-		m_greenforPoints++;
-	}
 
 	override void OnGameModeStart()
 	{
@@ -97,9 +80,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		float greenBonusFloat = base * greenFactor * greenWinOrNot;
 		int greenBonus = greenBonusFloat.ToString(lenDec: 0).ToInt();
 		
-		Log("blueWinOrNot "+blueWinOrNot);
-		Log("m_blueforPoints "+m_blueforPoints);
-		Log("blueFactor "+blueFactor);
+		
 		Log("blueBonus "+blueBonus);
 		Log("redBonus "+redBonus);
 		Log("greenBonus "+greenBonus);
@@ -113,11 +94,11 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 
 		foreach (int playerId : playerIds)
 		{
-			IEntity entity = playerManager.GetPlayerControlledEntity(playerId);
-			string playerName = playerManager.GetPlayerName(playerId);
+			IEntity controlledEntity = playerManager.GetPlayerControlledEntity(playerId);
+			string playerUID = GetGame().GetBackendApi().GetPlayerUID(playerId);
 			
-			if (entity) {
-				FactionAffiliationComponent targetFactionComp = FactionAffiliationComponent.Cast(entity.FindComponent(FactionAffiliationComponent));
+			if (controlledEntity) {
+				FactionAffiliationComponent targetFactionComp = FactionAffiliationComponent.Cast(controlledEntity.FindComponent(FactionAffiliationComponent));
 				if (targetFactionComp) {
 					Faction faction = targetFactionComp.GetAffiliatedFaction();
 					if (faction) {
@@ -133,9 +114,8 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 						
 						foreach (int index, KOTH_PlayerProfileJson savedProfile : m_listPlayerProfiles)
 						{
-							if (savedProfile.m_name == playerName) {
-								Rpc(RpcDo_Notif_EnemyKill, playerId);
-								//Rpc(RpcDo_Notif_EndGameBonus, playerId, bonus);
+							if (savedProfile.m_playerUID == playerUID) {
+								Rpc(RpcDo_Notif_EndGameBonus, playerId, bonus);
 								savedProfile.AddEndGameBonusXpAndMoney(bonus);
 								m_listPlayerProfiles.Set(index, savedProfile);
 							}
@@ -155,11 +135,11 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 	}
 	
 	// should only be server side
-	void Refund(int price, string playerName)
+	void Refund(int price, string playerUID)
 	{
 		foreach (int index, KOTH_PlayerProfileJson savedProfile : m_listPlayerProfiles)
 		{
-			if (savedProfile.m_name == playerName) {
+			if (savedProfile.m_playerUID == playerUID) {
 				savedProfile.Refund(price);
 				m_listPlayerProfiles.Set(index, savedProfile);
 			}
@@ -169,12 +149,12 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 	}
 
 	// should only be server side
-	bool TryBuy(int price, string playerName)
+	bool TryBuy(int price, string playerUID)
 	{
 		bool hasEnoughMoney = true;
 		foreach (int index, KOTH_PlayerProfileJson savedProfile : m_listPlayerProfiles)
 		{
-			if (savedProfile.m_name == playerName) {
+			if (savedProfile.m_playerUID == playerUID) {
 				if (price > savedProfile.GetMoney()) {
 					hasEnoughMoney = false;
 					break;
@@ -216,7 +196,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_listPlayerProfiles)
 			{
 
-				if (savedProfile.m_name == killerName) {
+				if (savedProfile.m_playerName == killerName) {
 					savedProfile.RemoveFriendlyKillXpAndMoney();
 					m_listPlayerProfiles.Set(index, savedProfile);
 					killerIsInList = true;
@@ -228,20 +208,20 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 			if (!killerIsInList) {
 				KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
 				profile.RemoveFriendlyKillXpAndMoney();
-				profile.m_name = killerName;
+				profile.m_playerName = killerName;
 				m_listPlayerProfiles.Insert(profile);
 			}
 		} else {
 			// kill
 			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_listPlayerProfiles)
 			{
-				if (savedProfile.m_name == playerName) {
+				if (savedProfile.m_playerName == playerName) {
 					savedProfile.m_deaths++;
 					m_listPlayerProfiles.Set(index, savedProfile);
 					playerIsInList = true;
 				}
 
-				if (savedProfile.m_name == killerName) {
+				if (savedProfile.m_playerName == killerName) {
 					savedProfile.AddKillXpAndMoney();
 					m_listPlayerProfiles.Set(index, savedProfile);
 					killerIsInList = true;
@@ -253,14 +233,14 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 			if (!killerIsInList) {
 				KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
 				profile.AddKillXpAndMoney();
-				profile.m_name = killerName;
+				profile.m_playerName = killerName;
 				m_listPlayerProfiles.Insert(profile);
 			}
 
 			if (!playerIsInList) {
 				KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
 				profile.m_deaths++;
-				profile.m_name = playerName;
+				profile.m_playerName = playerName;
 				m_listPlayerProfiles.Insert(profile);
 			}
 		}
