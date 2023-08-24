@@ -1,14 +1,10 @@
 modded class SCR_BaseGameMode
 {
 	const string saveFilePath = "$profile:koth_profiles.json";
-	const int m_winnerPointsNeeded = 100;
+	const int m_winnerPointsNeeded = 1;
 
 	IEntity m_kothTrigger;
 
-	void CloseGame()
-	{
-		GetGame().RequestClose();
-	}
 	void CheckGameEnd()
 	{
 		if (!Replication.IsServer())
@@ -23,19 +19,24 @@ modded class SCR_BaseGameMode
 			Log("Missing KOTH_ScoringGameModeComponent on gameMode", LogLevel.FATAL);
 			return;
 		}
-		if (scoreComp.m_blueforPoints >= m_winnerPointsNeeded) { factionName = "BLUFOR"; };
-		if (scoreComp.m_redforPoints >= m_winnerPointsNeeded) { factionName = "OPFOR"; };
-		if (scoreComp.m_greenforPoints >= m_winnerPointsNeeded) { factionName = "INDFOR"; };
+		if (scoreComp.GetBlueforPoint() >= m_winnerPointsNeeded) { factionName = "BLUFOR"; };
+		if (scoreComp.GetRedforPoint() >= m_winnerPointsNeeded) { factionName = "OPFOR"; };
+		if (scoreComp.GetGreenforPoint() >= m_winnerPointsNeeded) { factionName = "INDFOR"; };
 
 		foreach (Faction faction : factions)
 		{
 			if (faction.GetFactionName() == factionName) {
+				scoreComp.OnBeforeGameEnd();
 				int factionIndex = GetGame().GetFactionManager().GetFactionIndex(faction);
 				SCR_GameModeEndData gameModeEndData = SCR_GameModeEndData.CreateSimple(EGameOverTypes.FACTION_VICTORY_SCORE, winnerFactionId: factionIndex);
 				EndGameMode(gameModeEndData);
 				GetGame().GetCallqueue().CallLater(CloseGame, 15000, false);
 			}
 		}
+	}
+	void CloseGame()
+	{
+		GetGame().RequestClose();
 	}
 
 	protected override void OnGameStart()
@@ -75,7 +76,7 @@ modded class SCR_BaseGameMode
 		slotInfo.AttachEntity(flagEntity);
 	}
 
-	void prout()
+	void SpawnVehicles()
 	{
 		IEntity vehicleSpawnOne = GetGame().GetWorld().FindEntityByName("vehicleSpawnOne");
 		SCR_AmbientVehicleSpawnPointComponent compSec = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnOne.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
@@ -93,9 +94,9 @@ modded class SCR_BaseGameMode
 	// called only server side
 	override void StartGameMode()
 	{
-		prout();
-		GetGame().GetCallqueue().CallLater(prout, 10000, true);
-		GetGame().GetCallqueue().CallLater(PlayersProtection, 1000, true);
+		SpawnVehicles();
+		GetGame().GetCallqueue().CallLater(SpawnVehicles, 10000, true);
+		GetGame().GetCallqueue().CallLater(PlayersProtection, 5000, true);
 
 		IEntity firstSpawn = GetGame().GetWorld().FindEntityByName("KOTH_FirstSpawn");
 		IEntity spawnPointFirst = FindSpawnPoint(firstSpawn);

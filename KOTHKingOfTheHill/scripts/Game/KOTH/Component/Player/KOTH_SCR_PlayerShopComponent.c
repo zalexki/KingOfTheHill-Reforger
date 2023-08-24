@@ -1,32 +1,33 @@
 class KOTH_SCR_PlayerShopComponentClass : ScriptComponentClass {}
 class KOTH_SCR_PlayerShopComponent : ScriptComponent 
 {
-	private ref array<ref KOTH_SCR_ShopGunItem> m_shopItemList;
-	
+	protected ref array<ref KOTH_SCR_ShopGunItem> m_shopItemList;
+	protected string m_playerUID;
+
 	override void OnPostInit(IEntity owner)
 	{
 		m_shopItemList = SCR_ConfigHelperT<KOTH_SCR_ShopGunItemList>.GetConfigObject("{232D181B9F9FE8D1}Configs/ShopGunItemList.conf").GetItems();
+		PlayerController controller = GetGame().GetPlayerController();
+		if (controller)
+			m_playerUID = GetGame().GetBackendApi().GetPlayerUID(controller.GetPlayerId());
 	}
 	
-	void DoRpcBuy(int configItemIndex)
+	void DoRpcBuy(int configItemIndex, string playerUID, int playerId)
 	{
-		Rpc(RpcAsk_BuyStuff, configItemIndex, GetGame().GetPlayerController().GetPlayerId());
+		Rpc(RpcAsk_BuyStuff, configItemIndex, playerUID, playerId);
 	}
 	
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	void RpcAsk_BuyStuff(int configItemIndex, int playerId)
+	void RpcAsk_BuyStuff(int configItemIndex, string playerUID, int playerId)
 	{
 		Log("----------- BuyStuff from rpc call");		
 		KOTH_SCR_ShopGunItem item = m_shopItemList.Get(configItemIndex);
-		
-		PlayerManager playerManager = GetGame().GetPlayerManager();
-		IEntity controlledEntity = playerManager.GetPlayerControlledEntity(playerId);
+		IEntity controlledEntity = GetGame().GetPlayerManager().GetPlayerControlledEntity(playerId);
 		KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
-		string playerName = playerManager.GetPlayerName(playerId);
 		
-		bool buySuccess = scoreComp.TryBuy(item.m_priceOnce, playerName);
+		bool buySuccess = scoreComp.TryBuy(item.m_priceOnce, playerUID);
 		if (buySuccess) {
-			RemoveOldItemsAndAddNewOnes(controlledEntity, item, playerName);
+			RemoveOldItemsAndAddNewOnes(controlledEntity, item, playerUID);
 		} else {
 			DoRpc_Notif_Failed_NoSpace();
 		}
