@@ -42,8 +42,6 @@ ButtonWidgetClass {
      Clipping False
      "Inherit Color" 1
      Text "BUY ONCE"
-     "Font Size" 17
-     "Min Font Size" 17
      FontProperties FontProperties "{546AF489DFD25402}" {
       Font "{3E7733BAC8C831F6}UI/Fonts/RobotoCondensed/RobotoCondensed_Regular.fnt"
       ShadowSize 16

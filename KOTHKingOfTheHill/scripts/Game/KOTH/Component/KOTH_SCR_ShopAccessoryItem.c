@@ -1,11 +1,11 @@
 [BaseContainerProps(configRoot:true)]
-class KOTH_SCR_ShopGunItem
+class KOTH_SCR_ShopAccessoryItem
 {
 	[Attribute("baguette", desc: "name")]
 	string m_itemName;
 	
-	[Attribute("0", uiwidget: UIWidgets.ComboBox, enums: ParamEnumArray.FromEnum(WeaponCategory))]
-	WeaponCategory m_category;
+	[Attribute("0", uiwidget: UIWidgets.ComboBox, enums: ParamEnumArray.FromEnum(AccessoryCategory))]
+	AccessoryCategory m_category;
 	
 	[Attribute(desc: "Prefab of the Arsenal item", params: "et")]
 	ResourceName m_itemResource;
@@ -15,18 +15,6 @@ class KOTH_SCR_ShopGunItem
 		
 	[Attribute(desc: "Mask of the Prefab", params: "edds")]
 	ResourceName m_maskResource;
-	
-	[Attribute(desc: "Prefab of the magazine", params: "et")]
-	ResourceName m_magazineResource;
-	
-	[Attribute("5", desc: "Number of magazines added when equiped")]
-	int m_magazineNumber;
-	
-	[Attribute(desc: "Prefab of the secondary magazine", params: "et")]
-	ResourceName m_secondaryMagazineResource;
-
-	[Attribute("5", desc: "Number of magazines added when equiped")]
-	int m_secondaryMagazineNumber;
 
 	[Attribute("1000", desc: "Price buy once")]
 	int m_priceOnce;
@@ -38,9 +26,10 @@ class KOTH_SCR_ShopGunItem
 	int m_level;
 }
 
-enum WeaponCategory
+enum AccessoryCategory
 {
-	Handgun,
-	Primary,
-	Launcher
+	Optics,
+	Muzzle,
+	Flashlight
+	
 }

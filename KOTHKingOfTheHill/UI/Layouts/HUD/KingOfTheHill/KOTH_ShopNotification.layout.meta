@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{9795C9A322B4D7FE}UI/Layouts/HUD/Shop/ItemListPERMUILayout.layout"
+ Name "{993FD33C936EB12C}UI/Layouts/HUD/KingOfTheHill/KOTH_ShopNotification.layout"
  Configurations {
   LayoutResourceClass PC {
   }
