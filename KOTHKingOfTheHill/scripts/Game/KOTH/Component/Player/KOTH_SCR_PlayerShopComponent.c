@@ -27,19 +27,25 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		
 		bool buySuccess = scoreComp.TryBuy(item.m_priceOnce, playerUID);
 		if (buySuccess) {
-			RemoveOldItemsAndAddNewOnes(controlledEntity, item, playerUID);
-		} else {
-			DoRpc_Notif_Failed_NoSpace();
+			bool isSuccess = RemoveOldItemsAndAddNewOnes(controlledEntity, item, playerUID);
+			
+			if (!isSuccess) {
+				DoRpc_Notif_Failed_NoSpace();
+			}
+		} 
+		else 
+		{
+			DoRpc_Notif_Failed_NoMoney();
 		}
 	}
 	
-	void DoRpc_Notif_Succeed()
+	void DoRpc_Notif_Succeed(int price)
 	{
-		Rpc(RpcDo_NotifBuy_Succeed);
+		Rpc(RpcDo_NotifBuy_Succeed, price);
 	}
 	
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
-	void RpcDo_NotifBuy_Succeed()
+	void RpcDo_NotifBuy_Succeed(int price)
 	{
 		ChimeraMenuBase menu = ChimeraMenuBase.CurrentChimeraMenu();
 		if (!menu)
@@ -50,6 +56,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 			return;
 		
 		shopLayout.TestRpcBuySucceed();
+		shopLayout.HUD_NotifBuy(price);
 	}
 	
 	void DoRpc_Notif_Failed_NoSpace()
@@ -71,19 +78,38 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		shopLayout.TestRpcBuyFailed();
 	}
 	
-	void RemoveOldItemsAndAddNewOnes(IEntity player, KOTH_SCR_ShopGunItem item, string playerName)
+	void DoRpc_Notif_Failed_NoMoney()
+	{
+		Rpc(RpcDo_NotifBuy_Failed_NoMoney);
+	}
+	
+	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
+	void RpcDo_NotifBuy_Failed_NoMoney()
+	{
+		ChimeraMenuBase menu = ChimeraMenuBase.CurrentChimeraMenu();
+		if (!menu)
+			return;
+		
+		KOTH_ShopGunClass shopLayout = KOTH_ShopGunClass.Cast(menu);
+		if (!shopLayout)
+			return;
+		
+		shopLayout.TestRpcBuyFailed();
+	}
+	
+	bool RemoveOldItemsAndAddNewOnes(IEntity player, KOTH_SCR_ShopGunItem item, string playerName)
 	{
 		InventoryStorageManagerComponent inventoryStorage = InventoryStorageManagerComponent.Cast(player.FindComponent(InventoryStorageManagerComponent));
 		if (!inventoryStorage)
-			return;
+			return false;
 		
 		SCR_CharacterInventoryStorageComponent characterInventoryStorageComp = SCR_CharacterInventoryStorageComponent.Cast(player.FindComponent(SCR_CharacterInventoryStorageComponent));
 		if (!characterInventoryStorageComp)
-			return;
+			return false;
 
 		BaseInventoryStorageComponent inventoryStorageComponent = characterInventoryStorageComp.GetWeaponStorage();
 		if (!inventoryStorageComponent)
-			return;
+			return false;
 		
 		// remove primary and secondary weapon slot
 		IEntity ent1 = inventoryStorageComponent.GetSlot(0).GetAttachedEntity();
@@ -119,7 +145,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 			KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
 			scoreComp.Refund(item.m_priceOnce, playerName);
 
-			return;
+			return false;
 		}
 		
 		if (item.m_secondaryMagazineResource != "") {
@@ -127,16 +153,16 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 				// refund
 				KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
 				scoreComp.Refund(item.m_priceOnce, playerName);
-				return;
+				return false;
 			}
 		}
 
 		IEntity itemBought = GetGame().SpawnEntityPrefab(Resource.Load(item.m_itemResource));
         inventory.TryInsertItem(itemBought);
 		
-		DoRpc_Notif_Succeed();
+		DoRpc_Notif_Succeed(item.m_priceOnce);
 		
-		return; // ---------- dont remove mags, for now ?
+		return true; // ---------- dont remove mags, for now ?
 		
 		// remove all mags
 		array<typename> components = {};
@@ -150,7 +176,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 			//SCR_EntityHelper.DeleteEntityAndChildren(entity);
 			BaseWeaponComponent wpComp = BaseWeaponComponent.Cast(entity.FindComponent(BaseWeaponComponent));
 			if (wpComp)
-				return;
+				return false;
 			
 			// not sure if needed or not
 			if (!inventoryStorage.TryRemoveItemFromStorage(entity, inventoryStorageComponent))

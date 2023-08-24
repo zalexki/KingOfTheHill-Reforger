@@ -167,9 +167,6 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 		OverlayWidget purchaseOnceHINT = OverlayWidget.Cast(row.FindAnyWidget("PurchaseOnceHINT"));
 		purchaseOnceButton.SetVisible(false);
 		purchaseOnceHINT.SetVisible(true);
-
-		// TODO: notif from server after purchase validated
-		HUD_NotifBuy(price);
 	}
 
 	protected void OnClickBuyPermanent(SCR_ButtonBaseComponent button)
@@ -198,7 +195,7 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 		//TODO: when money is spend we need to update what can be buy or no
 	}
 
-	private void HUD_NotifBuy(int amount)
+	void HUD_NotifBuy(int amount)
 	{
 		SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
 		if (hudManager) {
