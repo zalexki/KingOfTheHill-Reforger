@@ -2,6 +2,8 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 {
 	string m_playerUID;
 	string m_playerName;
+	int m_playerId;
+	
 	protected int m_money = 1000;
 	protected int m_level = 1;
 	protected int m_xp = 0;
@@ -117,8 +119,7 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 
 	bool RplSave(ScriptBitWriter writer)
 	{
-		writer.WriteString(m_playerUID);
-		writer.WriteString(m_playerName);
+		writer.WriteInt(m_playerId);
 		writer.WriteInt(m_money);
 		writer.WriteInt(m_level);
 		writer.WriteInt(m_xp);
@@ -127,8 +128,7 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 
 	bool RplLoad(ScriptBitReader reader)
 	{
-		reader.ReadString(m_playerUID);
-		reader.ReadString(m_playerName);
+		reader.ReadInt(m_playerId);
 		reader.ReadInt(m_money);
 		reader.ReadInt(m_level);
 		reader.ReadInt(m_xp);
@@ -144,8 +144,7 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 	static bool Extract(KOTH_PlayerProfileJson instance, ScriptCtx ctx, SSnapSerializerBase snapshot)
 	{
 		// Fill a snapshot with values from an instance.
-		snapshot.SerializeString(instance.m_playerUID);
-		snapshot.SerializeString(instance.m_playerName);
+		snapshot.SerializeInt(instance.m_playerId);
 		snapshot.SerializeInt(instance.m_money);
 		snapshot.SerializeInt(instance.m_level);
 		snapshot.SerializeInt(instance.m_xp);
@@ -156,8 +155,7 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 	static bool Inject(SSnapSerializerBase snapshot, ScriptCtx ctx, KOTH_PlayerProfileJson instance)
 	{
 		// Fill an instance with values from snapshot.
-		snapshot.SerializeString(instance.m_playerUID);
-		snapshot.SerializeString(instance.m_playerName);
+		snapshot.SerializeInt(instance.m_playerId);
 		snapshot.SerializeInt(instance.m_money);
 		snapshot.SerializeInt(instance.m_level);
 		snapshot.SerializeInt(instance.m_xp);
@@ -168,8 +166,7 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 	{
 		// Read values from snapshot, encode them into smaller representation, then
 		// write them into packet.
-		snapshot.EncodeString(packet);
-		snapshot.EncodeString(packet);
+		snapshot.EncodeInt(packet);
 		snapshot.EncodeInt(packet);
 		snapshot.EncodeInt(packet);
 		snapshot.EncodeInt(packet);
@@ -179,8 +176,7 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 	{
 		// Read values from packet, decode them into their original representation,
 		// then write them into snapshot.
-		snapshot.DecodeString(packet);
-		snapshot.DecodeString(packet);
+		snapshot.DecodeInt(packet);
 		snapshot.DecodeInt(packet);
 		snapshot.DecodeInt(packet);
 		snapshot.DecodeInt(packet);
@@ -202,7 +198,6 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 		return snapshot.CompareInt(instance.m_money)
 			&& snapshot.CompareInt(instance.m_level)
 			&& snapshot.CompareInt(instance.m_xp)
-			&& snapshot.CompareString(instance.m_playerUID)
-			&& snapshot.CompareString(instance.m_playerName);
+			&& snapshot.CompareInt(instance.m_playerId);
 	}
 }

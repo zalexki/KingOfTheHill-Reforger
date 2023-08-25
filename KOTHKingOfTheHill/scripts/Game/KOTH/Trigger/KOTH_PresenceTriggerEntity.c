@@ -11,7 +11,6 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 
 	override protected void EOnInit(IEntity owner)
 	{
-
 		if (SCR_Global.IsEditMode(owner))
 			return;
 
@@ -27,21 +26,13 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 		m_mapDescriptor = KOTH_SCR_MapDescriptorComponent.Cast(this.FindComponent(KOTH_SCR_MapDescriptorComponent));
 		m_scoreComp = KOTH_ScoringGameModeComponent.Cast(m_gameMode.FindComponent(KOTH_ScoringGameModeComponent));
 
+
 		GetOnDeactivate().Insert(OnDeactivation);
-		//GetOnActivate().Insert(OnActivation);
-		if (!m_mapDescriptor)
-		{
-			Log("missing KOTH_SCR_MapDescriptorComponent on KOTH_PresenceTriggerEntity", LogLevel.ERROR);
-		}
-
-
 		GetGame().GetCallqueue().CallLater(OnActivation, 10000, true);
 	}
 
 	protected void OnDeactivation(IEntity ent)
 	{
-		//Log("OnDeactivate");
-
 		array<IEntity> outEntities = {};
 		GetEntitiesInside(outEntities);
 
@@ -52,10 +43,15 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 		}
 	}
 
-	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
-	void NotifCapture(int killerId)
+	void DoRpc_NotifCapture(int playerId)
 	{
-		if (GetGame().GetPlayerController().GetPlayerId() != killerId)
+		Rpc(RpcDo_NotifCapture, playerId);
+	}
+	
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	void RpcDo_NotifCapture(int playerId)
+	{
+		if (GetGame().GetPlayerController().GetPlayerId() != playerId)
 			return;
 
 		SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
@@ -72,110 +68,99 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 		if (!m_gameMode.IsRunning())
 			return;
 
-		//m_counterTick++;
+		array<IEntity> outEntities = {};
+		
 
-		//if (m_counterTick >= 10) {
-			array<IEntity> outEntities = {};
-			GetEntitiesInside(outEntities);
+		PlayerManager playerManager = GetGame().GetPlayerManager();
+		int blueforPlayerNumber = 0;
+		int greenforPlayerNumber = 0;
+		int redforPlayerNumber = 0;
 
-			PlayerManager playerManager = GetGame().GetPlayerManager();
-			int blueforPlayerNumber = 0;
-			int greenforPlayerNumber = 0;
-			int redforPlayerNumber = 0;
+		GetEntitiesInside(outEntities);
+		foreach (IEntity entity : outEntities)
+		{
+			// verify player is not dead or unconscious
+			CharacterControllerComponent controllerComp = ChimeraCharacter.Cast(entity).GetCharacterController();
+			if (controllerComp.IsDead() || controllerComp.IsUnconscious())
+				continue;
 
-			foreach (IEntity entity : outEntities)
-			{
-				// verify player is not dead or unconscious
-				CharacterControllerComponent controllerComp = ChimeraCharacter.Cast(entity).GetCharacterController();
-				if (controllerComp.IsDead() || controllerComp.IsUnconscious())
-					continue;
-
+			if (Replication.IsServer()) {
+				 int playerId = playerManager.GetPlayerIdFromControlledEntity(entity);
+				
 				// show notif for players inside zone
-				int playerId = playerManager.GetPlayerIdFromControlledEntity(entity);
-				if (GetGame().GetPlayerController().GetPlayerId() == playerId)
-				{
-					SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
-					if (hudManager) {
-						KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
-						if (kothHud) {
-							kothHud.NotifCapture();
-						}
-					}
-				}
-
+				DoRpc_NotifCapture(playerId);
+				
 				// add xp/money to players server side
-				if (Replication.IsServer()) {
-					bool playerIsInList = false;
-					string playerName = playerManager.GetPlayerName(playerId);
-					string playerUID = GetGame().GetBackendApi().GetPlayerUID(playerId);
-	
-					foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.m_listPlayerProfiles)
-					{
-						if (savedProfile.m_playerUID == playerUID) {
-							savedProfile.AddInZoneXpAndMoney();
-							m_scoreComp.m_listPlayerProfiles.Set(index, savedProfile);
-							playerIsInList = true;
-							break;
-						}
-					}
+				bool playerIsInList = false;
+				string playerUID = GetGame().GetBackendApi().GetPlayerUID(playerId);
 
-					if (!playerIsInList) {
-						KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
-						profile.AddInZoneXpAndMoney();
-						profile.m_playerName = playerName;
-						profile.m_playerUID = playerUID;
-						m_scoreComp.m_listPlayerProfiles.Insert(profile);
+				foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.m_listPlayerProfiles)
+				{
+					if (savedProfile.m_playerId == playerId) {
+						savedProfile.AddInZoneXpAndMoney();
+						m_scoreComp.m_listPlayerProfiles.Set(index, savedProfile);
+						playerIsInList = true;
+						break;
 					}
 				}
 
-				FactionAffiliationComponent targetFactionComp = FactionAffiliationComponent.Cast(entity.FindComponent(FactionAffiliationComponent));
-				if (targetFactionComp) {
-					Faction faction = targetFactionComp.GetAffiliatedFaction();
-					if (faction) {
-						m_mapDescriptor.ChangeMarker(faction.GetFactionName());
-
-						if (faction.GetFactionName() == "BLUFOR")
-							blueforPlayerNumber++;
-
-						if (faction.GetFactionName() == "OPFOR")
-							redforPlayerNumber++;
-
-						if (faction.GetFactionName() == "INDFOR")
-							greenforPlayerNumber++;
-					}
+				if (!playerIsInList) {
+					KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
+					profile.AddInZoneXpAndMoney();
+					profile.m_playerUID = playerUID;
+					profile.m_playerId = playerId;
+					profile.m_playerName = playerManager.GetPlayerName(playerId);
+					m_scoreComp.m_listPlayerProfiles.Insert(profile);
 				}
 			}
 
-			bool isZoneContested = true;
+			FactionAffiliationComponent targetFactionComp = FactionAffiliationComponent.Cast(entity.FindComponent(FactionAffiliationComponent));
+			if (targetFactionComp) {
+				Faction faction = targetFactionComp.GetAffiliatedFaction();
+				if (faction) {
+					m_mapDescriptor.ChangeMarker(faction.GetFactionName());
 
-			if (blueforPlayerNumber > greenforPlayerNumber && blueforPlayerNumber > redforPlayerNumber) {
-				isZoneContested = false;
-				if (Replication.IsServer())
-					m_scoreComp.AddBlueforPoint();
+					if (faction.GetFactionName() == "BLUFOR")
+						blueforPlayerNumber++;
+
+					if (faction.GetFactionName() == "OPFOR")
+						redforPlayerNumber++;
+
+					if (faction.GetFactionName() == "INDFOR")
+						greenforPlayerNumber++;
+				}
 			}
+		}
 
-			if (greenforPlayerNumber > blueforPlayerNumber && greenforPlayerNumber > redforPlayerNumber) {
-				isZoneContested = false;
-				if (Replication.IsServer())
-					m_scoreComp.AddGreenforPoint();
-			}
+		bool isZoneContested = true;
 
-			if (redforPlayerNumber > greenforPlayerNumber && redforPlayerNumber > blueforPlayerNumber) {
-				isZoneContested = false;
-				if (Replication.IsServer())
-					m_scoreComp.AddRedforPoint();
-			}
-
-			// send new stats to clients
+		if (blueforPlayerNumber > greenforPlayerNumber && blueforPlayerNumber > redforPlayerNumber) {
+			isZoneContested = false;
 			if (Replication.IsServer())
-				m_scoreComp.BumpMe();
+				m_scoreComp.AddBlueforPoint();
+		}
 
-			// update zone marker
-			if (true == isZoneContested)
-				m_mapDescriptor.ChangeMarker("contested");
+		if (greenforPlayerNumber > blueforPlayerNumber && greenforPlayerNumber > redforPlayerNumber) {
+			isZoneContested = false;
+			if (Replication.IsServer())
+				m_scoreComp.AddGreenforPoint();
+		}
 
-			//m_counterTick = 0;
+		if (redforPlayerNumber > greenforPlayerNumber && redforPlayerNumber > blueforPlayerNumber) {
+			isZoneContested = false;
+			if (Replication.IsServer())
+				m_scoreComp.AddRedforPoint();
+		}
+
+		// send new stats to clients
+		if (Replication.IsServer())
+			m_scoreComp.BumpMe();
+
+		// update zone marker
+		if (true == isZoneContested)
+			m_mapDescriptor.ChangeMarker("contested");
+		
+		if (Replication.IsServer())
 			m_gameMode.CheckGameEnd();
-		//}
 	}
 }

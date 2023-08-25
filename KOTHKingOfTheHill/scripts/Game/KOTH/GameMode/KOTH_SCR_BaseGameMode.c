@@ -1,7 +1,7 @@
 modded class SCR_BaseGameMode
 {
 	const string saveFilePath = "$profile:koth_profiles.json";
-	const int m_winnerPointsNeeded = 1;
+	const int m_winnerPointsNeeded = 10;
 
 	IEntity m_kothTrigger;
 

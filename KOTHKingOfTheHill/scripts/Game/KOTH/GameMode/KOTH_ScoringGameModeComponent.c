@@ -31,6 +31,9 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 	protected int m_greenPlayers = 0;
 	int GetGreenPlayers() { return m_greenPlayers; }
 	
+	[RplProp()]
+	string m_areaState = "none";
+	
 	// TODO: rethink this ugly thing
 	[RplProp()]
 	ref array<ref KOTH_PlayerProfileJson> m_listPlayerProfiles = new array<ref KOTH_PlayerProfileJson>();
@@ -114,7 +117,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 						
 						foreach (int index, KOTH_PlayerProfileJson savedProfile : m_listPlayerProfiles)
 						{
-							if (savedProfile.m_playerUID == playerUID) {
+							if (savedProfile.m_playerId == playerId) {
 								Rpc(RpcDo_Notif_EndGameBonus, playerId, bonus);
 								savedProfile.AddEndGameBonusXpAndMoney(bonus);
 								m_listPlayerProfiles.Set(index, savedProfile);
@@ -135,11 +138,11 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 	}
 	
 	// should only be server side
-	void Refund(int price, string playerUID)
+	void Refund(int price, int playerId)
 	{
 		foreach (int index, KOTH_PlayerProfileJson savedProfile : m_listPlayerProfiles)
 		{
-			if (savedProfile.m_playerUID == playerUID) {
+			if (savedProfile.m_playerId == playerId) {
 				savedProfile.Refund(price);
 				m_listPlayerProfiles.Set(index, savedProfile);
 			}
@@ -149,12 +152,12 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 	}
 
 	// should only be server side
-	bool TryBuy(int price, string playerUID)
+	bool TryBuy(int price, int playerId)
 	{
 		bool hasEnoughMoney = true;
 		foreach (int index, KOTH_PlayerProfileJson savedProfile : m_listPlayerProfiles)
 		{
-			if (savedProfile.m_playerUID == playerUID) {
+			if (savedProfile.m_playerId == playerId) {
 				if (price > savedProfile.GetMoney()) {
 					hasEnoughMoney = false;
 					break;
@@ -209,6 +212,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 				KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
 				profile.RemoveFriendlyKillXpAndMoney();
 				profile.m_playerName = killerName;
+				profile.m_playerId = killerId;
 				m_listPlayerProfiles.Insert(profile);
 			}
 		} else {
@@ -234,6 +238,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 				KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
 				profile.AddKillXpAndMoney();
 				profile.m_playerName = killerName;
+				profile.m_playerId = killerId;
 				m_listPlayerProfiles.Insert(profile);
 			}
 
@@ -241,6 +246,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 				KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
 				profile.m_deaths++;
 				profile.m_playerName = playerName;
+				profile.m_playerId = playerId;
 				m_listPlayerProfiles.Insert(profile);
 			}
 		}
@@ -303,6 +309,70 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 
 		bool success = listPlayerProfilesJson.SaveToFile(saveFilePath);
 		Log("SAVING IS " + success);
+	}
+
+	override void OnPlayerConnected(int playerId)
+	{
+		if (!Replication.IsServer())
+			return;
+
+		Log("OnPlayerConnected "+playerId);
+		
+		GetGame().GetCallqueue().CallLater(whilePlayerUID, 500, false, playerId);
+	}
+	
+	void whilePlayerUID(int playerId)
+	{
+		bool isInList = false;
+		string playerUID = GetGame().GetBackendApi().GetPlayerUID(playerId);
+		if (playerUID == string.Empty)
+		{
+			Log("empty playerUID for "+playerId);
+			GetGame().GetCallqueue().CallLater(whilePlayerUID, 500, false, playerId);
+			return;
+		}
+		
+		foreach (int index, KOTH_PlayerProfileJson profile : m_listPlayerProfiles)
+		{
+			if (profile.m_playerUID == playerUID)
+			{
+				profile.m_playerId = playerId;
+				
+				Log("found playerId "+playerId+" is now "+playerUID);
+				m_listPlayerProfiles.Set(index, profile);
+				isInList = true;
+			}
+		}
+		
+		if (!isInList) {
+			KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
+			profile.m_playerUID = playerUID;
+			profile.m_playerId = playerId;
+			profile.m_playerName = GetGame().GetPlayerManager().GetPlayerName(playerId);
+			m_listPlayerProfiles.Insert(profile);
+			Log("added playerId "+playerId+" to "+playerUID);
+		}
+		
+		Replication.BumpMe();
+	}
+	
+	override void OnPlayerDisconnected(int playerId, KickCauseCode cause, int timeout)
+	{
+		if (!Replication.IsServer())
+			return;
+
+		Log("OnPlayerDisconnected "+playerId);
+		
+		foreach (int index, KOTH_PlayerProfileJson profile : m_listPlayerProfiles)
+		{
+			if (profile.m_playerId == playerId)
+			{
+				profile.m_playerId = -1;
+				m_listPlayerProfiles.Set(index, profile);
+			}
+		}
+		
+		Replication.BumpMe();
 	}
 	
 	void UpdatePlayerCount()

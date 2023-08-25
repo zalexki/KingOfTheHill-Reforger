@@ -4,14 +4,14 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 	private SCR_PlayerController m_playerController;
 	private ItemPreviewManagerEntity m_PreviewManager;
 	private KOTH_ScoringGameModeComponent m_scoreComp;
-	private string m_playerUID;
+	private int m_playerId;
 	
 	override void OnMenuInit()
 	{
 		super.OnMenuInit();
 		m_PreviewManager = GetGame().GetItemPreviewManager();
 		m_scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
-		m_playerUID = GetGame().GetBackendApi().GetPlayerUID(GetGame().GetPlayerController().GetPlayerId());
+		m_playerId = GetGame().GetPlayerController().GetPlayerId();
 	}
 
 	void TestRpcBuySucceed()
@@ -71,7 +71,7 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 			int playerLevel = 1;
 			KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
 			foreach (KOTH_PlayerProfileJson profile : scoreComp.m_listPlayerProfiles) {
-				if (profile.m_playerUID == m_playerUID) {
+				if (profile.m_playerId == m_playerId) {
 					playerLevel = profile.GetLevel();
 					break;
 				}
@@ -160,7 +160,7 @@ class KOTH_ShopGunClass : ChimeraMenuBase
 		KOTH_SCR_PlayerShopComponent kothPlayerComp = KOTH_SCR_PlayerShopComponent.Cast(controller.FindComponent(KOTH_SCR_PlayerShopComponent));
 
 		int price = priceOnceWidget.GetText().ToInt();
-		kothPlayerComp.DoRpcBuy(configItemIndexWidget.GetText().ToInt(), m_playerUID, controller.GetPlayerId());
+		kothPlayerComp.DoRpcBuy(configItemIndexWidget.GetText().ToInt(), controller.GetPlayerId());
 
 		// set widget equiped visible
 		ButtonWidget purchaseOnceButton = ButtonWidget.Cast(row.FindAnyWidget("PurchaseOnceButton"));

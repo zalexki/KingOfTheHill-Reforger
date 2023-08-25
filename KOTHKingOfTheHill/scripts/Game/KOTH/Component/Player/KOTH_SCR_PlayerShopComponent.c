@@ -12,22 +12,22 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 			m_playerUID = GetGame().GetBackendApi().GetPlayerUID(controller.GetPlayerId());
 	}
 	
-	void DoRpcBuy(int configItemIndex, string playerUID, int playerId)
+	void DoRpcBuy(int configItemIndex, int playerId)
 	{
-		Rpc(RpcAsk_BuyStuff, configItemIndex, playerUID, playerId);
+		Rpc(RpcAsk_BuyStuff, configItemIndex, playerId);
 	}
 	
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	void RpcAsk_BuyStuff(int configItemIndex, string playerUID, int playerId)
+	void RpcAsk_BuyStuff(int configItemIndex, int playerId)
 	{
 		Log("----------- BuyStuff from rpc call");		
 		KOTH_SCR_ShopGunItem item = m_shopItemList.Get(configItemIndex);
 		IEntity controlledEntity = GetGame().GetPlayerManager().GetPlayerControlledEntity(playerId);
 		KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
 		
-		bool buySuccess = scoreComp.TryBuy(item.m_priceOnce, playerUID);
+		bool buySuccess = scoreComp.TryBuy(item.m_priceOnce, playerId);
 		if (buySuccess) {
-			bool isSuccess = RemoveOldItemsAndAddNewOnes(controlledEntity, item, playerUID);
+			bool isSuccess = RemoveOldItemsAndAddNewOnes(controlledEntity, item, playerId);
 			
 			if (!isSuccess) {
 				DoRpc_Notif_Failed_NoSpace();
@@ -97,7 +97,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		shopLayout.TestRpcBuyFailed();
 	}
 	
-	bool RemoveOldItemsAndAddNewOnes(IEntity player, KOTH_SCR_ShopGunItem item, string playerName)
+	bool RemoveOldItemsAndAddNewOnes(IEntity player, KOTH_SCR_ShopGunItem item, int playerId)
 	{
 		InventoryStorageManagerComponent inventoryStorage = InventoryStorageManagerComponent.Cast(player.FindComponent(InventoryStorageManagerComponent));
 		if (!inventoryStorage)
@@ -143,7 +143,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		if (false == AddMags(inventory, item.m_magazineResource, item.m_magazineNumber)) {
 			// refund
 			KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
-			scoreComp.Refund(item.m_priceOnce, playerName);
+			scoreComp.Refund(item.m_priceOnce, playerId);
 
 			return false;
 		}
@@ -152,7 +152,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 			if (false == AddMags(inventory, item.m_secondaryMagazineResource, item.m_secondaryMagazineNumber)) {
 				// refund
 				KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
-				scoreComp.Refund(item.m_priceOnce, playerName);
+				scoreComp.Refund(item.m_priceOnce, playerId);
 				return false;
 			}
 		}
