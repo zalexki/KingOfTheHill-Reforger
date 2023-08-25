@@ -95,7 +95,7 @@ modded class SCR_BaseGameMode
 	override void StartGameMode()
 	{
 		SpawnVehicles();
-		GetGame().GetCallqueue().CallLater(SpawnVehicles, 10000, true);
+		GetGame().GetCallqueue().CallLater(SpawnVehicles, 60000 * 5, true);
 		GetGame().GetCallqueue().CallLater(PlayersProtection, 5000, true);
 
 		IEntity firstSpawn = GetGame().GetWorld().FindEntityByName("KOTH_FirstSpawn");

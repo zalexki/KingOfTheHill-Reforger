@@ -438,7 +438,7 @@ GenericEntity : "{FA9066DE33E8E67D}Prefabs/Structures/Military/Camps/Canvas_Cove
       }
      }
      additionalActions {
-      KOTH_ShopPerformAction "{5E28034071DD1A0F}" {
+      KOTH_ShopWeaponUserAction "{5E28034071DD1A0F}" {
        ParentContextList {
         "Default"
        }

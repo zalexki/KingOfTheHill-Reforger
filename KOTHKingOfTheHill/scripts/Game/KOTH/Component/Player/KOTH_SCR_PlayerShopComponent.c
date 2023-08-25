@@ -1,12 +1,12 @@
 class KOTH_SCR_PlayerShopComponentClass : ScriptComponentClass {}
 class KOTH_SCR_PlayerShopComponent : ScriptComponent 
 {
-	protected ref array<ref KOTH_SCR_ShopGunItem> m_shopItemList;
+	protected ref array<ref KOTH_ShopItem> m_shopItemList;
 	protected string m_playerUID;
 
 	override void OnPostInit(IEntity owner)
 	{
-		m_shopItemList = SCR_ConfigHelperT<KOTH_SCR_ShopGunItemList>.GetConfigObject("{232D181B9F9FE8D1}Configs/ShopGunItemList.conf").GetItems();
+		m_shopItemList = SCR_ConfigHelperT<KOTH_ShopItemList>.GetConfigObject("{232D181B9F9FE8D1}Configs/ShopGunItemList.conf").GetItems();
 		PlayerController controller = GetGame().GetPlayerController();
 		if (controller)
 			m_playerUID = GetGame().GetBackendApi().GetPlayerUID(controller.GetPlayerId());
@@ -21,7 +21,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 	void RpcAsk_BuyStuff(int configItemIndex, int playerId)
 	{
 		Log("----------- BuyStuff from rpc call");		
-		KOTH_SCR_ShopGunItem item = m_shopItemList.Get(configItemIndex);
+		KOTH_ShopItem item = m_shopItemList.Get(configItemIndex);
 		IEntity controlledEntity = GetGame().GetPlayerManager().GetPlayerControlledEntity(playerId);
 		KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
 		
@@ -51,7 +51,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		if (!menu)
 			return;
 		
-		KOTH_ShopGunClass shopLayout = KOTH_ShopGunClass.Cast(menu);
+		KOTH_ShopUI shopLayout = KOTH_ShopUI.Cast(menu);
 		if (!shopLayout)
 			return;
 		
@@ -71,7 +71,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		if (!menu)
 			return;
 		
-		KOTH_ShopGunClass shopLayout = KOTH_ShopGunClass.Cast(menu);
+		KOTH_ShopUI shopLayout = KOTH_ShopUI.Cast(menu);
 		if (!shopLayout)
 			return;
 		
@@ -90,14 +90,14 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		if (!menu)
 			return;
 		
-		KOTH_ShopGunClass shopLayout = KOTH_ShopGunClass.Cast(menu);
+		KOTH_ShopUI shopLayout = KOTH_ShopUI.Cast(menu);
 		if (!shopLayout)
 			return;
 		
 		shopLayout.TestRpcBuyFailed();
 	}
 	
-	bool RemoveOldItemsAndAddNewOnes(IEntity player, KOTH_SCR_ShopGunItem item, int playerId)
+	bool RemoveOldItemsAndAddNewOnes(IEntity player, KOTH_ShopItem item, int playerId)
 	{
 		InventoryStorageManagerComponent inventoryStorage = InventoryStorageManagerComponent.Cast(player.FindComponent(InventoryStorageManagerComponent));
 		if (!inventoryStorage)
@@ -116,7 +116,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		IEntity ent2 = inventoryStorageComponent.GetSlot(1).GetAttachedEntity();
 		if (ent1)
 		{
-			WeaponCategory category = FindEntityWeaponCategory(ent1);
+			KOTH_ShopItemCategory category = FindEntityKOTH_ShopItemCategory(ent1);
 			
 			if (category == item.m_category)
 			{
@@ -128,7 +128,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		
 		if (ent2)
 		{
-			WeaponCategory category = FindEntityWeaponCategory(ent2);
+			KOTH_ShopItemCategory category = FindEntityKOTH_ShopItemCategory(ent2);
 			
 			if (category == item.m_category)
 			{
@@ -186,11 +186,11 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		}
 	}
 	
-	WeaponCategory FindEntityWeaponCategory(IEntity entity)
+	KOTH_ShopItemCategory FindEntityKOTH_ShopItemCategory(IEntity entity)
 	{
-		WeaponCategory currentItemCategory;
+		KOTH_ShopItemCategory currentItemCategory;
 		
-		foreach(KOTH_SCR_ShopGunItem shopItem : m_shopItemList)
+		foreach(KOTH_ShopItem shopItem : m_shopItemList)
 		{
 			string prefabData = entity.GetPrefabData().GetPrefabName();
 			string itemName = shopItem.m_itemResource;

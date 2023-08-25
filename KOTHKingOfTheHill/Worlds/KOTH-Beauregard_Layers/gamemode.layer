@@ -2,7 +2,6 @@ SCR_BaseGameMode KOTH_GameMode1 : "{E5118D0809DD3CDF}Prefabs/MP/Modes/KOTH_GameM
  coords 3113.879 16 2724.923
  {
   SCR_MapEntity "5E272AA8B2A30052" {
-   ID "5E1ED724B33BC815"
    "Map Geometry Data" "{0DD089CCD442399A}worlds/Arland/Arland.topo"
    "Satellite background image" "{F98F3D2CBA523091}UI/Textures/Map/worlds/Arland/ArlandRasterized.edds"
   }
@@ -17,4 +16,35 @@ SCR_BaseGameMode KOTH_GameMode1 : "{E5118D0809DD3CDF}Prefabs/MP/Modes/KOTH_GameM
    ID "5E1F0BA227A3D04A"
   }
  }
+}
+GenericEntity : "{DA861447E6D426AE}Prefabs/Props/Industrial/Repair/VehicleGarbage_01_pile_small.et" {
+ components {
+  Hierarchy "{5E32F9676EE2E5E9}" {
+  }
+  ActionsManagerComponent "{5E32E33B314099F5}" {
+   ActionContexts {
+    UserActionContext "{5E32E33B7DC1A16A}" {
+     ContextName "Default"
+     Position PointInfo "{5E32E33B6F12EB2C}" {
+      Offset 0 0.5 0
+     }
+     Radius 2
+    }
+   }
+   additionalActions {
+    KOTH_ShopVehicleUserAction "{5E32E33B2DDAC3C6}" {
+     ParentContextList {
+      "Default"
+     }
+     UIInfo UIInfo "{5E32E33B66C1D7E5}" {
+      Name "Open Vehicle Shop"
+     }
+    }
+   }
+  }
+  RplComponent "{5624A88DC2D9928D}" {
+   Enabled 1
+  }
+ }
+ coords 3546.148 45.546 2638.824
 }
