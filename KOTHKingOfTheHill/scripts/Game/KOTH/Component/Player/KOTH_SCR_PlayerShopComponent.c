@@ -18,10 +18,17 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 			m_playerUID = GetGame().GetBackendApi().GetPlayerUID(controller.GetPlayerId());
 	}
 	
-	void FoundSpawnForVehicle(string faction, string resourceName)
+	bool FindSpawnForVehicle(string faction, string resourceName)
 	{
 		KOTH_SpawnPrefab firstSpawn = KOTH_SpawnPrefab.Cast(GetGame().GetWorld().FindEntityByName("vehicleSpawnFirst"));
-		firstSpawn.Spawn(resourceName);
+		if (!firstSpawn)
+			return false;
+		
+//		KOTH_SpawnPrefab spawnComp = KOTH_SpawnPrefab.Cast(firstSpawn.FindComponent(KOTH_SpawnPrefab));
+//		if (!spawnComp)
+//			return false;
+		
+		return firstSpawn.Spawn(resourceName);
 	}
 	
 	// --------------------- RPC START
@@ -61,10 +68,15 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 			// check category for vehicles
 			switch (item.m_category) {
 				case KOTH_ShopItemCategory.Vehicle:
-					Log("buy vehicle");
 					// get player Faction
 					// found spawns for faction
-					FoundSpawnForVehicle("vehicleSpawnFirst", resourceName);
+					if (FindSpawnForVehicle("vehicleSpawnFirst", resourceName))
+					{
+						DoRpc_Notif_Succeed(item.m_priceOnce);
+					} else {
+						m_scoreComp.Refund(item.m_priceOnce, playerId);
+						DoRpc_Notif_Failed("cannot spawn vehicle", "no place found");
+					}
 				break;
 				default:
 					bool isSuccess = RemoveOldItemsAndAddNewOnes(item, playerId);
@@ -165,18 +177,14 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		if (item.m_magazineResource)
 		{
 			if (false == AddMags(inventory, item.m_magazineResource, item.m_magazineNumber)) {
-				// refund
-				KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
-				scoreComp.Refund(item.m_priceOnce, playerId);
+				m_scoreComp.Refund(item.m_priceOnce, playerId);
 				return false;
 			}
 		}
 			
 		if (item.m_secondaryMagazineResource != "") {
 			if (false == AddMags(inventory, item.m_secondaryMagazineResource, item.m_secondaryMagazineNumber)) {
-				// refund
-				KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
-				scoreComp.Refund(item.m_priceOnce, playerId);
+				m_scoreComp.Refund(item.m_priceOnce, playerId);
 				return false;
 			}
 		}

@@ -1,48 +1,52 @@
 class KOTH_SpawnPrefabClass : SCR_BaseTriggerEntityClass{}
 class KOTH_SpawnPrefab : SCR_BaseTriggerEntity
 {
-	bool IsSomethingInside()
+	bool isSpawnEmpty()
 	{
+		QueryEntitiesInside();
 		array<IEntity> outEntities = {};
 		GetEntitiesInside(outEntities);
 		if (outEntities.Count() > 0) {
-			return true;
+			return false;
 		}
 		
-		return false;
+		return true;
 	}
 	
 	bool Spawn(ResourceName m_prefabName)
 	{
 		vector pos;
 		IEntity entity = IEntity.Cast(this);
-		bool spawnEmpty = IsSomethingInside();
-		if (spawnEmpty == false)
+		bool isSpawnEmpty = isSpawnEmpty();
+		if (!isSpawnEmpty)
 		{
 			IEntity child = GetChildren();
 			KOTH_SpawnPrefab kothSP = KOTH_SpawnPrefab.Cast(child);
-			spawnEmpty = kothSP.IsSomethingInside();
-			if (!spawnEmpty)
+			isSpawnEmpty = kothSP.isSpawnEmpty();
+			if (!isSpawnEmpty)
 			{
-				for (int i; i++; i < 100)
+				for (int i = 0; i < 100; i++)
 				{
 					child = child.GetSibling();
 					kothSP = KOTH_SpawnPrefab.Cast(child);
-					spawnEmpty = kothSP.IsSomethingInside();
-					if (!spawnEmpty)
+					if (!kothSP)
+						return false;
+					
+					isSpawnEmpty = kothSP.isSpawnEmpty();
+					if (isSpawnEmpty)
 						break;
 				}
 			} 
 			
 			entity = child;
-			if (spawnEmpty)
+			if (!isSpawnEmpty)
 				return false;
 		}
 		
 		SCR_WorldTools.FindEmptyTerrainPosition(pos, entity.GetOrigin(), 5);
 		EntitySpawnParams params = EntitySpawnParams();
 		params.TransformMode = ETransformMode.WORLD;
-		GetTransform(params.Transform);
+		entity.GetTransform(params.Transform);
 		
 		IEntity newEnt = GetGame().SpawnEntityPrefab(Resource.Load(m_prefabName), null, params);
 		
