@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{1E394AEE2617B42D}Prefabs/MP/Spawning/KOTH_VehicleSpawn.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}
