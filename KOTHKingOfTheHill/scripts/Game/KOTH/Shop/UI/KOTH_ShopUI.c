@@ -37,10 +37,9 @@ class KOTH_ShopUI : ChimeraMenuBase
 		
 		m_parentShopCategorie_Weapons = m_wRoot.FindAnyWidget("ShopCategorie_Weapons");
 		TextWidget text = TextWidget.Cast(m_parentShopCategorie_Weapons.FindAnyWidget("Content"));
-		text.SetColor(Color.Gray75);
+		text.SetColor(Color.Gray25);
 		m_parentShopCategorie_Ammo = m_wRoot.FindAnyWidget("ShopCategorie_Ammo");
 		m_parentShopCategorie_Gadget = m_wRoot.FindAnyWidget("ShopCategorie_Gadget");
-		
 	}
 
 	protected void AddItemsFromConfig(string itemListResource)

@@ -1,27 +1,43 @@
 class KOTH_SCR_PlayerShopComponentClass : ScriptComponentClass {}
 class KOTH_SCR_PlayerShopComponent : ScriptComponent 
 {
-	protected ref array<ref KOTH_ShopItem> m_shopItemList;
 	protected string m_playerUID;
+	protected KOTH_ScoringGameModeComponent m_scoreComp;
+	protected ref array<string> m_shopItemListResources = {
+		"{232D181B9F9FE8D1}Configs/Shop/ShopWeaponItemList.conf",
+		"{01BEF9B6FC671AF0}Configs/Shop/ShopThrowableItemlList.conf",
+		"{C9E28F21A8EC7DB7}Configs/Shop/ShopAccessoryItemlList.conf",
+		"{9F317D1901DBE909}Configs/Shop/ShopVehicleItemList.conf"
+	};
 
 	override void OnPostInit(IEntity owner)
 	{
-		m_shopItemList = SCR_ConfigHelperT<KOTH_ShopItemList>.GetConfigObject("{232D181B9F9FE8D1}Configs/Shop/ShopWeaponItemList.conf").GetItems();
+		m_scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
 		PlayerController controller = GetGame().GetPlayerController();
 		if (controller)
 			m_playerUID = GetGame().GetBackendApi().GetPlayerUID(controller.GetPlayerId());
 	}
 	
+	void FoundSpawnForVehicle(string faction, string resourceName)
+	{
+		KOTH_SpawnPrefab firstSpawn = KOTH_SpawnPrefab.Cast(GetGame().GetWorld().FindEntityByName("vehicleSpawnFirst"));
+		firstSpawn.Spawn(resourceName);
+	}
+	
+	// --------------------- RPC START
+	
 	void DoRpcBuy(string resourceName, int playerId, bool permanentBuy = false)
 	{
 		Rpc(RpcAsk_Buy, resourceName, playerId, permanentBuy);
+		Log("clientside m_playerUID" +m_playerUID);
 	}
 	
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
 	void RpcAsk_Buy(string resourceName, int playerId, bool permanentBuy)
 	{
+		Log("serverside m_playerUID" +m_playerUID);
 		Log("----------- RpcAsk_Buy "+resourceName+" for "+playerId+" is permanentBuy "+permanentBuy);
-		KOTH_ShopItem item = FindShopItemByresourceName(resourceName);
+		KOTH_ShopItem item = FindShopItemByResourceName(resourceName);
 
 		if (!item)
 		{
@@ -29,69 +45,38 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 			return;
 		}
 		
-		KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
-
+		
 		if (permanentBuy)
 		{
-			Log("/!\/!\/!\/!\ Not implemented yet ");	
+			Log("/!\/!\/!\/!\ Not implemented yet");
 		} 
 		else 
 		{
-			bool buySuccess = scoreComp.TryBuy(item.m_priceOnce, playerId);
-			if (buySuccess) {
-				// check category for vehicles
-				switch (item.m_category) {
-					case KOTH_ShopItemCategory.Vehicle:
-						Log("buy vehicle");
-						// get player Faction
-						// found spawns for faction
-						FoundSpawnForVehicle("vehicleSpawnFirst", resourceName);
-					break;
-					default:
-						bool isSuccess = RemoveOldItemsAndAddNewOnes(item, playerId);
-				
-						if (!isSuccess) {
-							DoRpc_Notif_Failed_NoSpace();
-						}
-					break;
-				}
+			bool buySuccess = m_scoreComp.TryBuy(item.m_priceOnce, playerId);
+			if (!buySuccess) {
+				DoRpc_Notif_Failed("You can't buy the weapon", "not enough money");
+				return;
 			}
-			else 
-			{
-				DoRpc_Notif_Failed_NoMoney();
+			
+			// check category for vehicles
+			switch (item.m_category) {
+				case KOTH_ShopItemCategory.Vehicle:
+					Log("buy vehicle");
+					// get player Faction
+					// found spawns for faction
+					FoundSpawnForVehicle("vehicleSpawnFirst", resourceName);
+				break;
+				default:
+					bool isSuccess = RemoveOldItemsAndAddNewOnes(item, playerId);
+					if (!isSuccess) {
+						DoRpc_Notif_Failed("You can't buy the weapon", "your inventory are full");
+						return;
+					}
+				
+					DoRpc_Notif_Succeed(item.m_priceOnce);
+				break;
 			}		
 		}
-	}
-	
-	KOTH_ShopItem FindShopItemByresourceName(string resourceName)
-	{
-		KOTH_ShopItem item;
-		foreach(KOTH_ShopItem iteminlist : m_shopItemList)
-		{
-			if (iteminlist.m_itemResource == resourceName)
-			{
-				item = iteminlist;
-			}
-		}
-		
-		if (!item) {
-		 	array< ref KOTH_ShopItem> shopList = SCR_ConfigHelperT<KOTH_ShopItemList>.GetConfigObject("{9F317D1901DBE909}Configs/Shop/ShopVehicleItemList.conf").GetItems();
-			foreach(KOTH_ShopItem iteminlist : shopList)
-			{
-				if (iteminlist.m_itemResource == resourceName)
-				{
-					item = iteminlist;
-				}
-			}
-		}
-		
-		return item;
-	}
-	
-	void FoundSpawnForVehicle(string faction, string resourceName)
-	{
-		KOTH_SpawnPrefab firstSpawn = KOTH_SpawnPrefab.Cast(GetGame().GetWorld().FindEntityByName("vehicleSpawnFirst"));
-		firstSpawn.Spawn(resourceName);
 	}
 	
 	void DoRpc_Notif_Succeed(int price)
@@ -113,13 +98,13 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		shopLayout.HUD_NotifBuy(price);
 	}
 	
-	void DoRpc_Notif_Failed_NoSpace()
+	void DoRpc_Notif_Failed(string firstLine, string secondLine)
 	{
-		Rpc(RpcDo_NotifBuy_Failed_NoSpace);
+		Rpc(RpcDo_NotifBuy_Failed, firstLine, secondLine);
 	}
 	
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
-	void RpcDo_NotifBuy_Failed_NoSpace()
+	void RpcDo_NotifBuy_Failed(string firstLine, string secondLine)
 	{
 		ChimeraMenuBase menu = ChimeraMenuBase.CurrentChimeraMenu();
 		if (!menu)
@@ -129,27 +114,10 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		if (!shopLayout)
 			return;
 		
-		shopLayout.NotifErrorShop("You can't buy the weapon", "your inventory are full");
+		shopLayout.NotifErrorShop(firstLine, secondLine);
 	}
 	
-	void DoRpc_Notif_Failed_NoMoney()
-	{
-		Rpc(RpcDo_NotifBuy_Failed_NoMoney);
-	}
-	
-	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
-	void RpcDo_NotifBuy_Failed_NoMoney()
-	{
-		ChimeraMenuBase menu = ChimeraMenuBase.CurrentChimeraMenu();
-		if (!menu)
-			return;
-		
-		KOTH_ShopUI shopLayout = KOTH_ShopUI.Cast(menu);
-		if (!shopLayout)
-			return;
-		
-		shopLayout.NotifErrorShop("You can't buy the weapon", "not enough money");
-	}
+	// --------------------- RPC END
 	
 	bool RemoveOldItemsAndAddNewOnes(KOTH_ShopItem item, int playerId)
 	{
@@ -192,17 +160,18 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 			}
 		}		
 		
-		// add new weapon
+		// add new weapon mags
 		SCR_InventoryStorageManagerComponent inventory = SCR_InventoryStorageManagerComponent.Cast(player.FindComponent(SCR_InventoryStorageManagerComponent));
-		
-		if (false == AddMags(inventory, item.m_magazineResource, item.m_magazineNumber)) {
-			// refund
-			KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
-			scoreComp.Refund(item.m_priceOnce, playerId);
-
-			return false;
+		if (item.m_magazineResource)
+		{
+			if (false == AddMags(inventory, item.m_magazineResource, item.m_magazineNumber)) {
+				// refund
+				KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
+				scoreComp.Refund(item.m_priceOnce, playerId);
+				return false;
+			}
 		}
-		
+			
 		if (item.m_secondaryMagazineResource != "") {
 			if (false == AddMags(inventory, item.m_secondaryMagazineResource, item.m_secondaryMagazineNumber)) {
 				// refund
@@ -211,50 +180,68 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 				return false;
 			}
 		}
-
+		
+		// add new weapon
 		IEntity itemBought = GetGame().SpawnEntityPrefab(Resource.Load(item.m_itemResource));
-        inventory.TryInsertItem(itemBought);
-		
-		DoRpc_Notif_Succeed(item.m_priceOnce);
-		
-		return true; // ---------- dont remove mags, for now ?
-		
-		// remove all mags
-		array<typename> components = {};
-		array<IEntity> entities = {};
-		components.Insert(BaseMagazineComponent);
-		inventoryStorage.FindItemsWithComponents(entities, components, EStoragePurpose.PURPOSE_ANY);
-		
-		foreach (IEntity entity : entities)
-		{
-			//inventoryStorage.TryRemoveItemFromStorage(entity, inventoryStorageComponent);
-			//SCR_EntityHelper.DeleteEntityAndChildren(entity);
-			BaseWeaponComponent wpComp = BaseWeaponComponent.Cast(entity.FindComponent(BaseWeaponComponent));
-			if (wpComp)
-				return false;
-			
-			// not sure if needed or not
-			if (!inventoryStorage.TryRemoveItemFromStorage(entity, inventoryStorageComponent))
-			{
-				RplComponent.DeleteRplEntity(entity, false)
-			}
+        bool successAddInInventory = false;
+		if (item.m_category == KOTH_ShopItemCategory.Primary || 
+			item.m_category == KOTH_ShopItemCategory.Handgun ||
+			item.m_category == KOTH_ShopItemCategory.Launcher) {
+			successAddInInventory = inventory.TryInsertItem(itemBought, EStoragePurpose.PURPOSE_WEAPON_PROXY);
+			if (successAddInInventory)
+				inventory.EquipWeapon(itemBought);
+		} else {
+			successAddInInventory = inventory.TryInsertItem(itemBought);
 		}
+		
+		Log("successAddInInventory "+successAddInInventory);
+		return successAddInInventory;
 	}
 	
 	KOTH_ShopItemCategory FindEntityKOTH_ShopItemCategory(IEntity entity)
 	{
+		string prefabData = entity.GetPrefabData().GetPrefabName();
 		KOTH_ShopItemCategory currentItemCategory;
-		
-		foreach(KOTH_ShopItem shopItem : m_shopItemList)
+	
+		foreach(string shopItemListResourceName : m_shopItemListResources)
 		{
-			string prefabData = entity.GetPrefabData().GetPrefabName();
-			string itemName = shopItem.m_itemResource;
-			if (prefabData == itemName) {
-				currentItemCategory = shopItem.m_category;
+			array<ref KOTH_ShopItem> shopList = SCR_ConfigHelperT<KOTH_ShopItemList>
+				.GetConfigObject(shopItemListResourceName)
+				.GetItems();
+			
+			foreach(KOTH_ShopItem shopItem : shopList)
+			{
+				if (shopItem.m_itemResource == prefabData) {
+					currentItemCategory = shopItem.m_category;
+					break;
+				}
 			}
 		}
 		
 		return currentItemCategory;
+	}
+	
+	KOTH_ShopItem FindShopItemByResourceName(string resourceName)
+	{
+		KOTH_ShopItem item;
+		
+		foreach(string shopItemListResourceName : m_shopItemListResources)
+		{
+			array<ref KOTH_ShopItem> shopList = SCR_ConfigHelperT<KOTH_ShopItemList>
+				.GetConfigObject(shopItemListResourceName)
+				.GetItems();
+			
+			foreach(KOTH_ShopItem shopItem : shopList)
+			{
+				if (shopItem.m_itemResource == resourceName)
+				{
+					item = shopItem;
+					break;
+				}
+			}
+		}
+		
+		return item;
 	}
 	
 	
@@ -279,8 +266,6 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 				inventory.TryDeleteItem(magazine);
 			}
 
-			DoRpc_Notif_Failed_NoSpace();
-			
 			return false;
 		}
 		
