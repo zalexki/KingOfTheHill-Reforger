@@ -6,37 +6,92 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 
 	override void OnPostInit(IEntity owner)
 	{
-		m_shopItemList = SCR_ConfigHelperT<KOTH_ShopItemList>.GetConfigObject("{232D181B9F9FE8D1}Configs/ShopGunItemList.conf").GetItems();
+		m_shopItemList = SCR_ConfigHelperT<KOTH_ShopItemList>.GetConfigObject("{232D181B9F9FE8D1}Configs/Shop/ShopWeaponItemList.conf").GetItems();
 		PlayerController controller = GetGame().GetPlayerController();
 		if (controller)
 			m_playerUID = GetGame().GetBackendApi().GetPlayerUID(controller.GetPlayerId());
 	}
 	
-	void DoRpcBuy(int configItemIndex, int playerId)
+	void DoRpcBuy(string resourceName, int playerId, bool permanentBuy = false)
 	{
-		Rpc(RpcAsk_BuyStuff, configItemIndex, playerId);
+		Rpc(RpcAsk_Buy, resourceName, playerId, permanentBuy);
 	}
 	
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	void RpcAsk_BuyStuff(int configItemIndex, int playerId)
+	void RpcAsk_Buy(string resourceName, int playerId, bool permanentBuy)
 	{
-		Log("----------- BuyStuff from rpc call");		
-		KOTH_ShopItem item = m_shopItemList.Get(configItemIndex);
-		IEntity controlledEntity = GetGame().GetPlayerManager().GetPlayerControlledEntity(playerId);
-		KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
+		Log("----------- RpcAsk_Buy "+resourceName+" for "+playerId+" is permanentBuy "+permanentBuy);
+		KOTH_ShopItem item = FindShopItemByresourceName(resourceName);
+
+		if (!item)
+		{
+			Log("no item found for resourceName "+resourceName);
+			return;
+		}
 		
-		bool buySuccess = scoreComp.TryBuy(item.m_priceOnce, playerId);
-		if (buySuccess) {
-			bool isSuccess = RemoveOldItemsAndAddNewOnes(controlledEntity, item, playerId);
-			
-			if (!isSuccess) {
-				DoRpc_Notif_Failed_NoSpace();
-			}
+		KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
+
+		if (permanentBuy)
+		{
+			Log("/!\/!\/!\/!\ Not implemented yet ");	
 		} 
 		else 
 		{
-			DoRpc_Notif_Failed_NoMoney();
+			bool buySuccess = scoreComp.TryBuy(item.m_priceOnce, playerId);
+			if (buySuccess) {
+				// check category for vehicles
+				switch (item.m_category) {
+					case KOTH_ShopItemCategory.Vehicle:
+						Log("buy vehicle");
+						// get player Faction
+						// found spawns for faction
+						FoundSpawnForVehicle("vehicleSpawnFirst", resourceName);
+					break;
+					default:
+						bool isSuccess = RemoveOldItemsAndAddNewOnes(item, playerId);
+				
+						if (!isSuccess) {
+							DoRpc_Notif_Failed_NoSpace();
+						}
+					break;
+				}
+			}
+			else 
+			{
+				DoRpc_Notif_Failed_NoMoney();
+			}		
 		}
+	}
+	
+	KOTH_ShopItem FindShopItemByresourceName(string resourceName)
+	{
+		KOTH_ShopItem item;
+		foreach(KOTH_ShopItem iteminlist : m_shopItemList)
+		{
+			if (iteminlist.m_itemResource == resourceName)
+			{
+				item = iteminlist;
+			}
+		}
+		
+		if (!item) {
+		 	array< ref KOTH_ShopItem> shopList = SCR_ConfigHelperT<KOTH_ShopItemList>.GetConfigObject("{9F317D1901DBE909}Configs/Shop/ShopVehicleItemList.conf").GetItems();
+			foreach(KOTH_ShopItem iteminlist : shopList)
+			{
+				if (iteminlist.m_itemResource == resourceName)
+				{
+					item = iteminlist;
+				}
+			}
+		}
+		
+		return item;
+	}
+	
+	void FoundSpawnForVehicle(string faction, string resourceName)
+	{
+		KOTH_SpawnPrefab firstSpawn = KOTH_SpawnPrefab.Cast(GetGame().GetWorld().FindEntityByName("vehicleSpawnFirst"));
+		firstSpawn.Spawn(resourceName);
 	}
 	
 	void DoRpc_Notif_Succeed(int price)
@@ -55,7 +110,6 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		if (!shopLayout)
 			return;
 		
-		shopLayout.TestRpcBuySucceed();
 		shopLayout.HUD_NotifBuy(price);
 	}
 	
@@ -75,7 +129,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		if (!shopLayout)
 			return;
 		
-		shopLayout.TestRpcBuyFailed();
+		shopLayout.NotifErrorShop("You can't buy the weapon", "your inventory are full");
 	}
 	
 	void DoRpc_Notif_Failed_NoMoney()
@@ -94,11 +148,12 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		if (!shopLayout)
 			return;
 		
-		shopLayout.TestRpcBuyFailed();
+		shopLayout.NotifErrorShop("You can't buy the weapon", "not enough money");
 	}
 	
-	bool RemoveOldItemsAndAddNewOnes(IEntity player, KOTH_ShopItem item, int playerId)
+	bool RemoveOldItemsAndAddNewOnes(KOTH_ShopItem item, int playerId)
 	{
+		IEntity player = GetGame().GetPlayerManager().GetPlayerControlledEntity(playerId);
 		InventoryStorageManagerComponent inventoryStorage = InventoryStorageManagerComponent.Cast(player.FindComponent(InventoryStorageManagerComponent));
 		if (!inventoryStorage)
 			return false;

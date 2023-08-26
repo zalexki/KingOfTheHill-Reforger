@@ -1,7 +1,6 @@
 class KOTH_ShopUI : ChimeraMenuBase
 {
 	protected Widget m_wRoot;
-	
 	protected Widget m_parentShopCategorie_Weapons;
 	protected Widget m_parentShopCategorie_Ammo;
 	protected Widget m_parentShopCategorie_Gadget;
@@ -9,7 +8,6 @@ class KOTH_ShopUI : ChimeraMenuBase
 	protected VerticalLayoutWidget m_contentContainer;
 	
 	protected KOTH_ScoringGameModeComponent m_scoreComp;
-	
 	protected int m_playerId;
 	
 	override void OnMenuInit()
@@ -25,6 +23,7 @@ class KOTH_ShopUI : ChimeraMenuBase
 		super.OnMenuOpen();
 		
 		m_wRoot = GetRootWidget();
+		m_contentContainer = VerticalLayoutWidget.Cast(m_wRoot.FindAnyWidget("ContentContainer"));
 		
 		// add listeners
 		SCR_NavigationButtonComponent cancel = SCR_NavigationButtonComponent.GetNavigationButtonComponent("Cancel", m_wRoot);
@@ -42,7 +41,6 @@ class KOTH_ShopUI : ChimeraMenuBase
 		m_parentShopCategorie_Ammo = m_wRoot.FindAnyWidget("ShopCategorie_Ammo");
 		m_parentShopCategorie_Gadget = m_wRoot.FindAnyWidget("ShopCategorie_Gadget");
 		
-		m_contentContainer = VerticalLayoutWidget.Cast(m_wRoot.FindAnyWidget("ContentContainer"));
 	}
 
 	protected void AddItemsFromConfig(string itemListResource)
@@ -66,10 +64,10 @@ class KOTH_ShopUI : ChimeraMenuBase
 				buyPermanent.m_OnClicked.Insert(OnClickBuyPermanent);
 
 			// set text infos
+			TextWidget resourceNameWidget = TextWidget.Cast(newRow.FindAnyWidget("ResourceName"));
+			resourceNameWidget.SetText(item.m_itemResource);
 			TextWidget nameWidget = TextWidget.Cast(newRow.FindAnyWidget("ItemName"));
 			nameWidget.SetText(item.m_itemName);
-			TextWidget ConfigItemIndexWidget = TextWidget.Cast(newRow.FindAnyWidget("ConfigItemIndex"));
-			ConfigItemIndexWidget.SetText(index.ToString());
 			TextWidget priceOnceWidget = TextWidget.Cast(newRow.FindAnyWidget("PriceOnceText"));
 			priceOnceWidget.SetText(item.m_priceOnce.ToString() + "$");
 			TextWidget pricePermWidget = TextWidget.Cast(newRow.FindAnyWidget("PricePermText"));
@@ -117,7 +115,6 @@ class KOTH_ShopUI : ChimeraMenuBase
 				OverlayWidget purchaseOnceHINT = OverlayWidget.Cast(newRow.FindAnyWidget("PurchaseOnceHINT"));
 				purchaseOnceButton.SetVisible(true);
 				purchaseOnceHINT.SetVisible(false);
-
 			}
 
 			// add item preview
@@ -207,30 +204,19 @@ class KOTH_ShopUI : ChimeraMenuBase
 		text.SetColor(Color.White);
 		//m_itemList = "{01BEF9B6FC671AF0}Configs/Shop/ShopThrowableItemlList.conf";
 	}
-	
-	void TestRpcBuySucceed()
-	{
-		TextWidget contentContainer = TextWidget.Cast(m_wRoot.FindAnyWidget("NameContainer"));
-		//contentContainer.SetText("TestRpcBuySucceed");
-	}
-
-	void TestRpcBuyFailed()
-	{
-		NotifErrorShop();
-	}
 
 	protected void OnClickBuyOnce(SCR_ButtonBaseComponent button)
 	{
 		Widget row = button.GetRootWidget().GetParent().GetParent().GetParent();
 		TextWidget priceOnceWidget = TextWidget.Cast(row.FindAnyWidget("PriceOnceText"));
-		TextWidget configItemIndexWidget = TextWidget.Cast(row.FindAnyWidget("ConfigItemIndex"));
+		TextWidget resourceNameWidget = TextWidget.Cast(row.FindAnyWidget("ResourceName"));
 
 		PlayerController controller = GetGame().GetPlayerController();
 		IEntity cont = controller.GetControlledEntity();
-		KOTH_SCR_PlayerShopComponent kothPlayerComp = KOTH_SCR_PlayerShopComponent.Cast(controller.FindComponent(KOTH_SCR_PlayerShopComponent));
+		KOTH_SCR_PlayerShopComponent playerShopComp = KOTH_SCR_PlayerShopComponent.Cast(controller.FindComponent(KOTH_SCR_PlayerShopComponent));
 
 		int price = priceOnceWidget.GetText().ToInt();
-		kothPlayerComp.DoRpcBuy(configItemIndexWidget.GetText().ToInt(), controller.GetPlayerId());
+		playerShopComp.DoRpcBuy(resourceNameWidget.GetText(), controller.GetPlayerId());
 
 		// set widget equiped visible
 		ButtonWidget purchaseOnceButton = ButtonWidget.Cast(row.FindAnyWidget("PurchaseOnceButton"));
@@ -261,7 +247,7 @@ class KOTH_ShopUI : ChimeraMenuBase
 	}
 	
 	//informe player error in buy
-	void NotifErrorShop()
+	void NotifErrorShop(string firstLine, string secondLine)
 	{
 		Widget root = GetRootWidget();
 		VerticalLayoutWidget koth_scrollListshop = VerticalLayoutWidget.Cast(root.FindWidget("Overlay.VerticalLayout1.ScrollList.NotifContainer"));
@@ -269,10 +255,10 @@ class KOTH_ShopUI : ChimeraMenuBase
 		Widget w = GetGame().GetWorkspace().CreateWidgets("{993FD33C936EB12C}UI/Layouts/HUD/KingOfTheHill/KOTH_ShopNotification.layout", koth_scrollListshop);
 
 		TextWidget Seconde = TextWidget.Cast(w.FindAnyWidget("Seconde"));
-		Seconde.SetText("You can't buy the weapon");
+		Seconde.SetText(firstLine);
 
 		TextWidget Third = TextWidget.Cast(w.FindAnyWidget("Third"));
-		Third.SetText("your inventory are full");
+		Third.SetText(secondLine);
 
 		SCR_FadeUIComponent compFade = SCR_FadeUIComponent.Cast(w.FindHandler(SCR_FadeUIComponent));
 		compFade.DelayedFadeOut(10000, true);

@@ -1,15 +1,15 @@
-SCR_BasePrefabSpawner vehicleSpawnFirst {
- coords 3489.86 40.813 2611.335
+KOTH_SpawnPrefab vehicleSpawnFirst {
+ coords 3489.053 40.934 2613.671
  {
-  $grp SCR_BasePrefabSpawner {
+  $grp KOTH_SpawnPrefab {
    vehicleSpawnFirst2 {
-    coords 3.791 -0.969 -13.002
+    coords 5.051 -1.125 -15.696
    }
    vehicleSpawnFirst3 {
-    coords -10.337 -1.36 -20.437
+    coords -15.936 -0.901 -27.109
    }
    vehicleSpawnFirst4 {
-    coords -15.422 0.417 1.171
+    coords -28.878 0.356 -7.019
    }
   }
  }

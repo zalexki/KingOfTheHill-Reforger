@@ -1,39 +1,23 @@
+class KOTH_SpawnPrefabClass : GenericEntityClass{}
 class KOTH_SpawnPrefab : GenericEntity
 {
-	[Attribute("", UIWidgets.ResourcePickerThumbnail, desc: "Prefab to be spawned",  params: "et")]
-	protected ResourceName m_prefabName;
-	
 	protected Vehicle m_prefabSpawned;
+	protected bool m_isUsed = false;
 
-	void SCR_BasePrefabSpawner(IEntitySource src, IEntity parent)
+	bool CanSpawn()
 	{
-		SetEventMask(EntityEvent.INIT | EntityEvent.FRAME );
-		Activate();
+		 return m_isUsed;
 	}
 
-	protected override void EOnInit(IEntity owner)
+	bool Spawn(ResourceName m_prefabName)
 	{
-	}
-
-	protected override void EOnFrame(IEntity owner, float timeSlice)
-	{
-		if (!Replication.IsServer())
-			return;
-		if (CanSpawn())
-			Spawn();
-	}
-
-	protected bool CanSpawn()
-	{
-		 return false;
-	}
-
-	protected bool Spawn()
-	{
-		BaseWorld myWorld = GetGame().GetWorld();
-		if (!myWorld || m_rnPrefab.IsEmpty())
+		if (m_isUsed)
 			return false;
-		Resource res = Resource.Load(m_rnPrefab);
+		
+		BaseWorld myWorld = GetGame().GetWorld();
+		if (!myWorld || m_prefabName.IsEmpty())
+			return false;
+		Resource res = Resource.Load(m_prefabName);
 		EntitySpawnParams params();
 
 		vector mat[4];
@@ -45,16 +29,13 @@ class KOTH_SpawnPrefab : GenericEntity
 
 		newEnt.SetFlags(EntityFlags.VISIBLE, true);
 
-		OnSpawn(newEnt);
+		m_isUsed = true;
 
 		return true;
 	}
-
-	protected void OnSpawn(IEntity newEnt)
+	
+	void CheckVehicleIsFarEnough()
 	{
+		return;
 	}
-};
-
-class KOTH_SpawnPrefabClass : GenericEntityClass
-{
 };
