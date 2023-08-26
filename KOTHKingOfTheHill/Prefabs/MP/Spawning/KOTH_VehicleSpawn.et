@@ -1,0 +1,18 @@
+KOTH_SpawnPrefab {
+ ID "5E354EFA6C0860DD"
+ components {
+  Hierarchy "{5E354EFA4C844D32}" {
+  }
+  RplComponent "{5E354EF89D52EADB}" {
+  }
+ }
+ coords 3489.717 41.006 2616.58
+ TriggerShapeType Sphere
+ SphereRadius 5
+ DrawShape 1
+ TriggerActivationType "All changes"
+ PeriodicQueries 1
+ ClassesFilter {
+  "ChimeraCharacter" "BaseVehicle"
+ }
+}
