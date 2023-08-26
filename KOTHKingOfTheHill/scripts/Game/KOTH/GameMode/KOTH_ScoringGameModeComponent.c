@@ -318,17 +318,22 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 
 		Log("OnPlayerConnected "+playerId);
 		
-		GetGame().GetCallqueue().CallLater(whilePlayerUID, 500, false, playerId);
+		GetGame().GetCallqueue().CallLater(MapPlayerUIDToPlayerId, 1000, false, playerId);
 	}
 	
-	void whilePlayerUID(int playerId)
+	void MapPlayerUIDToPlayerId(int playerId)
 	{
 		bool isInList = false;
 		string playerUID = GetGame().GetBackendApi().GetPlayerUID(playerId);
+		
+		if (SCR_Global.IsEditMode()) {
+			playerUID = GetGame().GetPlayerManager().GetPlayerName(playerId);
+		}
+		
 		if (playerUID == string.Empty)
 		{
 			Log("empty playerUID for "+playerId);
-			GetGame().GetCallqueue().CallLater(whilePlayerUID, 500, false, playerId);
+			GetGame().GetCallqueue().CallLater(MapPlayerUIDToPlayerId, 1000, false, playerId);
 			return;
 		}
 		

@@ -1,3 +1,19 @@
+KOTH_SpawnPrefab vehicleSpawnFirst {
+ coords 3489.053 40.934 2613.671
+ {
+  $grp KOTH_SpawnPrefab {
+   vehicleSpawnFirst2 {
+    coords 5.051 -1.125 -15.696
+   }
+   vehicleSpawnFirst3 {
+    coords -15.936 -0.901 -27.109
+   }
+   vehicleSpawnFirst4 {
+    coords -28.878 0.356 -7.019
+   }
+  }
+ }
+}
 GenericEntity KOTH_FirstSpawn : "{0D777787DAAD3541}Prefabs/Structures/KOTH/Camp_Blufor.et" {
  coords 3550.51 45.662 2642.551
  angleY -75
@@ -68,7 +84,8 @@ $grp GenericEntity : "{67EE7343073E3AF4}Prefabs/Systems/AmbientVehicles/AmbientV
     m_bIncludeArmedVehicles 0
    }
   }
-  coords 3533.735 42.746 2658.378
+  coords 3532.587 43.494 2651.69
+  angleY 40.126
  }
 }
 GenericEntity KOTH_ThirdSpawn : "{900D62CF65FB7496}Prefabs/Structures/KOTH/Camp_Indfor.et" {

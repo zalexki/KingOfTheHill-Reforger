@@ -1,11 +1,11 @@
 [BaseContainerProps(configRoot:true)]
-class KOTH_SCR_ShopGunItem
+class KOTH_ShopItem
 {
 	[Attribute("baguette", desc: "name")]
 	string m_itemName;
 	
-	[Attribute("0", uiwidget: UIWidgets.ComboBox, enums: ParamEnumArray.FromEnum(WeaponCategory))]
-	WeaponCategory m_category;
+	[Attribute("0", uiwidget: UIWidgets.ComboBox, enums: ParamEnumArray.FromEnum(KOTH_ShopItemCategory))]
+	KOTH_ShopItemCategory m_category;
 	
 	[Attribute(desc: "Prefab of the Arsenal item", params: "et")]
 	ResourceName m_itemResource;
@@ -38,9 +38,16 @@ class KOTH_SCR_ShopGunItem
 	int m_level;
 }
 
-enum WeaponCategory
+enum KOTH_ShopItemCategory
 {
 	Handgun,
 	Primary,
-	Launcher
+	Launcher,
+	Optics,
+	Muzzle,
+	Flashlight,
+	Grenade,
+	Smoke,
+	Mine,
+	Vehicle
 }

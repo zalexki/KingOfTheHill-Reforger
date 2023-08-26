@@ -160,23 +160,16 @@ class KOTH_HUD : SCR_InfoDisplay
 		{
 			if (savedProfile.m_playerId == m_playerId) {
 				currentProfile = savedProfile;
-				Log("found my profile");
 				break;
 			}
 		}
-		Log("m_playerId "+ m_playerId);
 		
-
 		m_moneyText.SetText(currentProfile.GetMoney().ToString() + " $");
 		m_xpText.SetText(currentProfile.GetXp().ToString() + " / " + currentProfile.GetXpNextLevel().ToString());
 		m_lvlText.SetText(currentProfile.GetLevel().ToString());
 		m_xpProgressBar.SetValue(currentProfile.GetXp() / currentProfile.GetXpNextLevel(), true);
 
 		// teamPoints
-		if (!m_scoreComp) {
-			Log("Missing KOTH_ScoringGameModeComponent on gameMode", LogLevel.FATAL);
-			return;
-		}
 		m_blueforPointsText.SetText(m_scoreComp.GetBlueforPoint().ToString());
 		m_greenforPointsText.SetText(m_scoreComp.GetGreenforPoint().ToString());
 		m_redforPointsText.SetText(m_scoreComp.GetRedforPoint().ToString());

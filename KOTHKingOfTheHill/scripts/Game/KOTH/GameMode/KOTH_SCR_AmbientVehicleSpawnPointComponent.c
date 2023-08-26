@@ -4,6 +4,6 @@ modded class SCR_AmbientVehicleSpawnPointComponent : ScriptComponent
 	{
 		super.Update(faction);
 
-		m_sPrefab = "{16A674FE31B0921C}Prefabs/Vehicles/Wheeled/UAZ469/UAZ469_uncovered.et";
+		m_sPrefab = "{04BDACC0BB83284E}Prefabs/Vehicles/Wheeled/M923A1/M923A1_transport_covered_MERDC.et";
 	}
 }
