@@ -18,17 +18,25 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 			m_playerUID = GetGame().GetBackendApi().GetPlayerUID(controller.GetPlayerId());
 	}
 	
-	bool FindSpawnForVehicle(string faction, string resourceName)
+	bool FindSpawnForVehicle(string resourceName, int playerId)
 	{
-		KOTH_SpawnPrefab firstSpawn = KOTH_SpawnPrefab.Cast(GetGame().GetWorld().FindEntityByName("vehicleSpawnFirst"));
-		if (!firstSpawn)
+		KOTH_SpawnPrefab firstSpawn = KOTH_SpawnPrefab.Cast(GetGame().GetWorld().FindEntityByName("KOTH_FirstVehicleSpawn"));
+		KOTH_SpawnPrefab secondSpawn = KOTH_SpawnPrefab.Cast(GetGame().GetWorld().FindEntityByName("KOTH_SecondVehicleSpawn"));
+		KOTH_SpawnPrefab thirdSpawn = KOTH_SpawnPrefab.Cast(GetGame().GetWorld().FindEntityByName("KOTH_ThirdVehicleSpawn"));
+		if (!firstSpawn || !secondSpawn || !thirdSpawn)
 			return false;
+
+		Faction playerFaction = SCR_FactionManager.Cast(GetGame().GetFactionManager()).GetPlayerFaction(playerId);
+		if (firstSpawn.GetFactionKey() == playerFaction.GetFactionKey())
+			return firstSpawn.Spawn(resourceName);
 		
-//		KOTH_SpawnPrefab spawnComp = KOTH_SpawnPrefab.Cast(firstSpawn.FindComponent(KOTH_SpawnPrefab));
-//		if (!spawnComp)
-//			return false;
+		if (secondSpawn.GetFactionKey() == playerFaction.GetFactionKey())
+			return secondSpawn.Spawn(resourceName); 
 		
-		return firstSpawn.Spawn(resourceName);
+		if (thirdSpawn.GetFactionKey() == playerFaction.GetFactionKey())
+			return thirdSpawn.Spawn(resourceName);
+		
+		return false;
 	}
 	
 	// --------------------- RPC START
@@ -70,7 +78,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 				case KOTH_ShopItemCategory.Vehicle:
 					// get player Faction
 					// found spawns for faction
-					if (FindSpawnForVehicle("vehicleSpawnFirst", resourceName))
+					if (FindSpawnForVehicle(resourceName, playerId))
 					{
 						DoRpc_Notif_Succeed(item.m_priceOnce);
 					} else {

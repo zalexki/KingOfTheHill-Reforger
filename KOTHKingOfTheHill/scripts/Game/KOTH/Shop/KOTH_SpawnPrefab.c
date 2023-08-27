@@ -1,6 +1,9 @@
 class KOTH_SpawnPrefabClass : SCR_BaseTriggerEntityClass{}
 class KOTH_SpawnPrefab : SCR_BaseTriggerEntity
 {
+	private string m_sFaction;
+	string GetFactionKey(){ return m_sFaction; }
+	
 	bool isSpawnEmpty()
 	{
 		QueryEntitiesInside();
@@ -69,4 +72,15 @@ class KOTH_SpawnPrefab : SCR_BaseTriggerEntity
 
 		return true;
 	}
+	
+	void SetFactionKey(string factionKey)
+	{
+		if (factionKey == m_sFaction)
+			return;
+
+		m_sFaction = factionKey;
+		Replication.BumpMe();
+	}
+	
+
 };

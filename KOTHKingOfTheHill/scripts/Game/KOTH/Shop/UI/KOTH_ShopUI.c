@@ -1,6 +1,8 @@
 class KOTH_ShopUI : ChimeraMenuBase
 {
 	protected Widget m_wRoot;
+	protected TextWidget m_nameContainer;
+	
 	protected Widget m_parentShopCategorie_Weapons;
 	protected Widget m_parentShopCategorie_Ammo;
 	protected Widget m_parentShopCategorie_Gadget;
@@ -23,6 +25,7 @@ class KOTH_ShopUI : ChimeraMenuBase
 		super.OnMenuOpen();
 		
 		m_wRoot = GetRootWidget();
+		m_nameContainer = TextWidget.Cast(m_wRoot.FindAnyWidget("NameContainer"));
 		m_contentContainer = VerticalLayoutWidget.Cast(m_wRoot.FindAnyWidget("ContentContainer"));
 		
 		// add listeners

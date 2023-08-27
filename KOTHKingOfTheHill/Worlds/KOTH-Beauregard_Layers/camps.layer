@@ -39,24 +39,75 @@ GenericEntity KOTH_SecondSpawn : "{108B69D9D8DDE8B0}Prefabs/Structures/KOTH/Camp
   }
  }
 }
-KOTH_SpawnPrefab vehicleSpawnFirst : "{1E394AEE2617B42D}Prefabs/MP/Spawning/KOTH_VehicleSpawnPoint.et" {
- coords 3487.033 40.929 2607.93
- {
-  $grp KOTH_SpawnPrefab : "{1E394AEE2617B42D}Prefabs/MP/Spawning/KOTH_VehicleSpawnPoint.et" {
-   vehicleSpawnFirst2 {
-    coords 4.849 -1.087 -19.527
+$grp KOTH_SpawnPrefab : "{1E394AEE2617B42D}Prefabs/MP/Spawning/KOTH_VehicleSpawnPoint.et" {
+ KOTH_FirstVehicleSpawn {
+  coords 3487.033 40.929 2607.93
+  {
+   $grp KOTH_SpawnPrefab : "{1E394AEE2617B42D}Prefabs/MP/Spawning/KOTH_VehicleSpawnPoint.et" {
+    vehicleSpawnFirst2 {
+     coords 4.849 -1.087 -19.527
+    }
+    vehicleSpawnFirst3 {
+     coords 11.045 -3.016 -38.736
+    }
+    vehicleSpawnFirst4 {
+     coords -21.483 0.169 -4.645
+    }
+    vehicleSpawnFirst5 {
+     coords -16.05 -1.22 -25.658
+    }
+    vehicleSpawnFirst6 {
+     coords -9.527 -2.8 -45.524
+    }
    }
-   vehicleSpawnFirst3 {
-    coords 11.045 -3.016 -38.736
+  }
+ }
+ KOTH_SecondVehicleSpawn {
+  coords 2922.283 57.724 2207.423
+  angleY -79.772
+  {
+   $grp KOTH_SpawnPrefab : "{1E394AEE2617B42D}Prefabs/MP/Spawning/KOTH_VehicleSpawnPoint.et" {
+    vehicleSpawnFirst7 {
+     coords 4.849 -1.087 -19.527
+    }
+    vehicleSpawnFirst8 {
+     coords 11.045 -3.016 -38.736
+    }
+    vehicleSpawnFirst9 {
+     coords -21.483 0.669 -4.645
+    }
+    vehicleSpawnFirst10 {
+     coords -16.05 -1.22 -25.658
+    }
+    vehicleSpawnFirst11 {
+     coords -9.527 -2.8 -45.524
+    }
    }
-   vehicleSpawnFirst4 {
-    coords -21.483 0.169 -4.645
-   }
-   vehicleSpawnFirst5 {
-    coords -16.05 -1.22 -25.658
-   }
-   vehicleSpawnFirst6 {
-    coords -9.527 -2.8 -45.524
+  }
+ }
+ KOTH_ThirdVehicleSpawn {
+  coords 2817.092 36.725 3175.763
+  angleY -79.772
+  {
+   $grp KOTH_SpawnPrefab : "{1E394AEE2617B42D}Prefabs/MP/Spawning/KOTH_VehicleSpawnPoint.et" {
+    vehicleSpawnFirst12 {
+     coords -5.983 -1.087 18.983
+    }
+    vehicleSpawnFirst13 {
+     coords -14.19 -3.016 38.239
+    }
+    vehicleSpawnFirst14 {
+     coords -25.936 -7.46 54.093
+     angleY 79.772
+    }
+    vehicleSpawnFirst15 {
+     coords -37.568 -9.568 70.368
+     angleY 79.772
+    }
+    vehicleSpawnFirst16 {
+     coords -49.466 -11.969 86.249
+     angleY 79.772
+    }
    }
   }
  }
@@ -89,5 +140,100 @@ GenericEntity KOTH_ThirdSpawn : "{900D62CF65FB7496}Prefabs/Structures/KOTH/Camp_
   SCR_SpawnPoint {
    ID "5E1F523DC7E00B89"
   }
+ }
+}
+$grp GenericEntity : "{DA861447E6D426AE}Prefabs/Props/Industrial/Repair/VehicleGarbage_01_pile_small.et" {
+ {
+  components {
+   Hierarchy "{5E32F9676EE2E5E9}" {
+   }
+   ActionsManagerComponent "{5E32E33B314099F5}" {
+    ActionContexts {
+     UserActionContext "{5E32E33B7DC1A16A}" {
+      ContextName "Default"
+      Position PointInfo "{5E32E33B6F12EB2C}" {
+       Offset 0 0.5 0
+      }
+      Radius 2
+     }
+    }
+    additionalActions {
+     KOTH_ShopVehicleUserAction "{5E32E33B2DDAC3C6}" {
+      ParentContextList {
+       "Default"
+      }
+      UIInfo UIInfo "{5E32E33B66C1D7E5}" {
+       Name "Open Vehicle Shop"
+      }
+     }
+    }
+   }
+   RplComponent "{5624A88DC2D9928D}" {
+    Enabled 1
+   }
+  }
+  coords 2931.588 57.228 2226.102
+ }
+ {
+  components {
+   Hierarchy "{5E32F9676EE2E5E9}" {
+   }
+   ActionsManagerComponent "{5E32E33B314099F5}" {
+    ActionContexts {
+     UserActionContext "{5E32E33B7DC1A16A}" {
+      ContextName "Default"
+      Position PointInfo "{5E32E33B6F12EB2C}" {
+       Offset 0 0.5 0
+      }
+      Radius 2
+     }
+    }
+    additionalActions {
+     KOTH_ShopVehicleUserAction "{5E32E33B2DDAC3C6}" {
+      ParentContextList {
+       "Default"
+      }
+      UIInfo UIInfo "{5E32E33B66C1D7E5}" {
+       Name "Open Vehicle Shop"
+      }
+     }
+    }
+   }
+   RplComponent "{5624A88DC2D9928D}" {
+    Enabled 1
+   }
+  }
+  coords 3504.756 40.354 2606.789
+ }
+ {
+  components {
+   Hierarchy "{5E32F9676EE2E5E9}" {
+   }
+   ActionsManagerComponent "{5E32E33B314099F5}" {
+    ActionContexts {
+     UserActionContext "{5E32E33B7DC1A16A}" {
+      ContextName "Default"
+      Position PointInfo "{5E32E33B6F12EB2C}" {
+       Offset 0 0.5 0
+      }
+      Radius 2
+     }
+    }
+    additionalActions {
+     KOTH_ShopVehicleUserAction "{5E32E33B2DDAC3C6}" {
+      ParentContextList {
+       "Default"
+      }
+      UIInfo UIInfo "{5E32E33B66C1D7E5}" {
+       Name "Open Vehicle Shop"
+      }
+     }
+    }
+   }
+   RplComponent "{5624A88DC2D9928D}" {
+    Enabled 1
+   }
+  }
+  coords 2825.431 36.179 3183.137
  }
 }

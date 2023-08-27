@@ -76,28 +76,15 @@ modded class SCR_BaseGameMode
 		slotInfo.AttachEntity(flagEntity);
 	}
 
-	void SpawnVehicles()
-	{
-		IEntity vehicleSpawnOne = GetGame().GetWorld().FindEntityByName("vehicleSpawnOne");
-		SCR_AmbientVehicleSpawnPointComponent compSec = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnOne.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
-		compSec.SpawnVehicle();
-
-		IEntity vehicleSpawnTwo = GetGame().GetWorld().FindEntityByName("vehicleSpawnTwo");
-		SCR_AmbientVehicleSpawnPointComponent compSecTwo = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnTwo.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
-		compSecTwo.SpawnVehicle();
-
-		IEntity vehicleSpawnThree = GetGame().GetWorld().FindEntityByName("vehicleSpawnThree");
-		SCR_AmbientVehicleSpawnPointComponent compSecThree = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnThree.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
-		compSecThree.SpawnVehicle();
-	}
-
 	// called only server side
 	override void StartGameMode()
 	{
-		SpawnVehicles();
-		GetGame().GetCallqueue().CallLater(SpawnVehicles, 60000 * 5, true);
 		GetGame().GetCallqueue().CallLater(PlayersProtection, 5000, true);
 
+		KOTH_SpawnPrefab firstVehicleSpawn = KOTH_SpawnPrefab.Cast(GetGame().GetWorld().FindEntityByName("KOTH_FirstVehicleSpawn"));
+		KOTH_SpawnPrefab secondVehicleSpawn = KOTH_SpawnPrefab.Cast(GetGame().GetWorld().FindEntityByName("KOTH_SecondVehicleSpawn"));
+		KOTH_SpawnPrefab thirdVehicleSpawn = KOTH_SpawnPrefab.Cast(GetGame().GetWorld().FindEntityByName("KOTH_ThirdVehicleSpawn"));
+		
 		IEntity firstSpawn = GetGame().GetWorld().FindEntityByName("KOTH_FirstSpawn");
 		IEntity spawnPointFirst = FindSpawnPoint(firstSpawn);
 		IEntity firstFlag = FindFlag(firstSpawn);
@@ -121,9 +108,14 @@ modded class SCR_BaseGameMode
 		factions.Insert("USSR");
 		factions.Insert("FIA");
 
+		
 		spf.SetFactionKey(factions.Get(randomInts[0]));
+		firstVehicleSpawn.SetFactionKey(factions.Get(randomInts[0]));
 		sps.SetFactionKey(factions.Get(randomInts[1]));
+		secondVehicleSpawn.SetFactionKey(factions.Get(randomInts[1]));
 		spt.SetFactionKey(factions.Get(randomInts[2]));
+		thirdVehicleSpawn.SetFactionKey(factions.Get(randomInts[2]));
+		
 
 		super.StartGameMode();
 	}
