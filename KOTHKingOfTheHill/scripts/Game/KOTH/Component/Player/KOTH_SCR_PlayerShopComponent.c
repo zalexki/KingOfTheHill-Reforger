@@ -12,13 +12,17 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 
 	override void OnPostInit(IEntity owner)
 	{
+		if (SCR_Global.IsEditMode(owner))
+			return;
+		
 		m_scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
 		PlayerController controller = GetGame().GetPlayerController();
-		if (controller)
+		if (controller) {
 			m_playerUID = GetGame().GetBackendApi().GetPlayerUID(controller.GetPlayerId());
+		}
 	}
 	
-	bool FindSpawnForVehicle(string resourceName, int playerId)
+	bool SpawnVehicle(string resourceName, int playerId)
 	{
 		KOTH_SpawnPrefab firstSpawn = KOTH_SpawnPrefab.Cast(GetGame().GetWorld().FindEntityByName("KOTH_FirstVehicleSpawn"));
 		KOTH_SpawnPrefab secondSpawn = KOTH_SpawnPrefab.Cast(GetGame().GetWorld().FindEntityByName("KOTH_SecondVehicleSpawn"));
@@ -41,10 +45,35 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 	
 	// --------------------- RPC START
 	
+	
+	void AskRpc_Equip(string resourceName, int playerId)
+	{
+		Rpc(RpcAsk_Equip, resourceName, playerId);
+	}
+	
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	void RpcAsk_Equip(string resourceName, int playerId, bool permanentBuy)
+	{
+		KOTH_ShopItem item = FindShopItemByResourceName(resourceName);
+
+		if (!item)
+		{
+			Log("no item found for resourceName "+resourceName);
+			return;
+		}
+		
+		bool isSuccess = RemoveOldItemsAndAddNewOnes(item, playerId);
+		if (!isSuccess) {
+			DoRpc_Notif_Failed("You can't buy the weapon", "your inventory are full");
+			return;
+		}
+	}
+	
 	void DoRpcBuy(string resourceName, int playerId, bool permanentBuy = false)
 	{
 		Rpc(RpcAsk_Buy, resourceName, playerId, permanentBuy);
 		Log("clientside m_playerUID" +m_playerUID);
+			
 	}
 	
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
@@ -59,26 +88,36 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 			Log("no item found for resourceName "+resourceName);
 			return;
 		}
+		int price = item.m_priceOnce;
+		if (permanentBuy)
+			price = item.m_pricePermanent;
 		
+		bool buySuccess = m_scoreComp.TryBuy(price, playerId);
+		if (!buySuccess) {
+			DoRpc_Notif_Failed("You can't buy the weapon", "not enough money");
+			return;
+		}
 		
 		if (permanentBuy)
 		{
-			Log("/!\/!\/!\/!\ Not implemented yet");
+			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.m_listPlayerProfiles)
+			{
+				if (savedProfile.m_playerId == playerId) {
+					savedProfile.m_unlockedItems.Insert(item.m_itemResource);
+					m_scoreComp.m_listPlayerProfiles.Set(index, savedProfile);
+					
+					break;
+				}
+			}
+			
+			DoRpc_NotifBuy_PermanentBuySuccess(item.m_itemResource);
 		} 
 		else 
 		{
-			bool buySuccess = m_scoreComp.TryBuy(item.m_priceOnce, playerId);
-			if (!buySuccess) {
-				DoRpc_Notif_Failed("You can't buy the weapon", "not enough money");
-				return;
-			}
-			
 			// check category for vehicles
 			switch (item.m_category) {
 				case KOTH_ShopItemCategory.Vehicle:
-					// get player Faction
-					// found spawns for faction
-					if (FindSpawnForVehicle(resourceName, playerId))
+					if (SpawnVehicle(resourceName, playerId))
 					{
 						DoRpc_Notif_Succeed(item.m_priceOnce);
 					} else {
@@ -135,6 +174,27 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 			return;
 		
 		shopLayout.NotifErrorShop(firstLine, secondLine);
+	}
+	
+	void DoRpc_NotifBuy_PermanentBuySuccess(string itemResourceName)
+	{
+		Rpc(RpcDo_NotifBuy_PermanentBuySuccess, itemResourceName);
+	}
+	
+	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
+	void RpcDo_NotifBuy_PermanentBuySuccess(string itemResourceName)
+	{
+		ChimeraMenuBase menu = ChimeraMenuBase.CurrentChimeraMenu();
+		if (!menu)
+			return;
+		
+		KOTH_ShopUI shopLayout = KOTH_ShopUI.Cast(menu);
+		if (!shopLayout)
+			return;
+		
+		shopLayout.NotifBuy_PermanentBuySuccess(itemResourceName);
+		KOTH_SCR_PlayerProfileComponent playerProfileComp = KOTH_SCR_PlayerProfileComponent.Cast(GetGame().GetPlayerController().FindComponent(KOTH_SCR_PlayerProfileComponent));
+		playerProfileComp.AskRpc_PlayerProfile();
 	}
 	
 	// --------------------- RPC END
