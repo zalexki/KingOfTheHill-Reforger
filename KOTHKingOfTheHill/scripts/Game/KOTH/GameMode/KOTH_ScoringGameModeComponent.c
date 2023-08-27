@@ -38,6 +38,13 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 	[RplProp()]
 	ref array<ref KOTH_PlayerProfileJson> m_listPlayerProfiles = new array<ref KOTH_PlayerProfileJson>();
 
+	[RplProp()]	
+	int m_blueBonus;
+	[RplProp()]
+	int m_redBonus;
+	[RplProp()]
+	int m_greenBonus;
+
 	override void OnGameModeStart()
 	{
 		super.OnGameModeStart();
@@ -69,24 +76,19 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		float blueWinOrNot = 0.5;
 		if (m_blueforPoints == 100) { blueWinOrNot = 1; }
 		float blueBonusFloat = base * blueFactor * blueWinOrNot;
-		int blueBonus = blueBonusFloat.ToString(lenDec: 0).ToInt();
+		m_blueBonus = blueBonusFloat.ToString(lenDec: 0).ToInt();
 
 		float redFactor = m_redforPoints / 100;
 		float redWinOrNot = 0.5;
 		if (m_redforPoints == 100) { redWinOrNot = 1; }
 		float redBonusFloat = base * redFactor * redWinOrNot;
-		int redBonus = redBonusFloat.ToString(lenDec: 0).ToInt();
+		m_redBonus = redBonusFloat.ToString(lenDec: 0).ToInt();
 		
 		float greenFactor = m_greenforPoints / 100;
 		float greenWinOrNot = 0.5;
 		if (m_greenforPoints == 100) { greenWinOrNot = 1; }
 		float greenBonusFloat = base * greenFactor * greenWinOrNot;
-		int greenBonus = greenBonusFloat.ToString(lenDec: 0).ToInt();
-		
-		
-		Log("blueBonus "+blueBonus);
-		Log("redBonus "+redBonus);
-		Log("greenBonus "+greenBonus);
+		m_greenBonus = greenBonusFloat.ToString(lenDec: 0).ToInt();
 		
 		array<int> playerIds = new array<int>();
 		PlayerManager playerManager = GetGame().GetPlayerManager();
@@ -107,14 +109,15 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 					if (faction) {
 						int bonus;
 						if (faction.GetFactionName() == "BLUFOR")
-							bonus = blueBonus;
+							bonus = m_blueBonus;
 							
 						if (faction.GetFactionName() == "OPFOR")
-							bonus = redBonus;
+							bonus = m_redBonus;
 
 						if (faction.GetFactionName() == "INDFOR")
-							bonus = greenBonus;
+							bonus = m_greenBonus;
 						
+						Replication.BumpMe();
 						foreach (int index, KOTH_PlayerProfileJson savedProfile : m_listPlayerProfiles)
 						{
 							if (savedProfile.m_playerId == playerId) {

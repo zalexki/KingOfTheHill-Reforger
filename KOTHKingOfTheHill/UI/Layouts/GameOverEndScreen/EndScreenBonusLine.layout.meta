@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{144919871D65F121}UI/layouts/HUD/GameOver/EndScreen/EndScreen.layout"
+ Name "{0AB65604E4B00513}UI/Layouts/HUD/GameOver/EndScreen/EndScreenBonusLine.layout"
  Configurations {
   LayoutResourceClass PC {
   }
