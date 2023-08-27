@@ -300,6 +300,7 @@ SCR_BaseGameMode {
      }
     }
    }
+   m_sGameOverScreenBasePrefab "{9C2D5F0B4AFC2848}UI/Layouts/HUD/GameOver/EndScreen/EndScreen_KOTH.layout"
   }
   SCR_GroupsManagerComponent "{5E1F0BA23AC5322A}" {
    m_sDefaultGroupPrefab "{8B4D49A9F324E7D5}Prefabs/Groups/PlayableGroup.et"
@@ -1516,7 +1517,7 @@ SCR_BaseGameMode {
    Streamable Disabled
   }
  }
- coords 7071.133 118.908 6029.669
+ coords 3113.879 16 2724.923
  Flags 0
  m_bAllowFactionChange 1
  {
