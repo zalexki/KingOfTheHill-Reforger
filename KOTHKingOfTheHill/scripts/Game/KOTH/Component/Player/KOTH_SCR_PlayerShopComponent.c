@@ -109,8 +109,8 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 					break;
 				}
 			}
-			
-			DoRpc_NotifBuy_PermanentBuySuccess(item.m_itemResource);
+			GetGame().GetCallqueue().CallLater(DoRpc_NotifBuy_PermanentBuySuccess, 500, false, item.m_itemResource);
+			//DoRpc_NotifBuy_PermanentBuySuccess(item.m_itemResource);
 		} 
 		else 
 		{

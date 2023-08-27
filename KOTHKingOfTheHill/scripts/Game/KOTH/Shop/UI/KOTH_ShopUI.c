@@ -110,7 +110,7 @@ class KOTH_ShopUI : ChimeraMenuBase
 				TextWidget textLevelReq = TextWidget.Cast(newRow.FindAnyWidget("TextLevelReq"));
 				
 				purchaseOnceButton.SetVisible(false);
-				purchasePermanentButton .SetVisible(false);
+				purchasePermanentButton.SetVisible(false);
 				desactivatePermHINT.SetVisible(false);
 				
 				purchaseOnceNoLVL.SetVisible(true);

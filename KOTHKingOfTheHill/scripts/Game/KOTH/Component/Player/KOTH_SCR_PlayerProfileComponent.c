@@ -31,6 +31,8 @@ class KOTH_SCR_PlayerProfileComponent : ScriptComponent
 		{
 			if (savedProfile.m_playerId == playerId) {
 				profile = savedProfile;
+				DoRpc_PlayerProfile(savedProfile);
+				break;
 			}
 		}
 		
@@ -38,8 +40,6 @@ class KOTH_SCR_PlayerProfileComponent : ScriptComponent
 			GetGame().GetCallqueue().CallLater(RpcAsk_PlayerProfile, 1000, false, playerId);
 			return;
 		}
-		
-		
 	}
 	void DoRpc_PlayerProfile(KOTH_PlayerProfileJson profile)
 	{
