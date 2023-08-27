@@ -11,6 +11,8 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 	int m_kills = 0;
 	int m_deaths = 0;
 	int m_friendlyKills = 0;
+	
+	ref array<string> m_unlockedItems = {};
 
 	void KOTH_PlayerProfileJson()
 	{
@@ -23,6 +25,7 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 		RegV("m_kills");
 		RegV("m_deaths");
 		RegV("m_friendlyKills");
+		RegV("m_unlockedItems");
 	}
 
 	void AddInZoneXpAndMoney()

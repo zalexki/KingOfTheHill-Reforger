@@ -212,6 +212,26 @@ SizeLayoutWidgetClass {
                 }
                }
               }
+              ButtonWidgetClass "{5E36E786AF127BF9}" : "{267D0C58DBFE24FA}UI/Layouts/Shop/KOTH_BuyOnceButton.layout" {
+               Name "EquipButton"
+               Slot OverlayWidgetSlot "{5E272AA1639BC7BD}" {
+                HorizontalAlign 3
+                VerticalAlign 3
+                Padding 2 2 2 2
+               }
+               "Is Visible" 0
+               {
+                OverlayWidgetClass "{5E272AA14F65CC8A}" {
+                 Prefab "{5E272AA14F65CC8A}"
+                 {
+                  TextWidgetClass "{5E272AA14F65CC87}" {
+                   Prefab "{5E272AA14F65CC87}"
+                   Text "EQUIP"
+                  }
+                 }
+                }
+               }
+              }
               OverlayWidgetClass "{5E28034BC77265F8}" {
                Name "EquipePermHINT"
                Slot OverlayWidgetSlot "{5E2803422E4EEF65}" {
@@ -238,7 +258,7 @@ SizeLayoutWidgetClass {
                  }
                  Clipping False
                  "Inherit Color" 1
-                 Text "EQUIPE"
+                 Text "EQUIP"
                  "Font Size" 17
                  "Min Font Size" 17
                  FontProperties FontProperties "{546AF489DFD25402}" {

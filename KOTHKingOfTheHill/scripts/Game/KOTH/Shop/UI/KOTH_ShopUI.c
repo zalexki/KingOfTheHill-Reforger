@@ -9,6 +9,8 @@ class KOTH_ShopUI : ChimeraMenuBase
 	
 	protected VerticalLayoutWidget m_contentContainer;
 	
+	protected KOTH_SCR_PlayerShopComponent m_playerShopComp;
+	protected KOTH_SCR_PlayerProfileComponent m_playerProfileComp;
 	protected KOTH_ScoringGameModeComponent m_scoreComp;
 	protected int m_playerId;
 	
@@ -18,6 +20,12 @@ class KOTH_ShopUI : ChimeraMenuBase
 		
 		m_playerId = GetGame().GetPlayerController().GetPlayerId();
 		m_scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
+		
+		PlayerController controller = GetGame().GetPlayerController();
+		int playerId = controller.GetPlayerId();
+		
+		m_playerShopComp = KOTH_SCR_PlayerShopComponent.Cast(controller.FindComponent(KOTH_SCR_PlayerShopComponent));
+		m_playerProfileComp = KOTH_SCR_PlayerProfileComponent.Cast(controller.FindComponent(KOTH_SCR_PlayerProfileComponent));
 	}
 	
 	override void OnMenuOpen()
@@ -64,6 +72,10 @@ class KOTH_ShopUI : ChimeraMenuBase
 			SCR_ButtonBaseComponent buyPermanent = SCR_ButtonBaseComponent.GetButtonBase("PurchasePermanentButton", newRow);
 			if (buyPermanent)
 				buyPermanent.m_OnClicked.Insert(OnClickBuyPermanent);
+			
+			SCR_ButtonBaseComponent equipButton = SCR_ButtonBaseComponent.GetButtonBase("EquipButton", newRow);
+			if (equipButton)
+				equipButton.m_OnClicked.Insert(OnClickEquip);
 
 			// set text infos
 			TextWidget resourceNameWidget = TextWidget.Cast(newRow.FindAnyWidget("ResourceName"));
@@ -85,20 +97,20 @@ class KOTH_ShopUI : ChimeraMenuBase
 				}
 			}
 			
+			OverlayWidget desactivatePermHINT = OverlayWidget.Cast(newRow.FindAnyWidget("DesactivatePermHINT"));
+			ButtonWidget purchaseOnceButton = ButtonWidget.Cast(newRow.FindAnyWidget("PurchaseOnceButton"));
+			ButtonWidget purchasePermanentButton = ButtonWidget.Cast(newRow.FindAnyWidget("PurchasePermanentButton"));
+			
+			OverlayWidget purchaseOnceNoLVL = OverlayWidget.Cast(newRow.FindAnyWidget("PurchaseOnceNoLVL"));
+			OverlayWidget purchasePermNoLVL = OverlayWidget.Cast(newRow.FindAnyWidget("PurchasePermNoLVL"));
+			
 			if (playerLevel < item.m_level)
-			{
-				ButtonWidget purchaseOnceButton = ButtonWidget.Cast(newRow.FindAnyWidget("PurchaseOnceButton"));
-				ButtonWidget PurchasePermanentButton = ButtonWidget.Cast(newRow.FindAnyWidget("PurchasePermanentButton"));
-				
-				OverlayWidget purchaseOnceNoLVL = OverlayWidget.Cast(newRow.FindAnyWidget("PurchaseOnceNoLVL"));
-				OverlayWidget purchasePermNoLVL = OverlayWidget.Cast(newRow.FindAnyWidget("PurchasePermNoLVL"));
-				OverlayWidget desactivatePermHINT = OverlayWidget.Cast(newRow.FindAnyWidget("DesactivatePermHINT"));
-				
+			{				
 				ImageWidget fadeLVLReq = ImageWidget .Cast(newRow.FindAnyWidget("FadeLVLReq"));
 				TextWidget textLevelReq = TextWidget.Cast(newRow.FindAnyWidget("TextLevelReq"));
 				
 				purchaseOnceButton.SetVisible(false);
-				PurchasePermanentButton.SetVisible(false);
+				purchasePermanentButton.SetVisible(false);
 				desactivatePermHINT.SetVisible(false);
 				
 				purchaseOnceNoLVL.SetVisible(true);
@@ -112,11 +124,20 @@ class KOTH_ShopUI : ChimeraMenuBase
 			else 
 			{
 				// set visible or not buy
-				// TODO: can buy from current money
-				ButtonWidget purchaseOnceButton = ButtonWidget.Cast(newRow.FindAnyWidget("PurchaseOnceButton"));
 				OverlayWidget purchaseOnceHINT = OverlayWidget.Cast(newRow.FindAnyWidget("PurchaseOnceHINT"));
 				purchaseOnceButton.SetVisible(true);
 				purchaseOnceHINT.SetVisible(false);
+				
+				if (m_playerProfileComp.GetUnlockedItemList().Contains(item.m_itemResource))
+				{
+					purchaseOnceButton.SetVisible(false);
+					equipButton.SetVisible(true);
+					
+					OverlayWidget purchasePermHINT = OverlayWidget.Cast(newRow.FindAnyWidget("PurchasePermHINT"));
+					purchasePermanentButton.SetVisible(false);
+					desactivatePermHINT.SetVisible(false);
+					purchasePermHINT.SetVisible(true);
+				}
 			}
 
 			// add item preview
@@ -213,12 +234,7 @@ class KOTH_ShopUI : ChimeraMenuBase
 		TextWidget priceOnceWidget = TextWidget.Cast(row.FindAnyWidget("PriceOnceText"));
 		TextWidget resourceNameWidget = TextWidget.Cast(row.FindAnyWidget("ResourceName"));
 
-		PlayerController controller = GetGame().GetPlayerController();
-		IEntity cont = controller.GetControlledEntity();
-		KOTH_SCR_PlayerShopComponent playerShopComp = KOTH_SCR_PlayerShopComponent.Cast(controller.FindComponent(KOTH_SCR_PlayerShopComponent));
-
-		int price = priceOnceWidget.GetText().ToInt();
-		playerShopComp.DoRpcBuy(resourceNameWidget.GetText(), controller.GetPlayerId());
+		m_playerShopComp.DoRpcBuy(resourceNameWidget.GetText(), m_playerId);
 
 		// set widget equiped visible
 		ButtonWidget purchaseOnceButton = ButtonWidget.Cast(row.FindAnyWidget("PurchaseOnceButton"));
@@ -230,23 +246,31 @@ class KOTH_ShopUI : ChimeraMenuBase
 	protected void OnClickBuyPermanent(SCR_ButtonBaseComponent button)
 	{
 		Log("not implemented yet");
-//		Widget row = button.GetRootWidget().GetParent().GetParent().GetParent();
-//		TextWidget priceOnceWidget = TextWidget.Cast(row.FindAnyWidget("PricePermText"));
-//		TextWidget itemResourceNameWidget = TextWidget.Cast(row.FindAnyWidget("ItemResourceName"));
-//
-//		PlayerManager playerManager = GetGame().GetPlayerManager();
-//		PlayerController controller = GetGame().GetPlayerController();
-//		int playerId = controller.GetPlayerId();
-//		string playerName = playerManager.GetPlayerName(playerId);
-//
-//
-//		KOTH_SCR_PlayerShopComponent kothPlayerComp = KOTH_SCR_PlayerShopComponent.Cast(controller.FindComponent(KOTH_SCR_PlayerShopComponent));
-//
-//		int price = priceOnceWidget.GetText().ToInt();
-//		string itemResourceName = itemResourceNameWidget.GetText();
-//		kothPlayerComp.DoRpcBuy(price, playerName, itemResourceName);
-//		HUD_NotifBuy(price);
+		Widget row = button.GetRootWidget().GetParent().GetParent().GetParent();
+		TextWidget pricePermWidget = TextWidget.Cast(row.FindAnyWidget("PricePermText"));
+		TextWidget resourceNameWidget = TextWidget.Cast(row.FindAnyWidget("ResourceName"));
+
+		m_playerShopComp.DoRpcBuy(resourceNameWidget.GetText(), m_playerId, true);
+		
+		// set widget owned visible
+		ButtonWidget purchasePermanentButton = ButtonWidget.Cast(row.FindAnyWidget("PurchasePermanentButton"));
+		OverlayWidget purchasePermHINT = OverlayWidget.Cast(row.FindAnyWidget("PurchasePermHINT"));
+		purchasePermanentButton.SetVisible(false);
+		purchasePermHINT.SetVisible(true);
 	}
+	
+	protected void OnClickEquip(SCR_ButtonBaseComponent button)
+	{
+		Widget row = button.GetRootWidget().GetParent().GetParent().GetParent();
+		TextWidget resourceNameWidget = TextWidget.Cast(row.FindAnyWidget("ResourceName"));
+		m_playerShopComp.AskRpc_Equip(resourceNameWidget.GetText(), m_playerId);
+		
+		// set widget equiped visible
+		OverlayWidget purchaseOnceHINT = OverlayWidget.Cast(row.FindAnyWidget("PurchaseOnceHINT"));
+		button.SetVisible(false);
+		purchaseOnceHINT.SetVisible(true);
+	}
+	
 	
 	//informe player error in buy
 	void NotifErrorShop(string firstLine, string secondLine)
@@ -255,7 +279,6 @@ class KOTH_ShopUI : ChimeraMenuBase
 		VerticalLayoutWidget koth_scrollListshop = VerticalLayoutWidget.Cast(root.FindWidget("Overlay.VerticalLayout1.ScrollList.NotifContainer"));
 
 		Widget w = GetGame().GetWorkspace().CreateWidgets("{993FD33C936EB12C}UI/Layouts/HUD/KingOfTheHill/KOTH_ShopNotification.layout", koth_scrollListshop);
-
 		TextWidget Seconde = TextWidget.Cast(w.FindAnyWidget("Seconde"));
 		Seconde.SetText(firstLine);
 
@@ -273,6 +296,35 @@ class KOTH_ShopUI : ChimeraMenuBase
 			KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
 			if (kothHud) {
 				kothHud.NotifBuy(amount);
+			}
+		}
+	}
+	
+	void NotifBuy_PermanentBuySuccess(string itemResource)
+	{
+		int i = 0;
+		bool foundRow = false;
+		Widget child = m_contentContainer.GetChildren();
+		TextWidget resourceNameWidget = TextWidget.Cast(child.FindAnyWidget("ResourceName"));
+		
+		if (resourceNameWidget.GetText() == itemResource) {
+			Widget PurchaseOnceButton = child.FindAnyWidget("PurchaseOnceButton");
+			PurchaseOnceButton.SetVisible(false);
+			OverlayWidget EquipButton = OverlayWidget.Cast(child.FindAnyWidget("EquipButton"));
+			EquipButton.SetVisible(true);
+		}
+		while (!foundRow && i < 1000) 
+		{
+			i++;
+			child = child.GetSibling();
+			resourceNameWidget = TextWidget.Cast(child.FindAnyWidget("ResourceName"));
+			if (resourceNameWidget.GetText() == itemResource) 
+			{
+				Widget PurchaseOnceButton = child.FindAnyWidget("PurchaseOnceButton");
+				PurchaseOnceButton.SetVisible(false);
+				Widget EquipButton = child.FindAnyWidget("EquipButton");
+				EquipButton.SetVisible(true);
+				foundRow = true;
 			}
 		}
 	}
