@@ -42,6 +42,8 @@ modded class SCR_BaseGameMode
 	protected override void OnGameStart()
 	{
 		super.OnGameStart();
+		
+		
 
 		IEntity firstSpawn = GetGame().GetWorld().FindEntityByName("KOTH_FirstSpawn");
 		IEntity secondSpawn = GetGame().GetWorld().FindEntityByName("KOTH_SecondSpawn");
@@ -51,6 +53,15 @@ modded class SCR_BaseGameMode
 		GetGame().GetCallqueue().CallLater(AttachProperFlag, 1000, false, secondSpawn);
 		GetGame().GetCallqueue().CallLater(AttachProperFlag, 1000, false, thirdSpawn);
 	}
+	
+	override void EOnDiag(IEntity owner, float timeSlice)
+	{
+//		if (DiagMenu.GetBool(SCR_DebugMenuID.UDR_SHOW_GAME_MODE_PANEL))
+//		{
+			//DbgUI.Begin("Game Mode");
+		//}
+	}
+	
 
 	void AttachProperFlag(IEntity spawn)
 	{

@@ -89,14 +89,21 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 		return m_level;
 	}
 
-	private int AddMoney(int amount)
+	int AddMoney(int amount)
 	{
 		m_money += amount;
 		
 		return m_money;
 	}
+	
+	int RemoveMoney(int amount)
+	{
+		m_money -= amount;
+		
+		return m_money;
+	}
 
-	private int AddXp(int amount)
+	int AddXp(int amount)
 	{
 		m_xp = m_xp + amount;
 
@@ -106,6 +113,20 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 		}
 
 		return m_xp;
+	}
+	
+	int AddLevel(int amount)
+	{
+		m_level += amount;
+		
+		return m_level;
+	}
+	
+	int RemoveLevel(int amount)
+	{
+		m_level -= amount;
+		
+		return m_level;
 	}
 
 

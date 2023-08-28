@@ -7,17 +7,68 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 	[RplProp()]
 	protected int m_blueforPoints = 0;
 	int GetBlueforPoint() { return m_blueforPoints; }
-	void AddBlueforPoint() { m_blueforPoints++; }
+	void AddBlueforPoint(int i = 0) { 
+		if (i == 0) {
+			m_blueforPoints++; 
+		} else {
+			m_blueforPoints = m_blueforPoints + i;
+		}
+	}
+	void RemoveBlueforPoint(int i = 0) 
+	{ 
+		if (i == 0) {
+			m_blueforPoints--; 
+		} else {
+			m_blueforPoints = m_blueforPoints - i;
+		}
+		
+		if (m_blueforPoints < 0)
+			m_blueforPoints = 0;
+	}
 	
 	[RplProp()]
 	protected int m_redforPoints = 0;
 	int GetRedforPoint() { return m_redforPoints; }
-	void AddRedforPoint() { m_redforPoints++; }
+	void AddRedforPoint(int i = 0) { 
+		if (i == 0) {
+			m_redforPoints++; 
+		} else {
+			m_redforPoints = m_redforPoints + i;
+		}
+	}
+	void RemoveRedforPoint(int i = 0) 
+	{ 
+		if (i == 0) {
+			m_redforPoints--; 
+		} else {
+			m_redforPoints = m_redforPoints - i;
+		}
+		
+		if (m_redforPoints < 0)
+			m_redforPoints = 0;
+	}
 	
 	[RplProp()]
 	protected int m_greenforPoints = 0;
 	int GetGreenforPoint() { return m_greenforPoints; }
-	void AddGreenforPoint() { m_greenforPoints++; }
+	void AddGreenforPoint(int i = 0) { 
+		if (i == 0) {
+			m_greenforPoints++; 
+		} else {
+			m_greenforPoints = m_greenforPoints + i;
+		}
+	}
+	void RemoveGreenforPoint(int i = 0) 
+	{ 
+		if (i == 0) {
+			m_greenforPoints--; 
+		} else {
+			m_greenforPoints = m_greenforPoints - i;
+		}
+		
+		if (m_greenforPoints < 0)
+			m_greenforPoints = 0;
+	}
 	
 	[RplProp()]
 	protected int m_bluePlayers = 0;
@@ -117,7 +168,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 						if (faction.GetFactionName() == "INDFOR")
 							bonus = m_greenBonus;
 						
-						Replication.BumpMe();
+						
 						foreach (int index, KOTH_PlayerProfileJson savedProfile : m_listPlayerProfiles)
 						{
 							if (savedProfile.m_playerId == playerId) {
@@ -126,6 +177,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 								m_listPlayerProfiles.Set(index, savedProfile);
 							}
 						}
+						Replication.BumpMe();
 					}
 				}
 			}
@@ -425,6 +477,12 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		Replication.BumpMe();
 	}
 
+	
+	override void OnPlayerSpawnFinalize_S(SCR_SpawnRequestComponent requestComponent, SCR_SpawnHandlerComponent handlerComponent, SCR_SpawnData data, IEntity entity)
+	{
+		Log("OnPlayerSpawnFinalize_S");
+	}
+	
 	void BumpMe()
 	{
 		Replication.BumpMe();
