@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{E86197392C9C345B}Prefabs/Characters/Vests/Vest_PASGT/PareBalleVest_INDFOR.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

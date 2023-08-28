@@ -1,0 +1,12 @@
+MatPBRMulti {
+ CavityFromAO 1
+ VFXMap "{9268279F8C6B2A2B}Assets/Characters/Uniforms/Pants_BDU_M81/Data/Pants_BDU_M81_VFX.edds"
+ MudColor 0.392 0.002 0.002 1
+ DirtUserOpacity 1
+ DirtOpacity 3
+ DirtRoughness 1.2
+ DirtBCRMap "{032BC3E4375DE681}Assets/Characters/Uniforms/Pants_BDU_M81/Data/Pants_BDU_M81_wound_BCR.edds"
+ Color_1 0.561 0.561 0.561 1
+ BCR_1 "{4BD57071E1209F48}Art/PATERN_INDFOR.edds"
+ NMO_1 "{65157539EC947D16}Assets/Characters/Uniforms/Pants_BDU_M81/Data/Pants_BDU_M81_tucked_NMO.edds"
+}

@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{C1490C1A42C8824F}Prefabs/Items/Equipment/Backpacks/Backpack_M5_KOTH.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

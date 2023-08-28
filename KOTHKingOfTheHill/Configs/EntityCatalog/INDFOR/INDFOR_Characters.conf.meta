@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{29242EE3AB66D2E9}Configs/EntityCatalog/INDFOR/INDFOR_Characters.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}

@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{7C98AF3D5AB4A519}Prefabs/Characters/Factions/BLUFOR/KOTH_Base/Character_KOTH_BLUFOR.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

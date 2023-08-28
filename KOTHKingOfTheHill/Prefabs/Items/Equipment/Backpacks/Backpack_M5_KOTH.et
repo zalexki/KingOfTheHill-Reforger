@@ -1,0 +1,69 @@
+GenericEntity : "{09D6A1C9543E4A95}Prefabs/Items/Core/Backpack_Base.et" {
+ ID "511E9C6ADE70F798"
+ components {
+  MeshObject "{511E9C6ADE70F7BD}" {
+   Object "{A2F05BCE848CB8E1}Assets/Items/Equipment/Backpacks/Backpack_Medical_M5/Backpack_Medical_M5_item.xob"
+   Materials {
+    MaterialAssignClass "{5E392148BBA32B52}" {
+     SourceMaterial "Backpack_Medical_M5"
+     AssignedMaterial "{5E2BF635A85B615E}Assets/Items/Equipment/Backpacks/Backpack_Medical_M5/Data/Backpack_M5_KOTH.emat"
+    }
+   }
+  }
+  SCR_UniversalInventoryStorageComponent "{5222CB03A40528FA}" {
+   Attributes SCR_ItemAttributeCollection "{5222CB039E9715D1}" {
+    ItemDisplayName UIInfo "{5222CB03904B414C}" {
+     Name "#AR-Backpack_M5_Name"
+     Description "#AR-Backpack_M5_Description"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes PhysicalAttributes {
+     Weight 1.5
+     SizeSetupStrategy Manual
+     ItemDimensions 20 20 20
+     ItemVolume 4001
+    }
+    CustomAttributes {
+     PreviewRenderAttributes "{52BCBDD2B54658EC}" {
+      CameraDistanceToItem 4
+      PreviewModel "{5839842DD729D30F}Assets/Items/Equipment/Backpacks/Backpack_Medical_M5/Backpack_Medical_M5.xob"
+     }
+    }
+   }
+   UseCapacityCoefficient 0
+   CapacityCoefficient 1
+   MaxCumulativeVolume 4000
+   MaxItemSize 20 20 20
+  }
+  SimpleSoundComponent "{5E39214FF6331343}" {
+   Filenames {
+    "{3D8789E7ACF6EDD3}Sounds/Items/_SharedData/PickUp/Items_PickUp_BackPack.acp" "{F2BEB3DF3F95849F}Sounds/Items/_SharedData/Open/Backpack_Medical_M5/Items_Backpack_Medical_M5.acp"
+   }
+  }
+  BaseLoadoutClothComponent "{511E9C6ADE70F7BB}" {
+   WornModel "{5839842DD729D30F}Assets/Items/Equipment/Backpacks/Backpack_Medical_M5/Backpack_Medical_M5.xob"
+   WornMaterialsOverride {
+    "{5E2BF635A85B615E}Assets/Items/Equipment/Backpacks/Backpack_Medical_M5/Data/Backpack_M5_KOTH.emat"
+   }
+   ItemModel "{A2F05BCE848CB8E1}Assets/Items/Equipment/Backpacks/Backpack_Medical_M5/Backpack_Medical_M5_item.xob"
+   ItemMaterialsOverride {
+    "{5E2BF635A85B615E}Assets/Items/Equipment/Backpacks/Backpack_Medical_M5/Data/Backpack_M5_KOTH.emat"
+   }
+   DeflatedModel "{A10BE087594FA005}Assets/Items/Equipment/Backpacks/Backpack_Medical_M5/Backpack_Medical_M5_Inflated.xob"
+   AreaTypeWhenModelChange {
+    LoadoutArmoredVestSlotArea "{5E39214FF63313AC}" {
+    }
+   }
+  }
+  ActionsManagerComponent "{511E9C6ADE70F786}" {
+   ActionContexts {
+    UserActionContext "{511E9C6ADE70F788}" {
+     Position PointInfo "{511E9C6ADE70F78D}" {
+      Offset 0 0.1168 0.1802
+     }
+     Radius 1
+    }
+   }
+  }
+ }
+ coords 1220.652 38.011 2841.177
+}

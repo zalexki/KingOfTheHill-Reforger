@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{B94B3453E022C32F}Configs/EntityCatalog/OPFOR/OPFOR_Characters.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}

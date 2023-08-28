@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{850537FBE5BB5380}Prefabs/MP/Managers/Factions/FactionManager_BLUFORxOPFORxINDFOR.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}
