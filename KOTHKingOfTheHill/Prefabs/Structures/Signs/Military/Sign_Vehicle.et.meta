@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{FCA8E71AAD8F5053}Prefabs/MP/Spawning/vehicleSpawnOne.et"
+ Name "{F15CBBE99BEC1270}Prefabs/Structures/Signs/Military/Sign_Vehicle.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

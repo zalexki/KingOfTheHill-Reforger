@@ -343,6 +343,11 @@ GenericEntity : "{FA9066DE33E8E67D}Prefabs/Structures/Military/Camps/Canvas_Cove
    ID "5E1EFBF8517E6668"
    coords 2.972 -0.148 -3.236
   }
+  GenericEntity : "{F15CBBE99BEC1270}Prefabs/Structures/Signs/Military/Sign_Vehicle.et" {
+   ID "5E39676782008B90"
+   coords -3.401 -0.123 6.724
+   angleY 135
+  }
   GenericEntity : "{FF181C2921B7A4F3}Prefabs/Props/Furniture/CabinetMetal_01_olive_V2.et" {
    ID "5E1EFBF8517E6665"
    components {

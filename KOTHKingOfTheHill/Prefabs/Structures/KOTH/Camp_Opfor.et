@@ -380,6 +380,11 @@ GenericEntity : "{FA9066DE33E8E67D}Prefabs/Structures/Military/Camps/Canvas_Cove
    ID "5E1EFBF84EEC9C26"
    coords 2.972 -0.148 -3.236
   }
+  GenericEntity : "{F15CBBE99BEC1270}Prefabs/Structures/Signs/Military/Sign_Vehicle.et" {
+   ID "5E396767B57737CB"
+   coords -3.451 -0.124 6.728
+   angleY 135
+  }
   SCR_SpawnPoint : "{F607201D6D19DAA3}Prefabs/MP/Spawning/OPFOR_Spawnpoint_KOTH.et" {
    ID "5E1F523DF4404F54"
    coords 0.09 0.253 -0.102

@@ -1,52 +1,62 @@
 GenericEntity KOTH_FirstSpawn : "{0D777787DAAD3541}Prefabs/Structures/KOTH/Camp_Blufor.et" {
- coords 5186.829 39.217 10611.32
- angleY -127.983
+ coords 2613.735 110.015 2104.127
+ angleY -165
 }
 GenericEntity KOTH_SecondSpawn : "{108B69D9D8DDE8B0}Prefabs/Structures/KOTH/Camp_Opfor.et" {
- coords 4525.925 16.401 11298.679
- angleY -90
+ coords 2309.925 90.183 1333.2
+ angleY 37.223
 }
 $grp KOTH_SpawnPrefab : "{1E394AEE2617B42D}Prefabs/MP/Spawning/KOTH_VehicleSpawnPoint.et" {
  KOTH_FirstVehicleSpawn {
-  coords 5194.948 35.698 10626.952
+  coords 2605.61 106.217 2084.96
+  angleX 15.087
+  angleY -0.793
+  angleZ -12.535
   {
    $grp KOTH_SpawnPrefab : "{1E394AEE2617B42D}Prefabs/MP/Spawning/KOTH_VehicleSpawnPoint.et" {
-    KOTH_FirstVehicleSpawn2 {
-     coords -28.119 0.344 -20.397
+    {
+     coords -10.84 2.845 -16.293
+     angleX -14.896
+     angleY -2.549
+     angleZ 12.763
     }
-    KOTH_FirstVehicleSpawn3 {
-     coords 14.821 -0.187 13.591
+    {
+     coords -9.046 3.105 -36.292
+     angleX -14.896
+     angleY -2.549
+     angleZ 12.763
     }
    }
   }
  }
  KOTH_ThirdVehicleSpawn {
-  coords 4546.61 18.573 10078.017
+  coords 3135.99 33.162 1375.102
   {
    $grp KOTH_SpawnPrefab : "{1E394AEE2617B42D}Prefabs/MP/Spawning/KOTH_VehicleSpawnPoint.et" {
-    KOTH_ThirdVehicleSpawn2 {
-     coords 0.054 -0.355 -28.75
+    {
+     coords -18.306 5.145 36.789
     }
-    KOTH_ThirdVehicleSpawn3 {
-     coords 0.427 0.001 20.516
+    {
+     coords -8.952 2.464 18.546
     }
    }
   }
  }
  KOTH_SecondVehicleSpawn {
-  coords 4517.758 16.914 11274.666
+  coords 2319.472 87.022 1348.346
   {
    $grp KOTH_SpawnPrefab : "{1E394AEE2617B42D}Prefabs/MP/Spawning/KOTH_VehicleSpawnPoint.et" {
-    KOTH_SecondVehicleSpawn2 {
-     coords -20.309 -2.068 -2.354
+    {
+     coords -15.618 -4.382 11.811
     }
-    KOTH_SecondVehicleSpawn3 {
-     coords -11.58 -3.606 26.919
+    {
+     coords 12.755 -1.152 15.52
     }
    }
   }
  }
 }
 GenericEntity KOTH_ThirdSpawn : "{900D62CF65FB7496}Prefabs/Structures/KOTH/Camp_Indfor.et" {
- coords 4535.361 19.112 10064.448
+ coords 3149.662 31.914 1364.311
+ angleY -115.176
 }

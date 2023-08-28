@@ -3145,7 +3145,7 @@ $grp SplineShapeEntity {
   coords 2608.299 88.926 1923.463
   Points {
    ShapePoint "{5E2D1685F12DD5DC}" {
-    Position 0 -0 0
+    Position 0 0 0
     Data {
      ForestGeneratorPointData "{000000002C57B0BA}" {
      }
@@ -4844,7 +4844,7 @@ $grp SplineShapeEntity {
        scale 1.134
       }
       {
-       coords 1.424 -0.812 -0
+       coords 1.424 -0.812 0
        angleY 163.624
        scale 1.153
       }
@@ -5024,7 +5024,7 @@ $grp SplineShapeEntity {
   coords 2878.94 68.944 1539.841
   Points {
    ShapePoint "{5E2D16857A365178}" {
-    Position 0 -0 0
+    Position 0 0 0
     Data {
      ForestGeneratorPointData "{000000002C57B0BA}" {
      }
