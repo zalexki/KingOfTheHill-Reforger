@@ -4,6 +4,16 @@ modded class SCR_BaseGameMode
 	const int m_winnerPointsNeeded = 100;
 
 	IEntity m_kothTrigger;
+	
+	IEntity m_firstSpawn;
+	IEntity m_secondSpawn;
+	IEntity m_thirdSpawn;
+	SCR_SpawnPoint m_firstSpawnPoint;
+	SCR_SpawnPoint m_secondSpawnPoint;
+	SCR_SpawnPoint m_thirdSpawnPoint;
+	KOTH_SpawnProtectionTriggerEntity m_firstProtect;
+	KOTH_SpawnProtectionTriggerEntity m_secondProtect;
+	KOTH_SpawnProtectionTriggerEntity m_thirdProtect;
 
 	void CheckGameEnd()
 	{
@@ -43,25 +53,22 @@ modded class SCR_BaseGameMode
 	{
 		super.OnGameStart();
 		
+		m_firstSpawn = GetGame().GetWorld().FindEntityByName("KOTH_FirstSpawn");
+		m_secondSpawn = GetGame().GetWorld().FindEntityByName("KOTH_SecondSpawn");
+		m_thirdSpawn = GetGame().GetWorld().FindEntityByName("KOTH_ThirdSpawn");
 		
+		m_firstSpawnPoint = SCR_SpawnPoint.Cast(FindSpawnPoint(m_firstSpawn));
+		m_secondSpawnPoint = SCR_SpawnPoint.Cast(FindSpawnPoint(m_secondSpawn));
+		m_thirdSpawnPoint = SCR_SpawnPoint.Cast(FindSpawnPoint(m_thirdSpawn));
+		
+		m_firstProtect = FindSpawnProtection(m_firstSpawn);
+		m_secondProtect = FindSpawnProtection(m_secondSpawn);
+		m_thirdProtect = FindSpawnProtection(m_thirdSpawn);
 
-		IEntity firstSpawn = GetGame().GetWorld().FindEntityByName("KOTH_FirstSpawn");
-		IEntity secondSpawn = GetGame().GetWorld().FindEntityByName("KOTH_SecondSpawn");
-		IEntity thirdSpawn = GetGame().GetWorld().FindEntityByName("KOTH_ThirdSpawn");
-
-		GetGame().GetCallqueue().CallLater(AttachProperFlag, 1000, false, firstSpawn);
-		GetGame().GetCallqueue().CallLater(AttachProperFlag, 1000, false, secondSpawn);
-		GetGame().GetCallqueue().CallLater(AttachProperFlag, 1000, false, thirdSpawn);
-	}
-	
-	override void EOnDiag(IEntity owner, float timeSlice)
-	{
-//		if (DiagMenu.GetBool(SCR_DebugMenuID.UDR_SHOW_GAME_MODE_PANEL))
-//		{
-			//DbgUI.Begin("Game Mode");
-		//}
-	}
-	
+		GetGame().GetCallqueue().CallLater(AttachProperFlag, 1000, false, m_firstSpawn);
+		GetGame().GetCallqueue().CallLater(AttachProperFlag, 1000, false, m_secondSpawn);
+		GetGame().GetCallqueue().CallLater(AttachProperFlag, 1000, false, m_thirdSpawn);
+	}	
 
 	void AttachProperFlag(IEntity spawn)
 	{
@@ -96,21 +103,9 @@ modded class SCR_BaseGameMode
 		KOTH_SpawnPrefab secondVehicleSpawn = KOTH_SpawnPrefab.Cast(GetGame().GetWorld().FindEntityByName("KOTH_SecondVehicleSpawn"));
 		KOTH_SpawnPrefab thirdVehicleSpawn = KOTH_SpawnPrefab.Cast(GetGame().GetWorld().FindEntityByName("KOTH_ThirdVehicleSpawn"));
 		
-		IEntity firstSpawn = GetGame().GetWorld().FindEntityByName("KOTH_FirstSpawn");
-		IEntity spawnPointFirst = FindSpawnPoint(firstSpawn);
-		IEntity firstFlag = FindFlag(firstSpawn);
-
-		IEntity secondSpawn = GetGame().GetWorld().FindEntityByName("KOTH_SecondSpawn");
-		IEntity spawnPointSecond = FindSpawnPoint(secondSpawn);
-		IEntity secondFlag = FindFlag(secondSpawn);
-
-		IEntity thirdSpawn = GetGame().GetWorld().FindEntityByName("KOTH_ThirdSpawn");
-		IEntity spawnPointThird = FindSpawnPoint(thirdSpawn);
-		IEntity thirdFlag = FindFlag(thirdSpawn);
-
-		SCR_SpawnPoint spf = SCR_SpawnPoint.Cast(spawnPointFirst);
-		SCR_SpawnPoint sps = SCR_SpawnPoint.Cast(spawnPointSecond);
-		SCR_SpawnPoint spt = SCR_SpawnPoint.Cast(spawnPointThird);
+		IEntity firstFlag = FindFlag(m_firstSpawnPoint);
+		IEntity secondFlag = FindFlag(m_secondSpawnPoint);
+		IEntity thirdFlag = FindFlag(m_thirdSpawnPoint);
 
 		// randomize
 		array<int> randomInts = GetUniqueRandomInts();
@@ -119,14 +114,14 @@ modded class SCR_BaseGameMode
 		factions.Insert("OPFOR");
 		factions.Insert("INDFOR");
 
-		
-		spf.SetFactionKey(factions.Get(randomInts[0]));
+		m_firstSpawnPoint.SetFactionKey(factions.Get(randomInts[0]));
 		firstVehicleSpawn.SetFactionKey(factions.Get(randomInts[0]));
-		sps.SetFactionKey(factions.Get(randomInts[1]));
-		secondVehicleSpawn.SetFactionKey(factions.Get(randomInts[1]));
-		spt.SetFactionKey(factions.Get(randomInts[2]));
-		thirdVehicleSpawn.SetFactionKey(factions.Get(randomInts[2]));
 		
+		m_secondSpawnPoint.SetFactionKey(factions.Get(randomInts[1]));
+		secondVehicleSpawn.SetFactionKey(factions.Get(randomInts[1]));
+		
+		m_thirdSpawnPoint.SetFactionKey(factions.Get(randomInts[2]));
+		thirdVehicleSpawn.SetFactionKey(factions.Get(randomInts[2]));
 
 		super.StartGameMode();
 	}
@@ -137,41 +132,46 @@ modded class SCR_BaseGameMode
 		PlayerManager playerManager = GetGame().GetPlayerManager();
 		playerManager.GetPlayers(playerIds);
 
-		IEntity firstSpawn = GetGame().GetWorld().FindEntityByName("KOTH_FirstSpawn");
-		IEntity secondSpawn = GetGame().GetWorld().FindEntityByName("KOTH_SecondSpawn");
-		IEntity thirdSpawn = GetGame().GetWorld().FindEntityByName("KOTH_ThirdSpawn");
 
 		foreach (int playerId : playerIds)
 		{
-			bool isPlayerInAnyProtectionZone = false;
-
-			KOTH_SpawnProtectionTriggerEntity firstProtect = FindSpawnProtection(firstSpawn);
-			if (firstProtect.IsPlayerInside(playerId))
-				isPlayerInAnyProtectionZone = true;
-
-			KOTH_SpawnProtectionTriggerEntity secondProtect = FindSpawnProtection(secondSpawn);
-			if (secondProtect.IsPlayerInside(playerId))
-				isPlayerInAnyProtectionZone = true;
-
-			KOTH_SpawnProtectionTriggerEntity thirdProtect = FindSpawnProtection(thirdSpawn);
-			if (thirdProtect.IsPlayerInside(playerId))
-				isPlayerInAnyProtectionZone = true;
-
-			//Log("playerID "+playerId+ " is inside " + isPlayerInAnyProtectionZone);
-			IEntity entity = playerManager.GetPlayerControlledEntity(playerId);
-			if (!entity)
+			bool isPlayerInProtectionZone = false;
+			IEntity controlledEntity = playerManager.GetPlayerControlledEntity(playerId);
+			if (!controlledEntity) 
 				return;
-			SCR_DamageManagerComponent damageManager = SCR_DamageManagerComponent.Cast(entity.FindComponent(SCR_DamageManagerComponent));
+			
+			FactionAffiliationComponent targetFactionComp = FactionAffiliationComponent.Cast(controlledEntity.FindComponent(FactionAffiliationComponent));
+			FactionKey userFactionKey = targetFactionComp.GetAffiliatedFaction().GetFactionKey();
+				
+			if (m_firstSpawnPoint.GetFactionKey() == userFactionKey) {
+				if (m_firstProtect.IsPlayerInside(playerId))
+					isPlayerInProtectionZone = true;
+			}
+				
+			if (m_secondSpawnPoint.GetFactionKey() == userFactionKey) {
+				if (m_secondProtect.IsPlayerInside(playerId))
+					isPlayerInProtectionZone = true;
+			}
+			
+
+			if (m_thirdSpawnPoint.GetFactionKey() == userFactionKey) {
+				if (m_thirdProtect.IsPlayerInside(playerId))
+					isPlayerInProtectionZone = true;
+			}
+
+			SCR_DamageManagerComponent damageManager = SCR_DamageManagerComponent.Cast(controlledEntity.FindComponent(SCR_DamageManagerComponent));
 			if (!damageManager)
 				return;
 
-			if (isPlayerInAnyProtectionZone)
+			if (isPlayerInProtectionZone)
 			{
-				damageManager.EnableDamageHandling(false);
+				if (damageManager.IsDamageHandlingEnabled())
+					damageManager.EnableDamageHandling(false);
 			}
 			else
 			{
-				damageManager.EnableDamageHandling(true);
+				if (!damageManager.IsDamageHandlingEnabled())
+					damageManager.EnableDamageHandling(true);
 			}
 		}
 	}

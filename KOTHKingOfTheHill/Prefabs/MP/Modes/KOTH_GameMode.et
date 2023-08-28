@@ -3,6 +3,8 @@ SCR_BaseGameMode {
  components {
   KOTH_ScoringGameModeComponent "{5E20F3CD56EAC26E}" {
   }
+  PR_ActiveMapIconManagerComponent "{5E3974C597B35B3C}" {
+  }
   SCR_CallsignManagerComponent "{5E1F0BA23AC53C37}" {
   }
   SCR_DataCollectorComponent "{5E1F0BA23AC53C75}" {
@@ -300,7 +302,7 @@ SCR_BaseGameMode {
      }
     }
    }
-   m_sGameOverScreenBasePrefab "{9C2D5F0B4AFC2848}UI/Layouts/HUD/GameOver/EndScreen/EndScreen_KOTH.layout"
+   m_sGameOverScreenBasePrefab "{9C2D5F0B4AFC2848}UI/Layouts/GameOverEndScreen/EndScreen_KOTH.layout"
   }
   SCR_GroupsManagerComponent "{5E1F0BA23AC5322A}" {
    m_sDefaultGroupPrefab "{8B4D49A9F324E7D5}Prefabs/Groups/PlayableGroup.et"

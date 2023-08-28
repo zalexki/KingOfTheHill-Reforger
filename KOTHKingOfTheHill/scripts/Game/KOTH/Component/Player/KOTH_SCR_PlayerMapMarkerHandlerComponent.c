@@ -22,6 +22,8 @@ class KOTH_SCR_PlayerMapMarkerHandlerComponent : ScriptComponent
 
 	override void EOnInit(IEntity owner)
 	{
+		super.EOnInit(owner);
+		
 		if (SCR_Global.IsEditMode(owner))
 			return;
 
@@ -61,7 +63,7 @@ class KOTH_SCR_PlayerMapMarkerHandlerComponent : ScriptComponent
 		IEntity kothZone = m_gameMode.m_kothTrigger;
 		if (!kothZone)
 		{
-			Log("missing KOTH_PresenceTriggerEntity named 'koth_zone' in world", LogLevel.ERROR);
+			Log("missing KOTH_PresenceTriggerEntity in world", LogLevel.ERROR);
 			return;
 		}
 

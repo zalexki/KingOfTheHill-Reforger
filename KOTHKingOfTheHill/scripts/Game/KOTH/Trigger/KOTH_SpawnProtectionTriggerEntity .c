@@ -9,7 +9,7 @@ class KOTH_SpawnProtectionTriggerEntity : SCR_BaseTriggerEntity
 			return;
 
 		trigger.AddClassType(ChimeraCharacter);
-		trigger.SetUpdateRate(0.5);
+		trigger.SetUpdateRate(2);
 		trigger.EnablePeriodicQueries(true);
 		trigger.SetSphereRadius(125);
 	}
@@ -26,6 +26,7 @@ class KOTH_SpawnProtectionTriggerEntity : SCR_BaseTriggerEntity
 			if (playerId == playerManager.GetPlayerIdFromControlledEntity(entity))
 			{
 				isPlayerInside = true;
+				break;
 			}
 		}
 

@@ -1,0 +1,18 @@
+SCR_PlayerController {
+ ID "1A9BA6BEFA06E3B1"
+ components {
+  KOTH_SCR_PlayerMapMarkerHandlerComponent "{5E396A9FB760BE53}" {
+  }
+  KOTH_SCR_PlayerProfileComponent "{5E396A9FBF8AFDD0}" {
+  }
+  KOTH_SCR_PlayerShopComponent "{5E396A9FB4FB1BF7}" {
+  }
+  SCR_HUDManagerComponent "{2FDC275D9EBCDB8B}" {
+   InfoDisplays {
+    KOTH_HUD "{5E396A9FA27BFEF8}" {
+     m_LayoutPath "{EBEA5B43BE732A85}UI/Layouts/HUD/KOTH_ScoringLayout.layout"
+    }
+   }
+  }
+ }
+}

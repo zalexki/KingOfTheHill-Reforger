@@ -3,7 +3,7 @@ GameProject {
  GUID "5E055A77849516EF"
  TITLE "KOTH - King Of The Hill"
  Dependencies {
-  "58D0FB3206B6F859"
+  "58D0FB3206B6F859" "5C5EBCE1BAFE1C01"
  }
  Configurations {
   GameProjectConfig PC {
