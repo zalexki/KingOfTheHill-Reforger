@@ -1,11 +1,3 @@
-GenericEntity KOTH_FirstSpawn : "{0D777787DAAD3541}Prefabs/Structures/KOTH/Camp_Blufor.et" {
- coords 2613.735 110.015 2104.127
- angleY -165
-}
-GenericEntity KOTH_SecondSpawn : "{108B69D9D8DDE8B0}Prefabs/Structures/KOTH/Camp_Opfor.et" {
- coords 2309.925 90.183 1333.2
- angleY 37.223
-}
 $grp GenericEntity : "{6F1B7BFE78ECAE16}Prefabs/Structures/KOTH/TowerV1.et" {
  {
   components {
@@ -34,8 +26,4 @@ $grp GenericEntity : "{6F1B7BFE78ECAE16}Prefabs/Structures/KOTH/TowerV1.et" {
   coords 2642.832 67.59 1618.561
   angleY -25.797
  }
-}
-GenericEntity KOTH_ThirdSpawn : "{900D62CF65FB7496}Prefabs/Structures/KOTH/Camp_Indfor.et" {
- coords 3149.662 31.914 1364.311
- angleY -115.176
 }

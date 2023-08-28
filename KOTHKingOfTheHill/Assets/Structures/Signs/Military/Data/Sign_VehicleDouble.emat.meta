@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{DE9B2C9810C84C5B}Assets/Structures/Signs/Military/Data/Sign_VehicleDouble.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

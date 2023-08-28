@@ -1,0 +1,52 @@
+GenericEntity : "{34A9CE116E4942E7}Prefabs/Structures/Signs/Military/SignRectangle_01_75x45_double_base.et" {
+ ID "50D67C36F4200F97"
+ components {
+  MeshObject "{54969A6AAAADA251}" {
+   Materials {
+    MaterialAssignClass "{5E396766F64ED8FD}" {
+     SourceMaterial "SignRectangle_01_75x45_double"
+     AssignedMaterial "{DE9B2C9810C84C5B}Assets/Structures/Signs/Military/Data/Sign_VehicleDouble.emat"
+    }
+    MaterialAssignClass "{5E396766F64ED8C8}" {
+     SourceMaterial "SignRectangle_01_75x45_double_MLOD"
+     AssignedMaterial "{7B3E0E71FF911A94}Assets/Structures/Signs/Military/Data/Sign_VehicleShop.emat"
+    }
+   }
+  }
+  RigidBody "{54969A6AA8773997}" {
+   ResponseIndex "TinyDestructible"
+  }
+  SCR_DestructionMultiPhaseComponent "{5496C1EF00137501}" {
+   m_DestroySpawnObjects {
+    SCR_DebrisSpawnable "{5A9C806F8BB0C38E}" {
+     m_ModelPrefabs {
+      "{A6D58F5A62DD48BE}Prefabs/Structures/Signs/Military/Dst/SignRectangle_01_75x45_double_dst_AmmoStorage_USSR_01.et" "{5E817543C497BA14}Assets/Structures/Signs/Military/Dst/SignRectangle_01_75x45_double_dst_02.xob"
+     }
+    }
+   }
+  }
+  BaseActionsManagerComponent "{5E396766253FA679}" {
+   ActionContexts {
+    UserActionContext "{5E39676626D8AB42}" {
+     ContextName "Defaut"
+     Position PointInfo "{5E39676622281552}" {
+      Offset 0 0.9251 0
+     }
+     Radius 1
+    }
+   }
+   additionalActions {
+    KOTH_ShopVehicleUserAction "{5E39676657AFED9C}" {
+     ParentContextList {
+      "Defaut"
+     }
+     UIInfo UIInfo "{5E39676651F80380}" {
+      Name "Open vehicle shop"
+     }
+    }
+   }
+  }
+ }
+ coords -3.451 -0.124 6.728
+ angleY 135
+}
