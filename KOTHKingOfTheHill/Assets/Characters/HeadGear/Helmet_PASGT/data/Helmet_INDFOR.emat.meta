@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{FC527FC8BCC57133}Assets/Characters/HeadGear/Helmet_PASGT/data/Helmet_INDFOR.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

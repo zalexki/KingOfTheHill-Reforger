@@ -1,0 +1,32 @@
+GameEntity : "{FE5C49069C2499D9}Prefabs/Characters/HeadGear/Helmet_PASGT_01/Helmet_PASGT_01_cover.et" {
+ ID "50D49DC5BC0CD17E"
+ components {
+  InventoryItemComponent "{5244E4431E28A759}" {
+   Attributes SCR_ItemAttributeCollection "{52C8D601873E6784}" {
+    ItemDisplayName UIInfo "{52C8D60185955516}" {
+     Name "#AR-Headgear_Helmet_PASGT_Goggles_Name"
+    }
+   }
+  }
+  MeshObject "{5112706CD4157AE0}" {
+   Object "{6957A8C0CB8F4F60}Assets/Characters/HeadGear/Helmet_PASGT/Helmet_PASGT_01_cover_with_goggles_item.xob"
+   Materials {
+    MaterialAssignClass "{5E39214619658B0A}" {
+     SourceMaterial "Helmet_PASGT_01_Cover"
+     AssignedMaterial "{FC527FC8BCC57133}Assets/Characters/HeadGear/Helmet_PASGT/data/Helmet_INDFOR.emat"
+    }
+   }
+  }
+  BaseLoadoutClothComponent "{5112706CD4157AF8}" {
+   WornModel "{80051C2DA887BC0F}Assets/Characters/HeadGear/Helmet_PASGT/Helmet_PASGT_01_cover_with_goggles.xob"
+   WornMaterialsOverride {
+    "" "" "{FC527FC8BCC57133}Assets/Characters/HeadGear/Helmet_PASGT/data/Helmet_INDFOR.emat"
+   }
+   ItemModel "{6957A8C0CB8F4F60}Assets/Characters/HeadGear/Helmet_PASGT/Helmet_PASGT_01_cover_with_goggles_item.xob"
+   ItemMaterialsOverride {
+    "" "" "{FC527FC8BCC57133}Assets/Characters/HeadGear/Helmet_PASGT/data/Helmet_INDFOR.emat"
+   }
+  }
+ }
+ coords 3556.03 45.563 2646.599
+}

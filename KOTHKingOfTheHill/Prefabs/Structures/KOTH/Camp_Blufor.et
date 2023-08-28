@@ -38,14 +38,6 @@ GenericEntity : "{FA9066DE33E8E67D}Prefabs/Structures/Military/Camps/Canvas_Cove
    ID "5E1EFBF8517CA3CC"
    coords 1.454 -0.051 -3.661
   }
-  GenericEntity : "{0FC1D6E9B592F75D}Prefabs/Systems/Arsenal/AmmoBoxes/US/AmmoBoxArsenal_Equipment_US.et" {
-   ID "5E2B41C09ED8EA7E"
-   coords -0.499 -0.051 -2.29
-  }
-  GenericEntity : "{10F9EE0FB9EC0E4E}Prefabs/Systems/Arsenal/AmmoBoxes/FIA/AmmoBoxArsenal_Ammunition_FIA.et" {
-   ID "5E29171A6BD1DE19"
-   coords 0.544 -0.052 -2.3
-  }
   $grp StaticModelEntity : "{172DD50ACF177B9E}Prefabs/Props/Military/Furniture/ChairMilitary_USSR_01.et" {
    {
     ID "5E1EFBF8517CA3F3"
@@ -62,16 +54,7 @@ GenericEntity : "{FA9066DE33E8E67D}Prefabs/Structures/Military/Camps/Canvas_Cove
    ID "5E1F523DAA68A671"
    coords 0.104 0.254 -0.01
    angleY 90
-  }
-  GenericEntity : "{377EB906F591E4BA}Prefabs/Systems/Arsenal/AmmoBoxes/US/AmmoBoxArsenal_Weapons_US.et" {
-   ID "5E1EFBF8517CA3FB"
-   components {
-    SCR_ArsenalComponent "{589F01C9C8D4A475}" {
-     m_eSupportedArsenalItemModes 68
-    }
-   }
-   coords -0.344 -0.075 -3.285
-   angleY -90
+   m_sFaction "BLUFOR"
   }
   GameEntity : "{3CCA7A9BB4FD3197}Prefabs/Characters/Uniforms/Jacket_US_BDU_rolledup.et" {
    ID "5E1EFBF8517CA3F9"
@@ -142,15 +125,6 @@ GenericEntity : "{FA9066DE33E8E67D}Prefabs/Structures/Military/Camps/Canvas_Cove
    coords -2.894 0.456 2.025
    angleX -60
    angleY 90
-  }
-  GenericEntity : "{5E6CBF60621C39CD}Prefabs/Systems/Arsenal/AmmoBoxes/USSR/AmmoBoxArsenal_Ammunition_USSR.et" {
-   ID "5E1EFBF8517CA3E8"
-   coords 1.491 0.754 -2.773
-  }
-  GenericEntity : "{5FFD91CF507BFFFB}Prefabs/Systems/Arsenal/AmmoBoxes/US/AmmoBoxArsenal_Ammunition_US.et" {
-   ID "5E1EFBF8517CA316"
-   coords 1.543 0.264 -2.303
-   angleY -180
   }
   GenericEntity : "{691E1CE1800ABC13}Prefabs/Object/FRM_Screen/TV_FRM.et" {
    ID "5E1EFBF8517CA312"
@@ -364,16 +338,6 @@ GenericEntity : "{FA9066DE33E8E67D}Prefabs/Structures/Military/Camps/Canvas_Cove
     coords 1.963 -0.148 -3.646
     angleY -90
    }
-  }
-  GenericEntity : "{E74C02B60805F7C7}Prefabs/Systems/Arsenal/AmmoBoxes/USSR/AmmoBoxArsenal_Weapons_USSR.et" {
-   ID "5E1EFBF8517E666E"
-   components {
-    SCR_ArsenalComponent "{589F01C9C8D4A475}" {
-     m_eSupportedArsenalItemModes 68
-    }
-   }
-   coords 0.496 0.777 -3.288
-   angleY -90
   }
   GenericEntity : "{ED4996370C8C7518}Prefabs/Compositions/Misc/SubCompositions/PalletFuel_Camo_Cluttered_US_01.et" {
    ID "5E1EFBF8517E6668"

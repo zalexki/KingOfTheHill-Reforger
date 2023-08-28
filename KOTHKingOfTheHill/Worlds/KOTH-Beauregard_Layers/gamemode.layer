@@ -5,13 +5,6 @@ SCR_BaseGameMode KOTH_GameMode1 : "{E5118D0809DD3CDF}Prefabs/MP/Modes/KOTH_GameM
    "Map Geometry Data" "{0DD089CCD442399A}worlds/Arland/Arland.topo"
    "Satellite background image" "{F98F3D2CBA523091}UI/Textures/Map/worlds/Arland/ArlandRasterized.edds"
   }
-  SCR_LoadoutManager {
-   ID "5E1F0BA227A3D054"
-   m_aPlayerLoadouts {
-    SCR_FactionPlayerLoadout "{5E27748BFAA6EC30}" {
-    }
-   }
-  }
   ItemPreviewManagerEntity ItemPreviewManager {
    ID "5E1F0BA227A3D04A"
   }

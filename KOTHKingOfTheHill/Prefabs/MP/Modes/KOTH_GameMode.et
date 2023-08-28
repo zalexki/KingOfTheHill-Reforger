@@ -1532,39 +1532,9 @@ SCR_BaseGameMode {
    ID "5E1F0BA227A27ECC"
    coords -1365.027 -39.01 -2217.766
   }
-  SCR_FactionManager "5E1F591715EDC402" : "{589540B35EBA8CDC}Prefabs/MP/Managers/Factions/FactionManager_USxUSSR.et" {
-   ID "5E1F0BA227A27EF8"
-   coords -203.715 74.032 358.066
-   Factions {
-    SCR_Faction "{56B2B46E999BF3BF}" {
-     FactionKey "US"
-     UIInfo SCR_FactionUIInfo "{528C961236B7DCD3}" {
-      Name "BLUFOR"
-      m_sNameUpper "BLUEFOR"
-     }
-     m_sFactionFlag "{636ED9CA5F7B7BCA}Art/BLUFOR_Flag.edds"
-     m_FactionFlagMaterial "{16A1F05D460A444F}Assets/Props/Fabric/Flags/Data/Flag_1_BLUFOR.emat"
-    }
-    SCR_Faction "{56B2B46E9AF80999}" {
-     FactionKey "USSR"
-     UIInfo SCR_FactionUIInfo "{528C96127F8B6B08}" {
-      Name "OPFOR"
-      m_sNameUpper "OPFOR"
-     }
-     m_sFactionFlag "{095A44DAFA378980}Art/OPFOR_Flag.edds"
-     m_FactionFlagMaterial "{C255CA73E24384E2}Assets/Props/Fabric/Flags/Data/Flag_1_OPFOR.emat"
-    }
-    SCR_Faction "{5E0F433DFA16BF7F}" : "{8053DB656DD18B14}Configs/Factions/FIA.conf" {
-     FactionKey "FIA"
-     UIInfo SCR_FactionUIInfo "{5570936866E0AD08}" {
-      Name "INDFOR"
-      m_sNameUpper "INDFOR"
-     }
-     m_sFactionFlag "{D9D8B9A41A6FD19F}Art/INDFOR_Flag.edds"
-     m_FactionFlagMaterial "{D66CFD74585F60E4}Assets/Props/Fabric/Flags/Data/Flag_1_INDFOR.emat"
-    }
-   }
-   m_bCanChangeFactionsPlayable 1
+  SCR_FactionManager "5E392148707100B5" : "{850537FBE5BB5380}Prefabs/MP/Managers/Factions/FactionManager_BLUFORxOPFORxINDFOR.et" {
+   ID "5E3921527F9332EE"
+   coords 0 0 0
   }
   RadioManagerEntity : "{B8E09FAB91C4ECCD}Prefabs/Radio/RadioManager.et" {
    ID "5E1F0BA227A27EC4"
@@ -1586,13 +1556,27 @@ SCR_BaseGameMode {
    ID "5E1F0BA227A3D055"
    coords -1365.027 -39.01 -2217.766
   }
-  SCR_LoadoutManager : "{2D9FD3531D381466}Prefabs/MP/Managers/Loadouts/LoadoutManager_BLUEFORxOPFORxINDFOR.et" {
-   ID "5E1F0BA227A3D054"
-   coords 1145.161 109.199 53.63
-  }
   ItemPreviewManagerEntity ItemPreviewManager : "{9F18C476AB860F3B}Prefabs/World/Game/ItemPreviewManager.et" {
    ID "5E1F0BA227A3D04A"
    coords -1364.373 -39.01 -2218.007
+  }
+  SCR_LoadoutManager : "{C18BE7333A710C14}Prefabs/MP/Managers/Loadouts/LoadoutManager_BLUEFORxOPFORxINDFOR_V2.et" {
+   ID "5E3921527A26441A"
+   coords 0 0 0
+   m_aPlayerLoadouts {
+    SCR_FactionPlayerLoadout "{5E27748BF8FDE692}" {
+     m_sLoadoutName "INDFOR Man"
+     m_sLoadoutResource "{E1E2BA75E5E2E4CE}Prefabs/Characters/Factions/BLUFOR/KOTH_Base/Character_KOTH_INDFOR.et"
+    }
+    SCR_FactionPlayerLoadout "{5E27748BF9E02B84}" {
+     m_sLoadoutName "OPFOR Man"
+     m_sLoadoutResource "{4A513974D5682D30}Prefabs/Characters/Factions/BLUFOR/KOTH_Base/Character_KOTH_OPFOR.et"
+    }
+    SCR_FactionPlayerLoadout "{5E27748BFAA6EC30}" {
+     m_sLoadoutName "BLUFOR Man"
+     m_sLoadoutResource "{7C98AF3D5AB4A519}Prefabs/Characters/Factions/BLUFOR/KOTH_Base/Character_KOTH_BLUFOR.et"
+    }
+   }
   }
  }
 }

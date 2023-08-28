@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{868D49E0606D991A}Assets/Characters/Vests/Vest_PASGT/Data/Vest_INDFOR.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

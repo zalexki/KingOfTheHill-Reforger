@@ -1,0 +1,5 @@
+MatPBRBasic {
+ CavityFromAO 0.853
+ BCRMap "{77A25291A660C4C9}Art/BackPack_M5_KOTH.edds"
+ NMOMap "{E78B1B4E1F554945}Assets/Items/Equipment/Backpacks/Backpack_Medical_M5/Data/Backpack_Medical_M5_NMO.edds"
+}

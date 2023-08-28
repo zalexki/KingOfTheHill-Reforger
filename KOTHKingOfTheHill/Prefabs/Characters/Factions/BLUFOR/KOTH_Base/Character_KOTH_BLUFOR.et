@@ -1,0 +1,83 @@
+SCR_ChimeraCharacter : "{37578B1666981FCE}Prefabs/Characters/Core/Character_Base.et" {
+ ID "520EC961A090B1EE"
+ components {
+  FactionAffiliationComponent "{5E392145FBA82188}" {
+   "faction affiliation" "BLUFOR"
+  }
+  SCR_EditableCharacterComponent "{520EA1D2F659C85C}" {
+   m_UIInfo SCR_EditableEntityUIInfo "{5298E609432D192D}" {
+    Name "#AR-Role_Rifleman"
+    Icon "{A489F552FB7489C3}UI/Textures/Editor/EditableEntities/Characters/EditableEntity_Character_Custom.edds"
+    m_Image "{DAC5F0C685E3EE07}UI/Textures/EditorPreviews/Characters/BLUFOR/US_Army/Character_US_Base.edds"
+    m_sFaction "BLUFOR"
+    m_aAuthoredLabels + {
+     2 1023
+    }
+    m_aAutoLabels {
+    }
+   }
+  }
+  CharacterWeaponSlotComponent "{520EA1D2F659CFAB}" {
+   WeaponSlotIndex 0
+  }
+  CharacterWeaponSlotComponent "{520EA1D2F659CFB7}" {
+   WeaponSlotIndex 1
+  }
+  CharacterWeaponSlotComponent "{520EA1D2F659CFDC}" {
+   WeaponTemplate "{C0F7DD85A86B2900}Prefabs/Weapons/Handguns/PM/Handgun_PM.et"
+  }
+  SCR_CharacterIdentityComponent "{5584CBC63E092DBC}" {
+   Identity Identity "{5584CBC6363C648B}" {
+    VisualIdentity VisualIdentity "{56E6D9456009D1C4}" {
+     Head "{04F4D8CBA36A534B}Prefabs/Characters/Heads/Head_Black_02.et"
+     Body "{6253161EEAB88EAB}Prefabs/Characters/Basebody/CharacterBasebody_Black_02.et"
+    }
+    SoundIdentity SoundIdentity "{56E6D945D8F79290}" {
+     VoiceID 0
+    }
+   }
+  }
+  BaseLoadoutManagerComponent "{520EA1D2DB11821E}" {
+   Slots {
+    LoadoutSlotInfo Hat {
+     Prefab "{E685A8D337D36204}Prefabs/Characters/HeadGear/Helmet_PASGT_01/Helmet_PASGT_01_cover_w_goggles.et"
+    }
+    LoadoutSlotInfo Jacket {
+     Prefab "{C7861F11D5334C0E}Prefabs/Characters/Uniforms/Jacket_US_BDU.et"
+    }
+    LoadoutSlotInfo ArmoredVest {
+     Prefab "{4B57C11AA5161760}Prefabs/Characters/Vests/Vest_PASGT/Vest_PASGT.et"
+    }
+    LoadoutSlotInfo Pants {
+     Prefab "{604BB72BE8E023C2}Prefabs/Characters/Uniforms/Pants_US_BDU.et"
+    }
+    LoadoutSlotInfo Boots {
+     Prefab "{DAAFD15478BDE1C3}Prefabs/Characters/Footwear/CombatBoots_US_01.et"
+    }
+    LoadoutSlotInfo Back {
+     Prefab "{C1490C1A42C8824F}Prefabs/Items/Equipment/Backpacks/Backpack_M5_KOTH.et"
+    }
+    LoadoutSlotInfo Vest {
+     Prefab "{18B8B9316B590643}Prefabs/Characters/Vests/Vest_ALICE/Variants/Vest_ALICE_GL.et"
+    }
+   }
+  }
+  SCR_InventoryStorageManagerComponent "{520EA1D2DB118DE5}" {
+   InitialInventoryItems {
+    ItemsInitConfigurationItem "{5E392145FBA821FA}" {
+     TargetStorage "Prefabs/Items/Equipment/Backpacks/Backpack_M5_KOTH.et"
+     PrefabsToSpawn {
+      "{8B853CDD11BA916E}Prefabs/Weapons/Magazines/Magazine_9x18_PM_8rnd_Ball.et" "{8B853CDD11BA916E}Prefabs/Weapons/Magazines/Magazine_9x18_PM_8rnd_Ball.et" "{8B853CDD11BA916E}Prefabs/Weapons/Magazines/Magazine_9x18_PM_8rnd_Ball.et" "{8B853CDD11BA916E}Prefabs/Weapons/Magazines/Magazine_9x18_PM_8rnd_Ball.et" "{8B853CDD11BA916E}Prefabs/Weapons/Magazines/Magazine_9x18_PM_8rnd_Ball.et" "{260827F90690140A}Prefabs/Items/Medicine/Tourniquet_01/Tourniquet_US_01_base.et" "{260827F90690140A}Prefabs/Items/Medicine/Tourniquet_01/Tourniquet_US_01_base.et" "{0D9A5DCF89AE7AA9}Prefabs/Items/Medicine/MorphineInjection_01/MorphineInjection_01.et" "{0D9A5DCF89AE7AA9}Prefabs/Items/Medicine/MorphineInjection_01/MorphineInjection_01.et" "{AF3411AAF94D18C2}Prefabs/Items/Medicine/Gauze_02/Gauze_02.et" "{AF3411AAF94D18C2}Prefabs/Items/Medicine/Gauze_02/Gauze_02.et" "{AF3411AAF94D18C2}Prefabs/Items/Medicine/Gauze_02/Gauze_02.et" "{AF3411AAF94D18C2}Prefabs/Items/Medicine/Gauze_02/Gauze_02.et" "{AF3411AAF94D18C2}Prefabs/Items/Medicine/Gauze_02/Gauze_02.et"
+     }
+    }
+    ItemsInitConfigurationItem "{5E392145FBA821F9}" {
+     TargetStorage "Prefabs/Characters/Uniforms/Jacket_US_BDU.et"
+     PrefabsToSpawn {
+      "{13772C903CB5E4F7}Prefabs/Items/Equipment/Maps/PaperMap_01_folded.et" "{61D4F80E49BF9B12}Prefabs/Items/Equipment/Compass/Compass_SY183.et" "{36275BFF5E45147E}Prefabs/Items/Equipment/Radios/Radio_BLUFOR.et" "{F2539FA5706E51E4}Prefabs/Items/Equipment/Binoculars/Binoculars_B12/Binoculars_B12.et"
+     }
+    }
+   }
+  }
+ }
+ coords 3554.146 45.563 2647.062
+}

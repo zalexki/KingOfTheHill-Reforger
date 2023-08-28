@@ -69,13 +69,13 @@ modded class SCR_BaseGameMode
 		IEntity flagPoleEntity = FindFlag(spawn);
 		Resource res;
 
-		if (sp.GetFactionKey() == "US") {
+		if (sp.GetFactionKey() == "BLUFOR") {
 			res = Resource.Load("{31F54FB5494520B8}Prefabs/Props/Fabric/Flags/Flag_1_Blufor.et");
 		}
-		if (sp.GetFactionKey() == "USSR") {
+		if (sp.GetFactionKey() == "OPFOR") {
 			res = Resource.Load("{167B394478139624}Prefabs/Props/Fabric/Flags/Flag_1_Opfor.et");
 		}
-		if (sp.GetFactionKey() == "FIA") {
+		if (sp.GetFactionKey() == "INDFOR") {
 			res = Resource.Load("{AC8F5AFDF613616F}Prefabs/Props/Fabric/Flags/Flag_1_Indfor.et");
 		}
 
@@ -115,9 +115,9 @@ modded class SCR_BaseGameMode
 		// randomize
 		array<int> randomInts = GetUniqueRandomInts();
 		array<string> factions = {};
-		factions.Insert("US");
-		factions.Insert("USSR");
-		factions.Insert("FIA");
+		factions.Insert("BLUFOR");
+		factions.Insert("OPFOR");
+		factions.Insert("INDFOR");
 
 		
 		spf.SetFactionKey(factions.Get(randomInts[0]));

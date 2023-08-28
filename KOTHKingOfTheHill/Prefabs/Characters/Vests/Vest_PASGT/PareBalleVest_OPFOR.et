@@ -1,0 +1,10 @@
+GenericEntity : "{CCE569C5F2D46E3D}Prefabs/Characters/Vests/Vest_PASGT/Vest_PASGT_base.et" {
+ ID "50D8C49B3558F152"
+ components {
+  BaseLoadoutClothComponent "{5312D798A71DFBB1}" {
+   WornMaterialsOverride {
+    "{3B530584C2E8A52F}Assets/Characters/Vests/Vest_PASGT/Data/Vest_OPFOR.emat"
+   }
+  }
+ }
+}

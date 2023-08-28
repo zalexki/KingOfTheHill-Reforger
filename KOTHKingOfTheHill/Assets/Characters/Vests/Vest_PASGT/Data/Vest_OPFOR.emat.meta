@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{3B530584C2E8A52F}Assets/Characters/Vests/Vest_PASGT/Data/Vest_OPFOR.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

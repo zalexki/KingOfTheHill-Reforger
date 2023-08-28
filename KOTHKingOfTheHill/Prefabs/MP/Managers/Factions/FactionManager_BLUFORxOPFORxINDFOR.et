@@ -1,0 +1,11 @@
+SCR_FactionManager : "{A242612865F2A48E}Prefabs/MP/Managers/Factions/FactionManager_Base.et" {
+ ID "56B2B4776E6E4499"
+ Factions {
+  SCR_Faction "{56B2B46E999BF3BF}" : "{E7B7EA4823DD81F0}Configs/Factions/BLUFOR.conf" {
+  }
+  SCR_Faction "{56B2B46E9AF80999}" : "{277AE7613D88A55B}Configs/Factions/INDFOR.conf" {
+  }
+  SCR_Faction "{5E392152AFD8A65C}" : "{B122E3B10BB3404B}Configs/Factions/OPFOR.conf" {
+  }
+ }
+}
