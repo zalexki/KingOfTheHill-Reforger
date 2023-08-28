@@ -117,7 +117,6 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		GetGame().GetCallqueue().CallLater(SavePlayersProfile, 30000, true);
 		GetGame().GetCallqueue().CallLater(UpdatePlayerCount, 5000, true);
 	}
-
 	
 	void OnBeforeGameEnd()
 	{
@@ -475,12 +474,6 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		m_greenPlayers = countGreenfor;
 		
 		Replication.BumpMe();
-	}
-
-	
-	override void OnPlayerSpawnFinalize_S(SCR_SpawnRequestComponent requestComponent, SCR_SpawnHandlerComponent handlerComponent, SCR_SpawnData data, IEntity entity)
-	{
-		Log("OnPlayerSpawnFinalize_S");
 	}
 	
 	void BumpMe()
