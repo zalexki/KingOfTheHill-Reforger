@@ -21,9 +21,9 @@ modded class SCR_NameTagData
 		FactionKey factionkey = targetFactionComp.GetAffiliatedFaction().GetFactionName();
 		switch (factionkey)
 		{
-			case "OPFOR": ActivateEntityState(ENameTagEntityState.RED); break;
-			case "BLUFOR": ActivateEntityState(ENameTagEntityState.BLUE); break;
-			case "INDFOR": ActivateEntityState(ENameTagEntityState.GREEN); break;
+			case KOTH_Faction.OPFOR: ActivateEntityState(ENameTagEntityState.RED); break;
+			case KOTH_Faction.BLUFOR: ActivateEntityState(ENameTagEntityState.BLUE); break;
+			case KOTH_Faction.INDFOR: ActivateEntityState(ENameTagEntityState.GREEN); break;
 		}
 	}
 }

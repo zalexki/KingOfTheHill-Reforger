@@ -49,5 +49,6 @@ enum KOTH_ShopItemCategory
 	Grenade,
 	Smoke,
 	Mine,
-	Vehicle
+	Vehicle,
+	VehicleArmed
 }
