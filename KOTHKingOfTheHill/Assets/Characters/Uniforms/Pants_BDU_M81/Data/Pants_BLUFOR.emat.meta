@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{C4F56DCF50F68411}Assets/Characters/Uniforms/Pants_BDU_M81/Data/Pants_BLUFOR.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}
