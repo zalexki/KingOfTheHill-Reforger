@@ -15,40 +15,6 @@ modded class SCR_BaseGameMode
 	KOTH_SpawnProtectionTriggerEntity m_secondProtect;
 	KOTH_SpawnProtectionTriggerEntity m_thirdProtect;
 
-	void CheckGameEnd()
-	{
-		if (!Replication.IsServer())
-			return;
-
-		array<Faction> factions = {};
-		GetGame().GetFactionManager().GetFactionsList(factions);
-
-		string factionName;
-		KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(FindComponent(KOTH_ScoringGameModeComponent));
-		if (!scoreComp) {
-			Log("Missing KOTH_ScoringGameModeComponent on gameMode", LogLevel.FATAL);
-			return;
-		}
-		if (scoreComp.GetBlueforPoint() >= m_winnerPointsNeeded) { factionName = "BLUFOR"; };
-		if (scoreComp.GetRedforPoint() >= m_winnerPointsNeeded) { factionName = "OPFOR"; };
-		if (scoreComp.GetGreenforPoint() >= m_winnerPointsNeeded) { factionName = "INDFOR"; };
-
-		foreach (Faction faction : factions)
-		{
-			if (faction.GetFactionName() == factionName) {
-				scoreComp.OnBeforeGameEnd();
-				int factionIndex = GetGame().GetFactionManager().GetFactionIndex(faction);
-				SCR_GameModeEndData gameModeEndData = SCR_GameModeEndData.CreateSimple(EGameOverTypes.FACTION_VICTORY_SCORE, winnerFactionId: factionIndex);
-				EndGameMode(gameModeEndData);
-				GetGame().GetCallqueue().CallLater(CloseGame, 15000, false);
-			}
-		}
-	}
-	void CloseGame()
-	{
-		GetGame().RequestClose();
-	}
-
 	protected override void OnGameStart()
 	{
 		super.OnGameStart();
@@ -76,13 +42,13 @@ modded class SCR_BaseGameMode
 		IEntity flagPoleEntity = FindFlag(spawn);
 		Resource res;
 
-		if (sp.GetFactionKey() == "BLUFOR") {
+		if (sp.GetFactionKey() == KOTH_Faction.BLUFOR) {
 			res = Resource.Load("{31F54FB5494520B8}Prefabs/Props/Fabric/Flags/Flag_1_Blufor.et");
 		}
-		if (sp.GetFactionKey() == "OPFOR") {
+		if (sp.GetFactionKey() == KOTH_Faction.OPFOR) {
 			res = Resource.Load("{167B394478139624}Prefabs/Props/Fabric/Flags/Flag_1_Opfor.et");
 		}
-		if (sp.GetFactionKey() == "INDFOR") {
+		if (sp.GetFactionKey() == KOTH_Faction.INDFOR) {
 			res = Resource.Load("{AC8F5AFDF613616F}Prefabs/Props/Fabric/Flags/Flag_1_Indfor.et");
 		}
 
@@ -110,9 +76,9 @@ modded class SCR_BaseGameMode
 		// randomize
 		array<int> randomInts = GetUniqueRandomInts();
 		array<string> factions = {};
-		factions.Insert("BLUFOR");
-		factions.Insert("OPFOR");
-		factions.Insert("INDFOR");
+		factions.Insert(KOTH_Faction.BLUFOR);
+		factions.Insert(KOTH_Faction.OPFOR);
+		factions.Insert(KOTH_Faction.INDFOR);
 
 		m_firstSpawnPoint.SetFactionKey(factions.Get(randomInts[0]));
 		firstVehicleSpawn.SetFactionKey(factions.Get(randomInts[0]));
@@ -131,7 +97,6 @@ modded class SCR_BaseGameMode
 		array<int> playerIds = new array<int>();
 		PlayerManager playerManager = GetGame().GetPlayerManager();
 		playerManager.GetPlayers(playerIds);
-
 
 		foreach (int playerId : playerIds)
 		{
@@ -174,6 +139,40 @@ modded class SCR_BaseGameMode
 					damageManager.EnableDamageHandling(true);
 			}
 		}
+	}
+	
+	void CheckGameEnd()
+	{
+		if (!Replication.IsServer())
+			return;
+
+		array<Faction> factions = {};
+		GetGame().GetFactionManager().GetFactionsList(factions);
+
+		string factionName;
+		KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(FindComponent(KOTH_ScoringGameModeComponent));
+		if (!scoreComp) {
+			Log("Missing KOTH_ScoringGameModeComponent on gameMode", LogLevel.FATAL);
+			return;
+		}
+		if (scoreComp.GetBlueforPoint() >= m_winnerPointsNeeded) { factionName = KOTH_Faction.BLUFOR; };
+		if (scoreComp.GetRedforPoint() >= m_winnerPointsNeeded) { factionName = KOTH_Faction.OPFOR; };
+		if (scoreComp.GetGreenforPoint() >= m_winnerPointsNeeded) { factionName = KOTH_Faction.INDFOR; };
+
+		foreach (Faction faction : factions)
+		{
+			if (faction.GetFactionName() == factionName) {
+				scoreComp.OnBeforeGameEnd();
+				int factionIndex = GetGame().GetFactionManager().GetFactionIndex(faction);
+				SCR_GameModeEndData gameModeEndData = SCR_GameModeEndData.CreateSimple(EGameOverTypes.FACTION_VICTORY_SCORE, winnerFactionId: factionIndex);
+				EndGameMode(gameModeEndData);
+				GetGame().GetCallqueue().CallLater(CloseGame, 15000, false);
+			}
+		}
+	}
+	void CloseGame()
+	{
+		GetGame().RequestClose();
 	}
 
 	KOTH_SpawnProtectionTriggerEntity FindSpawnProtection(IEntity parent)

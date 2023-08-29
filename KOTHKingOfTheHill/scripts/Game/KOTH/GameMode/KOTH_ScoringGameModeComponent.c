@@ -95,6 +95,10 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 	int m_redBonus;
 	[RplProp()]
 	int m_greenBonus;
+	
+	int m_bluforArmedVehiclesCount = 0;
+	int m_opforArmedVehiclesCount = 0;
+	int m_indforArmedVehiclesCount = 0;
 
 	override void OnGameModeStart()
 	{
@@ -158,13 +162,13 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 					Faction faction = targetFactionComp.GetAffiliatedFaction();
 					if (faction) {
 						int bonus;
-						if (faction.GetFactionName() == "BLUFOR")
+						if (faction.GetFactionName() == KOTH_Faction.BLUFOR)
 							bonus = m_blueBonus;
 							
-						if (faction.GetFactionName() == "OPFOR")
+						if (faction.GetFactionName() == KOTH_Faction.OPFOR)
 							bonus = m_redBonus;
 
-						if (faction.GetFactionName() == "INDFOR")
+						if (faction.GetFactionName() == KOTH_Faction.INDFOR)
 							bonus = m_greenBonus;
 						
 						

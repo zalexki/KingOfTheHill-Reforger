@@ -120,13 +120,13 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 				if (faction) {
 					m_mapDescriptor.ChangeMarker(faction.GetFactionName());
 
-					if (faction.GetFactionName() == "BLUFOR")
+					if (faction.GetFactionName() == KOTH_Faction.BLUFOR)
 						blueforPlayerNumber++;
 
-					if (faction.GetFactionName() == "OPFOR")
+					if (faction.GetFactionName() == KOTH_Faction.OPFOR)
 						redforPlayerNumber++;
 
-					if (faction.GetFactionName() == "INDFOR")
+					if (faction.GetFactionName() == KOTH_Faction.INDFOR)
 						greenforPlayerNumber++;
 				}
 			}

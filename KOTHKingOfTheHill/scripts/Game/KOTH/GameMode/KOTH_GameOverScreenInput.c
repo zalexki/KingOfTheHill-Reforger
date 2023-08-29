@@ -19,9 +19,9 @@ modded class GameOverScreenInput: ChimeraMenuBase
 		
 		Faction playerFaction = SCR_FactionManager.Cast(GetGame().GetFactionManager()).GetPlayerFaction( GetGame().GetPlayerController().GetPlayerId());
 		int bonus;
-		if (playerFaction.GetFactionKey() == "US") { bonus = scoreComp.m_blueBonus; }
-		if (playerFaction.GetFactionKey() == "USSR") { bonus = scoreComp.m_redBonus; }
-		if (playerFaction.GetFactionKey() == "FIA") { bonus = scoreComp.m_greenBonus; }
+		if (playerFaction.GetFactionKey() == KOTH_Faction.BLUFOR) { bonus = scoreComp.m_blueBonus; }
+		if (playerFaction.GetFactionKey() == KOTH_Faction.OPFOR) { bonus = scoreComp.m_redBonus; }
+		if (playerFaction.GetFactionKey() == KOTH_Faction.INDFOR) { bonus = scoreComp.m_greenBonus; }
 		money.SetText(""+bonus+" $");
 		xp.SetText(""+bonus+" xp");
 		Log(notif);

@@ -69,8 +69,19 @@ class KOTH_SpawnPrefab : SCR_BaseTriggerEntity
 			physicsComponent.SetVelocity("0 -1 0");
 
 		newEnt.SetFlags(EntityFlags.VISIBLE, true);
+		
+		EventHandlerManagerComponent ehmc = EventHandlerManagerComponent.Cast(newEnt.FindComponent(EventHandlerManagerComponent));
+		if (ehmc)
+		{
+			ehmc.RegisterScriptHandler("OnDestroyed", newEnt, OnDestroyed);
+		}
 
 		return true;
+	}
+	
+	void OnDestroyed()
+	{
+		Log("OnDestroyed");
 	}
 	
 	void SetFactionKey(string factionKey)
@@ -81,6 +92,4 @@ class KOTH_SpawnPrefab : SCR_BaseTriggerEntity
 		m_sFaction = factionKey;
 		Replication.BumpMe();
 	}
-	
-
 };

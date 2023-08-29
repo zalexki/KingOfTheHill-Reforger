@@ -43,6 +43,63 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		return false;
 	}
 	
+	bool CanBuyVehicleArmed(Faction playerFaction, KOTH_ShopItem item, int playerId)
+	{
+		switch (playerFaction.GetFactionKey())
+		{
+			case KOTH_Faction.BLUFOR:
+				if (m_scoreComp.m_bluforArmedVehiclesCount >= 3)
+				{
+					m_scoreComp.Refund(item.m_priceOnce, playerId);
+					DoRpc_Notif_Failed("cannot spawn vehicle", "too much armed vehicle in your team");
+					return false;
+				}
+			break;
+			case KOTH_Faction.OPFOR:
+				if (m_scoreComp.m_opforArmedVehiclesCount >= 3)
+				{
+					m_scoreComp.Refund(item.m_priceOnce, playerId);
+					DoRpc_Notif_Failed("cannot spawn vehicle", "too much armed vehicle in your team");
+					return false;
+				}
+			break;
+			case KOTH_Faction.INDFOR:
+				if (m_scoreComp.m_indforArmedVehiclesCount >= 3)
+				{
+					m_scoreComp.Refund(item.m_priceOnce, playerId);
+					DoRpc_Notif_Failed("cannot spawn vehicle", "too much armed vehicle in your team (max 3)");
+					return false;
+				}
+			break;
+			default:
+				DoRpc_Notif_Failed("cannot spawn vehicle", "error: your faction was not found");
+				return false;
+			break;
+		}
+		
+		return true;
+	}
+	
+	void AddCountVehicleArmed(Faction playerFaction)
+	{
+		switch (playerFaction.GetFactionKey())
+		{
+			case KOTH_Faction.BLUFOR:
+				m_scoreComp.m_bluforArmedVehiclesCount++;
+			break;
+			case KOTH_Faction.OPFOR:
+				m_scoreComp.m_opforArmedVehiclesCount++;
+			break;
+			case KOTH_Faction.INDFOR:
+				m_scoreComp.m_indforArmedVehiclesCount++;
+			break;
+			default:
+				DoRpc_Notif_Failed("cannot spawn vehicle", "error: your faction was not found");
+				return;
+			break;
+		}
+	}
+	
 	// --------------------- RPC START
 	
 	
@@ -71,15 +128,12 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 	
 	void DoRpcBuy(string resourceName, int playerId, bool permanentBuy = false)
 	{
-		Rpc(RpcAsk_Buy, resourceName, playerId, permanentBuy);
-		Log("clientside m_playerUID" +m_playerUID);
-			
+		Rpc(RpcAsk_Buy, resourceName, playerId, permanentBuy);			
 	}
 	
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
 	void RpcAsk_Buy(string resourceName, int playerId, bool permanentBuy)
 	{
-		Log("serverside m_playerUID" +m_playerUID);
 		Log("----------- RpcAsk_Buy "+resourceName+" for "+playerId+" is permanentBuy "+permanentBuy);
 		KOTH_ShopItem item = FindShopItemByResourceName(resourceName);
 
@@ -109,12 +163,12 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 					break;
 				}
 			}
-			GetGame().GetCallqueue().CallLater(DoRpc_NotifBuy_PermanentBuySuccess, 500, false, item.m_itemResource);
-			//DoRpc_NotifBuy_PermanentBuySuccess(item.m_itemResource);
+			GetGame().GetCallqueue().CallLater(DoRpc_NotifBuy_PermanentBuySuccess, 250, false, item.m_itemResource);
 		} 
 		else 
 		{
 			// check category for vehicles
+			// TODO: refactor this
 			switch (item.m_category) {
 				case KOTH_ShopItemCategory.Vehicle:
 					if (SpawnVehicle(resourceName, playerId))
@@ -125,9 +179,25 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 						DoRpc_Notif_Failed("cannot spawn vehicle", "no place found");
 					}
 				break;
+				case KOTH_ShopItemCategory.VehicleArmed:
+					Faction playerFaction = SCR_FactionManager.Cast(GetGame().GetFactionManager()).GetPlayerFaction(playerId);
+					
+					if (!CanBuyVehicleArmed(playerFaction, item, playerId))
+						return;
+				
+					if (SpawnVehicle(resourceName, playerId))
+					{
+						AddCountVehicleArmed(playerFaction);
+						DoRpc_Notif_Succeed(item.m_priceOnce);
+					} else {
+						m_scoreComp.Refund(item.m_priceOnce, playerId);
+						DoRpc_Notif_Failed("cannot spawn vehicle", "no place found");
+					}
+				break;
 				default:
 					bool isSuccess = RemoveOldItemsAndAddNewOnes(item, playerId);
 					if (!isSuccess) {
+						m_scoreComp.Refund(item.m_priceOnce, playerId);
 						DoRpc_Notif_Failed("You can't buy the weapon", "your inventory are full");
 						return;
 					}
@@ -245,14 +315,12 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		if (item.m_magazineResource)
 		{
 			if (false == AddMags(inventory, item.m_magazineResource, item.m_magazineNumber)) {
-				m_scoreComp.Refund(item.m_priceOnce, playerId);
 				return false;
 			}
 		}
 			
 		if (item.m_secondaryMagazineResource != "") {
 			if (false == AddMags(inventory, item.m_secondaryMagazineResource, item.m_secondaryMagazineNumber)) {
-				m_scoreComp.Refund(item.m_priceOnce, playerId);
 				return false;
 			}
 		}

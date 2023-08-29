@@ -26,13 +26,13 @@ class KOTH_DebugMenu
 		
 		KOTH_ScoringGameModeComponent m_scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
 
-		DbgUI.Text("BLUFOR");
-		if (DbgUI.Button("Add 1 point to blufor"))
+		DbgUI.Text(KOTH_Faction.BLUFOR);
+		if (DbgUI.Button("Add 1 point to "+KOTH_Faction.BLUFOR))
 		{
 			m_scoreComp.AddBlueforPoint();
 			SCR_UISoundEntity.SoundEvent(SCR_SoundEvent.SOUND_PICK_UP);
 		}
-		if (DbgUI.Button("Add 10 point to blufor"))
+		if (DbgUI.Button("Add 10 point to "+KOTH_Faction.BLUFOR))
 		{
 			m_scoreComp.AddBlueforPoint(10);
 			SCR_UISoundEntity.SoundEvent(SCR_SoundEvent.SOUND_PICK_UP);
