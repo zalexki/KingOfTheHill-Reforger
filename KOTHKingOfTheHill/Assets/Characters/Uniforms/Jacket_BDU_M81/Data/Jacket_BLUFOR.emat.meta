@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{DC57B561784B0C06}Assets/Characters/Uniforms/Jacket_BDU_M81/Data/Jacket_BLUFOR.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

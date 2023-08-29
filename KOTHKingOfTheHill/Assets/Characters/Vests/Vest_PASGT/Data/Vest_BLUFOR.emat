@@ -1,0 +1,6 @@
+MatPBRBasic {
+ Color 0.2 0.2 0.2 1
+ CavityFromAO 1
+ BCRMap "{8B187D58FF75BBE3}Art/PATERN_BLUFOR.edds"
+ NMOMap "{29419571E3267758}Assets/Characters/Vests/Vest_PASGT/Data/Vest_PASGT_NMO.edds"
+}
