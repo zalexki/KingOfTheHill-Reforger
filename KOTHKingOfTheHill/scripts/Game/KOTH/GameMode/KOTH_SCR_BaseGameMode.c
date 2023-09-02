@@ -106,7 +106,11 @@ modded class SCR_BaseGameMode
 				return;
 			
 			FactionAffiliationComponent targetFactionComp = FactionAffiliationComponent.Cast(controlledEntity.FindComponent(FactionAffiliationComponent));
-			FactionKey userFactionKey = targetFactionComp.GetAffiliatedFaction().GetFactionKey();
+			Faction faction = targetFactionComp.GetAffiliatedFaction();
+			if (!faction)
+				return;
+			
+			FactionKey userFactionKey = faction.GetFactionKey();
 				
 			if (m_firstSpawnPoint.GetFactionKey() == userFactionKey) {
 				if (m_firstProtect.IsPlayerInside(playerId))

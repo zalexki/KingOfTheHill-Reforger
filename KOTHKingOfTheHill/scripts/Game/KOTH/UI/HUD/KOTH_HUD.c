@@ -45,6 +45,9 @@ class KOTH_HUD : SCR_InfoDisplay
 			m_lvlText = TextWidget.Cast(koth_hub.FindWidget("Demi_Front.Demi_EXPERIENCE_Footer.Level"));
 			m_moneyText = TextWidget.Cast(koth_hub.FindWidget("Back.HorizontalLayout2.Money"));
 
+			BaseGameMode gamemode = GetGame().GetGameMode();
+			if (!gamemode)
+				return;
 			m_scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
 			m_profileManager = KOTH_PlayerProfileManagerGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_PlayerProfileManagerGameModeComponent));
 			
@@ -155,6 +158,8 @@ class KOTH_HUD : SCR_InfoDisplay
 	protected override event void UpdateValues(IEntity owner, float timeSlice)
 	{
 		super.UpdateValues(owner, timeSlice);
+		if (!m_profileManager)
+			return;
 		
 		// money/xp
 		KOTH_PlayerProfileJson currentProfile = new KOTH_PlayerProfileJson();
