@@ -9,9 +9,13 @@ class KOTH_ShopUI : ChimeraMenuBase
 	
 	protected VerticalLayoutWidget m_contentContainer;
 	
+	protected SCR_TabViewComponent m_tabViewComponent;
+	protected SCR_ScrollBarComponent m_scrollContent;
+	
 	protected KOTH_SCR_PlayerShopComponent m_playerShopComp;
 	protected KOTH_SCR_PlayerProfileComponent m_playerProfileComp;
 	protected KOTH_ScoringGameModeComponent m_scoreComp;
+	
 	protected int m_playerId;
 	
 	override void OnMenuInit()
@@ -23,7 +27,6 @@ class KOTH_ShopUI : ChimeraMenuBase
 		
 		PlayerController controller = GetGame().GetPlayerController();
 		int playerId = controller.GetPlayerId();
-		
 		m_playerShopComp = KOTH_SCR_PlayerShopComponent.Cast(controller.FindComponent(KOTH_SCR_PlayerShopComponent));
 		m_playerProfileComp = KOTH_SCR_PlayerProfileComponent.Cast(controller.FindComponent(KOTH_SCR_PlayerProfileComponent));
 	}
@@ -39,18 +42,19 @@ class KOTH_ShopUI : ChimeraMenuBase
 		// add listeners
 		SCR_NavigationButtonComponent cancel = SCR_NavigationButtonComponent.GetNavigationButtonComponent("Cancel", m_wRoot);
 		if (cancel) { cancel.m_OnActivated.Insert(OnClickEscape); }
-		SCR_ButtonBaseComponent weaponBtn = SCR_ButtonBaseComponent.GetButtonBase("ShopCategorie_Weapons", m_wRoot);
-		if (weaponBtn) { weaponBtn.m_OnClicked.Insert(OnClickWeaponCategory); }
-		SCR_ButtonBaseComponent ammoBtn = SCR_ButtonBaseComponent.GetButtonBase("ShopCategorie_Ammo", m_wRoot);
-		if (ammoBtn) { ammoBtn.m_OnClicked.Insert(OnClickAmmoCategory); }
-		SCR_ButtonBaseComponent gadgetBtn = SCR_ButtonBaseComponent.GetButtonBase("ShopCategorie_Gadget", m_wRoot);
-		if (gadgetBtn) { gadgetBtn.m_OnClicked.Insert(OnClickGadgetCategory); }
+			
+		Widget tabViewRootWidget = m_wRoot.FindAnyWidget("TabViewRoot");
+		m_tabViewComponent = SCR_TabViewComponent.Cast(tabViewRootWidget.FindHandler(SCR_TabViewComponent));
+		m_tabViewComponent.m_OnContentSelect.Insert(OnSelectedTab);
 		
-		m_parentShopCategorie_Weapons = m_wRoot.FindAnyWidget("ShopCategorie_Weapons");
-		TextWidget text = TextWidget.Cast(m_parentShopCategorie_Weapons.FindAnyWidget("Content"));
-		text.SetColor(Color.Gray25);
-		m_parentShopCategorie_Ammo = m_wRoot.FindAnyWidget("ShopCategorie_Ammo");
-		m_parentShopCategorie_Gadget = m_wRoot.FindAnyWidget("ShopCategorie_Gadget");
+		Widget scrollContentWidget = m_wRoot.FindAnyWidget("ScrollContent");
+		m_scrollContent = scrollContentWidget.FindHandler(SCR_ScrollBarComponent);
+	}
+	
+	void OnSelectedTab()
+	{
+		m_scrollContent.MoveHandlerPos(0);
+		Log("selected tab "+m_tabViewComponent.GetShownTab());
 	}
 
 	protected void AddItemsFromConfig(string itemListResource)
@@ -202,33 +206,6 @@ class KOTH_ShopUI : ChimeraMenuBase
 		
 		ClearItemList();
 		AddItemsFromConfig("{232D181B9F9FE8D1}Configs/Shop/ShopWeaponItemList.conf");
-	}
-	
-	//ShopCategorie_Ammo
-	void OnClickAmmoCategory()
-	{
-		Log("OnClickAmmoCategory");
-		TextWidget text = TextWidget.Cast(m_parentShopCategorie_Gadget.FindAnyWidget("Content"));
-		text.SetColor(Color.White);
-		text = TextWidget.Cast(m_parentShopCategorie_Ammo.FindAnyWidget("Content"));
-		text.SetColor(Color.Gray25);
-		text = TextWidget.Cast(m_parentShopCategorie_Weapons.FindAnyWidget("Content"));
-		text.SetColor(Color.White);
-		
-		ClearItemList();
-		AddItemsFromConfig("{01BEF9B6FC671AF0}Configs/Shop/ShopThrowableItemlList.conf");
-	}
-	
-	//ShopCategorie_Gadget
-	void OnClickGadgetCategory()
-	{
-		TextWidget text = TextWidget.Cast(m_parentShopCategorie_Gadget.FindAnyWidget("Content"));
-		text.SetColor(Color.Gray25);
-		text = TextWidget.Cast(m_parentShopCategorie_Ammo.FindAnyWidget("Content"));
-		text.SetColor(Color.White);
-		text = TextWidget.Cast(m_parentShopCategorie_Weapons.FindAnyWidget("Content"));
-		text.SetColor(Color.White);
-		//m_itemList = "{01BEF9B6FC671AF0}Configs/Shop/ShopThrowableItemlList.conf";
 	}
 
 	protected void OnClickBuyOnce(SCR_ButtonBaseComponent button)

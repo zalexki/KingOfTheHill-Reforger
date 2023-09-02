@@ -172,6 +172,12 @@ SizeLayoutWidgetClass {
                 VerticalAlign 3
                 Padding 2 2 2 2
                }
+               components {
+                SCR_ButtonBaseComponent "{5E272AA17FC54394}" {
+                 m_bMouseOverToFocus 1
+                 m_bShowBorderOnFocus 1
+                }
+               }
                {
                 OverlayWidgetClass "{5E272AA14F65CC8A}" {
                  Prefab "{5E272AA14F65CC8A}"
@@ -187,6 +193,14 @@ SizeLayoutWidgetClass {
                    Slot OverlayWidgetSlot "{547290FBCA5E9358}" {
                     Padding 0 5 0 5
                    }
+                  }
+                  PanelWidgetClass "{5E455EBE31B671EF}" {
+                   Prefab "{5E272AA14F65CC89}"
+                   Name "Border"
+                   Slot OverlayWidgetSlot "{5452C531C2876D22}" {
+                    VerticalAlign 1
+                   }
+                   style outline_2px
                   }
                  }
                 }

@@ -33,6 +33,9 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 			return false;
 
 		Faction playerFaction = SCR_FactionManager.Cast(GetGame().GetFactionManager()).GetPlayerFaction(playerId);
+		if (!playerFaction)
+			return false;
+		
 		if (firstSpawn.GetFactionKey() == playerFaction.GetFactionKey())
 			return firstSpawn.Spawn(resourceName);
 		
@@ -188,6 +191,8 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 				break;
 				case KOTH_ShopItemCategory.VehicleArmed:
 					Faction playerFaction = SCR_FactionManager.Cast(GetGame().GetFactionManager()).GetPlayerFaction(playerId);
+					if (!playerFaction)
+						return;
 					
 					if (!CanBuyVehicleArmed(playerFaction, item, playerId))
 						return;

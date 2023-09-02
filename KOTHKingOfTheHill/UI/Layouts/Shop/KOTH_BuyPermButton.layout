@@ -10,7 +10,6 @@ ButtonWidgetClass {
  components {
   SCR_ButtonBaseComponent "{5E272AA17FC54394}" {
    m_BackgroundHovered 0.813 0.422 0 0.49
-   m_bShowBorderOnFocus 0
    m_bShowBorderOnHover 1
   }
  }
@@ -48,6 +47,16 @@ ButtonWidgetClass {
       ShadowOffset 3 3
       ShadowOpacity 0.3
      }
+    }
+    PanelWidgetClass "{5E455EBF0B108467}" {
+     Name "Border"
+     Slot OverlayWidgetSlot "{5452C531C2876D22}" {
+      HorizontalAlign 3
+      VerticalAlign 3
+      Padding 0 0 0 0
+     }
+     Color 0.761 0.386 0.078 1
+     style outline_2px
     }
    }
   }
