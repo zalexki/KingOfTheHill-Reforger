@@ -1,7 +1,7 @@
 class KOTH_SCR_PlayerProfileComponentClass : ScriptComponentClass {}
 class KOTH_SCR_PlayerProfileComponent : ScriptComponent 
 {
-	protected KOTH_ScoringGameModeComponent m_scoreComp;
+	protected KOTH_PlayerProfileManagerGameModeComponent m_playerProfiles;
 	protected ref array<string> m_unlockedItems = {};
 	array<string> GetUnlockedItemList() { return m_unlockedItems; }
 
@@ -14,12 +14,20 @@ class KOTH_SCR_PlayerProfileComponent : ScriptComponent
 		if (Replication.IsServer() && !ismaster)
 			return;
 
-		m_scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
+		m_playerProfiles = KOTH_PlayerProfileManagerGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_PlayerProfileManagerGameModeComponent));
 		GetGame().GetCallqueue().CallLater(AskRpc_PlayerProfile, 1000, false);
 	}
 
 	void AskRpc_PlayerProfile()
 	{
+		PlayerController controller = GetGame().GetPlayerController();
+		if (!controller)
+			return;
+
+		int playerId = controller.GetPlayerId();
+		if (!playerId || playerId == 0)
+			return;
+		
 		Rpc(RpcAsk_PlayerProfile, GetGame().GetPlayerController().GetPlayerId());
 	}
 
@@ -27,7 +35,7 @@ class KOTH_SCR_PlayerProfileComponent : ScriptComponent
 	void RpcAsk_PlayerProfile(int playerId)
 	{
 		KOTH_PlayerProfileJson profile = null;
-		foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.m_listPlayerProfiles)
+		foreach (int index, KOTH_PlayerProfileJson savedProfile : m_playerProfiles.m_listPlayerProfiles)
 		{
 			if (savedProfile.m_playerId == playerId) {
 				profile = savedProfile;

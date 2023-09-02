@@ -13,9 +13,9 @@ KOTH_PresenceTriggerEntity {
  angleZ -0.895
  TriggerShapeType Sphere
  SphereRadius 100
- DrawShape 0
+ DrawShape 1
  TriggerActivationType "Every query"
- PeriodicQueries 1
+ PeriodicQueries 0
  NamesFilter {
   ""
  }

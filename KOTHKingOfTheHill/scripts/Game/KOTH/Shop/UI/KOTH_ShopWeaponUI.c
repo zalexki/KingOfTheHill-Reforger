@@ -4,5 +4,6 @@ class KOTH_ShopWeaponUI : KOTH_ShopUI
 	{
 		super.OnMenuOpen();
 		AddItemsFromConfig("{232D181B9F9FE8D1}Configs/Shop/ShopWeaponItemList.conf");
+		m_parentShopCategorie_Gadget.SetVisible(false);
 	}
 }

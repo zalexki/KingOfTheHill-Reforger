@@ -14,6 +14,7 @@ class KOTH_HUD : SCR_InfoDisplay
 	SCR_WLibProgressBarComponent m_xpProgressBar;
 
 	KOTH_ScoringGameModeComponent m_scoreComp;
+	KOTH_PlayerProfileManagerGameModeComponent m_profileManager;
 	int m_playerId;
 
 	override event void OnStartDraw(IEntity owner)
@@ -45,6 +46,7 @@ class KOTH_HUD : SCR_InfoDisplay
 			m_moneyText = TextWidget.Cast(koth_hub.FindWidget("Back.HorizontalLayout2.Money"));
 
 			m_scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
+			m_profileManager = KOTH_PlayerProfileManagerGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_PlayerProfileManagerGameModeComponent));
 			
 			m_playerId = GetGame().GetPlayerController().GetPlayerId();
 		}
@@ -156,7 +158,7 @@ class KOTH_HUD : SCR_InfoDisplay
 		
 		// money/xp
 		KOTH_PlayerProfileJson currentProfile = new KOTH_PlayerProfileJson();
-		foreach (KOTH_PlayerProfileJson savedProfile : m_scoreComp.m_listPlayerProfiles)
+		foreach (KOTH_PlayerProfileJson savedProfile : m_profileManager.m_listPlayerProfiles)
 		{
 			if (savedProfile.m_playerId == m_playerId) {
 				currentProfile = savedProfile;

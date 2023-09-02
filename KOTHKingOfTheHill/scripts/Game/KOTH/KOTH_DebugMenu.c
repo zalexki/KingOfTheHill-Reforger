@@ -25,7 +25,7 @@ class KOTH_DebugMenu
 			int playerID = playerController.GetPlayerId();
 		
 		KOTH_ScoringGameModeComponent m_scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
-
+			
 		DbgUI.Text(KOTH_Faction.BLUFOR);
 		if (DbgUI.Button("Add 1 point to "+KOTH_Faction.BLUFOR))
 		{
@@ -104,103 +104,114 @@ class KOTH_DebugMenu
 		
 		int playerId = playerController.GetPlayerId();
 		
-		KOTH_ScoringGameModeComponent m_scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
-
+		KOTH_PlayerProfileManagerGameModeComponent m_playerProfileManager = KOTH_PlayerProfileManagerGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_PlayerProfileManagerGameModeComponent));
+	
 		if (DbgUI.Button("Add me 100$"))
 		{
-			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.m_listPlayerProfiles)
+			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_playerProfileManager.m_listPlayerProfiles)
 			{
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.AddMoney(100);
-					m_scoreComp.m_listPlayerProfiles.Set(index, savedProfile);
+					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
 				}
 			}
-			m_scoreComp.BumpMe();
+			m_playerProfileManager.BumpMe();
 			
 		}
 		if (DbgUI.Button("Remove me 100$"))
 		{
-			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.m_listPlayerProfiles)
+			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_playerProfileManager.m_listPlayerProfiles)
 			{
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.RemoveMoney(100);
-					m_scoreComp.m_listPlayerProfiles.Set(index, savedProfile);
+					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
 				}
 			}
-			m_scoreComp.BumpMe();
+			m_playerProfileManager.BumpMe();
 		}
 		
 		if (DbgUI.Button("Add me 1000$"))
 		{
-			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.m_listPlayerProfiles)
+			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_playerProfileManager.m_listPlayerProfiles)
 			{
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.AddMoney(1000);
-					m_scoreComp.m_listPlayerProfiles.Set(index, savedProfile);
+					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
 				}
 			}
-			m_scoreComp.BumpMe();
+			m_playerProfileManager.BumpMe();
+		}
+		if (DbgUI.Button("Add me 1000000$"))
+		{
+			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_playerProfileManager.m_listPlayerProfiles)
+			{
+				if (savedProfile.m_playerId == playerId) {
+					savedProfile.AddMoney(1000000);
+					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
+				}
+			}
+			m_playerProfileManager.BumpMe();
 		}
 		if (DbgUI.Button("Remove me 1000$"))
 		{
-			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.m_listPlayerProfiles)
+			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_playerProfileManager.m_listPlayerProfiles)
 			{
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.RemoveMoney(1000);
-					m_scoreComp.m_listPlayerProfiles.Set(index, savedProfile);
+					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
 					break;
 				}
 			}
-			m_scoreComp.BumpMe();
+			m_playerProfileManager.BumpMe();
 		}
 		
 		if (DbgUI.Button("Add me 1LVL"))
 		{
-			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.m_listPlayerProfiles)
+			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_playerProfileManager.m_listPlayerProfiles)
 			{
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.AddLevel(1);
-					m_scoreComp.m_listPlayerProfiles.Set(index, savedProfile);
+					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
 					break;
 				}
 			}
-			m_scoreComp.BumpMe();
+			m_playerProfileManager.BumpMe();
 		}
 		if (DbgUI.Button("Remove me 1LVL"))
 		{
-			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.m_listPlayerProfiles)
+			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_playerProfileManager.m_listPlayerProfiles)
 			{
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.RemoveLevel(1);
-					m_scoreComp.m_listPlayerProfiles.Set(index, savedProfile);
+					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
 					break;
 				}
 			}
-			m_scoreComp.BumpMe();
+			m_playerProfileManager.BumpMe();
 		}
 		
 		if (DbgUI.Button("Add me 10LVL"))
 		{
-			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.m_listPlayerProfiles)
+			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_playerProfileManager.m_listPlayerProfiles)
 			{
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.AddLevel(10);
-					m_scoreComp.m_listPlayerProfiles.Set(index, savedProfile);
+					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
 					break;
 				}
 			}
-			m_scoreComp.BumpMe();
+			m_playerProfileManager.BumpMe();
 		}
 		if (DbgUI.Button("Remove me 10LVL"))
 		{
-			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.m_listPlayerProfiles)
+			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_playerProfileManager.m_listPlayerProfiles)
 			{
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.RemoveLevel(10);
-					m_scoreComp.m_listPlayerProfiles.Set(index, savedProfile);
+					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
 				}
 			}
-			m_scoreComp.BumpMe();
+			m_playerProfileManager.BumpMe();
 		}
 		
 		DbgUI.End();

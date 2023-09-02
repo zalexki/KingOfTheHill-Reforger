@@ -3,6 +3,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 {
 	protected string m_playerUID;
 	protected KOTH_ScoringGameModeComponent m_scoreComp;
+	protected KOTH_PlayerProfileManagerGameModeComponent m_playerProfileManager;
 	protected ref array<string> m_shopItemListResources = {
 		"{232D181B9F9FE8D1}Configs/Shop/ShopWeaponItemList.conf",
 		"{01BEF9B6FC671AF0}Configs/Shop/ShopThrowableItemlList.conf",
@@ -16,10 +17,11 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 			return;
 		
 		m_scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
+		m_playerProfileManager = KOTH_PlayerProfileManagerGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_PlayerProfileManagerGameModeComponent));
 		PlayerController controller = GetGame().GetPlayerController();
-		if (controller) {
+		
+		if (controller)
 			m_playerUID = GetGame().GetBackendApi().GetPlayerUID(controller.GetPlayerId());
-		}
 	}
 	
 	bool SpawnVehicle(string resourceName, int playerId)
@@ -40,6 +42,11 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		if (thirdSpawn.GetFactionKey() == playerFaction.GetFactionKey())
 			return thirdSpawn.Spawn(resourceName);
 		
+//		EventHandlerManagerComponent handler = EventHandlerManagerComponent.Cast(m_Vehicle.FindComponent(EventHandlerManagerComponent));
+//		
+//		if (handler)
+//			handler.RegisterScriptHandler("OnDestroyed", this, OnVehicleDestroyed);
+		
 		return false;
 	}
 	
@@ -51,7 +58,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 				if (m_scoreComp.m_bluforArmedVehiclesCount >= 3)
 				{
 					m_scoreComp.Refund(item.m_priceOnce, playerId);
-					DoRpc_Notif_Failed("cannot spawn vehicle", "too much armed vehicle in your team");
+					DoRpc_Notif_Failed("cannot spawn vehicle", "too much armed vehicle in your team "+"\n"+" (max 3)");
 					return false;
 				}
 			break;
@@ -59,7 +66,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 				if (m_scoreComp.m_opforArmedVehiclesCount >= 3)
 				{
 					m_scoreComp.Refund(item.m_priceOnce, playerId);
-					DoRpc_Notif_Failed("cannot spawn vehicle", "too much armed vehicle in your team");
+					DoRpc_Notif_Failed("cannot spawn vehicle", "too much armed vehicle in your team "+"\n"+"(max 3)");
 					return false;
 				}
 			break;
@@ -67,7 +74,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 				if (m_scoreComp.m_indforArmedVehiclesCount >= 3)
 				{
 					m_scoreComp.Refund(item.m_priceOnce, playerId);
-					DoRpc_Notif_Failed("cannot spawn vehicle", "too much armed vehicle in your team (max 3)");
+					DoRpc_Notif_Failed("cannot spawn vehicle", "too much armed vehicle in your team "+"\n"+" (max 3)");
 					return false;
 				}
 			break;
@@ -154,11 +161,11 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		
 		if (permanentBuy)
 		{
-			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_scoreComp.m_listPlayerProfiles)
+			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_playerProfileManager.m_listPlayerProfiles)
 			{
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.m_unlockedItems.Insert(item.m_itemResource);
-					m_scoreComp.m_listPlayerProfiles.Set(index, savedProfile);
+					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
 					
 					break;
 				}
@@ -284,31 +291,52 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		if (!inventoryStorageComponent)
 			return false;
 		
-		// remove primary and secondary weapon slot
-		IEntity ent1 = inventoryStorageComponent.GetSlot(0).GetAttachedEntity();
-		IEntity ent2 = inventoryStorageComponent.GetSlot(1).GetAttachedEntity();
-		if (ent1)
+		if (item.m_category == KOTH_ShopItemCategory.Primary) 
 		{
-			KOTH_ShopItemCategory category = FindEntityKOTH_ShopItemCategory(ent1);
-			
-			if (category == item.m_category)
+			// remove primary and secondary weapon slot
+			IEntity ent1 = inventoryStorageComponent.GetSlot(0).GetAttachedEntity();
+			IEntity ent2 = inventoryStorageComponent.GetSlot(1).GetAttachedEntity();
+			if (ent1)
 			{
-				inventoryStorage.TryRemoveItemFromStorage(ent1, inventoryStorageComponent);
-
-				RplComponent.DeleteRplEntity(ent1, false);
+				KOTH_ShopItemCategory category = FindEntityKOTH_ShopItemCategory(ent1);
+				
+				if (category == item.m_category)
+				{
+					inventoryStorage.TryRemoveItemFromStorage(ent1, inventoryStorageComponent);
+	
+					RplComponent.DeleteRplEntity(ent1, false);
+				}
+			}
+			
+			if (ent2)
+			{
+				KOTH_ShopItemCategory category = FindEntityKOTH_ShopItemCategory(ent2);
+				
+				if (category == item.m_category)
+				{
+					inventoryStorage.TryRemoveItemFromStorage(ent2, inventoryStorageComponent);
+					RplComponent.DeleteRplEntity(ent2, false);
+				}
 			}
 		}
 		
-		if (ent2)
+		if (item.m_category == KOTH_ShopItemCategory.Handgun) 
 		{
-			KOTH_ShopItemCategory category = FindEntityKOTH_ShopItemCategory(ent2);
-			
-			if (category == item.m_category)
+			// remove handgun weapon slot
+			IEntity ent = inventoryStorageComponent.GetSlot(2).GetAttachedEntity();
+			if (ent)
 			{
-				inventoryStorage.TryRemoveItemFromStorage(ent2, inventoryStorageComponent);
-				RplComponent.DeleteRplEntity(ent2, false);
+				KOTH_ShopItemCategory category = FindEntityKOTH_ShopItemCategory(ent);
+				
+				if (category == item.m_category)
+				{
+					inventoryStorage.TryRemoveItemFromStorage(ent, inventoryStorageComponent);
+	
+					RplComponent.DeleteRplEntity(ent, false);
+				}
 			}
-		}		
+		}
+				
 		
 		// add new weapon mags
 		SCR_InventoryStorageManagerComponent inventory = SCR_InventoryStorageManagerComponent.Cast(player.FindComponent(SCR_InventoryStorageManagerComponent));

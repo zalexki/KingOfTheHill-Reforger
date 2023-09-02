@@ -68,6 +68,9 @@ class KOTH_ShopUI : ChimeraMenuBase
 			
 			if (item.m_pricePermanent > 1) {
 				ShowNotOwned(newRow);
+			} else {
+				Widget buyPermLayoutWidget = Widget.Cast(newRow.FindAnyWidget("BuyPerm_Layout0"));
+				buyPermLayoutWidget.SetVisible(false);
 			}
 			SCR_ButtonBaseComponent buyPermanent = SCR_ButtonBaseComponent.GetButtonBase("PurchasePermanentButton", newRow);
 			if (buyPermanent)
@@ -89,8 +92,8 @@ class KOTH_ShopUI : ChimeraMenuBase
 
 			//get player level
 			int playerLevel = 1;
-			KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
-			foreach (KOTH_PlayerProfileJson profile : scoreComp.m_listPlayerProfiles) {
+			KOTH_PlayerProfileManagerGameModeComponent playerProfileManager = KOTH_PlayerProfileManagerGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_PlayerProfileManagerGameModeComponent));
+			foreach (KOTH_PlayerProfileJson profile : playerProfileManager.m_listPlayerProfiles) {
 				if (profile.m_playerId == m_playerId) {
 					playerLevel = profile.GetLevel();
 					break;

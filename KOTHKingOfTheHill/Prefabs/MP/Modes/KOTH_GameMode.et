@@ -1518,6 +1518,8 @@ SCR_BaseGameMode {
    "Rpl State Override" None
    Streamable Disabled
   }
+  KOTH_PlayerProfileManagerGameModeComponent "{5E435738A7CCAF1A}" {
+  }
  }
  coords 3113.879 16 2724.923
  Flags 0
@@ -1568,15 +1570,15 @@ SCR_BaseGameMode {
    m_aPlayerLoadouts {
     SCR_FactionPlayerLoadout "{5E27748BF8FDE692}" {
      m_sLoadoutName "INDFOR Man"
-     m_sLoadoutResource "{E1E2BA75E5E2E4CE}Prefabs/Characters/Factions/BLUFOR/KOTH_Base/Character_KOTH_INDFOR.et"
+     m_sLoadoutResource "{E1E2BA75E5E2E4CE}Prefabs/Characters/Factions/KOTH_Base/Character_KOTH_INDFOR.et"
     }
     SCR_FactionPlayerLoadout "{5E27748BF9E02B84}" {
      m_sLoadoutName "OPFOR Man"
-     m_sLoadoutResource "{4A513974D5682D30}Prefabs/Characters/Factions/BLUFOR/KOTH_Base/Character_KOTH_OPFOR.et"
+     m_sLoadoutResource "{4A513974D5682D30}Prefabs/Characters/Factions/KOTH_Base/Character_KOTH_OPFOR.et"
     }
     SCR_FactionPlayerLoadout "{5E27748BFAA6EC30}" {
      m_sLoadoutName "BLUFOR Man"
-     m_sLoadoutResource "{7C98AF3D5AB4A519}Prefabs/Characters/Factions/BLUFOR/KOTH_Base/Character_KOTH_BLUFOR.et"
+     m_sLoadoutResource "{7C98AF3D5AB4A519}Prefabs/Characters/Factions/KOTH_Base/Character_KOTH_BLUFOR.et"
     }
    }
   }

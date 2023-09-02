@@ -2,6 +2,9 @@
 class KOTH_SCR_MapDescriptorComponentClass : SCR_MapDescriptorComponentClass{};
 class KOTH_SCR_MapDescriptorComponent : SCR_MapDescriptorComponent
 {
+	[RplProp(onRplName: "OnAreaUpdated")]
+	private string m_areaState = "none";
+	
 	protected MapItem m_item;
 
 	void KOTH_SCR_MapDescriptorComponent(IEntityComponentSource src, IEntity ent, IEntity parent)
@@ -27,7 +30,18 @@ class KOTH_SCR_MapDescriptorComponent : SCR_MapDescriptorComponent
 
 		m_item.SetProps(props);
 	}
+	
+	void SetState(string state)
+	{
+		m_areaState = state;
+		Replication.BumpMe();
+	}
 
+	void OnAreaUpdated()
+	{
+		ChangeMarker(m_areaState);
+	}
+	
 	void ChangeMarker(string factionName)
 	{
 		MapDescriptorProps props = m_item.GetProps();
@@ -37,9 +51,9 @@ class KOTH_SCR_MapDescriptorComponent : SCR_MapDescriptorComponent
 		{
 			case "none": color = color.Gray75; break;
 			case "contested": color = color.Violet; break;
-			case "OPFOR": color = color.DarkRed; break;
-			case "BLUFOR": color = color.DarkBlue; break;
-			case "INDFOR": color = color.DarkGreen; break;
+			case KOTH_Faction.OPFOR: color = color.DarkRed; break;
+			case KOTH_Faction.BLUFOR: color = color.DarkBlue; break;
+			case KOTH_Faction.INDFOR: color = color.DarkGreen; break;
 		}
 		color.SetA(0.6);
 		props.SetFrontColor(color);

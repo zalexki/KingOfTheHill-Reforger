@@ -19,7 +19,7 @@ class KOTH_SpawnPrefab : SCR_BaseTriggerEntity
 	bool Spawn(ResourceName m_prefabName)
 	{
 		vector pos;
-		IEntity entity = IEntity.Cast(this);
+		IEntity entity = this;
 		bool isSpawnEmpty = isSpawnEmpty();
 		if (!isSpawnEmpty)
 		{
