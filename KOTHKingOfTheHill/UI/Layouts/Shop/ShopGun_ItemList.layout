@@ -113,6 +113,7 @@ SizeLayoutWidgetClass {
           HorizontalLayoutWidgetClass "{5E1D46E3F35C971B}" {
            Name "BuyOnce_Layout"
            Slot LayoutSlot "{5E1D46E3F35C9779}" {
+            VerticalAlign 1
             Padding 0 0 10 0
             SizeMode Fill
            }
@@ -152,7 +153,6 @@ SizeLayoutWidgetClass {
             OverlayWidgetClass "{5E1D46E396412ED9}" {
              Name "PurchaseOnce"
              Slot LayoutSlot "{5C982A3F129726D2}" {
-              Padding 0 0 0 0
               SizeMode Fill
               FillWeight 0.5
              }
@@ -171,6 +171,25 @@ SizeLayoutWidgetClass {
                 HorizontalAlign 3
                 VerticalAlign 3
                 Padding 2 2 2 2
+               }
+               {
+                OverlayWidgetClass "{5E272AA14F65CC8A}" {
+                 Prefab "{5E272AA14F65CC8A}"
+                 {
+                  ImageWidgetClass "{5E272AA14F65CC89}" {
+                   Prefab "{5E272AA14F65CC89}"
+                   Slot OverlayWidgetSlot "{5452C531C2876D22}" {
+                    VerticalAlign 1
+                   }
+                  }
+                  TextWidgetClass "{5E272AA14F65CC87}" {
+                   Prefab "{5E272AA14F65CC87}"
+                   Slot OverlayWidgetSlot "{547290FBCA5E9358}" {
+                    Padding 0 5 0 5
+                   }
+                  }
+                 }
+                }
                }
               }
               OverlayWidgetClass "{5E28034269E5C081}" {
@@ -284,7 +303,6 @@ SizeLayoutWidgetClass {
                  Name "Background"
                  Slot OverlayWidgetSlot "{5452C531C2876D22}" {
                   HorizontalAlign 3
-                  VerticalAlign 3
                   Padding 0 0 0 0
                  }
                  Color 1 1 1 0.106
@@ -293,7 +311,7 @@ SizeLayoutWidgetClass {
                 TextWidgetClass "{5E2F4B76F91745E3}" : "{A6E079574AACF9A0}UI/layouts/WidgetLibrary/TextWidgets/Text_Interactive.layout" {
                  Name "Content"
                  Slot OverlayWidgetSlot "{547290FBCA5E9358}" {
-                  Padding 0 12 0 12
+                  Padding 0 5 0 5
                  }
                  Clipping False
                  "Inherit Color" 1
@@ -381,6 +399,7 @@ SizeLayoutWidgetClass {
                Slot OverlayWidgetSlot "{5E2803422E4EEF65}" {
                 HorizontalAlign 3
                 VerticalAlign 3
+                Padding 2 2 2 2
                }
                "Is Visible" 0
                Color 1 1 1 1
@@ -403,8 +422,7 @@ SizeLayoutWidgetClass {
                  Clipping False
                  "Inherit Color" 1
                  Text "OWNED"
-                 "Font Size" 25
-                 "Min Font Size" 25
+                 "Min Font Size" 20
                  FontProperties FontProperties "{546AF489DFD25402}" {
                   Font "{3E7733BAC8C831F6}UI/Fonts/RobotoCondensed/RobotoCondensed_Regular.fnt"
                   ShadowSize 16

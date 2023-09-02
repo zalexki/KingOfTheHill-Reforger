@@ -63,7 +63,7 @@ FrameWidgetClass {
           ShadowOpacity 0.5
          }
         }
-        ButtonWidgetClass "{5E2AEA0FB87A29A3}" : "{9166209BD49D507A}UI/Layouts/HUD/Shop/ShopCategorie_List.layout" {
+        ButtonWidgetClass "{5E2AEA0FB87A29A3}" : "{9166209BD49D507A}UI/Layouts/Shop/ShopCategorie_List.layout" {
          Name "ShopCategorie_Weapons"
          Slot LayoutSlot "{5E2AEA0FB87A2994}" {
           HorizontalAlign 3
@@ -71,7 +71,7 @@ FrameWidgetClass {
           Padding 750 43 0 0
          }
         }
-        ButtonWidgetClass "{5E2AEA082360A679}" : "{9166209BD49D507A}UI/Layouts/HUD/Shop/ShopCategorie_List.layout" {
+        ButtonWidgetClass "{5E2AEA082360A679}" : "{9166209BD49D507A}UI/Layouts/Shop/ShopCategorie_List.layout" {
          Name "ShopCategorie_Ammo"
          Slot LayoutSlot "{5E2AEA082360A6AA}" {
           HorizontalAlign 3
@@ -90,7 +90,7 @@ FrameWidgetClass {
           }
          }
         }
-        ButtonWidgetClass "{5E2AEA084D07A0CC}" : "{9166209BD49D507A}UI/Layouts/HUD/Shop/ShopCategorie_List.layout" {
+        ButtonWidgetClass "{5E2AEA084D07A0CC}" : "{9166209BD49D507A}UI/Layouts/Shop/ShopCategorie_List.layout" {
          Name "ShopCategorie_Gadget"
          Slot LayoutSlot "{5E2AEA082360A6AA}" {
           HorizontalAlign 3
