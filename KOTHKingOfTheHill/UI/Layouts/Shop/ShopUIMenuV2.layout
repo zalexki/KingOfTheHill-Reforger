@@ -11,7 +11,7 @@ FrameWidgetClass {
     OffsetTop 0
     SizeX 203.52
     OffsetRight 0
-    SizeY -0
+    SizeY 0
     OffsetBottom 0
    }
    Clipping False
@@ -254,6 +254,11 @@ FrameWidgetClass {
            }
            Color 0.761 0.384 0.078 1
            Size 4 4
+          }
+          OverlayWidgetClass "{5E454997F5FE89A1}" {
+           Name "ContentOverlay"
+           Slot LayoutSlot "{5E454997F5FE89EB}" {
+           }
           }
          }
         }
