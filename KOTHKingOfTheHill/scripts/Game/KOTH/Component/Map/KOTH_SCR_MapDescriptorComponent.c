@@ -37,6 +37,11 @@ class KOTH_SCR_MapDescriptorComponent : SCR_MapDescriptorComponent
 		Replication.BumpMe();
 	}
 
+	string GetState()
+	{
+		return m_areaState;
+	}
+
 	void OnAreaUpdated()
 	{
 		ChangeMarker(m_areaState);

@@ -108,20 +108,23 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 
 		if (blueforPlayerNumber > greenforPlayerNumber && blueforPlayerNumber > redforPlayerNumber) {
 			isZoneContested = false;
-			m_mapDescriptor.SetState(KOTH_Faction.BLUFOR);
 			m_scoreComp.AddBlueforPoint();
+			if (m_mapDescriptor.GetState() != KOTH_Faction.BLUFOR)
+				m_mapDescriptor.SetState(KOTH_Faction.BLUFOR);
 		}
 
 		if (greenforPlayerNumber > blueforPlayerNumber && greenforPlayerNumber > redforPlayerNumber) {
 			isZoneContested = false;
-			m_mapDescriptor.SetState(KOTH_Faction.INDFOR);
 			m_scoreComp.AddGreenforPoint();
+			if (m_mapDescriptor.GetState() != KOTH_Faction.INDFOR)
+				m_mapDescriptor.SetState(KOTH_Faction.INDFOR);
 		}
 
 		if (redforPlayerNumber > greenforPlayerNumber && redforPlayerNumber > blueforPlayerNumber) {
 			isZoneContested = false;
-			m_mapDescriptor.SetState(KOTH_Faction.OPFOR);
 			m_scoreComp.AddRedforPoint();
+			if (m_mapDescriptor.GetState() != KOTH_Faction.OPFOR)
+				m_mapDescriptor.SetState(KOTH_Faction.OPFOR);
 		}
 
 		// send new stats to clients
@@ -132,11 +135,11 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 		if (true == isZoneContested) {
 			if (outEntities.Count() < 1)
 			{
-				Log("SetState to none");
-				m_mapDescriptor.SetState("none");
+				if (m_mapDescriptor.GetState() != "none")
+					m_mapDescriptor.SetState("none");
 			} else {
-				Log("SetState to contested");
-				m_mapDescriptor.SetState("contested");
+				if (m_mapDescriptor.GetState() != "contested")
+					m_mapDescriptor.SetState("contested");
 			}
 		}
 

@@ -90,6 +90,5 @@ class KOTH_SpawnPrefab : SCR_BaseTriggerEntity
 			return;
 
 		m_sFaction = factionKey;
-		Replication.BumpMe();
 	}
 };

@@ -174,6 +174,7 @@ modded class SCR_BaseGameMode
 			}
 		}
 	}
+	
 	void CloseGame()
 	{
 		GetGame().RequestClose();
