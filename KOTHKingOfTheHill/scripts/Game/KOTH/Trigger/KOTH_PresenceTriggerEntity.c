@@ -32,10 +32,10 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 		trigger.EnablePeriodicQueries(true);
 		trigger.SetSphereRadius(100);
 
-		GetGame().GetCallqueue().CallLater(OnActivation, 10000, true);
+		GetGame().GetCallqueue().CallLater(PeriodicCall, 10000, true);
 	}
 
-	protected void OnActivation()
+	protected void PeriodicCall()
 	{
 		if (!Replication.IsServer())
 			return;
@@ -58,20 +58,26 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 			if (controllerComp.IsDead() || controllerComp.IsUnconscious())
 				continue;
 
-			 int playerId = playerManager.GetPlayerIdFromControlledEntity(entity);
-			
-			// show notif for players inside zone
-			DoRpc_NotifCapture(playerId);
+			int playerId = playerManager.GetPlayerIdFromControlledEntity(entity);
 			
 			// add xp/money to players server side
 			bool playerIsInList = false;
 			string playerUID = GetGame().GetBackendApi().GetPlayerUID(playerId);
+			if (!playerUID || playerUID == string.Empty)
+			{
+				Log("could not find playerUID for playerId "+playerId+" named "+ playerManager.GetPlayerName(playerId), LogLevel.ERROR);
+				continue;
+			}
 
+			PlayerController playerController = playerManager.GetPlayerController(playerId);
+			KOTH_SCR_PlayerProfileComponent profileComp = KOTH_SCR_PlayerProfileComponent.Cast(playerController.FindComponent(KOTH_SCR_PlayerProfileComponent));
+			
 			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_playerProfileManager.m_listPlayerProfiles)
 			{
-				if (savedProfile.m_playerId == playerId) {
+				if (savedProfile.m_playerId == playerId && savedProfile.m_playerUID == playerUID) {
 					savedProfile.AddInZoneXpAndMoney();
 					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
+					profileComp.DoRpc_PlayerProfile(savedProfile);
 					playerIsInList = true;
 					break;
 				}
@@ -84,14 +90,14 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 				profile.m_playerId = playerId;
 				profile.m_playerName = playerManager.GetPlayerName(playerId);
 				m_playerProfileManager.m_listPlayerProfiles.Insert(profile);
+				profileComp.DoRpc_PlayerProfile(profile);
 			}
 
 			FactionAffiliationComponent targetFactionComp = FactionAffiliationComponent.Cast(entity.FindComponent(FactionAffiliationComponent));
 			if (targetFactionComp) {
 				Faction faction = targetFactionComp.GetAffiliatedFaction();
 				if (faction) {
-					
-
+	
 					if (faction.GetFactionName() == KOTH_Faction.BLUFOR)
 						blueforPlayerNumber++;
 
@@ -102,26 +108,29 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 						greenforPlayerNumber++;
 				}
 			}
+
+			// show notif for players inside zone
+			DoRpc_NotifCapture(playerId);
 		}
 
-		bool isZoneContested = true;
+		bool isZoneEmptyORContested = true;
 
 		if (blueforPlayerNumber > greenforPlayerNumber && blueforPlayerNumber > redforPlayerNumber) {
-			isZoneContested = false;
+			isZoneEmptyORContested = false;
 			m_scoreComp.AddBlueforPoint();
 			if (m_mapDescriptor.GetState() != KOTH_Faction.BLUFOR)
 				m_mapDescriptor.SetState(KOTH_Faction.BLUFOR);
 		}
 
 		if (greenforPlayerNumber > blueforPlayerNumber && greenforPlayerNumber > redforPlayerNumber) {
-			isZoneContested = false;
+			isZoneEmptyORContested = false;
 			m_scoreComp.AddGreenforPoint();
 			if (m_mapDescriptor.GetState() != KOTH_Faction.INDFOR)
 				m_mapDescriptor.SetState(KOTH_Faction.INDFOR);
 		}
 
 		if (redforPlayerNumber > greenforPlayerNumber && redforPlayerNumber > blueforPlayerNumber) {
-			isZoneContested = false;
+			isZoneEmptyORContested = false;
 			m_scoreComp.AddRedforPoint();
 			if (m_mapDescriptor.GetState() != KOTH_Faction.OPFOR)
 				m_mapDescriptor.SetState(KOTH_Faction.OPFOR);
@@ -129,10 +138,10 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 
 		// send new stats to clients
 		m_scoreComp.BumpMe();
-		m_playerProfileManager.BumpMe();
+		//m_playerProfileManager.BumpMe();
 
 		// update zone marker
-		if (true == isZoneContested) {
+		if (true == isZoneEmptyORContested) {
 			if (outEntities.Count() < 1)
 			{
 				if (m_mapDescriptor.GetState() != "none")
@@ -149,6 +158,7 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 	void DoRpc_NotifCapture(int playerId)
 	{
 		Rpc(RpcDo_NotifCapture, playerId);
+		Log("DoRpc_NotifCapture for "+playerId.ToString());
 	}
 	
 	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
@@ -156,11 +166,13 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 	{
 		if (GetGame().GetPlayerController().GetPlayerId() != playerId)
 			return;
-
+		
+		Log("RpcDo_NotifCapture for "+playerId.ToString());
 		SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
 		if (hudManager) {
 			KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
 			if (kothHud) {
+				Log("NotifCapture");
 				kothHud.NotifCapture();
 			}
 		}

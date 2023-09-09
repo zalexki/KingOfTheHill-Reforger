@@ -4,9 +4,6 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 	const string saveFilePath = "$profile:koth_profiles.json";
 	ref KOTH_ListPlayerProfileJson listPlayerProfilesJson = new KOTH_ListPlayerProfileJson();
 
-	
-	// TODO: send profile only to player via playerprofilecomponent
-	[RplProp()]
 	ref array<ref KOTH_PlayerProfileJson> m_listPlayerProfiles = new array<ref KOTH_PlayerProfileJson>();
 
 	override void OnGameModeStart()
@@ -191,15 +188,7 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 		return true;
 	}
 	
-	override void OnGameEnd()
-	{
-		if (!Replication.IsServer())
-			return;
-
-		SavePlayersProfile();
-	}
-	
-		[RplRpc(RplChannel.Unreliable, RplRcver.Broadcast)]
+	[RplRpc(RplChannel.Unreliable, RplRcver.Broadcast)]
 	void RpcDo_Notif_EnemyKill(int killerId)
 	{
 		if (GetGame().GetPlayerController().GetPlayerId() != killerId)
@@ -232,5 +221,13 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 	void BumpMe()
 	{
 		Replication.BumpMe();
+	}
+	
+	override void OnGameEnd()
+	{
+		if (!Replication.IsServer())
+			return;
+
+		SavePlayersProfile();
 	}
 }

@@ -151,7 +151,7 @@ class KOTH_HUD : SCR_InfoDisplay
 
 		TextWidget MoneyNotif = TextWidget.Cast(w.FindAnyWidget("MoneyNotif"));
 		MoneyNotif.SetText("10 $");
-
+		
 		SCR_FadeUIComponent compFade = SCR_FadeUIComponent.Cast(w.FindHandler(SCR_FadeUIComponent));
 		compFade.DelayedFadeOut(2000, true);
 	}
