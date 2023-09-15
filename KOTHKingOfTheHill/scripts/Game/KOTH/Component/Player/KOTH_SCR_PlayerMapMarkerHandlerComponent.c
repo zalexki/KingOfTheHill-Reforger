@@ -51,12 +51,12 @@ class KOTH_SCR_PlayerMapMarkerHandlerComponent : ScriptComponent
 		m_mapEntity.GetOnMapZoom().Insert(OnPlayerMapZoom);
 	}
 
-	protected void OnPlayerMapOpen()
+	protected void OnPlayerMapOpen(MapConfiguration config)
 	{
 		m_zoomValue = m_mapEntity.GetCurrentZoom();
 	}
 
-	protected void OnPlayerMapZoom()
+	protected void OnPlayerMapZoom(float targetPPU)
 	{
 		float currentZoom = m_mapEntity.GetCurrentZoom(); // 0.0-20.0 ZOOM
 

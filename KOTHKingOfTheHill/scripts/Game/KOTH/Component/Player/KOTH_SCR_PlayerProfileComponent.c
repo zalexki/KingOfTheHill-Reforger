@@ -9,6 +9,15 @@ class KOTH_SCR_PlayerProfileComponent : ScriptComponent
 	protected int m_level = 0;
 	protected int m_xp = 0;
 	
+	int GetMoney() { return m_money; }
+	int GetXp() { return m_xp; }
+	int GetXpNextLevel() { 
+		// TODO: up to 1000 for release
+		return (m_level + m_level - 1) * 100;
+	}
+	int GetLevel() { return m_level; }
+
+	
 	override protected void OnPostInit(IEntity owner)
 	{
 		if (SCR_Global.IsEditMode(owner))
@@ -68,24 +77,54 @@ class KOTH_SCR_PlayerProfileComponent : ScriptComponent
 		m_xp = xp;
 	}
 	
-	int GetMoney()
+	void DoRpc_NotifCapture()
 	{
-		return m_money;
+		Rpc(RpcDo_NotifCapture);
 	}
 	
-	int GetXp()
+	[RplRpc(RplChannel.Unreliable, RplRcver.Owner)]
+	void RpcDo_NotifCapture()
 	{
-		return m_xp;
+		SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
+		if (hudManager) {
+			KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
+			if (kothHud) {
+				kothHud.NotifCapture();
+			}
+		}
 	}
-
-	int GetXpNextLevel()
+	
+	void DoRpc_Notif_EnemyKill()
 	{
-		// TODO: up to 1000 for release
-		return (m_level + m_level - 1) * 100;
+		Rpc(RpcDo_Notif_EnemyKill);
 	}
-
-	int GetLevel()
+	[RplRpc(RplChannel.Unreliable, RplRcver.Owner)]
+	void RpcDo_Notif_EnemyKill()
 	{
-		return m_level;
+		SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
+		if (hudManager) {
+			KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
+			if (kothHud) {
+				kothHud.NotifEnemyKill();
+			}
+		}
 	}
+	
+	void DoRpc_Notif_FriendlyKill()
+	{
+		Rpc(RpcDo_Notif_FriendlyKill);
+	}
+	[RplRpc(RplChannel.Unreliable, RplRcver.Owner)]
+	void RpcDo_Notif_FriendlyKill()
+	{
+		SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
+		if (hudManager) {
+			KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
+			if (kothHud) {
+				kothHud.NotifFriendlyKill();
+			}
+		}
+	}
+		
+	
 }

@@ -66,7 +66,7 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 			if (!playerUID || playerUID == string.Empty)
 			{
 				Log("could not find playerUID for playerId "+playerId+" named "+ playerManager.GetPlayerName(playerId), LogLevel.ERROR);
-				continue;
+				//playerUID = playerId.ToString();
 			}
 
 			PlayerController playerController = playerManager.GetPlayerController(playerId);
@@ -92,6 +92,9 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 				m_playerProfileManager.m_listPlayerProfiles.Insert(profile);
 				profileComp.DoRpc_PlayerProfile(profile);
 			}
+			
+			// show notif for players inside zone
+			profileComp.DoRpc_NotifCapture();
 
 			FactionAffiliationComponent targetFactionComp = FactionAffiliationComponent.Cast(entity.FindComponent(FactionAffiliationComponent));
 			if (targetFactionComp) {
@@ -108,9 +111,6 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 						greenforPlayerNumber++;
 				}
 			}
-
-			// show notif for players inside zone
-			DoRpc_NotifCapture(playerId);
 		}
 
 		bool isZoneEmptyORContested = true;
@@ -138,7 +138,6 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 
 		// send new stats to clients
 		m_scoreComp.BumpMe();
-		//m_playerProfileManager.BumpMe();
 
 		// update zone marker
 		if (true == isZoneEmptyORContested) {
@@ -153,28 +152,5 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 		}
 
 		m_gameMode.CheckGameEnd();
-	}
-	
-	void DoRpc_NotifCapture(int playerId)
-	{
-		Rpc(RpcDo_NotifCapture, playerId);
-		Log("DoRpc_NotifCapture for "+playerId.ToString());
-	}
-	
-	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
-	void RpcDo_NotifCapture(int playerId)
-	{
-		if (GetGame().GetPlayerController().GetPlayerId() != playerId)
-			return;
-		
-		Log("RpcDo_NotifCapture for "+playerId.ToString());
-		SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
-		if (hudManager) {
-			KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
-			if (kothHud) {
-				Log("NotifCapture");
-				kothHud.NotifCapture();
-			}
-		}
 	}
 }

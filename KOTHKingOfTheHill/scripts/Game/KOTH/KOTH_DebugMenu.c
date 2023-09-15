@@ -95,6 +95,11 @@ class KOTH_DebugMenu
 		DbgUI.End();
 	}
 	
+	static void UpdatePlayerProfile()
+	{
+	
+	}
+	
 	static void DrawPlayerPanel()
 	{
 		DbgUI.Begin("KOTH Player Panel");
@@ -103,6 +108,8 @@ class KOTH_DebugMenu
 			return;
 		
 		int playerId = playerController.GetPlayerId();
+		KOTH_SCR_PlayerProfileComponent profileComp = KOTH_SCR_PlayerProfileComponent.Cast(playerController.FindComponent(KOTH_SCR_PlayerProfileComponent));
+
 		
 		KOTH_PlayerProfileManagerGameModeComponent m_playerProfileManager = KOTH_PlayerProfileManagerGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_PlayerProfileManagerGameModeComponent));
 	
@@ -113,10 +120,10 @@ class KOTH_DebugMenu
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.AddMoney(100);
 					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
+					profileComp.DoRpc_PlayerProfile(savedProfile);
+					break;
 				}
 			}
-			m_playerProfileManager.BumpMe();
-			
 		}
 		if (DbgUI.Button("Remove me 100$"))
 		{
@@ -125,9 +132,10 @@ class KOTH_DebugMenu
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.RemoveMoney(100);
 					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
+					profileComp.DoRpc_PlayerProfile(savedProfile);
+					break;
 				}
 			}
-			m_playerProfileManager.BumpMe();
 		}
 		
 		if (DbgUI.Button("Add me 1000$"))
@@ -137,9 +145,10 @@ class KOTH_DebugMenu
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.AddMoney(1000);
 					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
+					profileComp.DoRpc_PlayerProfile(savedProfile);
+					break;
 				}
 			}
-			m_playerProfileManager.BumpMe();
 		}
 		if (DbgUI.Button("Add me 1000000$"))
 		{
@@ -148,9 +157,10 @@ class KOTH_DebugMenu
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.AddMoney(1000000);
 					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
+					profileComp.DoRpc_PlayerProfile(savedProfile);
+					break;
 				}
 			}
-			m_playerProfileManager.BumpMe();
 		}
 		if (DbgUI.Button("Remove me 1000$"))
 		{
@@ -159,10 +169,10 @@ class KOTH_DebugMenu
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.RemoveMoney(1000);
 					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
+					profileComp.DoRpc_PlayerProfile(savedProfile);
 					break;
 				}
 			}
-			m_playerProfileManager.BumpMe();
 		}
 		
 		if (DbgUI.Button("Add me 1LVL"))
@@ -172,10 +182,10 @@ class KOTH_DebugMenu
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.AddLevel(1);
 					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
+					profileComp.DoRpc_PlayerProfile(savedProfile);
 					break;
 				}
 			}
-			m_playerProfileManager.BumpMe();
 		}
 		if (DbgUI.Button("Remove me 1LVL"))
 		{
@@ -184,10 +194,10 @@ class KOTH_DebugMenu
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.RemoveLevel(1);
 					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
+					profileComp.DoRpc_PlayerProfile(savedProfile);
 					break;
 				}
 			}
-			m_playerProfileManager.BumpMe();
 		}
 		
 		if (DbgUI.Button("Add me 10LVL"))
@@ -197,10 +207,10 @@ class KOTH_DebugMenu
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.AddLevel(10);
 					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
+					profileComp.DoRpc_PlayerProfile(savedProfile);
 					break;
 				}
 			}
-			m_playerProfileManager.BumpMe();
 		}
 		if (DbgUI.Button("Remove me 10LVL"))
 		{
@@ -209,9 +219,10 @@ class KOTH_DebugMenu
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.RemoveLevel(10);
 					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
+					profileComp.DoRpc_PlayerProfile(savedProfile);
+					break;
 				}
 			}
-			m_playerProfileManager.BumpMe();
 		}
 		
 		DbgUI.End();
