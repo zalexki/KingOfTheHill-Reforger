@@ -4,9 +4,6 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 	const string saveFilePath = "$profile:koth_profiles.json";
 	ref KOTH_ListPlayerProfileJson listPlayerProfilesJson = new KOTH_ListPlayerProfileJson();
 
-	
-	// TODO: send profile only to player via playerprofilecomponent
-	[RplProp()]
 	ref array<ref KOTH_PlayerProfileJson> m_listPlayerProfiles = new array<ref KOTH_PlayerProfileJson>();
 
 	override void OnGameModeStart()
@@ -25,7 +22,6 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 		}
 
 		m_listPlayerProfiles = listPlayerProfilesJson.m_list;
-		Replication.BumpMe();
 
 		GetGame().GetCallqueue().CallLater(SavePlayersProfile, 30000, true);
 	}
@@ -87,8 +83,6 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 			m_listPlayerProfiles.Insert(profile);
 			Log("added playerId "+playerId+" to "+playerUID);
 		}
-		
-		Replication.BumpMe();
 	}
 	
 	override void OnPlayerDisconnected(int playerId, KickCauseCode cause, int timeout)
@@ -106,8 +100,6 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 				m_listPlayerProfiles.Set(index, profile);
 			}
 		}
-		
-		Replication.BumpMe();
 	}
 	
 	override bool HandlePlayerKilled(int playerId, IEntity player, IEntity killer)
@@ -117,6 +109,8 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 		
 		FactionAffiliationComponent playerFactionComp = FactionAffiliationComponent.Cast(player.FindComponent(FactionAffiliationComponent));
 		FactionAffiliationComponent killerFactionComp = FactionAffiliationComponent.Cast(killer.FindComponent(FactionAffiliationComponent));
+		KOTH_SCR_PlayerProfileComponent killerProfileComp = KOTH_SCR_PlayerProfileComponent.Cast(killer.FindComponent(KOTH_SCR_PlayerProfileComponent));		
+
 		Log("OnPlayerKilled");
 
 		PlayerManager playerManager = GetGame().GetPlayerManager();
@@ -124,25 +118,27 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 			return false;
 
 		string playerName = playerManager.GetPlayerName(playerId);
+		string playerUID = GetGame().GetBackendApi().GetPlayerUID(playerId);
+		bool playerIsInList = false;
+		
 		int killerId = playerManager.GetPlayerIdFromControlledEntity(killer);
+		string killerUID = GetGame().GetBackendApi().GetPlayerUID(killerId);
 		string killerName = playerManager.GetPlayerName(killerId);
 		bool killerIsInList = false;
-		bool playerIsInList = false;
-		Log("killerName " + killerName);
-
+		
 		if (playerFactionComp.GetAffiliatedFaction() == killerFactionComp.GetAffiliatedFaction()) {
 			// teamkill
 			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_listPlayerProfiles)
 			{
-
-				if (savedProfile.m_playerName == killerName) {
+				if (savedProfile.m_playerId == killerId && savedProfile.m_playerUID == killerUID) {
 					savedProfile.RemoveFriendlyKillXpAndMoney();
 					m_listPlayerProfiles.Set(index, savedProfile);
 					killerIsInList = true;
 				}
 			}
 
-			Rpc(RpcDo_Notif_FriendlyKill, killerId);
+			//Rpc(RpcDo_Notif_FriendlyKill, killerId);
+			killerProfileComp.DoRpc_Notif_FriendlyKill();
 
 			if (!killerIsInList) {
 				KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
@@ -151,24 +147,28 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 				profile.m_playerId = killerId;
 				m_listPlayerProfiles.Insert(profile);
 			}
-		} else {
+		} 
+		else 
+		{
 			// kill
 			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_listPlayerProfiles)
 			{
-				if (savedProfile.m_playerName == playerName) {
+				//if (savedProfile.m_playerName == playerName) {
+				if (savedProfile.m_playerId == playerId && savedProfile.m_playerUID == playerUID) {
 					savedProfile.m_deaths++;
 					m_listPlayerProfiles.Set(index, savedProfile);
 					playerIsInList = true;
 				}
 
-				if (savedProfile.m_playerName == killerName) {
+				if (savedProfile.m_playerId == killerId && savedProfile.m_playerUID == killerUID) {
 					savedProfile.AddKillXpAndMoney();
 					m_listPlayerProfiles.Set(index, savedProfile);
 					killerIsInList = true;
 				}
 			}
 
-			Rpc(RpcDo_Notif_EnemyKill, killerId);
+			//Rpc(RpcDo_Notif_EnemyKill, killerId);
+			killerProfileComp.DoRpc_Notif_EnemyKill();
 
 			if (!killerIsInList) {
 				KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
@@ -187,19 +187,10 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 			}
 		}
 
-		Replication.BumpMe();
 		return true;
 	}
 	
-	override void OnGameEnd()
-	{
-		if (!Replication.IsServer())
-			return;
-
-		SavePlayersProfile();
-	}
-	
-		[RplRpc(RplChannel.Unreliable, RplRcver.Broadcast)]
+	[RplRpc(RplChannel.Unreliable, RplRcver.Broadcast)]
 	void RpcDo_Notif_EnemyKill(int killerId)
 	{
 		if (GetGame().GetPlayerController().GetPlayerId() != killerId)
@@ -213,24 +204,12 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 			}
 		}
 	}
-
-	[RplRpc(RplChannel.Unreliable, RplRcver.Broadcast)]
-	void RpcDo_Notif_FriendlyKill(int killerId)
+	
+	override void OnGameEnd()
 	{
-		if (GetGame().GetPlayerController().GetPlayerId() != killerId)
+		if (!Replication.IsServer())
 			return;
 
-		SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
-		if (hudManager) {
-			KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
-			if (kothHud) {
-				kothHud.NotifFriendlyKill();
-			}
-		}
-	}
-	
-	void BumpMe()
-	{
-		Replication.BumpMe();
+		SavePlayersProfile();
 	}
 }

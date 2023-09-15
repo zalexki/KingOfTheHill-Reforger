@@ -24,7 +24,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 			m_playerUID = GetGame().GetBackendApi().GetPlayerUID(controller.GetPlayerId());
 	}
 	
-	bool SpawnVehicle(string resourceName, int playerId)
+	bool SpawnVehicle(string resourceName, int playerId, bool isArmed = false)
 	{
 		KOTH_SpawnPrefab firstSpawn = KOTH_SpawnPrefab.Cast(GetGame().GetWorld().FindEntityByName("KOTH_FirstVehicleSpawn"));
 		KOTH_SpawnPrefab secondSpawn = KOTH_SpawnPrefab.Cast(GetGame().GetWorld().FindEntityByName("KOTH_SecondVehicleSpawn"));
@@ -37,18 +37,13 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 			return false;
 		
 		if (firstSpawn.GetFactionKey() == playerFaction.GetFactionKey())
-			return firstSpawn.Spawn(resourceName);
+			return firstSpawn.Spawn(resourceName, isArmed);
 		
 		if (secondSpawn.GetFactionKey() == playerFaction.GetFactionKey())
-			return secondSpawn.Spawn(resourceName); 
+			return secondSpawn.Spawn(resourceName, isArmed);
 		
 		if (thirdSpawn.GetFactionKey() == playerFaction.GetFactionKey())
-			return thirdSpawn.Spawn(resourceName);
-		
-//		EventHandlerManagerComponent handler = EventHandlerManagerComponent.Cast(m_Vehicle.FindComponent(EventHandlerManagerComponent));
-//		
-//		if (handler)
-//			handler.RegisterScriptHandler("OnDestroyed", this, OnVehicleDestroyed);
+			return thirdSpawn.Spawn(resourceName, isArmed);
 		
 		return false;
 	}
@@ -197,7 +192,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 					if (!CanBuyVehicleArmed(playerFaction, item, playerId))
 						return;
 				
-					if (SpawnVehicle(resourceName, playerId))
+					if (SpawnVehicle(resourceName, playerId, true))
 					{
 						AddCountVehicleArmed(playerFaction);
 						DoRpc_Notif_Succeed(item.m_priceOnce);

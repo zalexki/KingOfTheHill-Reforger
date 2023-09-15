@@ -10,13 +10,14 @@ class KOTH_ShopUI : ChimeraMenuBase
 	protected VerticalLayoutWidget m_contentContainer;
 	
 	protected SCR_TabViewComponent m_tabViewComponent;
-	protected SCR_ScrollBarComponent m_scrollContent;
 	
 	protected KOTH_SCR_PlayerShopComponent m_playerShopComp;
 	protected KOTH_SCR_PlayerProfileComponent m_playerProfileComp;
 	protected KOTH_ScoringGameModeComponent m_scoreComp;
 	
 	protected int m_playerId;
+
+	protected ref array<ResourceName> m_listShopItemList;
 	
 	override void OnMenuInit()
 	{
@@ -46,14 +47,17 @@ class KOTH_ShopUI : ChimeraMenuBase
 		Widget tabViewRootWidget = m_wRoot.FindAnyWidget("TabViewRoot");
 		m_tabViewComponent = SCR_TabViewComponent.Cast(tabViewRootWidget.FindHandler(SCR_TabViewComponent));
 		m_tabViewComponent.m_OnContentSelect.Insert(OnSelectedTab);
+
 		
-		Widget scrollContentWidget = m_wRoot.FindAnyWidget("ScrollContent");
-		m_scrollContent = scrollContentWidget.FindHandler(SCR_ScrollBarComponent);
+		AddItemsFromConfig(m_listShopItemList[0]);
 	}
 	
 	void OnSelectedTab()
 	{
-		m_scrollContent.MoveHandlerPos(0);
+		ClearItemList();
+		
+		AddItemsFromConfig(m_listShopItemList[m_tabViewComponent.GetShownTab()]);
+		
 		Log("selected tab "+m_tabViewComponent.GetShownTab());
 	}
 
@@ -135,7 +139,7 @@ class KOTH_ShopUI : ChimeraMenuBase
 				purchaseOnceButton.SetVisible(true);
 				purchaseOnceHINT.SetVisible(false);
 				
-				if (m_playerProfileComp.GetUnlockedItemList().Contains(item.m_itemResource))
+				if (m_playerProfileComp && m_playerProfileComp.GetUnlockedItemList().Contains(item.m_itemResource))
 				{
 					purchaseOnceButton.SetVisible(false);
 					equipButton.SetVisible(true);
@@ -192,28 +196,12 @@ class KOTH_ShopUI : ChimeraMenuBase
 		}
 	}
 
-	//ShopCategorie_Weapons
-	void OnClickWeaponCategory()
-	{
-		Log("OnClickWeaponCategory");
-		// empty list
-		TextWidget text = TextWidget.Cast(m_parentShopCategorie_Gadget.FindAnyWidget("Content"));
-		text.SetColor(Color.White);
-		text = TextWidget.Cast(m_parentShopCategorie_Ammo.FindAnyWidget("Content"));
-		text.SetColor(Color.White);
-		text = TextWidget.Cast(m_parentShopCategorie_Weapons.FindAnyWidget("Content"));
-		text.SetColor(Color.Gray25);
-		
-		ClearItemList();
-		AddItemsFromConfig("{232D181B9F9FE8D1}Configs/Shop/ShopWeaponItemList.conf");
-	}
-
 	protected void OnClickBuyOnce(SCR_ButtonBaseComponent button)
 	{
 		Widget row = button.GetRootWidget().GetParent().GetParent().GetParent();
 		TextWidget priceOnceWidget = TextWidget.Cast(row.FindAnyWidget("PriceOnceText"));
 		TextWidget resourceNameWidget = TextWidget.Cast(row.FindAnyWidget("ResourceName"));
-
+		
 		m_playerShopComp.DoRpcBuy(resourceNameWidget.GetText(), m_playerId);
 
 		// set widget equiped visible
@@ -225,7 +213,6 @@ class KOTH_ShopUI : ChimeraMenuBase
 
 	protected void OnClickBuyPermanent(SCR_ButtonBaseComponent button)
 	{
-		Log("not implemented yet");
 		Widget row = button.GetRootWidget().GetParent().GetParent().GetParent();
 		TextWidget pricePermWidget = TextWidget.Cast(row.FindAnyWidget("PricePermText"));
 		TextWidget resourceNameWidget = TextWidget.Cast(row.FindAnyWidget("ResourceName"));

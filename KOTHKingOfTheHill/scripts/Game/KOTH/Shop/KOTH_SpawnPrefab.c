@@ -3,6 +3,19 @@ class KOTH_SpawnPrefab : SCR_BaseTriggerEntity
 {
 	private string m_sFaction;
 	string GetFactionKey(){ return m_sFaction; }
+
+	protected KOTH_ScoringGameModeComponent m_scoreComp;
+	protected ref array<Vehicle> m_armedVehicles = {};
+	
+	override protected event void OnInit(IEntity owner)
+	{
+		if (SCR_Global.IsEditMode() || !Replication.IsServer())
+			return;
+		
+		Log("KOTH_SpawnPrefab OnInit");
+		m_scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
+		GetGame().GetCallqueue().CallLater(CheckDeletedArmedVehicles, 10000, true);
+	}
 	
 	bool isSpawnEmpty()
 	{
@@ -16,7 +29,7 @@ class KOTH_SpawnPrefab : SCR_BaseTriggerEntity
 		return true;
 	}
 	
-	bool Spawn(ResourceName m_prefabName)
+	bool Spawn(ResourceName m_prefabName, bool isArmed)
 	{
 		vector pos;
 		IEntity entity = this;
@@ -70,18 +83,61 @@ class KOTH_SpawnPrefab : SCR_BaseTriggerEntity
 
 		newEnt.SetFlags(EntityFlags.VISIBLE, true);
 		
-		EventHandlerManagerComponent ehmc = EventHandlerManagerComponent.Cast(newEnt.FindComponent(EventHandlerManagerComponent));
-		if (ehmc)
-		{
-			ehmc.RegisterScriptHandler("OnDestroyed", newEnt, OnDestroyed);
-		}
+		Vehicle spawnedVehicle = Vehicle.Cast(newEnt);
+		
+		if (isArmed)
+			m_armedVehicles.Insert(spawnedVehicle);
 
 		return true;
 	}
+
+
 	
-	void OnDestroyed()
+	void CheckDeletedArmedVehicles()
 	{
-		Log("OnDestroyed");
+		foreach(int index, Vehicle vec : m_armedVehicles)
+		{
+			if (!vec)
+				m_armedVehicles.Remove(index);
+		}
+		
+		UpdateCountFromList();
+	}
+	
+	void UpdateCountFromList()
+	{
+		switch (m_sFaction)
+		{
+			case KOTH_Faction.BLUFOR:
+				m_scoreComp.m_bluforArmedVehiclesCount = m_armedVehicles.Count();
+			break;
+			case KOTH_Faction.OPFOR:
+				m_scoreComp.m_opforArmedVehiclesCount = m_armedVehicles.Count();
+			break;
+			case KOTH_Faction.INDFOR:
+				m_scoreComp.m_indforArmedVehiclesCount = m_armedVehicles.Count();
+			break;
+		}
+		
+		Log("updated count "+m_sFaction+ "="+m_armedVehicles.Count());
+	}
+	
+	void CheckAddedArmedVehicles(Vehicle addedVec)
+	{
+		bool alreadyInList = false;
+		foreach(int index, Vehicle vec : m_armedVehicles)
+		{
+			if (vec == addedVec)
+			{
+				alreadyInList = true;
+			}
+		}
+		
+		if (alreadyInList)
+			return;
+		
+		m_armedVehicles.Insert(addedVec);
+		UpdateCountFromList();
 	}
 	
 	void SetFactionKey(string factionKey)
@@ -90,6 +146,5 @@ class KOTH_SpawnPrefab : SCR_BaseTriggerEntity
 			return;
 
 		m_sFaction = factionKey;
-		Replication.BumpMe();
 	}
 };

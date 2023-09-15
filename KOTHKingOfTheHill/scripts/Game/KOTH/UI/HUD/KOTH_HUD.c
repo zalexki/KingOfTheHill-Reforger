@@ -14,7 +14,8 @@ class KOTH_HUD : SCR_InfoDisplay
 	SCR_WLibProgressBarComponent m_xpProgressBar;
 
 	KOTH_ScoringGameModeComponent m_scoreComp;
-	KOTH_PlayerProfileManagerGameModeComponent m_profileManager;
+	KOTH_SCR_PlayerProfileComponent m_playerProfileComp;
+	
 	int m_playerId;
 
 	override event void OnStartDraw(IEntity owner)
@@ -49,7 +50,7 @@ class KOTH_HUD : SCR_InfoDisplay
 			if (!gamemode)
 				return;
 			m_scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
-			m_profileManager = KOTH_PlayerProfileManagerGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_PlayerProfileManagerGameModeComponent));
+			m_playerProfileComp = KOTH_SCR_PlayerProfileComponent.Cast(GetGame().GetPlayerController().FindComponent(KOTH_SCR_PlayerProfileComponent));
 			
 			m_playerId = GetGame().GetPlayerController().GetPlayerId();
 		}
@@ -150,7 +151,7 @@ class KOTH_HUD : SCR_InfoDisplay
 
 		TextWidget MoneyNotif = TextWidget.Cast(w.FindAnyWidget("MoneyNotif"));
 		MoneyNotif.SetText("10 $");
-
+		
 		SCR_FadeUIComponent compFade = SCR_FadeUIComponent.Cast(w.FindHandler(SCR_FadeUIComponent));
 		compFade.DelayedFadeOut(2000, true);
 	}
@@ -158,23 +159,13 @@ class KOTH_HUD : SCR_InfoDisplay
 	protected override event void UpdateValues(IEntity owner, float timeSlice)
 	{
 		super.UpdateValues(owner, timeSlice);
-		if (!m_profileManager)
+		if (!m_playerProfileComp)
 			return;
 		
-		// money/xp
-		KOTH_PlayerProfileJson currentProfile = new KOTH_PlayerProfileJson();
-		foreach (KOTH_PlayerProfileJson savedProfile : m_profileManager.m_listPlayerProfiles)
-		{
-			if (savedProfile.m_playerId == m_playerId) {
-				currentProfile = savedProfile;
-				break;
-			}
-		}
-		
-		m_moneyText.SetText(currentProfile.GetMoney().ToString() + " $");
-		m_xpText.SetText(currentProfile.GetXp().ToString() + " / " + currentProfile.GetXpNextLevel().ToString());
-		m_lvlText.SetText(currentProfile.GetLevel().ToString());
-		m_xpProgressBar.SetValue(currentProfile.GetXp() / currentProfile.GetXpNextLevel(), true);
+		m_moneyText.SetText(m_playerProfileComp.GetMoney().ToString() + " $");
+		m_xpText.SetText(m_playerProfileComp.GetXp().ToString() + " / " + m_playerProfileComp.GetXpNextLevel().ToString());
+		m_lvlText.SetText(m_playerProfileComp.GetLevel().ToString());
+		m_xpProgressBar.SetValue(m_playerProfileComp.GetXp() / m_playerProfileComp.GetXpNextLevel(), true);
 
 		// teamPoints
 		m_blueforPointsText.SetText(m_scoreComp.GetBlueforPoint().ToString());

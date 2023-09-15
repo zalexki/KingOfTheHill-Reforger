@@ -1,6 +1,8 @@
 SCR_BaseGameMode {
  ID "5E1F0BA227A27EFF"
  components {
+  KOTH_PlayerProfileManagerGameModeComponent "{5E435738A7CCAF1A}" {
+  }
   KOTH_ScoringGameModeComponent "{5E20F3CD56EAC26E}" {
   }
   PR_ActiveMapIconManagerComponent "{5E3974C597B35B3C}" {
@@ -1518,8 +1520,6 @@ SCR_BaseGameMode {
    "Rpl State Override" None
    Streamable Disabled
   }
-  KOTH_PlayerProfileManagerGameModeComponent "{5E435738A7CCAF1A}" {
-  }
  }
  coords 3113.879 16 2724.923
  Flags 0
@@ -1553,7 +1553,7 @@ SCR_BaseGameMode {
    ID "5E1F0BA227A3D057"
    coords -1364.152 -39.01 -2218.587
    CharacterLifetime 10
-   VehicleLifetime 300
+   VehicleLifetime 30
    ItemLifetime 10
   }
   HitRegistrationManager "5E1F591715EDC332" : "{0EDA3D48791120DD}Prefabs/MP/HitRegManager.et" {
