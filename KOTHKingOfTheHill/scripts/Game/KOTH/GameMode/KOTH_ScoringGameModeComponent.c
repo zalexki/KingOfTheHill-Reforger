@@ -172,20 +172,26 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 	// should only be server side
 	void Refund(int price, int playerId)
 	{
+		string playerUID = GetGame().GetBackendApi().GetPlayerUID(playerId);
 		foreach (int index, KOTH_PlayerProfileJson savedProfile : m_playerProfileManager.m_listPlayerProfiles)
 		{
 			if (savedProfile.m_playerId == playerId) {
 				savedProfile.Refund(price);
 				m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
+				
+				PlayerManager playerManager = GetGame().GetPlayerManager();
+				PlayerController playerController = playerManager.GetPlayerController(playerId);
+				KOTH_SCR_PlayerProfileComponent profileComp = KOTH_SCR_PlayerProfileComponent.Cast(playerController.FindComponent(KOTH_SCR_PlayerProfileComponent));
+				profileComp.DoRpc_PlayerProfile(savedProfile);
+				break;
 			}
 		}
-
-		Replication.BumpMe();
 	}
 
 	// should only be server side
 	bool TryBuy(int price, int playerId)
 	{
+		string playerUID = GetGame().GetBackendApi().GetPlayerUID(playerId);
 		bool hasEnoughMoney = true;
 		foreach (int index, KOTH_PlayerProfileJson savedProfile : m_playerProfileManager.m_listPlayerProfiles)
 		{
@@ -197,11 +203,14 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 				
 				savedProfile.Buy(price);
 				m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
+				
+				PlayerManager playerManager = GetGame().GetPlayerManager();
+				PlayerController playerController = playerManager.GetPlayerController(playerId);
+				KOTH_SCR_PlayerProfileComponent profileComp = KOTH_SCR_PlayerProfileComponent.Cast(playerController.FindComponent(KOTH_SCR_PlayerProfileComponent));
+				profileComp.DoRpc_PlayerProfile(savedProfile);
+				break;
 			}
 		}
-		
-		if (hasEnoughMoney)
-			Replication.BumpMe();
 		
 		return hasEnoughMoney;
 	}

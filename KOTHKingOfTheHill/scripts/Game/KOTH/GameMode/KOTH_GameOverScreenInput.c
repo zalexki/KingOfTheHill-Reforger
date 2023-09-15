@@ -24,6 +24,5 @@ modded class GameOverScreenInput: ChimeraMenuBase
 		if (playerFaction.GetFactionKey() == KOTH_Faction.INDFOR) { bonus = scoreComp.m_greenBonus; }
 		money.SetText(""+bonus+" $");
 		xp.SetText(""+bonus+" xp");
-		Log(notif);
 	}
 }

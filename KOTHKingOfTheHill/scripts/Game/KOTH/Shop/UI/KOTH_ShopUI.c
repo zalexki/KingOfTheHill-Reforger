@@ -97,16 +97,6 @@ class KOTH_ShopUI : ChimeraMenuBase
 			priceOnceWidget.SetText(item.m_priceOnce.ToString() + "$");
 			TextWidget pricePermWidget = TextWidget.Cast(newRow.FindAnyWidget("PricePermText"));
 			pricePermWidget.SetText(item.m_pricePermanent.ToString() + "$");
-
-			//get player level
-			int playerLevel = 1;
-			KOTH_PlayerProfileManagerGameModeComponent playerProfileManager = KOTH_PlayerProfileManagerGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_PlayerProfileManagerGameModeComponent));
-			foreach (KOTH_PlayerProfileJson profile : playerProfileManager.m_listPlayerProfiles) {
-				if (profile.m_playerId == m_playerId) {
-					playerLevel = profile.GetLevel();
-					break;
-				}
-			}
 			
 			OverlayWidget desactivatePermHINT = OverlayWidget.Cast(newRow.FindAnyWidget("DesactivatePermHINT"));
 			ButtonWidget purchaseOnceButton = ButtonWidget.Cast(newRow.FindAnyWidget("PurchaseOnceButton"));
@@ -115,7 +105,7 @@ class KOTH_ShopUI : ChimeraMenuBase
 			OverlayWidget purchaseOnceNoLVL = OverlayWidget.Cast(newRow.FindAnyWidget("PurchaseOnceNoLVL"));
 			OverlayWidget purchasePermNoLVL = OverlayWidget.Cast(newRow.FindAnyWidget("PurchasePermNoLVL"));
 			
-			if (playerLevel < item.m_level)
+			if (m_playerProfileComp.GetLevel() < item.m_level)
 			{				
 				ImageWidget fadeLVLReq = ImageWidget .Cast(newRow.FindAnyWidget("FadeLVLReq"));
 				TextWidget textLevelReq = TextWidget.Cast(newRow.FindAnyWidget("TextLevelReq"));

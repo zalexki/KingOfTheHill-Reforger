@@ -157,14 +157,20 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 			return;
 		}
 		
+		string playerUID = GetGame().GetBackendApi().GetPlayerUID(playerId);
+		
 		if (permanentBuy)
 		{
 			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_playerProfileManager.m_listPlayerProfiles)
 			{
-				if (savedProfile.m_playerId == playerId) {
+				if (savedProfile.m_playerId == playerId && savedProfile.m_playerUID == playerUID) {
 					savedProfile.m_unlockedItems.Insert(item.m_itemResource);
 					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
 					
+					PlayerManager playerManager = GetGame().GetPlayerManager();
+					PlayerController playerController = playerManager.GetPlayerController(playerId);
+					KOTH_SCR_PlayerProfileComponent profileComp = KOTH_SCR_PlayerProfileComponent.Cast(playerController.FindComponent(KOTH_SCR_PlayerProfileComponent));
+					profileComp.DoRpc_PlayerProfile(savedProfile);
 					break;
 				}
 			}
@@ -270,8 +276,6 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 			return;
 		
 		shopLayout.NotifBuy_PermanentBuySuccess(itemResourceName);
-		KOTH_SCR_PlayerProfileComponent playerProfileComp = KOTH_SCR_PlayerProfileComponent.Cast(GetGame().GetPlayerController().FindComponent(KOTH_SCR_PlayerProfileComponent));
-		playerProfileComp.AskRpc_PlayerProfile();
 	}
 	
 	// --------------------- RPC END
