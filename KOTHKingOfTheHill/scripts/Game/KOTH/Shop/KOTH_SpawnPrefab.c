@@ -14,7 +14,7 @@ class KOTH_SpawnPrefab : SCR_BaseTriggerEntity
 		
 		Log("KOTH_SpawnPrefab OnInit");
 		m_scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
-		GetGame().GetCallqueue().CallLater(CheckDeletedArmedVehicles, 10000, true);
+		GetGame().GetCallqueue().CallLater(CheckDeletedArmedVehicles, 30000, true);
 	}
 	
 	bool isSpawnEmpty()
@@ -52,7 +52,7 @@ class KOTH_SpawnPrefab : SCR_BaseTriggerEntity
 					if (isSpawnEmpty)
 						break;
 				}
-			} 
+			}
 			
 			entity = child;
 			if (!isSpawnEmpty)
@@ -90,8 +90,6 @@ class KOTH_SpawnPrefab : SCR_BaseTriggerEntity
 
 		return true;
 	}
-
-
 	
 	void CheckDeletedArmedVehicles()
 	{
@@ -118,8 +116,6 @@ class KOTH_SpawnPrefab : SCR_BaseTriggerEntity
 				m_scoreComp.m_indforArmedVehiclesCount = m_armedVehicles.Count();
 			break;
 		}
-		
-		Log("updated count "+m_sFaction+ "="+m_armedVehicles.Count());
 	}
 	
 	void CheckAddedArmedVehicles(Vehicle addedVec)

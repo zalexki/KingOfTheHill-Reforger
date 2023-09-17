@@ -1553,7 +1553,7 @@ SCR_BaseGameMode {
    ID "5E1F0BA227A3D057"
    coords -1364.152 -39.01 -2218.587
    CharacterLifetime 10
-   VehicleLifetime 30
+   VehicleLifetime 300
    ItemLifetime 10
   }
   HitRegistrationManager "5E1F591715EDC332" : "{0EDA3D48791120DD}Prefabs/MP/HitRegManager.et" {
