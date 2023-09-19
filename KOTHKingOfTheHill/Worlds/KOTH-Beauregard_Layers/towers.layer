@@ -86,6 +86,13 @@ $grp GenericEntity : "{6F1B7BFE78ECAE16}Prefabs/Structures/KOTH/TowerV1.et" {
    KOTH_SCR_TowerMapDescriptorComponent "{5E2CBEC9955ED14B}" {
     m_sImageQuadKoth "KOTH_Tower_3"
    }
+   MeshObject "{5E215A86C5CE5E1D}" {
+    Object "{8F1425947655E6EB}Assets/Tower_FRM/tour_guet_V2.xob"
+   }
+   RigidBody "{5E215A860E742910}" {
+    ModelGeometry 1
+    Static 1
+   }
   }
   coords 3147.76 16.621 2633.887
   angleY -45
@@ -95,6 +102,13 @@ $grp GenericEntity : "{6F1B7BFE78ECAE16}Prefabs/Structures/KOTH/TowerV1.et" {
    KOTH_SCR_TowerMapDescriptorComponent "{5E2CBEC9955ED14B}" {
     m_sImageQuadKoth "KOTH_Tower_2"
    }
+   MeshObject "{5E215A86C5CE5E1D}" {
+    Object "{8F1425947655E6EB}Assets/Tower_FRM/tour_guet_V2.xob"
+   }
+   RigidBody "{5E215A860E742910}" {
+    ModelGeometry 1
+    Static 1
+   }
   }
   coords 3189.26 6.501 2851.42
  }
@@ -102,6 +116,13 @@ $grp GenericEntity : "{6F1B7BFE78ECAE16}Prefabs/Structures/KOTH/TowerV1.et" {
   components {
    KOTH_SCR_TowerMapDescriptorComponent "{5E2CBEC9955ED14B}" {
     m_sImageQuadKoth "KOTH_Tower_1"
+   }
+   MeshObject "{5E215A86C5CE5E1D}" {
+    Object "{8F1425947655E6EB}Assets/Tower_FRM/tour_guet_V2.xob"
+   }
+   RigidBody "{5E215A860E742910}" {
+    ModelGeometry 1
+    Static 1
    }
   }
   coords 2989.277 18.316 2753.408
