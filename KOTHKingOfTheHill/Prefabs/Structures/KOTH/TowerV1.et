@@ -1,44 +1,50 @@
 GenericEntity {
  ID "5E215A84FED63A9C"
  components {
+  KOTH_SCR_TowerMapDescriptorComponent "{5E2CBEC9955ED14B}" {
+  }
   MeshObject "{5E215A86C5CE5E1D}" {
    Object "{8F1425947655E6EB}Assets/Tower_FRM/tour_guet_V2.xob"
    Materials {
     MaterialAssignClass "{5E277488AB3577A4}" {
      SourceMaterial "Details01"
-     AssignedMaterial "{9B509330764FC897}Assets/Props/Industrial/BarrelMetal_01/Data/BarrelMetal_01_Nocover_Green.emat"
+     AssignedMaterial "{9055A6F313BCF89C}Assets/Props/Industrial/BarrelMetal_01/Data/MetalFrey.emat"
     }
     MaterialAssignClass "{5E277488AB35778E}" {
      SourceMaterial "Logo"
-     AssignedMaterial "{014711066783BAF1}Assets/Props/Industrial/BarrelMetal_01/Data/BarrelMetal_01_ColorPallete_Blue.emat"
+     AssignedMaterial "{10189788C290F613}Assets/Props/Industrial/CargoContainer_01/Data/CargoContainer_01_10ft_Blue.emat"
     }
     MaterialAssignClass "{5E277488AB357785}" {
      SourceMaterial "LogoB"
-     AssignedMaterial "{014711066783BAF1}Assets/Props/Industrial/BarrelMetal_01/Data/BarrelMetal_01_ColorPallete_Blue.emat"
+     AssignedMaterial "{10189788C290F613}Assets/Props/Industrial/CargoContainer_01/Data/CargoContainer_01_10ft_Blue.emat"
     }
     MaterialAssignClass "{5E277488AB35779E}" {
      SourceMaterial "LogoR"
-     AssignedMaterial "{014711066783BAF1}Assets/Props/Industrial/BarrelMetal_01/Data/BarrelMetal_01_ColorPallete_Blue.emat"
+     AssignedMaterial "{10189788C290F613}Assets/Props/Industrial/CargoContainer_01/Data/CargoContainer_01_10ft_Blue.emat"
     }
     MaterialAssignClass "{5E277488AB35779A}" {
      SourceMaterial "Metal1"
-     AssignedMaterial "{9B509330764FC897}Assets/Props/Industrial/BarrelMetal_01/Data/BarrelMetal_01_Nocover_Green.emat"
+     AssignedMaterial "{34930F233CAD9CA6}Assets/Props/Industrial/BarrelMetal_01/Data/MetalGreen.emat"
     }
     MaterialAssignClass "{5E277488AB357792}" {
      SourceMaterial "Metal2"
-     AssignedMaterial "{827B822620AC0C6A}Assets/Props/Industrial/BarrelMetal_01/Data/BarrelMetal_01_green.emat"
+     AssignedMaterial "{34930F233CAD9CA6}Assets/Props/Industrial/BarrelMetal_01/Data/MetalGreen.emat"
     }
     MaterialAssignClass "{5E277488AB3577E4}" {
      SourceMaterial "Pieds"
-     AssignedMaterial "{9B509330764FC897}Assets/Props/Industrial/BarrelMetal_01/Data/BarrelMetal_01_Nocover_Green.emat"
+     AssignedMaterial "{DFD023B889E5754D}Assets/Structures/Military/Bunkers/AircraftShelter_E_01/Data/AircraftShelter_E_01_Concrete_2_EXT.emat"
     }
     MaterialAssignClass "{5E277488AB3577E0}" {
      SourceMaterial "Plateformes"
-     AssignedMaterial "{9B509330764FC897}Assets/Props/Industrial/BarrelMetal_01/Data/BarrelMetal_01_Nocover_Green.emat"
+     AssignedMaterial "{9055A6F313BCF89C}Assets/Props/Industrial/BarrelMetal_01/Data/MetalFrey.emat"
     }
     MaterialAssignClass "{5E289C3553047D06}" {
      SourceMaterial "Poutres"
-     AssignedMaterial "{9B509330764FC897}Assets/Props/Industrial/BarrelMetal_01/Data/BarrelMetal_01_Nocover_Green.emat"
+     AssignedMaterial "{9055A6F313BCF89C}Assets/Props/Industrial/BarrelMetal_01/Data/MetalFrey.emat"
+    }
+    MaterialAssignClass "{5E62D5BE18AECB6D}" {
+     SourceMaterial "DefaultGeneratedMaterial"
+     AssignedMaterial "{9055A6F313BCF89C}Assets/Props/Industrial/BarrelMetal_01/Data/MetalFrey.emat"
     }
    }
   }
@@ -50,9 +56,7 @@ GenericEntity {
   }
   RplComponent "{5E215A8606B3F178}" {
   }
-  KOTH_SCR_TowerMapDescriptorComponent "{5E2CBEC9955ED14B}" {
-  }
  }
- coords 3104.1 14.536 2750.64
- angleY -52.346
+ coords 1192.749 37.715 2712.775
+ angleY 75.66
 }
