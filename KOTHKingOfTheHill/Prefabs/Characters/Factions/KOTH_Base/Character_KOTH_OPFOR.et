@@ -73,11 +73,13 @@ SCR_ChimeraCharacter : "{37578B1666981FCE}Prefabs/Characters/Core/Character_Base
     ItemsInitConfigurationItem "{5E392145E912FE12}" {
      TargetStorage "Prefabs/Characters/Uniforms/Jacket_OPFOR.et"
      PrefabsToSpawn {
-      "{13772C903CB5E4F7}Prefabs/Items/Equipment/Maps/PaperMap_01_folded.et" "{61D4F80E49BF9B12}Prefabs/Items/Equipment/Compass/Compass_SY183.et" "{9DDF665B449F1FE6}Prefabs/Items/Equipment/Radios/Radio_OPFOR.et" "{F2539FA5706E51E4}Prefabs/Items/Equipment/Binoculars/Binoculars_B12/Binoculars_B12.et" "{3A421547BC29F679}Prefabs/Items/Equipment/Flashlights/Flashlight_MX991/Flashlight_MX991.et"
+      "{13772C903CB5E4F7}Prefabs/Items/Equipment/Maps/PaperMap_01_folded.et" "{61D4F80E49BF9B12}Prefabs/Items/Equipment/Compass/Compass_SY183.et" "{9DDF665B449F1FE6}Prefabs/Items/Equipment/Radios/Radio_OPFOR.et" ""
      }
+    }
+    ItemsInitConfigurationItem "{5E7B311C039DD069}" {
     }
    }
   }
  }
- coords 3107.096 16.276 2681.911
+ coords 3102.944 16.429 2679.132
 }

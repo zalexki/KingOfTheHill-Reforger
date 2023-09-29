@@ -73,11 +73,11 @@ SCR_ChimeraCharacter : "{37578B1666981FCE}Prefabs/Characters/Core/Character_Base
     ItemsInitConfigurationItem "{5E392145FBA821F9}" {
      TargetStorage "Prefabs/Characters/Uniforms/Jacket_BLUFOR.et"
      PrefabsToSpawn {
-      "{13772C903CB5E4F7}Prefabs/Items/Equipment/Maps/PaperMap_01_folded.et" "{61D4F80E49BF9B12}Prefabs/Items/Equipment/Compass/Compass_SY183.et" "{36275BFF5E45147E}Prefabs/Items/Equipment/Radios/Radio_BLUFOR.et" "{F2539FA5706E51E4}Prefabs/Items/Equipment/Binoculars/Binoculars_B12/Binoculars_B12.et" "{3A421547BC29F679}Prefabs/Items/Equipment/Flashlights/Flashlight_MX991/Flashlight_MX991.et"
+      "{13772C903CB5E4F7}Prefabs/Items/Equipment/Maps/PaperMap_01_folded.et" "{61D4F80E49BF9B12}Prefabs/Items/Equipment/Compass/Compass_SY183.et" "{36275BFF5E45147E}Prefabs/Items/Equipment/Radios/Radio_BLUFOR.et" ""
      }
     }
    }
   }
  }
- coords 3109.536 16.248 2681.202
+ coords 3106.068 16.419 2676.865
 }
