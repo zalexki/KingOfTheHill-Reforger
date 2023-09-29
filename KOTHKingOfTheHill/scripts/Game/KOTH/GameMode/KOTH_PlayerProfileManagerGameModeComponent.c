@@ -128,7 +128,7 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 		if (playerFactionComp.GetAffiliatedFaction() == killerFactionComp.GetAffiliatedFaction()) {
 			// teamkill
 			if (killerUID == playerUID)
-                return;
+                return true;
 			
 			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_listPlayerProfiles)
 			{
