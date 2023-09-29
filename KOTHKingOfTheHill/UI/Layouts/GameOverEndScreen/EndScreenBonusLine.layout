@@ -1,4 +1,4 @@
-VerticalLayoutWidgetClass "{5E36F1CDA3AE3D62}" {
+VerticalLayoutWidgetClass {
  Name "VerticalLayout0"
  Slot OverlayWidgetSlot "{5E36F1CDA3AE3DA6}" {
   HorizontalAlign 2
@@ -22,9 +22,9 @@ VerticalLayoutWidgetClass "{5E36F1CDA3AE3D62}" {
       Padding 0 0 0 0
      }
      {
-      HorizontalLayoutWidgetClass "{5E36F1CDABB9EFFF}" : "{74686613FDE00759}UI/Layouts/HUD/KingOfTheHill/KOTH_Notification.layout" {
+      HorizontalLayoutWidgetClass "{5E36F1CDABB9EFFF}" : "{74686613FDE00759}UI/Layouts/HUD/KOTH_Notification.layout" {
        Name "KOTH_Notification0"
-       Slot LayoutSlot {
+       Slot LayoutSlot "{5E7B4B928A3A85BB}" {
        }
        {
         OverlayWidgetClass "{5E2539EE77BDD63C}" {
@@ -89,6 +89,46 @@ VerticalLayoutWidgetClass "{5E36F1CDA3AE3D62}" {
           }
          }
         }
+       }
+      }
+     }
+    }
+   }
+  }
+  OverlayWidgetClass "{5E7B4B92B8E0C8E0}" {
+   Name "Overlay"
+   Slot LayoutSlot "{5D9E7C92E8117E0B}" {
+    SizeMode Fill
+   }
+   {
+    FrameWidgetClass "{5E7B4B92B8E0C8EF}" {
+     Name "RestartHolder"
+     Slot OverlayWidgetSlot "{5E1F523221A434B6}" {
+     }
+     {
+      TextWidgetClass "{5E7B4B92B8E0C8EE}" {
+       Name "GameOver_Restard"
+       Slot FrameWidgetSlot "{5E1F52322C442366}" {
+        Anchor 0 0 0 0
+        PositionX 156.233
+        OffsetLeft 156.233
+        PositionY 995.085
+        OffsetTop 995.085
+        SizeX 900
+        OffsetRight -1056.23
+        SizeY 30
+        OffsetBottom -1025.08
+       }
+       Color 0.761 0.392 0.078 1
+       Text "THE SERVER WILL RESTART, RECONNECT TO PLAY THE NEXT GAME"
+       "Font Size" 30
+       "Min Font Size" 30
+       "Horizontal Alignment" Center
+       "Vertical Alignment" Center
+       FontProperties FontProperties "{5E1F5235C1832659}" {
+        ShadowSize 32
+        ShadowOffset 3 3
+        ShadowOpacity 0.5
        }
       }
      }

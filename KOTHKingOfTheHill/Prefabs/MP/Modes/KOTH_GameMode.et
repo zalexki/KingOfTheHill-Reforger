@@ -65,15 +65,6 @@ SCR_BaseGameMode {
   SCR_GameOverScreenManagerComponent "{5E1F0BA23AC53211}" {
    m_GameOverScreenConfig SCR_GameOverScreenConfig "{5E1F0BA23AC53212}" {
     m_aGameOverScreens {
-     SCR_BaseGameOverScreenInfo "{5E1F0BA23AC53CFE}" {
-      m_GameOverScreenId NEUTRAL
-      m_GameOverContentLayout "{E04021BC742BE432}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_Default.layout"
-      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC53CF9}" {
-       m_sTitle "#AR-MatchResult_Default-UC"
-       m_sImageTexture "{BD2E2F871E6A3EBF}UI/Textures/Flags/Flag_Faction_Base.edds"
-       m_sAudioOneShot "SOUND_ONVICTORY"
-      }
-     }
      SCR_FactionGameOverScreenInfo "{5E1F0BA23AC53301}" {
       m_GameOverScreenId FACTION_NEUTRAL
       m_GameOverContentLayout "{E04021BC742BE432}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_Default.layout"
@@ -96,7 +87,7 @@ SCR_BaseGameMode {
      }
      SCR_FactionGameOverScreenInfo "{5E1F0BA23AC5332C}" {
       m_GameOverScreenId FACTION_DEFEAT_SCORE
-      m_GameOverContentLayout "{D7CCDDA709B57FA0}UI/Layouts/HUD/GameOver/EndScreen/EndScreenContent_KOTH.layout"
+      m_GameOverContentLayout "{E04021BC742BE432}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_Default.layout"
       m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC5332E}" {
        m_sTitle "#AR-MatchResult_Defeat-UC"
        m_sSubtitle "#AR-Campaign_MatchResult"
@@ -121,16 +112,6 @@ SCR_BaseGameMode {
        m_sTitle "#AR-MatchResult_Defeat-UC"
        m_sSubtitle "#AR-Campaign_MatchResult"
        m_sDebriefing "#AR-Campaign_MatchResult_DefeatDetail_Time"
-       m_sAudioOneShot "SOUND_ONDEFEAT"
-      }
-     }
-     SCR_BaseGameOverScreenInfo "{5E1F0BA23AC5335A}" {
-      m_GameOverScreenId FACTION_DRAW
-      m_GameOverContentLayout "{E04021BC742BE432}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_Default.layout"
-      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC5335B}" {
-       m_sTitle "#AR-MatchResult_Draw-UC"
-       m_sSubtitle "#AR-MatchResult_Draw"
-       m_sDebriefing "#AR-Campaign_MatchResult_DrawDetail"
        m_sAudioOneShot "SOUND_ONDEFEAT"
       }
      }
@@ -176,33 +157,6 @@ SCR_BaseGameMode {
        m_sImageTexture "{3E294459ED6AAF48}UI/Textures/EditorPreviews/Auto/Editor/PlaceholderObjects/E_Placeholder_BasicDoubleSign_01.edds"
        m_sDebriefing "loc DM debrief"
        m_sAudioOneShot "SOUND_ONDEFEAT"
-      }
-     }
-     SCR_BaseGameOverScreenInfo "{5E1F0BA23AC53399}" {
-      m_GameOverScreenId EDITOR_NEUTRAL
-      m_GameOverContentLayout "{E04021BC742BE432}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_Default.layout"
-      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC53382}" {
-       m_sTitle "#AR-MatchResult_EditorSessionEnd-UC"
-       m_sSubtitle "#AR-MatchResult_EditorNeutral_Subtitle"
-       m_sImageTexture "{45BF8792AAF74C6E}UI/Textures/Editor/Logos/Logo_Editor_GameOver.edds"
-       m_sDebriefing "#AR-MatchResult_EditorNeutral_Debrief"
-       m_sAudioOneShot "SOUND_ONVICTORY"
-      }
-      m_OptionalEditorParams SCR_BaseGameOverScreenInfoEditor "{5E1F0BA23AC5339A}" {
-       m_sDisplayName "#AR-Editor_GameOverAttribute_Neutral_Name"
-       m_sDescription "#AR-Editor_GameOverAttribute_Neutral_Description"
-      }
-     }
-     SCR_BaseGameOverScreenInfo "{5E1F0BA23AC533A9}" {
-      m_GameOverScreenId SERVER_RESTART
-      m_GameOverContentLayout "{C4507D07F3C54831}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_NoImage.layout"
-      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC53390}" {
-       m_sTitle "#AR-ServerRestart_Title-UC"
-       m_sSubtitle "#AR-ServerRestart_Description"
-      }
-      m_OptionalEditorParams SCR_BaseGameOverScreenInfoEditor "{5E1F0BA23AC533AA}" {
-       m_sDisplayName "#AR-Editor_GameOverAttribute_RestartServer_Name"
-       m_sDescription "#AR-Editor_GameOverAttribute_RestartServer_Description"
       }
      }
      SCR_FactionGameOverScreenInfo "{5E1F0BA23AC533BB}" {
@@ -265,42 +219,6 @@ SCR_BaseGameMode {
       }
       m_bGetWinningFactionImage 0
       m_bGetWinningSubtitleParam 0
-     }
-     SCR_BaseGameOverScreenInfo "{5E1F0BA23AC533F3}" {
-      m_GameOverScreenId COMBATPATROL_VICTORY
-      m_GameOverContentLayout "{77DC985790BEDC1C}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_CombatPatrol.layout"
-      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC533FC}" {
-       m_sTitle "#AR-MatchResult_Victory-UC"
-       m_sSubtitle "#AR-CombatScenario_Debriefing_Good"
-       m_sAudioOneShot "SOUND_ONVICTORY"
-      }
-     }
-     SCR_BaseGameOverScreenInfo "{5E1F0BA23AC533F4}" {
-      m_GameOverScreenId COMBATPATROL_PARTIAL_SUCCESS
-      m_GameOverContentLayout "{77DC985790BEDC1C}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_CombatPatrol.layout"
-      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC533F5}" {
-       m_sTitle "#AR-MatchResult_Victory-UC"
-       m_sSubtitle "#AR-CombatScenario_Debriefing_Normal"
-       m_sAudioOneShot "SOUND_ONVICTORY"
-      }
-     }
-     SCR_BaseGameOverScreenInfo "{5E1F0BA23AC53204}" {
-      m_GameOverScreenId COMBATPATROL_DRAW
-      m_GameOverContentLayout "{77DC985790BEDC1C}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_CombatPatrol.layout"
-      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC53205}" {
-       m_sTitle "#AR-MatchResult_Draw-UC"
-       m_sSubtitle "#AR-CombatScenario_Debriefing_Bad"
-       m_sAudioOneShot "SOUND_ONDEFEAT"
-      }
-     }
-     SCR_BaseGameOverScreenInfo "{5E1F0BA23AC53213}" {
-      m_GameOverScreenId COMBATPATROL_DEFEAT
-      m_GameOverContentLayout "{77DC985790BEDC1C}UI/layouts/HUD/GameOver/EndScreen/EndScreenContent_CombatPatrol.layout"
-      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{5E1F0BA23AC5321C}" {
-       m_sTitle "#AR-MatchResult_Defeat-UC"
-       m_sSubtitle "#AR-CombatScenario_Debriefing_Good_Timeout"
-       m_sAudioOneShot "SOUND_ONDEFEAT"
-      }
      }
     }
    }
