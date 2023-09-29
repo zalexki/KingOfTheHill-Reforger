@@ -5,7 +5,11 @@ modded class PauseMenuUI: ChimeraMenuBase
 	SCR_ButtonTextComponent m_FactionBtn;
 	SCR_ButtonTextComponent m_FieldManualBtn;
 	SCR_ButtonTextComponent m_FeedbackBtn;
-
+	
+	
+	
+	
+			
 	//------------------------------------------------------------------------------------------------
 	override void OnMenuOpen()
 	{
@@ -26,7 +30,16 @@ modded class PauseMenuUI: ChimeraMenuBase
 		m_FactionBtn = SCR_ButtonTextComponent.GetButtonText("LeaveFaction", m_wRoot);
 		if (m_FactionBtn)
 		{
-			m_FactionBtn.GetRootWidget().SetVisible(true);
+			BaseGameMode gamemode = GetGame().GetGameMode();
+			if (!gamemode)
+				return;
+			KOTH_ScoringGameModeComponent m_scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
+			if (m_scoreComp.PlayersCanChangeFaction()) {
+				m_FactionBtn.GetRootWidget().SetVisible(true);
+			} else {
+				m_FactionBtn.GetRootWidget().SetVisible(false);
+			}
+
 		}
 
 		m_FieldManualBtn = SCR_ButtonTextComponent.GetButtonText("FieldManual", m_wRoot);
