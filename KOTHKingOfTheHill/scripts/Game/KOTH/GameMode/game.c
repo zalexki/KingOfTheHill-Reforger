@@ -4,8 +4,9 @@ modded class ArmaReforgerScripted
 	{
 		super.OnGameStart();
 		
+		#ifdef WORKBENCH
 		KOTH_DebugMenu.Init();
-		
+		#endif
 		return true;
 	}
 	
