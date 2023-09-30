@@ -3,12 +3,15 @@ modded class SCR_FactionRequestUIComponent
 	override void ShowAvailableFactions()
 	{
 		super.ShowAvailableFactions();
+		
+		bool isOneOk = false;
 		foreach (SCR_DeployButtonBase btn : m_aButtons)
 		{
 			SCR_FactionButton factionBtn = SCR_FactionButton.Cast(btn);
 			if (factionBtn) 
 			{
-				factionBtn.UpdateButtons();
+				if (factionBtn.UpdateButtons())
+					isOneOk = true;
 			}
 		}
 	}
@@ -76,9 +79,9 @@ modded class SCR_FactionButton
 				SetShouldUnlock(true);
 				return true;
 			}
-			if (bluforPlayers >= highestCount - 1)
+			if (bluforPlayers >= highestCount)
 			{
-				if (bluforPlayers == greenforPlayers && highestCount != bluforPlayers || bluforPlayers == redforPlayers && highestCount != bluforPlayers)
+				if (bluforPlayers == greenforPlayers && bluforPlayers == redforPlayers)
 				{
 					SetEnabled(true);
 					SetShouldUnlock(true);
@@ -100,9 +103,9 @@ modded class SCR_FactionButton
 				SetShouldUnlock(true);
 				return true;
 			}
-			if (redforPlayers >= highestCount - 1)
+			if (redforPlayers >= highestCount)
 			{
-				if (redforPlayers == greenforPlayers && highestCount != redforPlayers || redforPlayers == bluforPlayers && highestCount != redforPlayers)
+				if (redforPlayers == greenforPlayers && redforPlayers == bluforPlayers)
 				{
 					SetEnabled(true);
 					SetShouldUnlock(true);
@@ -124,9 +127,9 @@ modded class SCR_FactionButton
 				SetShouldUnlock(true);
 				return true;
 			}
-			if (greenforPlayers >= highestCount - 1)
+			if (greenforPlayers >= highestCount)
 			{
-				if (greenforPlayers == redforPlayers && highestCount != greenforPlayers || greenforPlayers == bluforPlayers && highestCount != greenforPlayers)
+				if (greenforPlayers == redforPlayers && greenforPlayers == bluforPlayers)
 				{
 					SetEnabled(true);
 					SetShouldUnlock(true);
