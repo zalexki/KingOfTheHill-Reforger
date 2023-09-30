@@ -276,4 +276,12 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 	{
 		Replication.BumpMe();
 	}
+	
+	bool PlayersCanChangeFaction()
+	{
+		if (m_redforPoints > 85 || m_greenforPoints > 85 || m_blueforPoints > 85)
+			return false;
+		
+		return true;
+	}
 }
