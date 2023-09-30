@@ -7216,6 +7216,19 @@ $grp KOTH_SpawnPrefab : "{1E394AEE2617B42D}Prefabs/MP/Spawning/KOTH_VehicleSpawn
   }
  }
 }
+$grp GenericEntity : "{67EE7343073E3AF4}Prefabs/Systems/AmbientVehicles/AmbientVehicleSpawnpoint_US.et" {
+ KOTH_FreeVehicleSpawnOne {
+  coords 6887.09 118.828 6469.85
+  angleY -165
+ }
+ KOTH_FreeVehicleSpawnTwo {
+  coords 6745.637 92.116 5702.042
+  angleY -45
+ }
+ KOTH_FreeVehicleSpawnThree {
+  coords 7414.926 110.583 5684.235
+ }
+}
 $grp GenericEntity : "{6F1B7BFE78ECAE16}Prefabs/Structures/KOTH/TowerV1.et" {
  {
   components {
