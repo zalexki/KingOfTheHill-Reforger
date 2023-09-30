@@ -34,8 +34,26 @@ modded class SCR_BaseGameMode
 		GetGame().GetCallqueue().CallLater(AttachProperFlag, 1000, false, m_firstSpawn);
 		GetGame().GetCallqueue().CallLater(AttachProperFlag, 1000, false, m_secondSpawn);
 		GetGame().GetCallqueue().CallLater(AttachProperFlag, 1000, false, m_thirdSpawn);
+		
+		SpawnFreeVehicles();
+		GetGame().GetCallqueue().CallLater(SpawnFreeVehicles, 60000 * 5, true);
 	}	
 
+	void SpawnFreeVehicles()
+	{
+		IEntity vehicleSpawnOne = GetGame().GetWorld().FindEntityByName("KOTH_FreeVehicleSpawnOne");
+		SCR_AmbientVehicleSpawnPointComponent compSec = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnOne.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
+		compSec.SpawnVehicle();
+
+		IEntity vehicleSpawnTwo = GetGame().GetWorld().FindEntityByName("KOTH_FreeVehicleSpawnTwo");
+		SCR_AmbientVehicleSpawnPointComponent compSecTwo = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnTwo.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
+		compSecTwo.SpawnVehicle();
+
+		IEntity vehicleSpawnThree = GetGame().GetWorld().FindEntityByName("KOTH_FreeVehicleSpawnThree");
+		SCR_AmbientVehicleSpawnPointComponent compSecThree = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnThree.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
+		compSecThree.SpawnVehicle();
+	}
+	
 	void AttachProperFlag(IEntity spawn)
 	{
 		SCR_SpawnPoint sp = SCR_SpawnPoint.Cast(FindSpawnPoint(spawn));
