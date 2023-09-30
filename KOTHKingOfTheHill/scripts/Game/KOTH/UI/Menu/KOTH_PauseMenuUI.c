@@ -5,11 +5,7 @@ modded class PauseMenuUI: ChimeraMenuBase
 	SCR_ButtonTextComponent m_FactionBtn;
 	SCR_ButtonTextComponent m_FieldManualBtn;
 	SCR_ButtonTextComponent m_FeedbackBtn;
-	
-	
-	
-	
-			
+
 	//------------------------------------------------------------------------------------------------
 	override void OnMenuOpen()
 	{
