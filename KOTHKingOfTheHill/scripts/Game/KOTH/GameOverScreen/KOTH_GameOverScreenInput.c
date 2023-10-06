@@ -11,7 +11,7 @@ modded class GameOverScreenInput: ChimeraMenuBase
 		TextWidget text = TextWidget.Cast(newRow.FindAnyWidget("TextNotif"));
 		TextWidget money = TextWidget.Cast(newRow.FindAnyWidget("MoneyNotif"));
 		TextWidget xp = TextWidget.Cast(newRow.FindAnyWidget("XpNotif"));
-		text.SetText("END GAME BONUSqwe");
+		text.SetText("END GAME BONUS");
 		
  		int playerId = GetGame().GetPlayerController().GetPlayerId();
 		KOTH_SCR_PlayerProfileComponent profileComp = KOTH_SCR_PlayerProfileComponent.Cast(GetGame().GetPlayerManager().GetPlayerController(playerId).FindComponent(KOTH_SCR_PlayerProfileComponent));
