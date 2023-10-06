@@ -34,7 +34,7 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 		listPlayerProfilesJson.m_list = m_listPlayerProfiles;
 
 		bool success = listPlayerProfilesJson.SaveToFile(saveFilePath);
-		Log("SAVING IS " + success);
+		Log("SavePlayersProfile is ok = " + success);
 	}
 	
 	override void OnPlayerConnected(int playerId)
@@ -81,9 +81,6 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 				profileComp.SetSessionPointsWhenFactionWasJoined(m_scoreComp.GetGreenforPoint());
 			break;
 		}
-		Log("changed player faction, xp "+profileComp.GetSessionXpEarned());
-		Log("changed player faction, money "+profileComp.GetSessionMoneyEarned());
-		Log("changed player faction, new sessionPoints "+profileComp.GetSessionPointsWhenFactionWasJoined());
 	}
 	
 	void MapPlayerUIDToPlayerId(int playerId)
@@ -128,9 +125,7 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 	{
 		if (!Replication.IsServer())
 			return;
-
-		Log("OnPlayerDisconnected "+playerId);
-		
+	
 		foreach (int index, KOTH_PlayerProfileJson profile : m_listPlayerProfiles)
 		{
 			if (profile.m_playerId == playerId)
@@ -165,6 +160,8 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 		bool killerIsInList = false;
 		
 		if (playerFactionComp.GetAffiliatedFaction() == killerFactionComp.GetAffiliatedFaction()) {
+			Log("teamkill killer = "+killerName+" player = "+playerName);
+			Log("teamkill killerUID = "+killerUID+" playerUID = "+playerUID);
 			// teamkill
 			if (killerUID == playerUID)
                 return true;
@@ -177,7 +174,7 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 					killerIsInList = true;
 				}
 			}
-			
+
 			killerProfileComp.AddSessionFriendlyKillXpAndMoney();
 			killerProfileComp.DoRpc_Notif_FriendlyKill();
 
@@ -234,7 +231,8 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 	{
 		if (!Replication.IsServer())
 			return;
-
+		
+		Log("OnGameEnd launch SavePlayersProfile()");
 		SavePlayersProfile();
 	}
 }
