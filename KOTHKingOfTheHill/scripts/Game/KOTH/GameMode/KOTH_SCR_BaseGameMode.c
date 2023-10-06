@@ -1,7 +1,7 @@
 modded class SCR_BaseGameMode
 {
+	const int WINNER_POINTS_NEEDED = 100;
 	const string saveFilePath = "$profile:koth_profiles.json";
-	const int m_winnerPointsNeeded = 100;
 
 	IEntity m_kothTrigger;
 	
@@ -177,9 +177,9 @@ modded class SCR_BaseGameMode
 			Log("Missing KOTH_ScoringGameModeComponent on gameMode", LogLevel.FATAL);
 			return;
 		}
-		if (scoreComp.GetBlueforPoint() >= m_winnerPointsNeeded) { factionName = KOTH_Faction.BLUFOR; };
-		if (scoreComp.GetRedforPoint() >= m_winnerPointsNeeded) { factionName = KOTH_Faction.OPFOR; };
-		if (scoreComp.GetGreenforPoint() >= m_winnerPointsNeeded) { factionName = KOTH_Faction.INDFOR; };
+		if (scoreComp.GetBlueforPoint() >= WINNER_POINTS_NEEDED) { factionName = KOTH_Faction.BLUFOR; };
+		if (scoreComp.GetRedforPoint() >= WINNER_POINTS_NEEDED) { factionName = KOTH_Faction.OPFOR; };
+		if (scoreComp.GetGreenforPoint() >= WINNER_POINTS_NEEDED) { factionName = KOTH_Faction.INDFOR; };
 
 		foreach (Faction faction : factions)
 		{

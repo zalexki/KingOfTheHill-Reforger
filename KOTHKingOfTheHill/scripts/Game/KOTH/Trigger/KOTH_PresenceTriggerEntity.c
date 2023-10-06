@@ -57,9 +57,9 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 			CharacterControllerComponent controllerComp = ChimeraCharacter.Cast(entity).GetCharacterController();
 			if (controllerComp.IsDead() || controllerComp.IsUnconscious())
 				continue;
-
-			int playerId = playerManager.GetPlayerIdFromControlledEntity(entity);
 			
+			int playerId = playerManager.GetPlayerIdFromControlledEntity(entity);
+		
 			// add xp/money to players server side
 			bool playerIsInList = false;
 			string playerUID = GetGame().GetBackendApi().GetPlayerUID(playerId);
@@ -77,7 +77,8 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 				if (savedProfile.m_playerId == playerId && savedProfile.m_playerUID == playerUID) {
 					savedProfile.AddInZoneXpAndMoney();
 					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
-					profileComp.DoRpc_PlayerProfile(savedProfile);
+					profileComp.AddSessionInZoneXpAndMoney();
+					profileComp.DoRpc_SyncPlayerProfile(savedProfile);
 					playerIsInList = true;
 					break;
 				}
@@ -90,7 +91,8 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 				profile.m_playerId = playerId;
 				profile.m_playerName = playerManager.GetPlayerName(playerId);
 				m_playerProfileManager.m_listPlayerProfiles.Insert(profile);
-				profileComp.DoRpc_PlayerProfile(profile);
+				profileComp.AddSessionInZoneXpAndMoney();
+				profileComp.DoRpc_SyncPlayerProfile(profile);
 			}
 			
 			// show notif for players inside zone
