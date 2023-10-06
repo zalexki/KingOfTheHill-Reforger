@@ -34,7 +34,7 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 		listPlayerProfilesJson.m_list = m_listPlayerProfiles;
 
 		bool success = listPlayerProfilesJson.SaveToFile(saveFilePath);
-		Log("SAVING IS " + success);
+		Log("SavePlayersProfile is ok = " + success);
 	}
 	
 	override void OnPlayerConnected(int playerId)
@@ -45,6 +45,42 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 		Log("OnPlayerConnected "+playerId);
 		
 		GetGame().GetCallqueue().CallLater(MapPlayerUIDToPlayerId, 1000, false, playerId);
+		
+		SCR_PlayerController playerController = SCR_PlayerController.Cast(GetGame().GetPlayerManager().GetPlayerController(playerId));
+		if (playerController)
+		{
+			SCR_PlayerFactionAffiliationComponent playerFactionAff = SCR_PlayerFactionAffiliationComponent.Cast(playerController.FindComponent(SCR_PlayerFactionAffiliationComponent));
+			if (playerFactionAff)
+			{
+				playerFactionAff.GetOnPlayerFactionResponseInvoker_S().Insert(OnPlayerFactionResponse_S);
+			}
+		}
+	}
+	
+	protected void OnPlayerFactionResponse_S(SCR_PlayerFactionAffiliationComponent component, int factionIndex, bool response)
+	{
+		if (!Replication.IsServer())
+			return;
+		if (factionIndex == -1)
+			return;
+		
+		KOTH_ScoringGameModeComponent m_scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
+		KOTH_SCR_PlayerProfileComponent profileComp = KOTH_SCR_PlayerProfileComponent.Cast(component.GetPlayerController().FindComponent(KOTH_SCR_PlayerProfileComponent));
+		FactionManager factionManager = GetGame().GetFactionManager();
+		Faction faction = factionManager.GetFactionByIndex(factionIndex);
+		
+		switch (faction.GetFactionKey())
+		{
+			case KOTH_Faction.BLUFOR:
+				profileComp.SetSessionPointsWhenFactionWasJoined(m_scoreComp.GetBlueforPoint());
+			break;
+			case KOTH_Faction.OPFOR:
+				profileComp.SetSessionPointsWhenFactionWasJoined(m_scoreComp.GetRedforPoint());
+			break;
+			case KOTH_Faction.INDFOR:
+				profileComp.SetSessionPointsWhenFactionWasJoined(m_scoreComp.GetGreenforPoint());
+			break;
+		}
 	}
 	
 	void MapPlayerUIDToPlayerId(int playerId)
@@ -89,9 +125,7 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 	{
 		if (!Replication.IsServer())
 			return;
-
-		Log("OnPlayerDisconnected "+playerId);
-		
+	
 		foreach (int index, KOTH_PlayerProfileJson profile : m_listPlayerProfiles)
 		{
 			if (profile.m_playerId == playerId)
@@ -126,6 +160,8 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 		bool killerIsInList = false;
 		
 		if (playerFactionComp.GetAffiliatedFaction() == killerFactionComp.GetAffiliatedFaction()) {
+			Log("teamkill killer = "+killerName+" player = "+playerName);
+			Log("teamkill killerUID = "+killerUID+" playerUID = "+playerUID);
 			// teamkill
 			if (killerUID == playerUID)
                 return true;
@@ -139,7 +175,7 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 				}
 			}
 
-			//Rpc(RpcDo_Notif_FriendlyKill, killerId);
+			killerProfileComp.AddSessionFriendlyKillXpAndMoney();
 			killerProfileComp.DoRpc_Notif_FriendlyKill();
 
 			if (!killerIsInList) {
@@ -155,7 +191,6 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 			// kill
 			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_listPlayerProfiles)
 			{
-				//if (savedProfile.m_playerName == playerName) {
 				if (savedProfile.m_playerId == playerId && savedProfile.m_playerUID == playerUID) {
 					savedProfile.m_deaths++;
 					m_listPlayerProfiles.Set(index, savedProfile);
@@ -169,7 +204,7 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 				}
 			}
 
-			//Rpc(RpcDo_Notif_EnemyKill, killerId);
+			killerProfileComp.AddSessionKillXpAndMoney();
 			killerProfileComp.DoRpc_Notif_EnemyKill();
 
 			if (!killerIsInList) {
@@ -192,26 +227,12 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 		return true;
 	}
 	
-	[RplRpc(RplChannel.Unreliable, RplRcver.Broadcast)]
-	void RpcDo_Notif_EnemyKill(int killerId)
-	{
-		if (GetGame().GetPlayerController().GetPlayerId() != killerId)
-			return;
-
-		SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
-		if (hudManager) {
-			KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
-			if (kothHud) {
-				kothHud.NotifEnemyKill();
-			}
-		}
-	}
-	
 	override void OnGameEnd()
 	{
 		if (!Replication.IsServer())
 			return;
-
+		
+		Log("OnGameEnd launch SavePlayersProfile()");
 		SavePlayersProfile();
 	}
 }

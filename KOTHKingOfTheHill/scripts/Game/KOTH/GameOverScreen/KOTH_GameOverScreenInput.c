@@ -8,21 +8,15 @@ modded class GameOverScreenInput: ChimeraMenuBase
 
 		Widget newRow = GetGame().GetWorkspace().CreateWidgets("{0AB65604E4B00513}UI/Layouts/HUD/GameOver/EndScreen/EndScreenBonusLine.layout", GetRootWidget());
 		
-		Widget notif = newRow.FindAnyWidget("NotifContainer");
-		if (!notif)
-			return;
-		
-		TextWidget text = TextWidget.Cast(notif.FindAnyWidget("TextNotif"));
-		TextWidget money = TextWidget.Cast(notif.FindAnyWidget("MoneyNotif"));
-		TextWidget xp = TextWidget.Cast(notif.FindAnyWidget("XpNotif"));
+		TextWidget text = TextWidget.Cast(newRow.FindAnyWidget("TextNotif"));
+		TextWidget money = TextWidget.Cast(newRow.FindAnyWidget("MoneyNotif"));
+		TextWidget xp = TextWidget.Cast(newRow.FindAnyWidget("XpNotif"));
 		text.SetText("END GAME BONUS");
 		
-		Faction playerFaction = SCR_FactionManager.Cast(GetGame().GetFactionManager()).GetPlayerFaction( GetGame().GetPlayerController().GetPlayerId());
-		int bonus;
-		if (playerFaction.GetFactionKey() == KOTH_Faction.BLUFOR) { bonus = scoreComp.m_blueBonus; }
-		if (playerFaction.GetFactionKey() == KOTH_Faction.OPFOR) { bonus = scoreComp.m_redBonus; }
-		if (playerFaction.GetFactionKey() == KOTH_Faction.INDFOR) { bonus = scoreComp.m_greenBonus; }
-		money.SetText(""+bonus+" $");
-		xp.SetText(""+bonus+" xp");
+ 		int playerId = GetGame().GetPlayerController().GetPlayerId();
+		KOTH_SCR_PlayerProfileComponent profileComp = KOTH_SCR_PlayerProfileComponent.Cast(GetGame().GetPlayerManager().GetPlayerController(playerId).FindComponent(KOTH_SCR_PlayerProfileComponent));
+
+		money.SetText(""+profileComp.GetSessionEndGameBonus()+" $");
+		xp.SetText(""+profileComp.GetSessionEndGameBonus()+" xp");
 	}
 }

@@ -6,78 +6,66 @@ VerticalLayoutWidgetClass {
  }
  "Z Order" 2
  {
-  ScrollLayoutWidgetClass "{5E36F1CDA95EB0C1}" {
-   Name "ScrollList"
-   Slot LayoutSlot "{5E24E96F7FE5C3E8}" {
-    HorizontalAlign 2
-    Padding 0 0 0 0
-    SizeMode Auto
+  OverlayWidgetClass "{5E7B4B92B8E0C8E0}" {
+   Name "Overlay"
+   Slot LayoutSlot "{5D9E7C92E8117E0B}" {
+    SizeMode Fill
    }
    {
-    VerticalLayoutWidgetClass "{5E36F1CDA95EB0DF}" {
-     Name "NotifContainer"
-     Slot AlignableSlot "{5E24E9642D093960}" {
-      HorizontalAlign 3
-      VerticalAlign 3
-      Padding 0 0 0 0
+    HorizontalLayoutWidgetClass "{5E36F1CDABB9EFFF}" : "{74686613FDE00759}UI/Layouts/HUD/KOTH_Notification.layout" {
+     Name "KOTH_NotifEndGame"
+     Slot OverlayWidgetSlot "{5C9E2A9FC993FEE7}" {
      }
      {
-      HorizontalLayoutWidgetClass "{5E36F1CDABB9EFFF}" : "{74686613FDE00759}UI/Layouts/HUD/KOTH_Notification.layout" {
-       Name "KOTH_Notification0"
-       Slot LayoutSlot "{5E7B4B928A3A85BB}" {
-       }
+      OverlayWidgetClass "{5E2539EE77BDD63C}" {
+       Prefab "{5E2539EE77BDD63C}"
        {
-        OverlayWidgetClass "{5E2539EE77BDD63C}" {
-         Prefab "{5E2539EE77BDD63C}"
+        HorizontalLayoutWidgetClass "{5E2539EE77BDD63D}" {
+         Prefab "{5E2539EE77BDD63D}"
          {
-          HorizontalLayoutWidgetClass "{5E2539EE77BDD63D}" {
-           Prefab "{5E2539EE77BDD63D}"
+          VerticalLayoutWidgetClass "{5E2539EE77BDD63B}" {
+           Prefab "{5E2539EE77BDD63B}"
            {
-            VerticalLayoutWidgetClass "{5E2539EE77BDD63B}" {
-             Prefab "{5E2539EE77BDD63B}"
+            HorizontalLayoutWidgetClass "{5E2539EE77BDD638}" {
+             Prefab "{5E2539EE77BDD638}"
              {
-              HorizontalLayoutWidgetClass "{5E2539EE77BDD638}" {
-               Prefab "{5E2539EE77BDD638}"
+              OverlayWidgetClass "{5E2539EE77BDD636}" {
+               Prefab "{5E2539EE77BDD636}"
                {
-                OverlayWidgetClass "{5E2539EE77BDD636}" {
-                 Prefab "{5E2539EE77BDD636}"
+                HorizontalLayoutWidgetClass "{5E2539EE77BDD637}" {
+                 Prefab "{5E2539EE77BDD637}"
                  {
-                  HorizontalLayoutWidgetClass "{5E2539EE77BDD637}" {
-                   Prefab "{5E2539EE77BDD637}"
-                   {
-                    TextWidgetClass "{5E2539EE77BDD635}" {
-                     Prefab "{5E2539EE77BDD635}"
-                     Text "Bonus end game"
-                    }
-                   }
+                  TextWidgetClass "{5E2539EE77BDD635}" {
+                   Prefab "{5E2539EE77BDD635}"
+                   Text "Bonus end game"
                   }
                  }
                 }
-                OverlayWidgetClass "{5E2539EE77BDD632}" {
-                 Prefab "{5E2539EE77BDD632}"
+               }
+              }
+              OverlayWidgetClass "{5E2539EE77BDD632}" {
+               Prefab "{5E2539EE77BDD632}"
+               {
+                HorizontalLayoutWidgetClass "{5E2539EE77BDD630}" {
+                 Prefab "{5E2539EE77BDD630}"
                  {
-                  HorizontalLayoutWidgetClass "{5E2539EE77BDD630}" {
-                   Prefab "{5E2539EE77BDD630}"
-                   {
-                    TextWidgetClass "{5E2539EE77BDD631}" {
-                     Prefab "{5E2539EE77BDD631}"
-                     Text "10000 xp "
-                    }
-                   }
+                  TextWidgetClass "{5E2539EE77BDD631}" {
+                   Prefab "{5E2539EE77BDD631}"
+                   Text "123456 xp "
                   }
                  }
                 }
-                OverlayWidgetClass "{5E2539EE77BDD60F}" {
-                 Prefab "{5E2539EE77BDD60F}"
+               }
+              }
+              OverlayWidgetClass "{5E2539EE77BDD60F}" {
+               Prefab "{5E2539EE77BDD60F}"
+               {
+                HorizontalLayoutWidgetClass "{5E2539EE77BDD60D}" {
+                 Prefab "{5E2539EE77BDD60D}"
                  {
-                  HorizontalLayoutWidgetClass "{5E2539EE77BDD60D}" {
-                   Prefab "{5E2539EE77BDD60D}"
-                   {
-                    TextWidgetClass "{5E2539EE77BDD60A}" {
-                     Prefab "{5E2539EE77BDD60A}"
-                     Text "100000 $"
-                    }
-                   }
+                  TextWidgetClass "{5E2539EE77BDD60A}" {
+                   Prefab "{5E2539EE77BDD60A}"
+                   Text "123456 $"
                   }
                  }
                 }
@@ -93,14 +81,6 @@ VerticalLayoutWidgetClass {
       }
      }
     }
-   }
-  }
-  OverlayWidgetClass "{5E7B4B92B8E0C8E0}" {
-   Name "Overlay"
-   Slot LayoutSlot "{5D9E7C92E8117E0B}" {
-    SizeMode Fill
-   }
-   {
     FrameWidgetClass "{5E7B4B92B8E0C8EF}" {
      Name "RestartHolder"
      Slot OverlayWidgetSlot "{5E1F523221A434B6}" {

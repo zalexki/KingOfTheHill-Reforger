@@ -1,6 +1,28 @@
 class KOTH_SCR_PlayerProfileComponentClass : ScriptComponentClass {}
 class KOTH_SCR_PlayerProfileComponent : ScriptComponent 
 {
+	protected int m_sessionEndGameBonus = 0;
+	protected int m_sessionXpEarned = 0;
+	protected int m_sessionMoneyEarned = 0;
+	protected int m_sessionPointsWhenFactionWasJoined = 0;
+	void AddSessionInZoneXpAndMoney() { 
+		m_sessionXpEarned = m_sessionXpEarned + 10; 
+		m_sessionMoneyEarned = m_sessionMoneyEarned + 10; 
+	}
+	void AddSessionKillXpAndMoney() { 
+		m_sessionXpEarned = m_sessionXpEarned + 100; 
+		m_sessionMoneyEarned = m_sessionMoneyEarned + 100; 
+	}
+	void AddSessionFriendlyKillXpAndMoney() { 
+		m_sessionXpEarned = m_sessionXpEarned - 100; 
+		m_sessionMoneyEarned = m_sessionMoneyEarned - 100; 
+	}
+	int GetSessionEndGameBonus() { return m_sessionEndGameBonus; }
+	int GetSessionXpEarned() { return m_sessionXpEarned; }
+	int GetSessionMoneyEarned() { return m_sessionMoneyEarned; }
+	void SetSessionPointsWhenFactionWasJoined(int points) { m_sessionPointsWhenFactionWasJoined = points; }
+	int GetSessionPointsWhenFactionWasJoined() { return m_sessionPointsWhenFactionWasJoined; }
+	
 	protected KOTH_PlayerProfileManagerGameModeComponent m_playerProfiles;
 	protected ref array<string> m_unlockedItems = {};
 	array<string> GetUnlockedItemList() { return m_unlockedItems; }
@@ -9,14 +31,22 @@ class KOTH_SCR_PlayerProfileComponent : ScriptComponent
 	protected int m_level = 0;
 	protected int m_xp = 0;
 	
-	int GetMoney() { return m_money; }
 	int GetXp() { return m_xp; }
-	int GetXpNextLevel() { 
-		// TODO: up to 1000 for release
-		return (m_level + m_level - 1) * 100;
-	}
+	int GetMoney() { return m_money; }
 	int GetLevel() { return m_level; }
+	int GetXpNextLevel() { return (m_level + m_level - 1) * 100; } // TODO: up to 1000 for release
 
+	void AddInZoneXpAndMoney()
+	{
+		m_sessionXpEarned = m_sessionXpEarned + 10;
+		m_sessionMoneyEarned = m_sessionMoneyEarned + 10;
+	}
+
+	void AddKillXpAndMoney()
+	{
+		m_sessionXpEarned = m_sessionXpEarned + 100;
+		m_sessionMoneyEarned = m_sessionMoneyEarned + 100;
+	}
 	
 	override protected void OnPostInit(IEntity owner)
 	{
@@ -26,7 +56,7 @@ class KOTH_SCR_PlayerProfileComponent : ScriptComponent
 		bool ismaster = SCR_BaseGameMode.Cast(GetGame().GetGameMode()).IsMaster();
 		if (Replication.IsServer() && !ismaster)
 			return;
-
+		
 		m_playerProfiles = KOTH_PlayerProfileManagerGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_PlayerProfileManagerGameModeComponent));
 		GetGame().GetCallqueue().CallLater(AskRpc_PlayerProfile, 1000, false);
 	}
@@ -52,7 +82,7 @@ class KOTH_SCR_PlayerProfileComponent : ScriptComponent
 		{
 			if (savedProfile.m_playerId == playerId) {
 				profile = savedProfile;
-				DoRpc_PlayerProfile(savedProfile);
+				DoRpc_SyncPlayerProfile(savedProfile);
 				break;
 			}
 		}
@@ -63,13 +93,13 @@ class KOTH_SCR_PlayerProfileComponent : ScriptComponent
 		}
 	}
 
-	void DoRpc_PlayerProfile(KOTH_PlayerProfileJson profile)
+	void DoRpc_SyncPlayerProfile(KOTH_PlayerProfileJson profile)
 	{
-		Rpc(RpcDo_PlayerProfile, profile.m_unlockedItems, profile.GetMoney(), profile.GetLevel(), profile.GetXp());
+		Rpc(RpcDo_SyncPlayerProfile, profile.m_unlockedItems, profile.GetMoney(), profile.GetLevel(), profile.GetXp());
 	}
 	
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
-	void RpcDo_PlayerProfile(array<string> unlockedItems, int money, int level, int xp)
+	void RpcDo_SyncPlayerProfile(array<string> unlockedItems, int money, int level, int xp)
 	{
 		m_unlockedItems = unlockedItems;
 		m_money = money;
@@ -125,6 +155,14 @@ class KOTH_SCR_PlayerProfileComponent : ScriptComponent
 			}
 		}
 	}
-		
 	
+	void DoRpc_SetEndGameBonus(int bonus)
+	{
+		Rpc(RpcDo_SetEndGameBonus, bonus);
+	}
+	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
+	void RpcDo_SetEndGameBonus(int bonus)
+	{
+		m_sessionEndGameBonus = bonus;
+	}
 }

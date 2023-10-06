@@ -120,7 +120,7 @@ class KOTH_DebugMenu
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.AddMoney(100);
 					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
-					profileComp.DoRpc_PlayerProfile(savedProfile);
+					profileComp.DoRpc_SyncPlayerProfile(savedProfile);
 					break;
 				}
 			}
@@ -132,7 +132,7 @@ class KOTH_DebugMenu
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.RemoveMoney(100);
 					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
-					profileComp.DoRpc_PlayerProfile(savedProfile);
+					profileComp.DoRpc_SyncPlayerProfile(savedProfile);
 					break;
 				}
 			}
@@ -145,7 +145,7 @@ class KOTH_DebugMenu
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.AddMoney(1000);
 					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
-					profileComp.DoRpc_PlayerProfile(savedProfile);
+					profileComp.DoRpc_SyncPlayerProfile(savedProfile);
 					break;
 				}
 			}
@@ -157,7 +157,7 @@ class KOTH_DebugMenu
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.AddMoney(1000000);
 					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
-					profileComp.DoRpc_PlayerProfile(savedProfile);
+					profileComp.DoRpc_SyncPlayerProfile(savedProfile);
 					break;
 				}
 			}
@@ -169,7 +169,7 @@ class KOTH_DebugMenu
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.RemoveMoney(1000);
 					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
-					profileComp.DoRpc_PlayerProfile(savedProfile);
+					profileComp.DoRpc_SyncPlayerProfile(savedProfile);
 					break;
 				}
 			}
@@ -182,7 +182,7 @@ class KOTH_DebugMenu
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.AddLevel(1);
 					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
-					profileComp.DoRpc_PlayerProfile(savedProfile);
+					profileComp.DoRpc_SyncPlayerProfile(savedProfile);
 					break;
 				}
 			}
@@ -194,7 +194,7 @@ class KOTH_DebugMenu
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.RemoveLevel(1);
 					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
-					profileComp.DoRpc_PlayerProfile(savedProfile);
+					profileComp.DoRpc_SyncPlayerProfile(savedProfile);
 					break;
 				}
 			}
@@ -207,7 +207,7 @@ class KOTH_DebugMenu
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.AddLevel(10);
 					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
-					profileComp.DoRpc_PlayerProfile(savedProfile);
+					profileComp.DoRpc_SyncPlayerProfile(savedProfile);
 					break;
 				}
 			}
@@ -219,7 +219,7 @@ class KOTH_DebugMenu
 				if (savedProfile.m_playerId == playerId) {
 					savedProfile.RemoveLevel(10);
 					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
-					profileComp.DoRpc_PlayerProfile(savedProfile);
+					profileComp.DoRpc_SyncPlayerProfile(savedProfile);
 					break;
 				}
 			}

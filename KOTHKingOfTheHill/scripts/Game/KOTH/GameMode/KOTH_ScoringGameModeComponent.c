@@ -79,13 +79,6 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 	protected int m_greenPlayers = 0;
 	int GetGreenPlayers() { return m_greenPlayers; }
 
-	[RplProp()]	
-	int m_blueBonus;
-	[RplProp()]
-	int m_redBonus;
-	[RplProp()]
-	int m_greenBonus;
-	
 	int m_bluforArmedVehiclesCount = 0;
 	int m_opforArmedVehiclesCount = 0;
 	int m_indforArmedVehiclesCount = 0;
@@ -104,27 +97,12 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		m_playerProfileManager = KOTH_PlayerProfileManagerGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_PlayerProfileManagerGameModeComponent));
 	}
 	
+	// compute team and playtime bonus for each players
 	void OnBeforeGameEnd()
 	{
-		// add end game bonus xp / money
-		int base = 10000;	
-		float blueFactor = m_blueforPoints / 100;
-		float blueWinOrNot = 0.5;
-		if (m_blueforPoints == 100) { blueWinOrNot = 1; }
-		float blueBonusFloat = base * blueFactor * blueWinOrNot;
-		m_blueBonus = blueBonusFloat.ToString(lenDec: 0).ToInt();
-
-		float redFactor = m_redforPoints / 100;
-		float redWinOrNot = 0.5;
-		if (m_redforPoints == 100) { redWinOrNot = 1; }
-		float redBonusFloat = base * redFactor * redWinOrNot;
-		m_redBonus = redBonusFloat.ToString(lenDec: 0).ToInt();
-		
-		float greenFactor = m_greenforPoints / 100;
-		float greenWinOrNot = 0.5;
-		if (m_greenforPoints == 100) { greenWinOrNot = 1; }
-		float greenBonusFloat = base * greenFactor * greenWinOrNot;
-		m_greenBonus = greenBonusFloat.ToString(lenDec: 0).ToInt();
+		float blueFactor = m_blueforPoints / SCR_BaseGameMode.WINNER_POINTS_NEEDED;
+		float redFactor = m_redforPoints / SCR_BaseGameMode.WINNER_POINTS_NEEDED;
+		float greenFactor = m_greenforPoints / SCR_BaseGameMode.WINNER_POINTS_NEEDED;
 		
 		array<int> playerIds = new array<int>();
 		PlayerManager playerManager = GetGame().GetPlayerManager();
@@ -137,32 +115,44 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		{
 			IEntity controlledEntity = playerManager.GetPlayerControlledEntity(playerId);
 			string playerUID = GetGame().GetBackendApi().GetPlayerUID(playerId);
+			KOTH_SCR_PlayerProfileComponent profileComp = KOTH_SCR_PlayerProfileComponent.Cast(playerManager.GetPlayerController(playerId).FindComponent(KOTH_SCR_PlayerProfileComponent));
 			
 			if (controlledEntity) {
 				FactionAffiliationComponent targetFactionComp = FactionAffiliationComponent.Cast(controlledEntity.FindComponent(FactionAffiliationComponent));
 				if (targetFactionComp) {
 					Faction faction = targetFactionComp.GetAffiliatedFaction();
 					if (faction) {
-						int bonus;
-						if (faction.GetFactionName() == KOTH_Faction.BLUFOR)
-							bonus = m_blueBonus;
+						float teambonus;
+						float playtimebonus;
+						if (faction.GetFactionName() == KOTH_Faction.BLUFOR) {
+							teambonus = blueFactor * profileComp.GetSessionXpEarned() * 0.5;
+							float teampointsfactor = (m_blueforPoints - profileComp.GetSessionPointsWhenFactionWasJoined()) / SCR_BaseGameMode.WINNER_POINTS_NEEDED;
+							playtimebonus = blueFactor * teampointsfactor * 0.5;
+						}
 							
-						if (faction.GetFactionName() == KOTH_Faction.OPFOR)
-							bonus = m_redBonus;
+						if (faction.GetFactionName() == KOTH_Faction.OPFOR) {
+							teambonus = redFactor * profileComp.GetSessionXpEarned() * 0.5;
+							float teampointsfactor = (m_redforPoints - profileComp.GetSessionPointsWhenFactionWasJoined()) / SCR_BaseGameMode.WINNER_POINTS_NEEDED;
+							playtimebonus = redFactor * teampointsfactor * 0.5;
+						}
 
-						if (faction.GetFactionName() == KOTH_Faction.INDFOR)
-							bonus = m_greenBonus;
-						
+						if (faction.GetFactionName() == KOTH_Faction.INDFOR) {
+							teambonus = greenFactor * profileComp.GetSessionXpEarned() * 0.5;
+							float teampointsfactor = (m_greenforPoints - profileComp.GetSessionPointsWhenFactionWasJoined()) / SCR_BaseGameMode.WINNER_POINTS_NEEDED;
+							playtimebonus = greenFactor * teampointsfactor * 0.5;
+						}
+						 
+						int bonus = (playtimebonus + teambonus).ToString(lenDec: 0).ToInt();
 						
 						foreach (int index, KOTH_PlayerProfileJson savedProfile : m_playerProfileManager.m_listPlayerProfiles)
 						{
 							if (savedProfile.m_playerId == playerId) {
-								Rpc(RpcDo_Notif_EndGameBonus, playerId, bonus);
+								profileComp.DoRpc_SetEndGameBonus(bonus);
 								savedProfile.AddEndGameBonusXpAndMoney(bonus);
 								m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
+								break;
 							}
 						}
-						Replication.BumpMe();
 					}
 				}
 			}
@@ -182,7 +172,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 				PlayerManager playerManager = GetGame().GetPlayerManager();
 				PlayerController playerController = playerManager.GetPlayerController(playerId);
 				KOTH_SCR_PlayerProfileComponent profileComp = KOTH_SCR_PlayerProfileComponent.Cast(playerController.FindComponent(KOTH_SCR_PlayerProfileComponent));
-				profileComp.DoRpc_PlayerProfile(savedProfile);
+				profileComp.DoRpc_SyncPlayerProfile(savedProfile);
 				break;
 			}
 		}
@@ -207,27 +197,12 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 				PlayerManager playerManager = GetGame().GetPlayerManager();
 				PlayerController playerController = playerManager.GetPlayerController(playerId);
 				KOTH_SCR_PlayerProfileComponent profileComp = KOTH_SCR_PlayerProfileComponent.Cast(playerController.FindComponent(KOTH_SCR_PlayerProfileComponent));
-				profileComp.DoRpc_PlayerProfile(savedProfile);
+				profileComp.DoRpc_SyncPlayerProfile(savedProfile);
 				break;
 			}
 		}
 		
 		return hasEnoughMoney;
-	}
-	
-	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
-	void RpcDo_Notif_EndGameBonus(int playerId, int bonus)
-	{
-		if (GetGame().GetPlayerController().GetPlayerId() != playerId)
-			return;
-
-		SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
-		if (hudManager) {
-			KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
-			if (kothHud) {
-				kothHud.EndGameBonus(bonus.ToString());
-			}
-		}
 	}
 	
 	void UpdatePlayerCount()

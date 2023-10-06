@@ -170,7 +170,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 					PlayerManager playerManager = GetGame().GetPlayerManager();
 					PlayerController playerController = playerManager.GetPlayerController(playerId);
 					KOTH_SCR_PlayerProfileComponent profileComp = KOTH_SCR_PlayerProfileComponent.Cast(playerController.FindComponent(KOTH_SCR_PlayerProfileComponent));
-					profileComp.DoRpc_PlayerProfile(savedProfile);
+					profileComp.DoRpc_SyncPlayerProfile(savedProfile);
 					break;
 				}
 			}
