@@ -1,6 +1,21 @@
 class KOTH_SCR_PlayerProfileComponentClass : ScriptComponentClass {}
 class KOTH_SCR_PlayerProfileComponent : ScriptComponent 
 {
+	protected bool m_hasBeenDroppedNearZone = false;
+	bool HasBeenDroppedNearZone()
+	{
+		return m_hasBeenDroppedNearZone;
+	}
+	void ResetHasBeenDroppedNearZone()
+	{
+		m_hasBeenDroppedNearZone = false;
+	}
+	void DroppedNearZone()
+	{
+		m_hasBeenDroppedNearZone = true;
+		GetGame().GetCallqueue().CallLater(ResetHasBeenDroppedNearZone, 60000 * 2);
+	}
+	
 	protected int m_sessionEndGameBonus = 0;
 	protected int m_sessionXpEarned = 0;
 	protected int m_sessionMoneyEarned = 0;

@@ -95,9 +95,6 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 
 	void OnCompartmentLeft(IEntity targetEntity, BaseCompartmentManagerComponent manager, int mgrID, int slotID, bool move)
 	{
-		//super.OnCompartmentLeft(targetEntity, manager, mgrID, slotID, move);
-		Log("OnCompartmentLeftCustom move "+move);
-
         if (move) // moving only between compartments
 			return;
 		
@@ -116,6 +113,8 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 		}
 		
 		PlayerManager playerManager = GetGame().GetPlayerManager();
+		if (!playerManager)
+			return;
 		
 		array<IEntity> occupants = {};
 		baseCompartmentManagerComp.GetOccupantsOfType(occupants, ECompartmentType.Pilot);
@@ -125,36 +124,47 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 		vector kothTriggerPosition = gameMode.m_kothTrigger.GetOrigin();
 		
 		float distanceFromZone = vector.Distance(vehiclePosition, kothTriggerPosition);
-		Log("distance is "+distanceFromZone);
 		if (distanceFromZone > 300)
 			return;
 		
+		BaseCompartmentSlot compartment = manager.FindCompartment(slotID, mgrID);
+		if (!compartment)
+			return;
+
+		int occupantID = playerManager.GetPlayerIdFromControlledEntity(compartment.GetOccupant());
+		string occupantUID = GetGame().GetBackendApi().GetPlayerUID(occupantID);
+		PlayerController occupantPlayerController = playerManager.GetPlayerController(occupantID);
+		KOTH_SCR_PlayerProfileComponent occupantProfileComp = KOTH_SCR_PlayerProfileComponent.Cast(occupantPlayerController.FindComponent(KOTH_SCR_PlayerProfileComponent));
+		
+		if (occupantProfileComp.HasBeenDroppedNearZone())
+			return;
+			
+		occupantProfileComp.DroppedNearZone();
+		
 		foreach (IEntity pilot : occupants)
 		{
-			CharacterControllerComponent controllerComp = ChimeraCharacter.Cast(pilot).GetCharacterController();
-			
-			int playerId = playerManager.GetPlayerIdFromControlledEntity(pilot);
+			int pilotId = playerManager.GetPlayerIdFromControlledEntity(pilot);
 			bool playerIsInList = false;
-			string playerUID = GetGame().GetBackendApi().GetPlayerUID(playerId);
-			string occupantUID = GetGame().GetBackendApi().GetPlayerUID(playerId);
-			if (!playerUID || playerUID == string.Empty)
+			string pilotUID = GetGame().GetBackendApi().GetPlayerUID(pilotId);
+			
+			if (!pilotUID || pilotUID == string.Empty)
 			{
-				Log("could not find playerUID for playerId "+playerId+" named "+ playerManager.GetPlayerName(playerId), LogLevel.ERROR);
-				//playerUID = playerId.ToString();
+				Log("could not find pilot for playerUID "+pilotUID+" named "+ playerManager.GetPlayerName(pilotId), LogLevel.ERROR);
+				return;
 			}
-			if (playerUID == occupantUID)
+			if (pilotUID == occupantUID)
 			{
-				Log("pilot "+playerUID+" dismounted");
+				Log("pilot "+pilotUID+" dismounted");
 				return;
 			}
 			
 			KOTH_PlayerProfileManagerGameModeComponent m_playerProfileManager = KOTH_PlayerProfileManagerGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_PlayerProfileManagerGameModeComponent));
-			PlayerController playerController = playerManager.GetPlayerController(playerId);
+			PlayerController playerController = playerManager.GetPlayerController(pilotId);
 			KOTH_SCR_PlayerProfileComponent profileComp = KOTH_SCR_PlayerProfileComponent.Cast(playerController.FindComponent(KOTH_SCR_PlayerProfileComponent));
 			
 			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_playerProfileManager.m_listPlayerProfiles)
 			{
-				if (savedProfile.m_playerId == playerId && savedProfile.m_playerUID == playerUID) {
+				if (savedProfile.m_playerId == pilotId && savedProfile.m_playerUID == pilotUID) {
 					savedProfile.AddFriendlyDropNearZoneXpAndMoney();
 					m_playerProfileManager.m_listPlayerProfiles.Set(index, savedProfile);
 					profileComp.AddFriendlyDropNearZoneXpAndMoney();
@@ -167,15 +177,15 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 			if (!playerIsInList) {
 				KOTH_PlayerProfileJson profile = new KOTH_PlayerProfileJson();
 				profile.AddFriendlyDropNearZoneXpAndMoney();
-				profile.m_playerUID = playerUID;
-				profile.m_playerId = playerId;
-				profile.m_playerName = playerManager.GetPlayerName(playerId);
+				profile.m_playerUID = pilotUID;
+				profile.m_playerId = pilotId;
+				profile.m_playerName = playerManager.GetPlayerName(pilotId);
 				m_playerProfileManager.m_listPlayerProfiles.Insert(profile);
 				profileComp.AddFriendlyDropNearZoneXpAndMoney();
 				profileComp.DoRpc_SyncPlayerProfile(profile);
 			}
 			
-			// show notif for players inside zone
+			// show notif for pilot
 			profileComp.DoRpc_NotifDropFriendly();
 		}
 	}
