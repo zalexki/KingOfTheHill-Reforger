@@ -55,24 +55,38 @@ class KOTH_HUD : SCR_InfoDisplay
 			m_playerId = GetGame().GetPlayerController().GetPlayerId();
 		}
 	}
-
+	
 	void NotifEnemyKill()
+	{
+		Notif("Enemy killed", "100 xp", "100 $", 5000);
+	}
+	void NotifCapture()
+	{
+		Notif("Objectif offensive", "10 xp", "10 $");
+	}
+	void NotifDropFriendly()
+	{
+		Notif("Tactical Insertion", "100 xp", "100 $");
+	}
+	
+	void Notif(string textNotifContent, string xpNotifContent, string moneyNotifContent, int delay = 2000)
 	{
 		Widget root = GetRootWidget();
 		VerticalLayoutWidget koth_scrollList = VerticalLayoutWidget.Cast(root.FindWidget("OverlayRoot.VerticalLayoutRoot.ScrollList.NotifContainer"));
+
 		Widget w = GetGame().GetWorkspace().CreateWidgets("{74686613FDE00759}UI/Layouts/HUD/KingOfTheHill/KOTH_Notification.layout", koth_scrollList);
 
 		TextWidget TextNotif = TextWidget.Cast(w.FindAnyWidget("TextNotif"));
-		TextNotif.SetText("Enemy killed");
+		TextNotif.SetText(textNotifContent);
 
 		TextWidget XpNotif = TextWidget.Cast(w.FindAnyWidget("XpNotif"));
-		XpNotif.SetText("100 xp");
+		XpNotif.SetText(xpNotifContent);
 
 		TextWidget MoneyNotif = TextWidget.Cast(w.FindAnyWidget("MoneyNotif"));
-		MoneyNotif.SetText("100 $");
-
+		MoneyNotif.SetText(moneyNotifContent);
+		
 		SCR_FadeUIComponent compFade = SCR_FadeUIComponent.Cast(w.FindHandler(SCR_FadeUIComponent));
-		compFade.DelayedFadeOut(5000, true);
+		compFade.DelayedFadeOut(delay, true);
 	}
 
 	void NotifFriendlyKill()
@@ -116,26 +130,7 @@ class KOTH_HUD : SCR_InfoDisplay
 		SCR_FadeUIComponent compFade = SCR_FadeUIComponent.Cast(w.FindHandler(SCR_FadeUIComponent));
 		compFade.DelayedFadeOut(5000, true);
 	}
-
-	void NotifCapture()
-	{
-		Widget root = GetRootWidget();
-		VerticalLayoutWidget koth_scrollList = VerticalLayoutWidget.Cast(root.FindWidget("OverlayRoot.VerticalLayoutRoot.ScrollList.NotifContainer"));
-
-		Widget w = GetGame().GetWorkspace().CreateWidgets("{74686613FDE00759}UI/Layouts/HUD/KingOfTheHill/KOTH_Notification.layout", koth_scrollList);
-
-		TextWidget TextNotif = TextWidget.Cast(w.FindAnyWidget("TextNotif"));
-		TextNotif.SetText("Objectif offensive");
-
-		TextWidget XpNotif = TextWidget.Cast(w.FindAnyWidget("XpNotif"));
-		XpNotif.SetText("10 xp");
-
-		TextWidget MoneyNotif = TextWidget.Cast(w.FindAnyWidget("MoneyNotif"));
-		MoneyNotif.SetText("10 $");
-		
-		SCR_FadeUIComponent compFade = SCR_FadeUIComponent.Cast(w.FindHandler(SCR_FadeUIComponent));
-		compFade.DelayedFadeOut(2000, true);
-	}
+	
 
 	protected override event void UpdateValues(IEntity owner, float timeSlice)
 	{

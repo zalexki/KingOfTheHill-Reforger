@@ -33,6 +33,12 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 		AddXp(10);
 		AddMoney(10);
 	}
+	
+	void AddFriendlyDropNearZoneXpAndMoney()
+	{
+		AddXp(100);
+		AddMoney(100);
+	}
 
 	void AddKillXpAndMoney()
 	{

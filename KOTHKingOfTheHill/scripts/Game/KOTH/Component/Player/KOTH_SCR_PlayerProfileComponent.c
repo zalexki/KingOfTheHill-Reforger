@@ -48,6 +48,12 @@ class KOTH_SCR_PlayerProfileComponent : ScriptComponent
 		m_sessionMoneyEarned = m_sessionMoneyEarned + 100;
 	}
 	
+	void AddFriendlyDropNearZoneXpAndMoney()
+	{
+		m_sessionXpEarned = m_sessionXpEarned + 100;
+		m_sessionMoneyEarned = m_sessionMoneyEarned + 100;
+	}
+	
 	override protected void OnPostInit(IEntity owner)
 	{
 		if (SCR_Global.IsEditMode(owner))
@@ -152,6 +158,23 @@ class KOTH_SCR_PlayerProfileComponent : ScriptComponent
 			KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
 			if (kothHud) {
 				kothHud.NotifFriendlyKill();
+			}
+		}
+	}
+	
+	void DoRpc_NotifDropFriendly()
+	{
+		Rpc(RpcDo_NotifDropFriendly);
+	}
+	
+	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
+	void RpcDo_NotifDropFriendly()
+	{
+		SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.GetHUDManager();
+		if (hudManager) {
+			KOTH_HUD kothHud = KOTH_HUD.Cast(hudManager.FindInfoDisplay(KOTH_HUD));
+			if (kothHud) {
+				kothHud.NotifDropFriendly();
 			}
 		}
 	}

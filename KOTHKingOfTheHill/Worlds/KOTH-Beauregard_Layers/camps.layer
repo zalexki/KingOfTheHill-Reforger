@@ -110,7 +110,7 @@ $grp GenericEntity : "{67EE7343073E3AF4}Prefabs/Systems/AmbientVehicles/AmbientV
  }
 }
 GenericEntity KOTH_ThirdSpawn : "{900D62CF65FB7496}Prefabs/Structures/KOTH/Camp_Indfor.et" {
- coords 2830.461 37.191 3189.837
+ coords 2827.25 37.742 3189.837
  angleY -180
  {
   GenericEntity {
