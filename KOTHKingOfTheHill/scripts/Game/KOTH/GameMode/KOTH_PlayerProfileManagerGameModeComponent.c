@@ -254,7 +254,10 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 
 		string playerName = playerManager.GetPlayerName(playerId);
 		string playerUID = GetGame().GetBackendApi().GetPlayerUID(playerId);
+		PlayerController playerController = GetGame().GetPlayerManager().GetPlayerController(playerId);
 		FactionAffiliationComponent playerFactionComp = FactionAffiliationComponent.Cast(player.FindComponent(FactionAffiliationComponent));
+		KOTH_SCR_PlayerProfileComponent playerProfileComp = KOTH_SCR_PlayerProfileComponent.Cast(playerController.FindComponent(KOTH_SCR_PlayerProfileComponent));		
+		playerProfileComp.ResetHasBeenDroppedNearZone();
 		bool playerIsInList = false;
 		
 		int killerId = GetGame().GetPlayerManager().GetPlayerIdFromControlledEntity(killer);
@@ -267,9 +270,11 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 		bool killerIsInList = false;
 		
 		if (playerFactionComp.GetAffiliatedFaction() == killerFactionComp.GetAffiliatedFaction()) {
+			// teamkill
 			Log("teamkill killer = "+killerName+" player = "+playerName);
 			Log("teamkill killerUID = "+killerUID+" playerUID = "+playerUID);
-			// teamkill
+			
+			// suicide
 			if (killerUID == playerUID)
                 return true;
 			
