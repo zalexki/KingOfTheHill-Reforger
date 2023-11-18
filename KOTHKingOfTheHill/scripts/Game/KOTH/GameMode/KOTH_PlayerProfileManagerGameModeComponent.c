@@ -132,7 +132,7 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 			return;
 
 		int occupantID = playerManager.GetPlayerIdFromControlledEntity(compartment.GetOccupant());
-		string occupantUID = GetGame().GetBackendApi().GetPlayerUID(occupantID);
+		string occupantUID = GetGame().GetBackendApi().GetPlayerIdentityId(occupantID);
 		PlayerController occupantPlayerController = playerManager.GetPlayerController(occupantID);
 		KOTH_SCR_PlayerProfileComponent occupantProfileComp = KOTH_SCR_PlayerProfileComponent.Cast(occupantPlayerController.FindComponent(KOTH_SCR_PlayerProfileComponent));
 		
@@ -145,7 +145,7 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 		{
 			int pilotId = playerManager.GetPlayerIdFromControlledEntity(pilot);
 			bool playerIsInList = false;
-			string pilotUID = GetGame().GetBackendApi().GetPlayerUID(pilotId);
+			string pilotUID = GetGame().GetBackendApi().GetPlayerIdentityId(pilotId);
 			
 			if (!pilotUID || pilotUID == string.Empty)
 			{
@@ -193,7 +193,7 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 	void MapPlayerUIDToPlayerId(int playerId)
 	{
 		bool isInList = false;
-		string playerUID = GetGame().GetBackendApi().GetPlayerUID(playerId);
+		string playerUID = GetGame().GetBackendApi().GetPlayerIdentityId(playerId);
 		
 		if (SCR_Global.IsEditMode()) {
 			playerUID = GetGame().GetPlayerManager().GetPlayerName(playerId);
@@ -243,7 +243,7 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 		}
 	}
 	
-	override bool HandlePlayerKilled(int playerId, IEntity player, IEntity killer)
+	override bool HandlePlayerKilled(int playerId, IEntity playerEntity, IEntity killerEntity, notnull Instigator killer)
 	{
 		if (!Replication.IsServer())
 			return false;
@@ -253,19 +253,19 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 			return false;
 
 		string playerName = playerManager.GetPlayerName(playerId);
-		string playerUID = GetGame().GetBackendApi().GetPlayerUID(playerId);
+		string playerUID = GetGame().GetBackendApi().GetPlayerIdentityId(playerId);
 		PlayerController playerController = GetGame().GetPlayerManager().GetPlayerController(playerId);
-		FactionAffiliationComponent playerFactionComp = FactionAffiliationComponent.Cast(player.FindComponent(FactionAffiliationComponent));
+		FactionAffiliationComponent playerFactionComp = FactionAffiliationComponent.Cast(playerEntity.FindComponent(FactionAffiliationComponent));
 		KOTH_SCR_PlayerProfileComponent playerProfileComp = KOTH_SCR_PlayerProfileComponent.Cast(playerController.FindComponent(KOTH_SCR_PlayerProfileComponent));		
 		playerProfileComp.ResetHasBeenDroppedNearZone();
 		bool playerIsInList = false;
 		
-		int killerId = GetGame().GetPlayerManager().GetPlayerIdFromControlledEntity(killer);
+		int killerId = GetGame().GetPlayerManager().GetPlayerIdFromControlledEntity(killerEntity);
 		PlayerController killerController = GetGame().GetPlayerManager().GetPlayerController(killerId);
-		FactionAffiliationComponent killerFactionComp = FactionAffiliationComponent.Cast(killer.FindComponent(FactionAffiliationComponent));
+		FactionAffiliationComponent killerFactionComp = FactionAffiliationComponent.Cast(killerEntity.FindComponent(FactionAffiliationComponent));
 		KOTH_SCR_PlayerProfileComponent killerProfileComp = KOTH_SCR_PlayerProfileComponent.Cast(killerController.FindComponent(KOTH_SCR_PlayerProfileComponent));		
 		
-		string killerUID = GetGame().GetBackendApi().GetPlayerUID(killerId);
+		string killerUID = GetGame().GetBackendApi().GetPlayerIdentityId(killerId);
 		string killerName = playerManager.GetPlayerName(killerId);
 		bool killerIsInList = false;
 		

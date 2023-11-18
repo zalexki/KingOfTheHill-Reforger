@@ -1,5 +1,5 @@
 SCR_BaseGameMode {
- ID "5E1F0BA227A27EFF"
+ ID "0000000000000001"
  components {
   KOTH_PlayerProfileManagerGameModeComponent "{5E435738A7CCAF1A}" {
   }
@@ -1379,6 +1379,7 @@ SCR_BaseGameMode {
   SCR_RespawnTimerComponent "{5E1F0BA23AC5682F}" {
   }
   SCR_SaveLoadComponent "{5E1F0BA23AC56BD0}" {
+   Enabled 0
   }
   SCR_ScoringSystemComponent "{5E1F0BA23AC56BC0}" {
    m_aActions {
@@ -1408,7 +1409,6 @@ SCR_BaseGameMode {
       m_iSucceededNotificationId VOTING_KICK_SUCCEED
       m_iFailedNotificationId VOTING_KICK_FAIL
      }
-     m_KickReason KICK_VOTED
      m_bFactionSpecific 1
     }
    }
@@ -1467,38 +1467,9 @@ SCR_BaseGameMode {
    coords -1365.027 -39.01 -2217.766
    "Default channel" "Faction"
   }
-  SCR_GarbageManager {
-   ID "5E1F0BA227A3D057"
-   coords -1364.152 -39.01 -2218.587
-   CharacterLifetime 10
-   VehicleLifetime 300
-   ItemLifetime 10
-  }
-  HitRegistrationManager "5E1F591715EDC332" : "{0EDA3D48791120DD}Prefabs/MP/HitRegManager.et" {
-   ID "5E1F0BA227A3D055"
-   coords -1365.027 -39.01 -2217.766
-  }
-  ItemPreviewManagerEntity ItemPreviewManager : "{9F18C476AB860F3B}Prefabs/World/Game/ItemPreviewManager.et" {
-   ID "5E1F0BA227A3D04A"
-   coords -1364.373 -39.01 -2218.007
-  }
   SCR_LoadoutManager : "{C18BE7333A710C14}Prefabs/MP/Managers/Loadouts/LoadoutManager_BLUEFORxOPFORxINDFOR_V2.et" {
-   ID "5E3921527A26441A"
+   ID "5EE131DDA431FFF3"
    coords 0 0 0
-   m_aPlayerLoadouts {
-    SCR_FactionPlayerLoadout "{5E27748BF8FDE692}" {
-     m_sLoadoutName "INDFOR Man"
-     m_sLoadoutResource "{E1E2BA75E5E2E4CE}Prefabs/Characters/Factions/KOTH_Base/Character_KOTH_INDFOR.et"
-    }
-    SCR_FactionPlayerLoadout "{5E27748BF9E02B84}" {
-     m_sLoadoutName "OPFOR Man"
-     m_sLoadoutResource "{4A513974D5682D30}Prefabs/Characters/Factions/KOTH_Base/Character_KOTH_OPFOR.et"
-    }
-    SCR_FactionPlayerLoadout "{5E27748BFAA6EC30}" {
-     m_sLoadoutName "BLUFOR Man"
-     m_sLoadoutResource "{7C98AF3D5AB4A519}Prefabs/Characters/Factions/KOTH_Base/Character_KOTH_BLUFOR.et"
-    }
-   }
   }
  }
 }

@@ -28,8 +28,8 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 			return;
 
 		trigger.AddClassType(ChimeraCharacter);
-		trigger.SetUpdateRate(2);
-		trigger.EnablePeriodicQueries(true);
+		trigger.SetUpdateRate(0);
+		trigger.EnablePeriodicQueries(false);
 		trigger.SetSphereRadius(100);
 
 		GetGame().GetCallqueue().CallLater(PeriodicCall, 10000, true);
@@ -48,11 +48,16 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 		int greenforPlayerNumber = 0;
 		int redforPlayerNumber = 0;
 
+		QueryEntitiesInside();
 		array<IEntity> outEntities = {};
 		GetEntitiesInside(outEntities);
 		
 		foreach (IEntity entity : outEntities)
 		{
+			// TODO: temp fix since AddClassType seems broken rn
+			if (!ChimeraCharacter.Cast(entity))
+				continue;
+			
 			// verify player is not dead or unconscious
 			CharacterControllerComponent controllerComp = ChimeraCharacter.Cast(entity).GetCharacterController();
 			if (controllerComp.IsDead() || controllerComp.IsUnconscious())
@@ -62,7 +67,7 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 		
 			// add xp/money to players server side
 			bool playerIsInList = false;
-			string playerUID = GetGame().GetBackendApi().GetPlayerUID(playerId);
+			string playerUID = GetGame().GetBackendApi().GetPlayerIdentityId(playerId);
 			if (!playerUID || playerUID == string.Empty)
 			{
 				Log("could not find playerUID for playerId "+playerId+" named "+ playerManager.GetPlayerName(playerId), LogLevel.ERROR);

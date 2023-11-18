@@ -4,8 +4,8 @@ class KOTH_PlayerProfileJson : JsonApiStruct
 	string m_playerName;
 	int m_playerId;
 	
-	protected int m_money = 1000;
-	protected int m_level = 1;
+	protected int m_money = 10000;
+	protected int m_level = 5;
 	protected int m_xp = 0;
 
 	int m_kills = 0;

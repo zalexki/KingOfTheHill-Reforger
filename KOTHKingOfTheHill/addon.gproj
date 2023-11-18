@@ -3,7 +3,7 @@ GameProject {
  GUID "5E055A77849516EF"
  TITLE "KOTH - King Of The Hill"
  Dependencies {
-  "58D0FB3206B6F859" "5C5EBCE1BAFE1C01"
+  "58D0FB3206B6F859"
  }
  Configurations {
   GameProjectConfig PC {
@@ -73,13 +73,13 @@ GameProject {
     }
    }
   }
-  GameProjectConfig HEADLESS {
-  }
   GameProjectConfig XBOX_ONE {
   }
   GameProjectConfig XBOX_SERIES {
   }
   GameProjectConfig PS4 {
+  }
+  GameProjectConfig HEADLESS {
   }
  }
 }

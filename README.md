@@ -16,3 +16,7 @@ Inspirations/Help from teams/devs and their work : \
 **[EveronLife](https://everon.life/)** \
 **Lab6** ([Sparker95](https://github.com/Sparker95) & [jpetanjek](https://github.com/jpetanjek)) \
 **htom0104** for the marker zoom resize script 
+
+
+<!-- # OLD Peer tool setup -->
+<!-- -addonsDir "C:\Users\sengamin\Documents\My Games\ArmaReforgerWorkbench\addons\KingOfTheHill-Reforger" -addons KOTHKingOfTheHill,ProjectRefineMap -->

@@ -21,7 +21,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 		PlayerController controller = GetGame().GetPlayerController();
 		
 		if (controller)
-			m_playerUID = GetGame().GetBackendApi().GetPlayerUID(controller.GetPlayerId());
+			m_playerUID = GetGame().GetBackendApi().GetPlayerIdentityId(controller.GetPlayerId());
 	}
 	
 	bool SpawnVehicle(string resourceName, int playerId, bool isArmed = false)
@@ -114,7 +114,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 	}
 	
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	void RpcAsk_Equip(string resourceName, int playerId, bool permanentBuy)
+	void RpcAsk_Equip(string resourceName, int playerId)
 	{
 		KOTH_ShopItem item = FindShopItemByResourceName(resourceName);
 
@@ -157,7 +157,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 			return;
 		}
 		
-		string playerUID = GetGame().GetBackendApi().GetPlayerUID(playerId);
+		string playerUID = GetGame().GetBackendApi().GetPlayerIdentityId(playerId);
 		
 		if (permanentBuy)
 		{

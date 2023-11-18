@@ -114,7 +114,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		foreach (int playerId : playerIds)
 		{
 			IEntity controlledEntity = playerManager.GetPlayerControlledEntity(playerId);
-			string playerUID = GetGame().GetBackendApi().GetPlayerUID(playerId);
+			string playerUID = GetGame().GetBackendApi().GetPlayerIdentityId(playerId);
 			KOTH_SCR_PlayerProfileComponent profileComp = KOTH_SCR_PlayerProfileComponent.Cast(playerManager.GetPlayerController(playerId).FindComponent(KOTH_SCR_PlayerProfileComponent));
 			
 			if (controlledEntity) {
@@ -162,7 +162,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 	// should only be server side
 	void Refund(int price, int playerId)
 	{
-		string playerUID = GetGame().GetBackendApi().GetPlayerUID(playerId);
+		string playerUID = GetGame().GetBackendApi().GetPlayerIdentityId(playerId);
 		foreach (int index, KOTH_PlayerProfileJson savedProfile : m_playerProfileManager.m_listPlayerProfiles)
 		{
 			if (savedProfile.m_playerId == playerId) {
@@ -181,7 +181,7 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 	// should only be server side
 	bool TryBuy(int price, int playerId)
 	{
-		string playerUID = GetGame().GetBackendApi().GetPlayerUID(playerId);
+		string playerUID = GetGame().GetBackendApi().GetPlayerIdentityId(playerId);
 		bool hasEnoughMoney = true;
 		foreach (int index, KOTH_PlayerProfileJson savedProfile : m_playerProfileManager.m_listPlayerProfiles)
 		{

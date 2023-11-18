@@ -32,6 +32,19 @@ class KOTH_ShopUI : ChimeraMenuBase
 		m_playerProfileComp = KOTH_SCR_PlayerProfileComponent.Cast(controller.FindComponent(KOTH_SCR_PlayerProfileComponent));
 	}
 	
+	protected SCR_ButtonComponent GetButtonComponent(string name, Widget parent = null)
+	{
+		if (parent == null)
+			parent = m_wRoot;
+
+		Widget w = parent.FindAnyWidget(name);
+		if (!w)
+			return null;
+
+		SCR_ButtonComponent comp = SCR_ButtonComponent.Cast(w.FindHandler(SCR_ButtonComponent));
+		return comp;
+	}
+	
 	override void OnMenuOpen()
 	{
 		super.OnMenuOpen();
@@ -41,7 +54,9 @@ class KOTH_ShopUI : ChimeraMenuBase
 		m_contentContainer = VerticalLayoutWidget.Cast(m_wRoot.FindAnyWidget("ContentContainer"));
 		
 		// add listeners
-		SCR_NavigationButtonComponent cancel = SCR_NavigationButtonComponent.GetNavigationButtonComponent("Cancel", m_wRoot);
+		SCR_InputButtonComponent cancel = SCR_InputButtonComponent.GetInputButtonComponent("Cancel", m_wRoot);
+		//SCR_ButtonComponent cancel = GetButtonComponent("Cancel");
+		//m_contentContainer = ButtonWidget.Cast(m_wRoot.FindAnyWidget("Cancel"));
 		if (cancel) { cancel.m_OnActivated.Insert(OnClickEscape); }
 			
 		Widget tabViewRootWidget = m_wRoot.FindAnyWidget("TabViewRoot");
