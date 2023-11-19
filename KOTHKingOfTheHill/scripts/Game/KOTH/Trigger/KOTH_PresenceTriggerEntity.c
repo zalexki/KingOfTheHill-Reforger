@@ -75,7 +75,12 @@ class KOTH_PresenceTriggerEntity : SCR_BaseTriggerEntity
 			}
 
 			PlayerController playerController = playerManager.GetPlayerController(playerId);
+			if (!playerController)
+				continue;
+			
 			KOTH_SCR_PlayerProfileComponent profileComp = KOTH_SCR_PlayerProfileComponent.Cast(playerController.FindComponent(KOTH_SCR_PlayerProfileComponent));
+			if (!profileComp)
+				continue;
 			
 			foreach (int index, KOTH_PlayerProfileJson savedProfile : m_playerProfileManager.m_listPlayerProfiles)
 			{
