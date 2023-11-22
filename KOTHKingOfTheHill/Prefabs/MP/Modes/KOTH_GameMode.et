@@ -5,8 +5,6 @@ SCR_BaseGameMode {
   }
   KOTH_ScoringGameModeComponent "{5E20F3CD56EAC26E}" {
   }
-  PR_ActiveMapIconManagerComponent "{5E3974C597B35B3C}" {
-  }
   SCR_CallsignManagerComponent "{5E1F0BA23AC53C37}" {
   }
   SCR_DataCollectorComponent "{5E1F0BA23AC53C75}" {
@@ -1443,10 +1441,6 @@ SCR_BaseGameMode {
  Flags 0
  m_bAllowFactionChange 1
  {
-  DestructionManager : "{E5B570B5F32A7BAE}Prefabs/Systems/Destruction/DestructionManager.et" {
-   ID "5E1F0BA227A27EF0"
-   coords -1365.027 -39.01 -2217.766
-  }
   PerceptionManager "5E1F591715EDC4BA" : "{028DAEAD63E056BE}Prefabs/World/Game/PerceptionManager.et" {
    ID "5E1ED724B33BC817"
   }

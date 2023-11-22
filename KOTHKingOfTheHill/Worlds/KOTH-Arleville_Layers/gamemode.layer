@@ -1,11 +1,5 @@
 SCR_BaseGameMode KOTH_GameMode1 : "{E5118D0809DD3CDF}Prefabs/MP/Modes/KOTH_GameMode.et" {
- coords 2754.627 77.205 1660.609
- {
-  SCR_MapEntity "5E2B06346C7E2D1D" {
-   "Map Geometry Data" "{0DD089CCD442399A}worlds/Arland/Arland.topo"
-   "Satellite background image" "{F98F3D2CBA523091}UI/Textures/Map/worlds/Arland/ArlandRasterized.edds"
-  }
- }
+ coords 2734.389 65.521 1513.854
 }
 $grp SplineShapeEntity {
  {
@@ -5953,4 +5947,8 @@ $grp SplineShapeEntity {
    }
   }
  }
+}
+KOTH_PresenceTriggerEntity : "{F9467A5734030343}Prefabs/MP/Triggers/KOTH_zoneTrigger.et" {
+ coords 2739.489 77.516 1665.764
+ DrawShape 1
 }

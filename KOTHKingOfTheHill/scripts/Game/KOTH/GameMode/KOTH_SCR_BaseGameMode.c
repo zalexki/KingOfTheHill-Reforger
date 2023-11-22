@@ -207,7 +207,7 @@ modded class SCR_BaseGameMode
 					damageManager.EnableDamageHandling(true);
 			}
 			
-			Log("IsDamageHandlingEnabled " + damageManager.IsDamageHandlingEnabled());
+			//Log("IsDamageHandlingEnabled " + damageManager.IsDamageHandlingEnabled());
 		}
 	}
 	
