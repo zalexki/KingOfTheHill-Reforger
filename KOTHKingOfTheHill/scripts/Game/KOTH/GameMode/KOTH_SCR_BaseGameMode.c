@@ -42,16 +42,62 @@ modded class SCR_BaseGameMode
 	void SpawnFreeVehicles()
 	{
 		IEntity vehicleSpawnOne = GetGame().GetWorld().FindEntityByName("KOTH_FreeVehicleSpawnOne");
-		SCR_AmbientVehicleSpawnPointComponent compSec = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnOne.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
-		compSec.SpawnVehicle();
-
+		if (vehicleSpawnOne)
+		{
+			SCR_AmbientVehicleSpawnPointComponent compSec = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnOne.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
+			compSec.SpawnTruck();
+		}
 		IEntity vehicleSpawnTwo = GetGame().GetWorld().FindEntityByName("KOTH_FreeVehicleSpawnTwo");
-		SCR_AmbientVehicleSpawnPointComponent compSecTwo = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnTwo.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
-		compSecTwo.SpawnVehicle();
-
+		if (vehicleSpawnTwo)
+		{
+			SCR_AmbientVehicleSpawnPointComponent compSecTwo = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnTwo.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
+			compSecTwo.SpawnTruck();
+		}
 		IEntity vehicleSpawnThree = GetGame().GetWorld().FindEntityByName("KOTH_FreeVehicleSpawnThree");
-		SCR_AmbientVehicleSpawnPointComponent compSecThree = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnThree.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
-		compSecThree.SpawnVehicle();
+		if (vehicleSpawnTwo)
+		{
+			SCR_AmbientVehicleSpawnPointComponent compSecThree = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnThree.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
+			compSecThree.SpawnTruck();
+		}
+		
+		IEntity vehicleSpawnFirstTruck = GetGame().GetWorld().FindEntityByName("KOTH_FirstFreeTruck");
+		if (vehicleSpawnFirstTruck)
+		{
+			SCR_AmbientVehicleSpawnPointComponent compSecFirstTruck = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnFirstTruck.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
+			compSecFirstTruck.SpawnTruck();
+		}
+		IEntity vehicleSpawnFirstHelo = GetGame().GetWorld().FindEntityByName("KOTH_FirstFreeHelo");
+		if (vehicleSpawnFirstHelo)
+		{
+			SCR_AmbientVehicleSpawnPointComponent compSecFirstHelo = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnFirstHelo.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
+			compSecFirstHelo.SpawnHelo();
+		}
+		
+		IEntity vehicleSpawnSecondTruck = GetGame().GetWorld().FindEntityByName("KOTH_SecondFreeTruck");
+		if (vehicleSpawnSecondTruck)
+		{
+			SCR_AmbientVehicleSpawnPointComponent compSecSecondTruck = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnSecondTruck.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
+			compSecSecondTruck.SpawnTruck();
+		}
+		IEntity vehicleSpawnSecondHelo = GetGame().GetWorld().FindEntityByName("KOTH_SecondFreeHelo");
+		if (vehicleSpawnSecondHelo)
+		{
+			SCR_AmbientVehicleSpawnPointComponent compSecSecondHelo = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnSecondHelo.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
+			compSecSecondHelo.SpawnHelo();
+		}
+		
+		IEntity vehicleSpawnThirdTruck = GetGame().GetWorld().FindEntityByName("KOTH_ThirdFreeTruck");
+		if (vehicleSpawnThirdTruck)
+		{
+			SCR_AmbientVehicleSpawnPointComponent compSecThreeTruck = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnThirdTruck.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
+			compSecThreeTruck.SpawnTruck();
+		}
+		IEntity vehicleSpawnThirdHelo = GetGame().GetWorld().FindEntityByName("KOTH_ThirdFreeHelo");
+		if (vehicleSpawnThirdHelo)
+		{
+			SCR_AmbientVehicleSpawnPointComponent compSecThreeHelo = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnThirdHelo.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
+			compSecThreeHelo.SpawnHelo();
+		}
 	}
 	
 	void AttachProperFlag(IEntity spawn)

@@ -1,3 +1,16 @@
+GenericEntity : "{1DA733029CA1D572}PrefabLibrary/Infrastructure/Sings/SignAheadOnly.et" {
+ coords 2837.522 36.91 3172.516
+ angleX -1.271
+ angleZ 1.611
+ {
+  GenericEntity {
+   ID "569AF6010C50CB5E"
+   coords 0 0 0
+   angleZ 90
+   scale 2.05
+  }
+ }
+}
 KOTH_PresenceTriggerEntity : "{F9467A5734030343}Prefabs/MP/Triggers/KOTH_zoneTrigger.et" {
  coords 3104.1 15.95 2750.64
  angleX -1.79

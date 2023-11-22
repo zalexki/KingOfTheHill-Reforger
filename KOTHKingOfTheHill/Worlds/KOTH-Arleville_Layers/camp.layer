@@ -6,6 +6,50 @@ GenericEntity KOTH_SecondSpawn : "{108B69D9D8DDE8B0}Prefabs/Structures/KOTH/Camp
  coords 2309.925 90.183 1333.2
  angleY 37.223
 }
+$grp GenericEntity : "{1DA733029CA1D572}PrefabLibrary/Infrastructure/Sings/SignAheadOnly.et" {
+ {
+  coords 2322.608 89.263 1324.615
+  angleX 0.512
+  angleY -53.616
+  angleZ 0.473
+  {
+   GenericEntity {
+    ID "569AF6010C50CB5E"
+    coords 0 0 0
+    angleZ 90
+    scale 1.78
+   }
+  }
+ }
+ {
+  coords 2605.07 109.584 2102.779
+  angleX -0.702
+  angleY 90.006
+  angleZ -0.457
+  {
+   GenericEntity {
+    ID "569AF6010C50CB5E"
+    coords 0 0 0
+    angleZ 90
+    scale 1.56
+   }
+  }
+ }
+ {
+  coords 3138.714 30.606 1358.161
+  angleX -0.541
+  angleY 59.789
+  angleZ -1.38
+  {
+   GenericEntity {
+    ID "569AF6010C50CB5E"
+    coords 0 0 0
+    angleZ -90
+    scale 1.87
+   }
+  }
+ }
+}
 $grp KOTH_SpawnPrefab : "{1E394AEE2617B42D}Prefabs/MP/Spawning/KOTH_VehicleSpawnPoint.et" {
  KOTH_FirstVehicleSpawn {
   coords 2605.61 106.217 2084.96

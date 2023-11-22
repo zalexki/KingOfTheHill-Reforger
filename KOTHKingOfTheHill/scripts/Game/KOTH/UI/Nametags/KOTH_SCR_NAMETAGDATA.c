@@ -3,7 +3,6 @@ modded enum ENameTagEntityState
 	RED 	= 1<<7,
 	BLUE 	= 1<<8,
 	GREEN 	= 1<<9,
-	LVL = 1<<10,
 }
 
 modded class SCR_NameTagData
@@ -18,8 +17,11 @@ modded class SCR_NameTagData
 		if (!targetFactionComp)
 			return;
 
-		FactionKey factionkey = targetFactionComp.GetAffiliatedFaction().GetFactionName();
-		switch (factionkey)
+		Faction faction = targetFactionComp.GetAffiliatedFaction();
+		if (!faction)
+			return;
+		
+		switch (faction.GetFactionName())
 		{
 			case KOTH_Faction.OPFOR: ActivateEntityState(ENameTagEntityState.RED); break;
 			case KOTH_Faction.BLUFOR: ActivateEntityState(ENameTagEntityState.BLUE); break;
