@@ -150,12 +150,12 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 			if (!pilotUID || pilotUID == string.Empty)
 			{
 				Log("could not find pilot for playerUID "+pilotUID+" named "+ playerManager.GetPlayerName(pilotId), LogLevel.ERROR);
-				return;
+				continue;
 			}
 			if (pilotUID == occupantUID)
 			{
 				Log("pilot "+pilotUID+" dismounted");
-				return;
+				continue;
 			}
 			
 			KOTH_PlayerProfileManagerGameModeComponent m_playerProfileManager = KOTH_PlayerProfileManagerGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_PlayerProfileManagerGameModeComponent));

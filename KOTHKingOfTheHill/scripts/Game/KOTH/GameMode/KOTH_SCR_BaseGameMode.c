@@ -121,12 +121,12 @@ modded class SCR_BaseGameMode
 			bool isPlayerInProtectionZone = false;
 			IEntity controlledEntity = playerManager.GetPlayerControlledEntity(playerId);
 			if (!controlledEntity) 
-				return;
+				continue;
 			
 			FactionAffiliationComponent targetFactionComp = FactionAffiliationComponent.Cast(controlledEntity.FindComponent(FactionAffiliationComponent));
 			Faction faction = targetFactionComp.GetAffiliatedFaction();
 			if (!faction)
-				return;
+				continue;
 			
 			FactionKey userFactionKey = faction.GetFactionKey();
 				
@@ -148,7 +148,7 @@ modded class SCR_BaseGameMode
 
 			SCR_DamageManagerComponent damageManager = SCR_DamageManagerComponent.Cast(controlledEntity.FindComponent(SCR_DamageManagerComponent));
 			if (!damageManager)
-				return;
+				continue;
 
 			if (isPlayerInProtectionZone)
 			{
@@ -160,6 +160,8 @@ modded class SCR_BaseGameMode
 				if (!damageManager.IsDamageHandlingEnabled())
 					damageManager.EnableDamageHandling(true);
 			}
+			
+			Log("IsDamageHandlingEnabled " + damageManager.IsDamageHandlingEnabled());
 		}
 	}
 	

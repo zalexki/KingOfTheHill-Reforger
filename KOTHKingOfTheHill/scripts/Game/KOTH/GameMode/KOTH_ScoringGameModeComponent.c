@@ -222,22 +222,25 @@ class KOTH_ScoringGameModeComponent : SCR_BaseGameModeComponent
 		foreach (int playerId : playerIds)
 		{
 			IEntity entity = playerManager.GetPlayerControlledEntity(playerId);
-			if (entity) {
-				FactionAffiliationComponent targetFactionComp = FactionAffiliationComponent.Cast(entity.FindComponent(FactionAffiliationComponent));
-				if (targetFactionComp) {
-					Faction faction = targetFactionComp.GetAffiliatedFaction();
-					if (faction) {
-						if (faction.GetFactionName() == KOTH_Faction.BLUFOR)
-							countBluefor++;
-						
-						if (faction.GetFactionName() == KOTH_Faction.OPFOR)
-							countRedfor++;
-						
-						if (faction.GetFactionName() == KOTH_Faction.INDFOR)
-							countGreenfor++;
-					}
-				}
-			}
+			if (!entity)
+				continue;
+
+			FactionAffiliationComponent targetFactionComp = FactionAffiliationComponent.Cast(entity.FindComponent(FactionAffiliationComponent));
+			if (!targetFactionComp)
+				continue;
+
+			Faction faction = targetFactionComp.GetAffiliatedFaction();
+			if (!faction)
+				continue;
+
+			if (faction.GetFactionName() == KOTH_Faction.BLUFOR)
+				countBluefor++;
+			
+			if (faction.GetFactionName() == KOTH_Faction.OPFOR)
+				countRedfor++;
+			
+			if (faction.GetFactionName() == KOTH_Faction.INDFOR)
+				countGreenfor++;
 		}
 		
 		m_bluePlayers = countBluefor;
