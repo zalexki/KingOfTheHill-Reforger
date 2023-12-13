@@ -4,7 +4,7 @@ class KOTH_PlayerProfileManagerGameModeComponent : SCR_BaseGameModeComponent
 	const string saveFilePath = "$profile:koth_profiles.json";
 	ref KOTH_ListPlayerProfileJson listPlayerProfilesJson = new KOTH_ListPlayerProfileJson();
 
-	ref array<ref KOTH_PlayerProfileJson> m_listPlayerProfiles = new array<ref KOTH_PlayerProfileJson>();
+	ref array<ref KOTH_PlayerProfileJson> m_listPlayerProfiles = {};
 
 	override void OnGameModeStart()
 	{

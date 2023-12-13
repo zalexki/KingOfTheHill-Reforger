@@ -81,38 +81,6 @@ VerticalLayoutWidgetClass {
       }
      }
     }
-    FrameWidgetClass "{5E7B4B92B8E0C8EF}" {
-     Name "RestartHolder"
-     Slot OverlayWidgetSlot "{5E1F523221A434B6}" {
-     }
-     {
-      TextWidgetClass "{5E7B4B92B8E0C8EE}" {
-       Name "GameOver_Restard"
-       Slot FrameWidgetSlot "{5E1F52322C442366}" {
-        Anchor 0 0 0 0
-        PositionX 156.233
-        OffsetLeft 156.233
-        PositionY 995.085
-        OffsetTop 995.085
-        SizeX 900
-        OffsetRight -1056.23
-        SizeY 30
-        OffsetBottom -1025.08
-       }
-       Color 0.761 0.392 0.078 1
-       Text "THE SERVER WILL RESTART, RECONNECT TO PLAY THE NEXT GAME"
-       "Font Size" 30
-       "Min Font Size" 30
-       "Horizontal Alignment" Center
-       "Vertical Alignment" Center
-       FontProperties FontProperties "{5E1F5235C1832659}" {
-        ShadowSize 32
-        ShadowOffset 3 3
-        ShadowOpacity 0.5
-       }
-      }
-     }
-    }
    }
   }
  }

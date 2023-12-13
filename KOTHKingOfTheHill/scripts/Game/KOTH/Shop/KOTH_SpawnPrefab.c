@@ -12,7 +12,7 @@ class KOTH_SpawnPrefab : SCR_BaseTriggerEntity
 		if (SCR_Global.IsEditMode() || !Replication.IsServer())
 			return;
 		
-		Log("KOTH_SpawnPrefab OnInit");
+		//Log("KOTH_SpawnPrefab OnInit");
 		m_scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
 		GetGame().GetCallqueue().CallLater(CheckDeletedArmedVehicles, 30000, true);
 	}

@@ -220,7 +220,6 @@ SCR_BaseGameMode {
      }
     }
    }
-   m_sGameOverScreenBasePrefab "{9C2D5F0B4AFC2848}UI/Layouts/GameOverEndScreen/EndScreen_KOTH.layout"
   }
   SCR_GroupsManagerComponent "{5E1F0BA23AC5322A}" {
    m_sDefaultGroupPrefab "{8B4D49A9F324E7D5}Prefabs/Groups/PlayableGroup.et"
@@ -1392,6 +1391,8 @@ SCR_BaseGameMode {
   }
   SCR_SpawnerAIGroupManagerComponent "{5E1F0BA23AC56BC2}" {
   }
+  SCR_SupportStationManagerComponent "{5F1B2D524B80F342}" {
+  }
   SCR_VotingManagerComponent "{5E1F0BA23AC56B4B}" {
    m_aVotingTemplates {
     SCR_VotingKick "{5E1F0BA23AC56BBC}" {
@@ -1451,6 +1452,38 @@ SCR_BaseGameMode {
   SCR_FactionManager "5E392148707100B5" : "{850537FBE5BB5380}Prefabs/MP/Managers/Factions/FactionManager_BLUFORxOPFORxINDFOR.et" {
    ID "5E3921527F9332EE"
    coords 0 0 0
+   Factions {
+    SCR_Faction "{56B2B46E999BF3BF}" {
+     m_aEntityCatalogs {
+      SCR_EntityCatalog "{5F1B2D52D6E8544D}" {
+       m_eEntityCatalogType ITEM
+      }
+      SCR_EntityCatalog "{5F1B2D58C6E7233F}" {
+       m_eEntityCatalogType CHARACTER
+      }
+     }
+    }
+    SCR_Faction "{56B2B46E9AF80999}" {
+     m_aEntityCatalogs {
+      SCR_EntityCatalog "{5F1B2D52DD09F989}" {
+       m_eEntityCatalogType ITEM
+      }
+      SCR_EntityCatalog "{5F1B2D58F78A0E38}" {
+       m_eEntityCatalogType CHARACTER
+      }
+     }
+    }
+    SCR_Faction "{5E392152AFD8A65C}" {
+     m_aEntityCatalogs {
+      SCR_EntityCatalog "{5F1B2D52B145100B}" {
+       m_eEntityCatalogType ITEM
+      }
+      SCR_EntityCatalog "{5F1B2D58E88AF75B}" {
+       m_eEntityCatalogType CHARACTER
+      }
+     }
+    }
+   }
   }
   RadioManagerEntity : "{B8E09FAB91C4ECCD}Prefabs/Radio/RadioManager.et" {
    ID "5E1F0BA227A27EC4"

@@ -1,7 +1,9 @@
 modded class SCR_BaseGameMode
 {
 	const int WINNER_POINTS_NEEDED = 100;
-	const string saveFilePath = "$profile:koth_profiles.json";
+	
+	const string scenarioHistoryFilePath = "$profile:koth_scenarioHistory.json";
+	string m_nextScenario = string.Empty;
 
 	IEntity m_kothTrigger;
 	
@@ -10,6 +12,7 @@ modded class SCR_BaseGameMode
 	IEntity m_thirdSpawn;
 	SCR_SpawnPoint m_firstSpawnPoint;
 	SCR_SpawnPoint m_secondSpawnPoint;
+	
 	SCR_SpawnPoint m_thirdSpawnPoint;
 	KOTH_SpawnProtectionTriggerEntity m_firstProtect;
 	KOTH_SpawnProtectionTriggerEntity m_secondProtect;
@@ -18,7 +21,28 @@ modded class SCR_BaseGameMode
 	protected override void OnGameStart()
 	{
 		super.OnGameStart();
+
+		// handle history scenario
+		KOTH_ScenarioHistoryJson scenarioHistoryJson = new KOTH_ScenarioHistoryJson();
+		scenarioHistoryJson.LoadFromFile(scenarioHistoryFilePath);
+		foreach (string scenar : scenarioHistoryJson.m_list)
+		{
+			Log("previous scenar = " + scenar);
+		}
 		
+		SCR_MissionHeader header = SCR_MissionHeader.Cast(GetGame().GetMissionHeader());
+		if (header) {
+			string name = header.GetHeaderResourceName();
+			if (name != string.Empty)
+				scenarioHistoryJson.m_list.Insert(name);
+		}
+		
+		if (scenarioHistoryJson.m_list.Count() > 2)
+			scenarioHistoryJson.m_list.Remove(2);
+		
+		scenarioHistoryJson.SaveToFile(scenarioHistoryFilePath);
+		
+		// handle spawns
 		m_firstSpawn = GetGame().GetWorld().FindEntityByName("KOTH_FirstSpawn");
 		m_secondSpawn = GetGame().GetWorld().FindEntityByName("KOTH_SecondSpawn");
 		m_thirdSpawn = GetGame().GetWorld().FindEntityByName("KOTH_ThirdSpawn");
@@ -153,7 +177,7 @@ modded class SCR_BaseGameMode
 		m_thirdSpawnPoint.SetFactionKey(factions.Get(randomInts[2]));
 		thirdVehicleSpawn.SetFactionKey(factions.Get(randomInts[2]));
 
-		super.StartGameMode();
+		super.StartGameMode();	
 	}
 
 	void PlayersProtection()
@@ -236,14 +260,59 @@ modded class SCR_BaseGameMode
 				int factionIndex = GetGame().GetFactionManager().GetFactionIndex(faction);
 				SCR_GameModeEndData gameModeEndData = SCR_GameModeEndData.CreateSimple(EGameOverTypes.FACTION_VICTORY_SCORE, winnerFactionId: factionIndex);
 				EndGameMode(gameModeEndData);
-				GetGame().GetCallqueue().CallLater(CloseGame, 15000, false);
+				
+				// random next scenario
+				m_nextScenario = ChooseNextScenario();
+				GetGame().GetCallqueue().CallLater(ChangeScenario, 15000, false);
 			}
 		}
 	}
 	
-	void CloseGame()
+	void ChangeScenario()
 	{
-		GetGame().RequestClose();
+		GameStateTransitions.RequestScenarioChangeTransition(m_nextScenario, GetAddonsGUIDs());
+	}
+	
+	private string ChooseNextScenario()
+	{
+		KOTH_ScenarioHistoryJson scenarioHistoryJson = new KOTH_ScenarioHistoryJson();
+		scenarioHistoryJson.LoadFromFile(scenarioHistoryFilePath);
+		
+		array<string> all = {
+			"{08096F926A21678B}Worlds/Scenario/KOTH-Saintphilipe-V1.conf",
+			"{8ADD561C1F2F256F}Worlds/Scenario/KOTH-Montignac-V1.conf",
+			"{43A2DC866897E5FE}Worlds/Scenario/KOTH-Arleville-V1.conf", 
+			"{F8C8A21273E32FB9}Worlds/Scenario/KOTH-Beauregard-V1.conf",
+			"{DD04E8FC104D01F5}Worlds/Scenario/KOTH-Chotain-V1.conf",
+		};
+
+		foreach (string scenar : scenarioHistoryJson.m_list)
+		{
+			all.RemoveItem(scenar);
+		}
+		
+		return all.GetRandomElement();
+	}
+	
+	private string GetAddonsGUIDs()
+	{
+		string addonIDs;
+		
+		array<string> addonsGUIDs = {};
+		GameProject.GetLoadedAddons(addonsGUIDs);
+		
+		foreach (string GUID: addonsGUIDs)
+		{
+			if (!GameProject.IsVanillaAddon(GUID))
+			{
+				if (!addonIDs.IsEmpty())
+					addonIDs += ",";
+				
+				addonIDs += GUID;
+			}
+		}
+		
+		return addonIDs;
 	}
 
 	KOTH_SpawnProtectionTriggerEntity FindSpawnProtection(IEntity parent)
