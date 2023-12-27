@@ -1,0 +1,4 @@
+MatPBRBasic {
+ BCRMap "{9E6F65250B06E0C6}Assets/Tower_FRM/tower_by_justmichael/FRM_BCR.edds"
+ NMOMap "{A6B7DEB7D271B258}Assets/Tower_FRM/tower_by_justmichael/FRM_NMO.edds"
+}

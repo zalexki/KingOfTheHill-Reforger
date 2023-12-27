@@ -229,6 +229,8 @@ SCR_BaseGameMode {
   }
   SCR_MapConfigComponent "{5E1F0BA23AC5322D}" {
   }
+  SCR_MapMarkerManagerComponent "{5F24D9FB3038FE2D}" {
+  }
   SCR_NametagConfigComponent "{5E1F0BA23AC5323C}" {
    m_sConfigPath "{09F7AAA14A642683}Configs/NameTags/NametagFriendlies.conf"
   }
@@ -1440,6 +1442,7 @@ SCR_BaseGameMode {
  }
  coords 3113.879 16 2724.923
  Flags 0
+ GarbageSystemConfig "{49237B3567165306}Configs/Core/GarbageSystem.conf"
  m_bAllowFactionChange 1
  {
   PerceptionManager "5E1F591715EDC4BA" : "{028DAEAD63E056BE}Prefabs/World/Game/PerceptionManager.et" {

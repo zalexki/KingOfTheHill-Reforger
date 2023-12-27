@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{F158F6B2E5DA1C2B}Assets/Tower_FRM/Data/FRM.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

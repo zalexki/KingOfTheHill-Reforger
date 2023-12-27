@@ -2,9 +2,10 @@ GenericEntity {
  ID "5E215A84FED63A9C"
  components {
   KOTH_SCR_TowerMapDescriptorComponent "{5E2CBEC9955ED14B}" {
+   m_sImageQuadKoth "KOTH_Tower_4"
   }
   MeshObject "{5E215A86C5CE5E1D}" {
-   Object "{8F1425947655E6EB}Assets/Tower_FRM/tour_guet_V2.xob"
+   Object "{D1C69E43AFF95186}Assets/Tower_FRM/tower_by_justmichael/Tower_render.xob"
    Materials {
     MaterialAssignClass "{5E277488AB3577A4}" {
      SourceMaterial "Details01"
@@ -48,15 +49,15 @@ GenericEntity {
     }
    }
   }
-  Hierarchy "{5E215A8602AB8098}" {
-  }
   RigidBody "{5E215A860E742910}" {
    ModelGeometry 1
    Static 1
   }
   RplComponent "{5E215A8606B3F178}" {
   }
+  Hierarchy "{5E215A8602AB8098}" {
+  }
  }
- coords 1192.749 37.715 2712.775
- angleY 75.66
+ coords 3104.1 14.536 2750.64
+ angleY -52.346
 }
