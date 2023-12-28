@@ -38,7 +38,5 @@ $grp GenericEntity : "{6F1B7BFE78ECAE16}Prefabs/Structures/KOTH/TowerV1.et" {
   angleY 90
  }
  {
-  coords 3104.1 14.536 2750.64
-  angleY -52.346
  }
 }

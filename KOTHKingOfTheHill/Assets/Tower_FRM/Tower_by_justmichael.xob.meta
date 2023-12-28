@@ -1,0 +1,53 @@
+MetaFileClass {
+ Name "{FAAA06040C8BA703}Assets/Tower_FRM/Tower_by_justmichael.xob"
+ Configurations {
+  FBXResourceClass PC {
+   MaterialAssigns {
+    MaterialAssignClass "{5F374E8EDF9173EF}" {
+     SourceMaterial "FRM"
+     AssignedMaterial "{F158F6B2E5DA1C2B}Assets/Tower_FRM/Data/FRM.emat"
+    }
+   }
+   MeshParams {
+    MeshParam FRM_Logo {
+    }
+   }
+   GeometryParams {
+    GeometryParam UTM_FireGeometry {
+     LayerPreset "BuildingFireView"
+     SurfaceProperties {
+      "{8E8A10341B3BF250}Common/Materials/Game/Armor/armor_40mm.gamemat"
+     }
+     Mass 0
+     Margin 0
+    }
+    GeometryParam UTM_Geometry {
+     LayerPreset "Building"
+     SurfaceProperties {
+      "{8E8A10341B3BF250}Common/Materials/Game/Armor/armor_40mm.gamemat"
+     }
+     Mass 0
+     Margin 0
+    }
+   }
+   Common TXOCommonClass "{5F374E8EDEEDBF20}" : "{0877E7C4BB2B2C9A}Configs/System/ResourceTypes/PC/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass XBOX_ONE : PC {
+   Common TXOCommonClass "{5F374E8EDEEDBCFE}" : "{9D5B6207F7628CE2}Configs/System/ResourceTypes/XBOX_ONE/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass XBOX_SERIES : PC {
+   Common TXOCommonClass "{5F374E8EDEEDBB56}" : "{DD9F02115C764647}Configs/System/ResourceTypes/XBOX_SERIES/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass PS4 : PC {
+   Common TXOCommonClass "{5F374E8EDEEDBA58}" : "{53EC476BC921D99A}Configs/System/ResourceTypes/PS4/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass HEADLESS : PC {
+   Common TXOCommonClass "{5F374E8EDEEDB945}" : "{3A5B3356978039E8}Configs/System/ResourceTypes/HEADLESS/MeshObjectCommon.conf" {
+   }
+  }
+ }
+}

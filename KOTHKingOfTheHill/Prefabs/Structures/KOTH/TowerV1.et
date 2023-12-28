@@ -5,7 +5,7 @@ GenericEntity {
    m_sImageQuadKoth "KOTH_Tower_4"
   }
   MeshObject "{5E215A86C5CE5E1D}" {
-   Object "{D1C69E43AFF95186}Assets/Tower_FRM/tower_by_justmichael/Tower_render.xob"
+   Object "{FAAA06040C8BA703}Assets/Tower_FRM/Tower_by_justmichael.xob"
    Materials {
     MaterialAssignClass "{5E277488AB3577A4}" {
      SourceMaterial "Details01"
