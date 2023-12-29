@@ -8,9 +8,11 @@ It has been initiated by the FRM (FrenchReforgerMods) mod team.
 
 ### Credits
 
+**Sen**: Lead dev \
+**JustMichael**: 3D artist (Current Tower version) \
 **Aqkwa**: Layouts, Configs, Mapping, Dev ... \
-**CptChris**: 3D artist \
-**Sen**: Lead dev
+**CptChris**: 3D artist (First tower version) 
+
 
 Inspirations/Help from teams/devs and their work : \
 **[EveronLife](https://everon.life/)** \

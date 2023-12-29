@@ -5,7 +5,7 @@ class KOTH_SCR_PlayerShopComponent : ScriptComponent
 	protected KOTH_ScoringGameModeComponent m_scoreComp;
 	protected KOTH_PlayerProfileManagerGameModeComponent m_playerProfileManager;
 	protected ref array<string> m_shopItemListResources = {
-		"{232D181B9F9FE8D1}Configs/Shop/ShopWeaponItemList.conf",
+		"{E791EE08D968E844}Configs/Shop/ShopWeaponItemList.conf",
 		"{01BEF9B6FC671AF0}Configs/Shop/ShopThrowableItemlList.conf",
 		"{C9E28F21A8EC7DB7}Configs/Shop/ShopAccessoryItemlList.conf",
 		"{9F317D1901DBE909}Configs/Shop/ShopVehicleItemList.conf"

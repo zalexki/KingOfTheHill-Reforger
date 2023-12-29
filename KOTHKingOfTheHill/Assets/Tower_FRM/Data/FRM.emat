@@ -1,0 +1,4 @@
+MatPBRBasic {
+ BCRMap "{FDAC6115EBBE5B9A}Assets/Tower_FRM/FRM_BCR.edds"
+ NMOMap "{C574DA8732C90904}Assets/Tower_FRM/FRM_NMO.edds"
+}

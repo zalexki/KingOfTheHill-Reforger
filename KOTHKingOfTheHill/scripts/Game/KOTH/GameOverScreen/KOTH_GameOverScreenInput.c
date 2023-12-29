@@ -7,6 +7,7 @@ modded class GameOverScreenInput: ChimeraMenuBase
 		KOTH_ScoringGameModeComponent scoreComp = KOTH_ScoringGameModeComponent.Cast(GetGame().GetGameMode().FindComponent(KOTH_ScoringGameModeComponent));
 
 		Widget newRow = GetGame().GetWorkspace().CreateWidgets("{0AB65604E4B00513}UI/Layouts/HUD/GameOver/EndScreen/EndScreenBonusLine.layout", GetRootWidget());
+		GetGame().GetWorkspace().CreateWidgets("{D7B478A957368083}UI/Layouts/GameOverEndScreen/EndScreenNextGameLine.layout", GetRootWidget());
 		
 		TextWidget text = TextWidget.Cast(newRow.FindAnyWidget("TextNotif"));
 		TextWidget money = TextWidget.Cast(newRow.FindAnyWidget("MoneyNotif"));

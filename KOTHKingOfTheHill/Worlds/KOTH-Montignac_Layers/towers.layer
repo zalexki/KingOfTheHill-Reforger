@@ -26,4 +26,22 @@ $grp GenericEntity : "{6F1B7BFE78ECAE16}Prefabs/Structures/KOTH/TowerV1.et" {
   coords 4760.407 161.421 6877.813
   angleY -11.061
  }
+ {
+  components {
+   KOTH_SCR_TowerMapDescriptorComponent "{5E2CBEC9955ED14B}" {
+    Enabled 0
+   }
+  }
+  coords 4791.505 165.574 7019.557
+  angleY -96.418
+ }
+ {
+  components {
+   KOTH_SCR_TowerMapDescriptorComponent "{5E2CBEC9955ED14B}" {
+    m_sImageQuadKoth "KOTH_Tower_4"
+   }
+  }
+  coords 4793.241 187.014 7017.795
+  angleY -96.418
+ }
 }

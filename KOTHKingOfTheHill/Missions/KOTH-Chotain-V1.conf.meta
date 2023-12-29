@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{DD04E8FC104D01F5}Worlds/Scenario/KOTH-Chotain-V1.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}

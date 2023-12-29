@@ -98,14 +98,14 @@ $grp KOTH_SpawnPrefab : "{1E394AEE2617B42D}Prefabs/MP/Spawning/KOTH_VehicleSpawn
  }
 }
 $grp GenericEntity : "{67EE7343073E3AF4}Prefabs/Systems/AmbientVehicles/AmbientVehicleSpawnpoint_US.et" {
- KOTH_FreeVehicleSpawnOne {
+ KOTH_FirstFreeTruck {
   coords 2832.949 33.729 3206.102
   angleY 180
  }
- KOTH_FreeVehicleSpawnTwo {
+ KOTH_SecondFreeTruck {
   coords 3505.619 40.561 2614.642
  }
- KOTH_FreeVehicleSpawnThree {
+ KOTH_ThirdFreeTruck {
   coords 2922.148 56.226 2242.365
  }
 }
