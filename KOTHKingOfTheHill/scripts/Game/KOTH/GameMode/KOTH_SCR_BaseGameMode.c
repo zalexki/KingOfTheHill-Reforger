@@ -47,9 +47,9 @@ modded class SCR_BaseGameMode
 		m_secondSpawn = GetGame().GetWorld().FindEntityByName("KOTH_SecondSpawn");
 		m_thirdSpawn = GetGame().GetWorld().FindEntityByName("KOTH_ThirdSpawn");
 		
-		m_firstSpawnPoint = SCR_SpawnPoint.Cast(FindSpawnPoint(m_firstSpawn));
-		m_secondSpawnPoint = SCR_SpawnPoint.Cast(FindSpawnPoint(m_secondSpawn));
-		m_thirdSpawnPoint = SCR_SpawnPoint.Cast(FindSpawnPoint(m_thirdSpawn));
+		m_firstSpawnPoint = SCR_SpawnPoint.Cast(KOTH_SpawnHelper.FindSpawnPoint(m_firstSpawn));
+		m_secondSpawnPoint = SCR_SpawnPoint.Cast(KOTH_SpawnHelper.FindSpawnPoint(m_secondSpawn));
+		m_thirdSpawnPoint = SCR_SpawnPoint.Cast(KOTH_SpawnHelper.FindSpawnPoint(m_thirdSpawn));
 		
 		m_firstProtect = FindSpawnProtection(m_firstSpawn);
 		m_secondProtect = FindSpawnProtection(m_secondSpawn);
@@ -59,74 +59,17 @@ modded class SCR_BaseGameMode
 		GetGame().GetCallqueue().CallLater(AttachProperFlag, 1000, false, m_secondSpawn);
 		GetGame().GetCallqueue().CallLater(AttachProperFlag, 1000, false, m_thirdSpawn);
 		
-		SpawnFreeVehicles();
+		KOTH_SpawnHelper.SpawnFreeVehicles();
 		GetGame().GetCallqueue().CallLater(SpawnFreeVehicles, 60000 * 5, true);
-	}	
-
+	}
 	void SpawnFreeVehicles()
 	{
-		IEntity vehicleSpawnOne = GetGame().GetWorld().FindEntityByName("KOTH_FreeVehicleSpawnOne");
-		if (vehicleSpawnOne)
-		{
-			SCR_AmbientVehicleSpawnPointComponent compSec = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnOne.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
-			compSec.SpawnTruck();
-		}
-		IEntity vehicleSpawnTwo = GetGame().GetWorld().FindEntityByName("KOTH_FreeVehicleSpawnTwo");
-		if (vehicleSpawnTwo)
-		{
-			SCR_AmbientVehicleSpawnPointComponent compSecTwo = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnTwo.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
-			compSecTwo.SpawnTruck();
-		}
-		IEntity vehicleSpawnThree = GetGame().GetWorld().FindEntityByName("KOTH_FreeVehicleSpawnThree");
-		if (vehicleSpawnTwo)
-		{
-			SCR_AmbientVehicleSpawnPointComponent compSecThree = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnThree.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
-			compSecThree.SpawnTruck();
-		}
-		
-		IEntity vehicleSpawnFirstTruck = GetGame().GetWorld().FindEntityByName("KOTH_FirstFreeTruck");
-		if (vehicleSpawnFirstTruck)
-		{
-			SCR_AmbientVehicleSpawnPointComponent compSecFirstTruck = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnFirstTruck.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
-			compSecFirstTruck.SpawnTruck();
-		}
-		IEntity vehicleSpawnFirstHelo = GetGame().GetWorld().FindEntityByName("KOTH_FirstFreeHelo");
-		if (vehicleSpawnFirstHelo)
-		{
-			SCR_AmbientVehicleSpawnPointComponent compSecFirstHelo = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnFirstHelo.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
-			compSecFirstHelo.SpawnHelo();
-		}
-		
-		IEntity vehicleSpawnSecondTruck = GetGame().GetWorld().FindEntityByName("KOTH_SecondFreeTruck");
-		if (vehicleSpawnSecondTruck)
-		{
-			SCR_AmbientVehicleSpawnPointComponent compSecSecondTruck = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnSecondTruck.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
-			compSecSecondTruck.SpawnTruck();
-		}
-		IEntity vehicleSpawnSecondHelo = GetGame().GetWorld().FindEntityByName("KOTH_SecondFreeHelo");
-		if (vehicleSpawnSecondHelo)
-		{
-			SCR_AmbientVehicleSpawnPointComponent compSecSecondHelo = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnSecondHelo.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
-			compSecSecondHelo.SpawnHelo();
-		}
-		
-		IEntity vehicleSpawnThirdTruck = GetGame().GetWorld().FindEntityByName("KOTH_ThirdFreeTruck");
-		if (vehicleSpawnThirdTruck)
-		{
-			SCR_AmbientVehicleSpawnPointComponent compSecThreeTruck = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnThirdTruck.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
-			compSecThreeTruck.SpawnTruck();
-		}
-		IEntity vehicleSpawnThirdHelo = GetGame().GetWorld().FindEntityByName("KOTH_ThirdFreeHelo");
-		if (vehicleSpawnThirdHelo)
-		{
-			SCR_AmbientVehicleSpawnPointComponent compSecThreeHelo = SCR_AmbientVehicleSpawnPointComponent.Cast(vehicleSpawnThirdHelo.FindComponent(SCR_AmbientVehicleSpawnPointComponent));
-			compSecThreeHelo.SpawnHelo();
-		}
+		KOTH_SpawnHelper.SpawnFreeVehicles();
 	}
 	
 	void AttachProperFlag(IEntity spawn)
 	{
-		SCR_SpawnPoint sp = SCR_SpawnPoint.Cast(FindSpawnPoint(spawn));
+		SCR_SpawnPoint sp = SCR_SpawnPoint.Cast(KOTH_SpawnHelper.FindSpawnPoint(spawn));
 		IEntity flagPoleEntity = FindFlag(spawn);
 		Resource res;
 
@@ -352,26 +295,6 @@ modded class SCR_BaseGameMode
 		}
 
 		return null;
-	}
-
-	IEntity FindSpawnPoint(IEntity parent)
-	{
-		IEntity child = parent.GetChildren();
-		SCR_SpawnPoint spawn;
-		for (int i = 0; i < 100; i++)
-		{
-			spawn = SCR_SpawnPoint.Cast(child);
-			if (spawn)
-				break;
-
-			child = child.GetSibling();
-		}
-
-		if (spawn) {
-			return child;
-		} else {
-			return null;
-		}
 	}
 
 	array<int> GetUniqueRandomInts()
